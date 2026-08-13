@@ -17,6 +17,8 @@ button{cursor:pointer}.hidden{display:none!important}
 .btn{width:100%;padding:14px;margin-top:8px;border:0;border-radius:10px;font-weight:bold;color:#fff}
 .signup{background:#1687ff}.login{background:#283444}
 #authMessage{text-align:center;min-height:24px;margin-top:12px;color:#ffb6b6}
+#adminPanel input{width:100%;margin:0}
+#adminPanel .btn{width:auto;flex:1;padding:10px}
 #chatApp{height:100vh;display:flex;flex-direction:column}
 .header{height:64px;background:#151d28;border-bottom:1px solid #293646;display:flex;align-items:center;justify-content:space-between;padding:0 12px}
 .title{font-size:20px;font-weight:bold}.username{font-size:12px;color:#6ee7a0;margin-top:3px}
@@ -112,15 +114,16 @@ appId:"1:779042757468:web:7646d3cdadf46f315a3f99"
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getFirestore(app);
-const rtcConfig={iceServers:[{urls:"stun:stun.l.google.com:19302"},{urls:"stun:stun1.l.google.com:19302"}]};
+
+// ضع UID حساب المشرف هنا بعد إنشاء الحساب. لا تعتمد على إخفاء الأزرار وحده للأمان؛ يجب أيضًا ضبط Firestore Rules.
+const ADMIN_UIDS=["PUT_ADMIN_UID_HERE"];
+const isAdmin=()=>!!auth.currentUser&&ADMIN_UIDS.includes(auth.currentUser.uid);
+const rtcConfig={iceServers:[{urls:"stun:stun.l.google.com:19302"},{urls:"stun:stun1.l.google.com:19302"}],iceCandidatePoolSize:10};
 
 const loginPage=document.getElementById("loginPage");
 const chatApp=document.getElementById("chatApp");
 const authMessage=document.getElementById("authMessage");
 let stopMessages=null,stopSlots=null;
-let mySlot=null,localStream=null;
-const peerConnections=new Map();
-const unsubscribers=new Map();
 
 document.getElementById("signupButton").onclick=async()=>{
 const name=document.getElementById("nameInput").value.trim();
@@ -163,6 +166,22 @@ if(stopSlots){stopSlots();stopSlots=null}
 });
 
 document.getElementById("logoutButton").onclick=()=>signOut(auth);
+
+async function adminAction(action){
+  if(!isAdmin()){alert("ليس لديك صلاحية إشراف");return}
+  const uid=document.getElementById("adminTarget").value.trim();
+  if(!uid){alert("اكتب UID العضو");return}
+  try{
+    const ref=doc(db,"moderation",uid);
+    if(action==="ban") await setDoc(ref,{banned:true,updatedAt:serverTimestamp()},{merge:true});
+    if(action==="unban") await setDoc(ref,{banned:false,updatedAt:serverTimestamp()},{merge:true});
+    if(action==="mute") await setDoc(ref,{micMuted:true,updatedAt:serverTimestamp()},{merge:true});
+    alert("تم تنفيذ الأمر");
+  }catch(e){console.error(e);alert("تعذر تنفيذ الأمر: "+e.code)}
+}
+document.getElementById("banButton").onclick=()=>adminAction("ban");
+document.getElementById("unbanButton").onclick=()=>adminAction("unban");
+document.getElementById("muteButton").onclick=()=>adminAction("mute");
 
 async function sendMessage(){
 const input=document.getElementById("messageInput");
@@ -215,12 +234,7 @@ const peerConnections=new Map();
 const peerUnsubs=new Map();
 const candidateQueues=new Map();
 
-const rtcConfig={
-  iceServers:[
-    {urls:"stun:stun.l.google.com:19302"},
-    {urls:"stun:stun1.l.google.com:19302"}
-  ]
-};
+
 
 slots.forEach((s,i)=>s.button.onclick=()=>toggleMic(i));
 
@@ -311,8 +325,10 @@ async function toggleMic(index){
   }
 
   try{
+    const modSnap=await getDoc(doc(db,"moderation",u.uid));
+    if(modSnap.exists() && modSnap.data().micMuted){alert("🚫 تم منعك من استخدام المايك");return}
     localStream=await navigator.mediaDevices.getUserMedia({
-      audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true},
+      audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true,channelCount:1,sampleRate:48000},
       video:false
     });
 
