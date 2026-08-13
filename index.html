@@ -3,320 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>دردشتي Chat</title>
-
+  <title>دردشتي</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
-      font-family: Arial, sans-serif;
+      margin: 0;
       background: #111;
       color: white;
-      min-height: 100vh;
+      font-family: Arial;
     }
 
-    .app {
-      max-width: 600px;
-      height: 100vh;
-      margin: auto;
-      background: #181818;
-      display: flex;
-      flex-direction: column;
+    .box {
+      max-width: 400px;
+      margin: 60px auto;
+      padding: 25px;
+      background: #222;
+      border-radius: 15px;
     }
 
-    .header {
-      background: #242424;
-      padding: 16px;
+    h1 {
       text-align: center;
-      border-bottom: 1px solid #333;
     }
 
-    .header h1 {
-      font-size: 22px;
-    }
-
-    .header small {
-      display: block;
-      margin-top: 6px;
-      color: #aaa;
-    }
-
-    .auth {
-      padding: 25px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin: auto;
+    input, button {
       width: 100%;
-    }
-
-    .auth h2 {
-      text-align: center;
-      margin-bottom: 10px;
+      padding: 14px;
+      margin-top: 12px;
+      box-sizing: border-box;
+      border-radius: 10px;
+      border: 0;
+      font-size: 16px;
     }
 
     input {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 10px;
       background: #333;
       color: white;
-      outline: none;
-      font-size: 15px;
     }
 
     button {
-      padding: 13px;
-      border: none;
-      border-radius: 10px;
       background: #1877f2;
       color: white;
       font-weight: bold;
-      font-size: 15px;
-      cursor: pointer;
     }
 
-    button.secondary {
-      background: #333;
-    }
-
-    button:active {
-      transform: scale(.98);
-    }
-
-    #error {
-      color: #ff7777;
+    #result {
       text-align: center;
-      min-height: 20px;
-    }
-
-    #chat {
-      display: none;
-      height: 100%;
-      flex-direction: column;
-    }
-
-    .chat-top {
-      padding: 10px;
-      background: #242424;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .user-name {
-      color: #4da6ff;
-      font-weight: bold;
-    }
-
-    #messages {
-      flex: 1;
-      padding: 15px;
-      overflow-y: auto;
-    }
-
-    .message {
-      background: #292929;
-      padding: 10px 14px;
-      margin-bottom: 10px;
-      border-radius: 12px;
-      width: fit-content;
-      max-width: 85%;
-    }
-
-    .message .name {
-      color: #4da6ff;
-      font-size: 13px;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-
-    .message .text {
-      word-wrap: break-word;
-    }
-
-    .message .time {
-      color: #888;
-      font-size: 10px;
-      margin-top: 5px;
-    }
-
-    .bottom {
-      display: flex;
-      gap: 8px;
-      padding: 10px;
-      background: #242424;
-    }
-
-    .bottom input {
-      flex: 1;
-    }
-
-    .bottom button {
-      width: 80px;
+      margin-top: 15px;
     }
   </style>
 </head>
 
 <body>
 
-<div class="app">
+<div class="box">
+  <h1>💬 دردشتي</h1>
 
-  <div class="header">
-    <h1>💬 دردشتي</h1>
-    <small>دردشة كتابية</small>
-  </div>
+  <input id="name" placeholder="اسمك">
 
-  <!-- تسجيل الدخول -->
-  <div id="auth" class="auth">
+  <input id="email" type="email" placeholder="البريد الإلكتروني">
 
-    <h2>تسجيل الدخول</h2>
+  <input id="password" type="password" placeholder="كلمة المرور">
 
-    <input id="nameInput"
-           type="text"
-           placeholder="اسمك"
-           autocomplete="name">
+  <button id="signup">إنشاء حساب جديد</button>
 
-    <input id="emailInput"
-           type="email"
-           placeholder="البريد الإلكتروني"
-           autocomplete="email">
-
-    <input id="passwordInput"
-           type="password"
-           placeholder="كلمة المرور"
-           autocomplete="current-password">
-
-    <button id="loginBtn">دخول</button>
-
-    <button id="signupBtn" class="secondary">
-      إنشاء حساب جديد
-    </button>
-
-    <div id="error"></div>
-
-  </div>
-
-  <!-- الدردشة -->
-  <div id="chat">
-
-    <div class="chat-top">
-      <div>
-        المستخدم:
-        <span id="currentUser" class="user-name"></span>
-      </div>
-
-      <button id="logoutBtn">خروج</button>
-    </div>
-
-    <div id="messages"></div>
-
-    <div class="bottom">
-      <input id="messageInput"
-             type="text"
-             placeholder="اكتب رسالتك..."
-             autocomplete="off">
-
-      <button id="sendBtn">إرسال</button>
-    </div>
-
-  </div>
-
+  <div id="result"></div>
 </div>
-
 
 <script type="module">
 
-  import {
-    initializeApp
-  } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 
-  import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    updateProfile,
-    onAuthStateChanged,
-    signOut
-  } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
-
-  import {
-    getFirestore,
-    collection,
-    addDoc,
-    onSnapshot,
-    query,
-    orderBy,
-    serverTimestamp
-  } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile
+}
+from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
-    authDomain: "dardashti-chat.firebaseapp.com",
-    projectId: "dardashti-chat",
-    storageBucket: "dardashti-chat.firebasestorage.app",
-    messagingSenderId: "779042757468",
-    appId: "1:779042757468:web:7646d3cdadf46f315a3f99",
-    measurementId: "G-PFW6X6P2TR"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
+  authDomain: "dardashti-chat.firebaseapp.com",
+  projectId: "dardashti-chat",
+  storageBucket: "dardashti-chat.firebasestorage.app",
+  messagingSenderId: "779042757468",
+  appId: "1:779042757468:web:7646d3cdadf46f315a3f99"
+};
 
 
-  const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-  const auth = getAuth(app);
-
-  const db = getFirestore(app);
+const auth = getAuth(app);
 
 
-  const authBox = document.getElementById("auth");
-  const chatBox = document.getElementById("chat");
+document.getElementById("signup").addEventListener("click", async () => {
 
-  const nameInput = document.getElementById("nameInput");
-  const emailInput = document.getElementById("emailInput");
-  const passwordInput = document.getElementById("passwordInput");
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
 
-  const loginBtn = document.getElementById("loginBtn");
-  const signupBtn = document.getElementById("signupBtn");
-  const logoutBtn = document.getElementById("logoutBtn");
+  const result = document.getElementById("result");
 
-  const errorBox = document.getElementById("error");
-
-  const currentUser = document.getElementById("currentUser");
-
-  const messagesBox = document.getElementById("messages");
-
-  const messageInput = document.getElementById("messageInput");
-  const sendBtn = document.getElementById("sendBtn");
-
-
-  function showError(message) {
-    errorBox.textContent = message;
-  }
-
-
-  function clearError() {
-    errorBox.textContent = "";
-  }
-
-
-  signupBtn.addEventListener("click", async () => {
-
-    clearError();
-
-    const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
-    const password = passwordInput.value;
-
-    if (!name) {
-      showError("اكتب اسمك أولاً");
-      return;
-    }
-
-   
+  if (!name || !email || !password
