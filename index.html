@@ -1,546 +1,306 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>طليان الشعلة</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 body{
-margin:0;
-font-family:Arial,Tahoma,sans-serif;
-background:#080b10;
-color:#fff;
+  margin:0;
+  font-family:Arial,Tahoma,sans-serif;
+  background:#090d13;
+  color:white;
 }
 
-button,input,textarea{
-font-family:inherit;
-}
-
-button{
-cursor:pointer;
+button,input{
+  font-family:inherit;
 }
 
 .hidden{
-display:none!important;
+  display:none !important;
 }
 
-/* تسجيل الدخول */
+/* LOGIN */
 
-#auth{
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:20px;
-background:linear-gradient(145deg,#101a2a,#080b10);
+#loginPage{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:linear-gradient(145deg,#18283d,#090d13);
 }
 
-.auth-box{
-width:100%;
-max-width:420px;
-background:#151c26;
-padding:25px;
-border-radius:20px;
-border:1px solid #2b3747;
-box-shadow:0 15px 50px #0008;
+.loginBox{
+  width:100%;
+  max-width:420px;
+  background:#151d28;
+  padding:25px;
+  border-radius:20px;
+  border:1px solid #2d3a4b;
+  box-shadow:0 20px 60px #0009;
 }
 
 .logo{
-text-align:center;
-font-size:28px;
-font-weight:bold;
-margin-bottom:8px;
+  text-align:center;
+  font-size:29px;
+  font-weight:bold;
+  margin-bottom:8px;
 }
 
-.sub{
-text-align:center;
-color:#9da9b8;
-margin-bottom:22px;
+.description{
+  text-align:center;
+  color:#a4afbd;
+  margin-bottom:22px;
 }
 
-.auth-box input{
-width:100%;
-padding:14px;
-margin:6px 0;
-border:1px solid #354253;
-border-radius:10px;
-background:#0d131b;
-color:#fff;
-outline:none;
+.loginBox input{
+  width:100%;
+  padding:14px;
+  margin:6px 0;
+  border:1px solid #344255;
+  border-radius:10px;
+  background:#0d131b;
+  color:white;
+  outline:none;
 }
 
-.auth-box button{
-width:100%;
-padding:14px;
-margin-top:8px;
-border:0;
-border-radius:10px;
-font-weight:bold;
+.loginBox input:focus{
+  border-color:#2587ff;
+}
+
+.btn{
+  width:100%;
+  padding:14px;
+  margin-top:8px;
+  border:0;
+  border-radius:10px;
+  font-weight:bold;
+  color:white;
 }
 
 .signup{
-background:#168bff;
-color:white;
+  background:#1687ff;
 }
 
 .login{
-background:#273241;
-color:white;
+  background:#283444;
 }
 
-#authMsg{
-text-align:center;
-min-height:25px;
-margin-top:12px;
+#authMessage{
+  text-align:center;
+  min-height:24px;
+  margin-top:12px;
+  color:#ffb6b6;
 }
 
-/* التطبيق */
+/* CHAT */
 
-#app{
-height:100vh;
-display:flex;
-flex-direction:column;
+#chatApp{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
 }
 
 .header{
-height:62px;
-background:#151c26;
-border-bottom:1px solid #2a3544;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 12px;
+  height:64px;
+  background:#151d28;
+  border-bottom:1px solid #293646;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 12px;
 }
 
 .title{
-font-size:19px;
-font-weight:bold;
+  font-size:20px;
+  font-weight:bold;
 }
 
-.user-small{
-font-size:12px;
-color:#76e6a5;
-margin-top:3px;
+.username{
+  font-size:12px;
+  color:#6ee7a0;
+  margin-top:3px;
 }
 
 .logout{
-background:#a82d38;
-border:0;
-color:white;
-padding:9px 12px;
-border-radius:9px;
+  border:0;
+  background:#a92d38;
+  color:white;
+  padding:9px 12px;
+  border-radius:9px;
 }
-
-/* التبويبات */
-
-.tabs{
-display:flex;
-background:#111821;
-border-bottom:1px solid #2a3544;
-}
-
-.tab{
-flex:1;
-background:transparent;
-border:0;
-color:#9ca8b7;
-padding:13px 5px;
-font-weight:bold;
-}
-
-.tab.active{
-color:#fff;
-border-bottom:3px solid #2585ff;
-}
-
-/* الصفحات */
-
-.pages{
-flex:1;
-min-height:0;
-}
-
-.page{
-height:100%;
-overflow-y:auto;
-padding:12px;
-}
-
-#chatPage{
-display:flex;
-flex-direction:column;
-padding:0;
-}
-
-/* الرسائل */
 
 .messages{
-flex:1;
-overflow-y:auto;
-padding:12px;
+  flex:1;
+  overflow-y:auto;
+  padding:14px;
 }
 
 .message{
-display:flex;
-gap:9px;
-margin-bottom:12px;
-align-items:flex-start;
+  display:flex;
+  gap:9px;
+  margin-bottom:13px;
 }
 
 .avatar{
-width:42px;
-height:42px;
-border-radius:50%;
-object-fit:cover;
-background:#293646;
-flex:none;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  object-fit:cover;
+  background:#293646;
 }
 
-.message-box{
-background:#18222e;
-padding:8px 11px;
-border-radius:13px;
-max-width:78%;
+.messageContent{
+  background:#18222e;
+  border-radius:13px;
+  padding:8px 11px;
+  max-width:80%;
 }
 
-.message-name{
-font-size:12px;
-color:#62a8ff;
-font-weight:bold;
-margin-bottom:3px;
+.messageName{
+  color:#61a8ff;
+  font-size:12px;
+  font-weight:bold;
+  margin-bottom:3px;
 }
 
-.message-text{
-line-height:1.55;
-word-break:break-word;
+.messageText{
+  line-height:1.5;
+  word-break:break-word;
 }
-
-/* الكتابة */
 
 .composer{
-display:flex;
-gap:6px;
-padding:9px;
-background:#151c26;
-border-top:1px solid #2a3544;
+  display:flex;
+  gap:7px;
+  padding:9px;
+  background:#151d28;
+  border-top:1px solid #293646;
 }
 
 .composer input{
-flex:1;
-min-width:0;
-background:#0d131b;
-border:1px solid #354253;
-border-radius:10px;
-color:#fff;
-padding:12px;
-outline:none;
+  flex:1;
+  min-width:0;
+  padding:13px;
+  border:1px solid #344255;
+  border-radius:10px;
+  background:#0d131b;
+  color:white;
+  outline:none;
 }
 
 .send{
-width:48px;
-border:0;
-border-radius:10px;
-background:#168bff;
-color:white;
-font-size:18px;
-}
-
-/* المنشورات */
-
-.post-form,.post,.profile{
-background:#151c26;
-border:1px solid #2a3544;
-border-radius:15px;
-padding:13px;
-margin-bottom:12px;
-}
-
-.post-form textarea{
-width:100%;
-height:90px;
-resize:none;
-background:#0d131b;
-border:1px solid #354253;
-border-radius:10px;
-color:#fff;
-padding:12px;
-outline:none;
-}
-
-.publish{
-width:100%;
-border:0;
-border-radius:10px;
-background:#168bff;
-color:white;
-padding:12px;
-margin-top:8px;
-font-weight:bold;
-}
-
-.post-head{
-display:flex;
-align-items:center;
-gap:9px;
-}
-
-.post-name{
-font-weight:bold;
-}
-
-.post-text{
-white-space:pre-wrap;
-line-height:1.7;
-margin:12px 0;
-}
-
-.like{
-background:#222d3b;
-border:0;
-color:white;
-border-radius:9px;
-padding:8px 13px;
-}
-
-/* الحساب */
-
-.profile-head{
-display:flex;
-align-items:center;
-gap:12px;
-margin-bottom:15px;
-}
-
-.big-avatar{
-width:75px;
-height:75px;
-border-radius:50%;
-object-fit:cover;
-background:#293646;
-}
-
-.profile input{
-width:100%;
-padding:12px;
-margin:6px 0;
-background:#0d131b;
-border:1px solid #354253;
-border-radius:10px;
-color:#fff;
-}
-
-.save{
-width:100%;
-padding:12px;
-border:0;
-border-radius:10px;
-background:#168bff;
-color:white;
-font-weight:bold;
-margin-top:8px;
+  width:50px;
+  border:0;
+  border-radius:10px;
+  background:#1687ff;
+  color:white;
+  font-size:18px;
 }
 
 .empty{
-text-align:center;
-color:#7f8b9b;
-padding:35px 10px;
+  text-align:center;
+  color:#7e8a99;
+  padding:35px 10px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- تسجيل الدخول -->
+<!-- LOGIN PAGE -->
 
-<div id="auth">
+<div id="loginPage">
 
-<div class="auth-box">
+  <div class="loginBox">
 
-<div class="logo">🔥 طليان الشعلة</div>
+    <div class="logo">🔥 طليان الشعلة</div>
 
-<div class="sub">
-أهلًا بك في الدردشة
-</div>
+    <div class="description">
+      مرحبًا بك في الدردشة
+    </div>
 
-<input
-id="name"
-type="text"
-placeholder="اسم العضو"
->
+    <input
+      id="nameInput"
+      type="text"
+      placeholder="اسم العضو"
+    >
 
-<input
-id="email"
-type="email"
-placeholder="البريد الإلكتروني"
->
+    <input
+      id="emailInput"
+      type="email"
+      placeholder="البريد الإلكتروني"
+    >
 
-<input
-id="password"
-type="password"
-placeholder="كلمة المرور"
->
+    <input
+      id="passwordInput"
+      type="password"
+      placeholder="كلمة المرور"
+    >
 
-<input
-id="avatar"
-type="url"
-placeholder="رابط الصورة - اختياري"
->
+    <button id="signupButton" class="btn signup">
+      إنشاء حساب
+    </button>
 
-<button class="signup" id="signup">
-إنشاء حساب
-</button>
+    <button id="loginButton" class="btn login">
+      تسجيل الدخول
+    </button>
 
-<button class="login" id="login">
-تسجيل الدخول
-</button>
+    <div id="authMessage"></div>
 
-<div id="authMsg"></div>
-
-</div>
+  </div>
 
 </div>
 
 
-<!-- التطبيق -->
+<!-- CHAT APP -->
 
-<div id="app" class="hidden">
+<div id="chatApp" class="hidden">
 
-<div class="header">
+  <div class="header">
 
-<div>
-<div class="title">🔥 طليان الشعلة</div>
-<div class="user-small" id="currentUser">
-عضو
-</div>
-</div>
+    <div>
+      <div class="title">🔥 طليان الشعلة</div>
+      <div id="currentUsername" class="username">
+        عضو
+      </div>
+    </div>
 
-<button class="logout" id="logout">
-تسجيل الخروج
-</button>
+    <button id="logoutButton" class="logout">
+      خروج
+    </button>
 
-</div>
-
-
-<div class="tabs">
-
-<button class="tab active" data-page="chatPage">
-💬 الدردشة
-</button>
-
-<button class="tab" data-page="postsPage">
-📢 المنشورات
-</button>
-
-<button class="tab" data-page="profilePage">
-👤 حسابي
-</button>
-
-</div>
+  </div>
 
 
-<div class="pages">
+  <div id="messages" class="messages">
 
-<!-- الدردشة -->
+    <div class="empty">
+      جاري تحميل الدردشة...
+    </div>
 
-<div id="chatPage" class="page">
-
-<div id="messages" class="messages">
-
-<div class="empty">
-لا توجد رسائل بعد
-</div>
-
-</div>
-
-<div class="composer">
-
-<input
-id="messageInput"
-type="text"
-placeholder="اكتب رسالتك..."
->
-
-<button class="send" id="send">
-➤
-</button>
-
-</div>
-
-</div>
+  </div>
 
 
-<!-- المنشورات -->
+  <div class="composer">
 
-<div id="postsPage" class="page hidden">
+    <input
+      id="messageInput"
+      type="text"
+      placeholder="اكتب رسالتك..."
+    >
 
-<div class="post-form">
+    <button id="sendButton" class="send">
+      ➤
+    </button>
 
-<textarea
-id="postText"
-placeholder="اكتب منشورك..."
-></textarea>
-
-<button class="publish" id="publish">
-📢 نشر المنشور
-</button>
-
-</div>
-
-<div id="posts">
-<div class="empty">
-لا توجد منشورات بعد
-</div>
-</div>
-
-</div>
-
-
-<!-- الحساب -->
-
-<div id="profilePage" class="page hidden">
-
-<div class="profile">
-
-<div class="profile-head">
-
-<img id="bigAvatar" class="big-avatar">
-
-<div>
-<strong id="profileName">
-عضو
-</strong>
-
-<div id="profileEmail"></div>
-</div>
-
-</div>
-
-<input
-id="newName"
-placeholder="اسم العضو"
->
-
-<input
-id="newAvatar"
-placeholder="رابط صورة العضو"
->
-
-<button class="save" id="save">
-حفظ
-</button>
-
-<div id="profileMsg"></div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
+  </div>
 
 </div>
 
@@ -551,454 +311,459 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 
 import {
-getAuth,
-createUserWithEmailAndPassword,
-signInWithEmailAndPassword,
-updateProfile,
-onAuthStateChanged,
-signOut
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+  onAuthStateChanged,
+  signOut
 }
 from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
 import {
-getFirestore,
-collection,
-addDoc,
-doc,
-setDoc,
-query,
-orderBy,
-onSnapshot,
-serverTimestamp,
-updateDoc,
-increment
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  serverTimestamp
 }
 from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
 
-/* Firebase */
+/* FIREBASE */
 
-const firebaseConfig={
+const firebaseConfig = {
 
-apiKey:"AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
+  apiKey:
+  "AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
 
-authDomain:"dardashti-chat.firebaseapp.com",
+  authDomain:
+  "dardashti-chat.firebaseapp.com",
 
-projectId:"dardashti-chat",
+  projectId:
+  "dardashti-chat",
 
-storageBucket:"dardashti-chat.firebasestorage.app",
+  storageBucket:
+  "dardashti-chat.firebasestorage.app",
 
-messagingSenderId:"779042757468",
+  messagingSenderId:
+  "779042757468",
 
-appId:"1:779042757468:web:7646d3cdadf46f315a3f99"
-
+  appId:
+  "1:779042757468:web:7646d3cdadf46f315a3f99"
 };
 
 
-const firebaseApp=initializeApp(firebaseConfig);
+const firebaseApp =
+  initializeApp(firebaseConfig);
 
-const auth=getAuth(firebaseApp);
+const auth =
+  getAuth(firebaseApp);
 
-const db=getFirestore(firebaseApp);
+const db =
+  getFirestore(firebaseApp);
 
 
-/* العناصر */
+/* ELEMENTS */
 
-const authBox=document.getElementById("auth");
+const loginPage =
+  document.getElementById("loginPage");
 
-const app=document.getElementById("app");
+const chatApp =
+  document.getElementById("chatApp");
 
-const authMsg=document.getElementById("authMsg");
+const authMessage =
+  document.getElementById("authMessage");
 
 
-function avatarFor(name){
+/* CREATE ACCOUNT */
 
-return "https://ui-avatars.com/api/?name="
-+encodeURIComponent(name||"عضو")
-+"&background=168bff&color=fff";
+document
+.getElementById("signupButton")
+.addEventListener("click", async () => {
 
-}
+  const name =
+    document.getElementById("nameInput")
+    .value.trim();
 
+  const email =
+    document.getElementById("emailInput")
+    .value.trim();
 
-/* إنشاء حساب */
+  const password =
+    document.getElementById("passwordInput")
+    .value;
 
-document.getElementById("signup").onclick=async()=>{
 
-const name=document.getElementById("name").value.trim();
+  if(name.length < 2){
 
-const email=document.getElementById("email").value.trim();
+    authMessage.textContent =
+      "⚠️ اكتب اسم العضو";
 
-const password=document.getElementById("password").value;
+    return;
+  }
 
-const avatar=document.getElementById("avatar").value.trim();
 
+  if(!email){
 
-if(!name){
+    authMessage.textContent =
+      "⚠️ اكتب البريد الإلكتروني";
 
-authMsg.textContent="⚠️ اكتب اسم العضو";
+    return;
+  }
 
-return;
-}
 
-if(!email){
+  if(password.length < 6){
 
-authMsg.textContent="⚠️ اكتب البريد الإلكتروني";
+    authMessage.textContent =
+      "⚠️ كلمة المرور يجب أن تكون 6 أحرف على الأقل";
 
-return;
-}
+    return;
+  }
 
-if(password.length<6){
 
-authMsg.textContent="⚠️ كلمة المرور يجب أن تكون 6 أحرف على الأقل";
+  authMessage.textContent =
+    "جاري إنشاء الحساب...";
 
-return;
-}
 
+  try{
 
-authMsg.textContent="جاري إنشاء الحساب...";
+    const result =
+      await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
 
-try{
+    await updateProfile(
+      result.user,
+      {
+        displayName:name
+      }
+    );
 
-const result=
-await createUserWithEmailAndPassword(
-auth,
-email,
-password
-);
 
+    authMessage.textContent =
+      "✅ تم إنشاء الحساب بنجاح";
 
-const photo=avatar||avatarFor(name);
+  }
 
+  catch(error){
 
-await updateProfile(result.user,{
-displayName:name,
-photoURL:photo
-});
+    console.error(error);
 
+    authMessage.textContent =
+      "❌ " + error.code;
 
-await setDoc(
-doc(db,"users",result.user.uid),
-{
-uid:result.user.uid,
-name:name,
-email:email,
-avatar:photo,
-createdAt:serverTimestamp()
-}
-);
-
-
-authMsg.textContent="✅ تم إنشاء الحساب";
-
-}catch(error){
-
-console.error(error);
-
-authMsg.textContent=
-"❌ "+error.code;
-
-}
-
-};
-
-
-/* تسجيل الدخول */
-
-document.getElementById("login").onclick=async()=>{
-
-const email=document.getElementById("email").value.trim();
-
-const password=document.getElementById("password").value;
-
-
-if(!email||!password){
-
-authMsg.textContent="⚠️ اكتب البريد وكلمة المرور";
-
-return;
-}
-
-
-authMsg.textContent="جاري تسجيل الدخول...";
-
-
-try{
-
-await signInWithEmailAndPassword(
-auth,
-email,
-password
-);
-
-}catch(error){
-
-console.error(error);
-
-authMsg.textContent=
-"❌ "+error.code;
-
-}
-
-};
-
-
-/* مراقبة الدخول */
-
-onAuthStateChanged(auth,user=>{
-
-if(user){
-
-authBox.classList.add("hidden");
-
-app.classList.remove("hidden");
-
-showUser(user);
-
-loadMessages();
-
-loadPosts();
-
-}else{
-
-authBox.classList.remove("hidden");
-
-app.classList.add("hidden");
-
-}
+  }
 
 });
 
 
-/* عرض المستخدم */
+/* LOGIN */
 
-function showUser(user){
+document
+.getElementById("loginButton")
+.addEventListener("click", async () => {
 
-const name=user.displayName||"عضو";
+  const email =
+    document.getElementById("emailInput")
+    .value.trim();
 
-const photo=user.photoURL||avatarFor(name);
-
-
-document.getElementById("currentUser")
-.textContent=name;
-
-document.getElementById("profileName")
-.textContent=name;
-
-document.getElementById("profileEmail")
-.textContent=user.email||"";
-
-document.getElementById("bigAvatar")
-.src=photo;
-
-document.getElementById("newName")
-.value=name;
-
-document.getElementById("newAvatar")
-.value=user.photoURL||"";
-
-}
+  const password =
+    document.getElementById("passwordInput")
+    .value;
 
 
-/* خروج */
+  if(!email || !password){
 
-document.getElementById("logout").onclick=async()=>{
+    authMessage.textContent =
+      "⚠️ اكتب البريد وكلمة المرور";
 
-await signOut(auth);
-
-};
-
-
-/* التبويبات */
-
-document.querySelectorAll(".tab").forEach(tab=>{
-
-tab.onclick=()=>{
-
-document.querySelectorAll(".tab")
-.forEach(x=>x.classList.remove("active"));
-
-tab.classList.add("active");
+    return;
+  }
 
 
-document.querySelectorAll(".page")
-.forEach(x=>x.classList.add("hidden"));
+  authMessage.textContent =
+    "جاري تسجيل الدخول...";
 
-document.getElementById(tab.dataset.page)
-.classList.remove("hidden");
 
-};
+  try{
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    authMessage.textContent =
+      "❌ " + error.code;
+
+  }
 
 });
 
 
-/* إرسال رسالة */
+/* AUTH STATE */
+
+onAuthStateChanged(
+  auth,
+  user => {
+
+    if(user){
+
+      loginPage.classList.add("hidden");
+
+      chatApp.classList.remove("hidden");
+
+      document
+      .getElementById("currentUsername")
+      .textContent =
+      user.displayName || "عضو";
+
+      loadMessages();
+
+    }
+
+    else{
+
+      loginPage.classList.remove("hidden");
+
+      chatApp.classList.add("hidden");
+
+    }
+
+  }
+);
+
+
+/* LOGOUT */
+
+document
+.getElementById("logoutButton")
+.addEventListener("click", async () => {
+
+  await signOut(auth);
+
+});
+
+
+/* SEND MESSAGE */
 
 async function sendMessage(){
 
-const input=document.getElementById("messageInput");
+  const input =
+    document.getElementById("messageInput");
 
-const text=input.value.trim();
+  const text =
+    input.value.trim();
 
-const user=auth.currentUser;
+  const user =
+    auth.currentUser;
 
 
-if(!user||!text)return;
+  if(!user || !text){
+
+    return;
+  }
 
 
-try{
+  try{
 
-await addDoc(
-collection(db,"messages"),
-{
-uid:user.uid,
-name:user.displayName||"عضو",
-avatar:user.photoURL||avatarFor(user.displayName),
-text:text,
-createdAt:serverTimestamp()
+    await addDoc(
+      collection(db,"messages"),
+      {
+        uid:user.uid,
+
+        name:
+        user.displayName || "عضو",
+
+        text:text,
+
+        createdAt:
+        serverTimestamp()
+      }
+    );
+
+
+    input.value = "";
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    alert(
+      "تعذر إرسال الرسالة: "
+      + error.code
+    );
+
+  }
+
 }
+
+
+/* SEND BUTTON */
+
+document
+.getElementById("sendButton")
+.addEventListener(
+  "click",
+  sendMessage
 );
 
-input.value="";
 
-}catch(error){
+/* ENTER */
 
-console.error(error);
+document
+.getElementById("messageInput")
+.addEventListener(
+  "keydown",
+  event => {
 
-alert("تعذر إرسال الرسالة");
+    if(event.key === "Enter"){
 
-}
+      sendMessage();
 
-}
+    }
 
-
-document.getElementById("send")
-.onclick=sendMessage;
-
-
-document.getElementById("messageInput")
-.addEventListener("keydown",event=>{
-
-if(event.key==="Enter"){
-
-sendMessage();
-
-}
-
-});
+  }
+);
 
 
-/* قراءة الرسائل */
+/* LOAD MESSAGES */
 
 function loadMessages(){
 
-const q=query(
-collection(db,"messages"),
-orderBy("createdAt","asc")
-);
+  const messagesBox =
+    document.getElementById("messages");
 
 
-onSnapshot(q,snapshot=>{
+  const messagesQuery =
+    query(
+      collection(db,"messages"),
+      orderBy("createdAt","asc")
+    );
 
-const box=document.getElementById("messages");
 
-box.innerHTML="";
+  onSnapshot(
+    messagesQuery,
+
+    snapshot => {
+
+      messagesBox.innerHTML = "";
 
 
-if(snapshot.empty){
+      if(snapshot.empty){
 
-box.innerHTML=
-'<div class="empty">لا توجد رسائل بعد</div>';
+        messagesBox.innerHTML =
+          '<div class="empty">لا توجد رسائل بعد</div>';
 
-return;
+        return;
+      }
+
+
+      snapshot.forEach(
+        documentSnapshot => {
+
+          const data =
+            documentSnapshot.data();
+
+
+          const row =
+            document.createElement("div");
+
+          row.className =
+            "message";
+
+
+          const avatar =
+            document.createElement("img");
+
+          avatar.className =
+            "avatar";
+
+          avatar.src =
+            "https://ui-avatars.com/api/?name="
+            + encodeURIComponent(
+              data.name || "عضو"
+            )
+            + "&background=1687ff&color=fff";
+
+
+          const content =
+            document.createElement("div");
+
+          content.className =
+            "messageContent";
+
+
+          const name =
+            document.createElement("div");
+
+          name.className =
+            "messageName";
+
+          name.textContent =
+            data.name || "عضو";
+
+
+          const text =
+            document.createElement("div");
+
+          text.className =
+            "messageText";
+
+          text.textContent =
+            data.text || "";
+
+
+          content.appendChild(name);
+
+          content.appendChild(text);
+
+          row.appendChild(avatar);
+
+          row.appendChild(content);
+
+          messagesBox.appendChild(row);
+
+        }
+      );
+
+
+      messagesBox.scrollTop =
+        messagesBox.scrollHeight;
+
+    },
+
+    error => {
+
+      console.error(error);
+
+      messagesBox.innerHTML =
+        '<div class="empty">❌ تعذر تحميل الرسائل: '
+        + error.code
+        + '</div>';
+
+    }
+
+  );
 
 }
 
+</script>
 
-snapshot.forEach(item=>{
-
-const data=item.data();
-
-
-const row=document.createElement("div");
-
-row.className="message";
-
-
-const img=document.createElement("img");
-
-img.className="avatar";
-
-img.src=
-data.avatar||avatarFor(data.name);
-
-
-img.onerror=()=>{
-
-img.src=avatarFor(data.name);
-
-};
-
-
-const body=document.createElement("div");
-
-body.className="message-box";
-
-
-const name=document.createElement("div");
-
-name.className="message-name";
-
-name.textContent=
-data.name||"عضو";
-
-
-const text=document.createElement("div");
-
-text.className="message-text";
-
-text.textContent=
-data.text||"";
-
-
-body.append(name,text);
-
-row.append(img,body);
-
-box.appendChild(row);
-
-});
-
-
-box.scrollTop=box.scrollHeight;
-
-});
-
-}
-
-
-/* نشر */
-
-document.getElementById("publish")
-.onclick=async()=>{
-
-const input=document.getElementById("postText");
-
-const text=input.value.trim();
-
-const user=auth.currentUser;
-
-
-if(!user||!text)return;
-
-
-try{
-
-await addDoc(
-collection(db,"posts"),
-{
-uid:user.uid,
-name:user.displayName||"عضو",
-avatar:user.photoURL||avatarFor(user.displayName),
-text:text,
-likes
+</body>
+</html>
+```
