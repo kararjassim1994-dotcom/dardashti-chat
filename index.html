@@ -9,18 +9,18 @@
 *{box-sizing:border-box}
 
 html,body{
-  margin:0;
-  width:100%;
-  min-height:100%;
-  font-family:Arial,Tahoma,sans-serif;
-  background:#080b10;
-  color:#fff;
+margin:0;
+width:100%;
+min-height:100%;
+font-family:Arial,Tahoma,sans-serif;
+background:#080b10;
+color:#fff
 }
 
 body{
-  background:
-    linear-gradient(#0009,#0009),
-    url("./background.jpeg") center/cover fixed no-repeat;
+background:
+linear-gradient(#0009,#0009),
+url("./background.jpeg") center/cover fixed no-repeat
 }
 
 button,input{font-family:inherit}
@@ -30,57 +30,57 @@ button{cursor:pointer}
 /* LOGIN */
 
 #loginPage{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px
 }
 
 .loginBox{
-  width:100%;
-  max-width:430px;
-  background:#101722ee;
-  padding:25px;
-  border-radius:20px;
-  border:1px solid #ffffff25;
-  box-shadow:0 20px 60px #000b;
-  backdrop-filter:blur(8px);
+width:100%;
+max-width:430px;
+background:#101722ee;
+padding:25px;
+border-radius:20px;
+border:1px solid #ffffff25;
+box-shadow:0 20px 60px #000b;
+backdrop-filter:blur(8px)
 }
 
 .logo{
-  text-align:center;
-  font-size:30px;
-  font-weight:bold;
-  margin-bottom:8px;
+text-align:center;
+font-size:30px;
+font-weight:bold;
+margin-bottom:8px
 }
 
 .description{
-  text-align:center;
-  color:#c0cad6;
-  margin-bottom:20px;
-  line-height:1.7;
+text-align:center;
+color:#c0cad6;
+margin-bottom:20px;
+line-height:1.7
 }
 
 .tabs{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:6px;
-  margin-bottom:12px;
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:6px;
+margin-bottom:12px
 }
 
 .tab{
-  border:1px solid #344255;
-  background:#18222e;
-  color:#cbd5e1;
-  padding:11px 5px;
-  border-radius:9px;
-  font-weight:bold;
+border:1px solid #344255;
+background:#18222e;
+color:#cbd5e1;
+padding:11px 5px;
+border-radius:9px;
+font-weight:bold
 }
 
 .tab.active{
-  background:#1687ff;
-  color:#fff;
+background:#1687ff;
+color:#fff
 }
 
 .form{display:none}
@@ -88,544 +88,478 @@ button{cursor:pointer}
 
 .loginBox input,
 .composer input{
-  width:100%;
-  padding:14px;
-  margin:6px 0;
-  border:1px solid #344255;
-  border-radius:10px;
-  background:#0d131b;
-  color:#fff;
-  outline:none;
+width:100%;
+padding:14px;
+margin:6px 0;
+border:1px solid #344255;
+border-radius:10px;
+background:#0d131b;
+color:#fff;
+outline:none
 }
 
 .btn{
-  width:100%;
-  padding:14px;
-  margin-top:8px;
-  border:0;
-  border-radius:10px;
-  font-weight:bold;
-  color:#fff;
+width:100%;
+padding:14px;
+margin-top:8px;
+border:0;
+border-radius:10px;
+font-weight:bold;
+color:#fff
 }
 
 .primary{background:#1687ff}
-.secondary{background:#283444}
 
 #authMessage{
-  text-align:center;
-  min-height:24px;
-  margin-top:12px;
-  color:#ffb6b6;
+text-align:center;
+min-height:24px;
+margin-top:12px;
+color:#ffb6b6
 }
 
 .status{
-  text-align:center;
-  color:#8ee0b1;
-  font-size:12px;
-  margin-top:8px;
+text-align:center;
+color:#8ee0b1;
+font-size:12px;
+margin-top:8px
 }
 
 /* CHAT */
 
 #chatApp{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
+height:100vh;
+display:flex;
+flex-direction:column
 }
 
 .header{
-  min-height:64px;
-  background:#101722ee;
-  border-bottom:1px solid #293646;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 12px;
-  gap:7px;
-  backdrop-filter:blur(8px);
+min-height:64px;
+background:#101722ee;
+border-bottom:1px solid #293646;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 12px;
+gap:7px;
+backdrop-filter:blur(8px)
 }
 
 .headerRight{
-  display:flex;
-  align-items:center;
-  gap:7px;
+display:flex;
+align-items:center;
+gap:7px
 }
 
 .title{
-  font-size:20px;
-  font-weight:bold;
+font-size:20px;
+font-weight:bold
 }
 
 .username{
-  font-size:12px;
-  color:#6ee7a0;
-  margin-top:3px;
+font-size:12px;
+color:#6ee7a0;
+margin-top:3px
 }
 
 .logout{
-  border:0;
-  background:#a92d38;
-  color:#fff;
-  padding:9px 12px;
-  border-radius:9px;
+border:0;
+background:#a92d38;
+color:#fff;
+padding:9px 12px;
+border-radius:9px
 }
 
 .gameOpen{
-  border:0;
-  background:#1687ff;
-  color:#fff;
-  padding:9px 10px;
-  border-radius:9px;
-  font-weight:bold;
+border:0;
+background:#1687ff;
+color:#fff;
+padding:9px 10px;
+border-radius:9px;
+font-weight:bold
 }
 
 /* VOICE */
 
 .voicePanel{
-  background:#101720dd;
-  border-bottom:1px solid #293646;
-  padding:10px;
+background:#101720dd;
+border-bottom:1px solid #293646;
+padding:10px
 }
 
 .voiceTitle{
-  text-align:center;
-  font-weight:bold;
-  margin-bottom:8px;
-  color:#dce7f5;
+text-align:center;
+font-weight:bold;
+margin-bottom:8px
 }
 
 .voiceSlots{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px
 }
 
 .voiceSlot{
-  min-height:90px;
-  background:#18222ecc;
-  border:1px solid #344255;
-  border-radius:13px;
-  padding:9px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  gap:5px;
+min-height:85px;
+background:#18222ecc;
+border:1px solid #344255;
+border-radius:13px;
+padding:9px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+gap:5px
 }
 
-.voiceSlot.active{
-  border-color:#24c77a;
-}
+.voiceSlot.active{border-color:#24c77a}
 
 .voiceSlot button{
-  border:0;
-  border-radius:9px;
-  padding:8px 12px;
-  background:#1687ff;
-  color:#fff;
-  font-weight:bold;
+border:0;
+border-radius:9px;
+padding:8px 12px;
+background:#1687ff;
+color:#fff;
+font-weight:bold
 }
 
-.voiceSlot.active button{
-  background:#b52d39;
-}
+.voiceSlot.active button{background:#b52d39}
 
 .voiceName{
-  font-size:13px;
-  color:#aebaca;
-  max-width:100%;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+font-size:13px;
+color:#aebaca;
+max-width:100%;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap
 }
 
 .voiceStatus{
-  font-size:11px;
-  color:#7e8a99;
-  text-align:center;
+font-size:11px;
+color:#7e8a99;
+text-align:center
 }
 
 /* MESSAGES */
 
 .messages{
-  flex:1;
-  overflow-y:auto;
-  padding:14px;
-  background:#0004;
+flex:1;
+overflow-y:auto;
+padding:14px;
+background:#0004
 }
 
 .message{
-  display:flex;
-  gap:9px;
-  margin-bottom:13px;
+display:flex;
+gap:9px;
+margin-bottom:13px
 }
 
 .avatar{
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  object-fit:cover;
-  background:#293646;
+width:42px;
+height:42px;
+border-radius:50%;
+object-fit:cover;
+background:#293646
 }
 
 .messageContent{
-  background:#18222eea;
-  border-radius:13px;
-  padding:8px 11px;
-  max-width:80%;
+background:#18222eea;
+border-radius:13px;
+padding:8px 11px;
+max-width:80%
 }
 
 .messageName{
-  color:#61a8ff;
-  font-size:12px;
-  font-weight:bold;
-  margin-bottom:3px;
+color:#61a8ff;
+font-size:12px;
+font-weight:bold;
+margin-bottom:3px
 }
 
 .messageText{
-  line-height:1.5;
-  word-break:break-word;
+line-height:1.5;
+word-break:break-word
 }
 
 .composer{
-  display:flex;
-  gap:7px;
-  padding:9px;
-  background:#151d28ee;
-  border-top:1px solid #293646;
+display:flex;
+gap:7px;
+padding:9px;
+background:#151d28ee;
+border-top:1px solid #293646
 }
 
 .composer input{
-  flex:1;
-  min-width:0;
-  margin:0;
+flex:1;
+min-width:0;
+margin:0
 }
 
 .send{
-  width:50px;
-  border:0;
-  border-radius:10px;
-  background:#1687ff;
-  color:#fff;
-  font-size:18px;
+width:50px;
+border:0;
+border-radius:10px;
+background:#1687ff;
+color:#fff;
+font-size:18px
 }
 
 .empty{
-  text-align:center;
-  color:#7e8a99;
-  padding:35px 10px;
+text-align:center;
+color:#7e8a99;
+padding:35px 10px
 }
 
-/* AUDIO */
-
-#audioContainer{
-  position:fixed;
-  width:1px;
-  height:1px;
-  left:-100px;
-  top:-100px;
-  overflow:hidden;
-}
-
-#audioContainer audio{
-  width:1px;
-  height:1px;
-}
-
-#enableAudioButton{
-  position:fixed;
-  left:10px;
-  right:10px;
-  bottom:75px;
-  z-index:99999;
-  display:none;
-  border:0;
-  border-radius:12px;
-  padding:13px;
-  background:#1687ff;
-  color:#fff;
-  font-weight:bold;
-  box-shadow:0 8px 30px #0008;
-}
-
-/* GAMES MODAL */
+/* MODAL */
 
 .gameModal{
-  position:fixed;
-  inset:0;
-  z-index:100000;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:12px;
-  background:#000d;
-  backdrop-filter:blur(8px);
+position:fixed;
+inset:0;
+z-index:100000;
+display:none;
+align-items:center;
+justify-content:center;
+padding:12px;
+background:#000d;
+backdrop-filter:blur(8px)
 }
 
-.gameModal.show{
-  display:flex;
-}
+.gameModal.show{display:flex}
 
 .gameBox{
-  width:100%;
-  max-width:520px;
-  max-height:94vh;
-  overflow:auto;
-  background:#101722;
-  border:1px solid #344255;
-  border-radius:20px;
-  padding:14px;
-  box-shadow:0 20px 70px #000;
+width:100%;
+max-width:540px;
+max-height:94vh;
+overflow:auto;
+background:#101722;
+border:1px solid #344255;
+border-radius:20px;
+padding:14px;
+box-shadow:0 20px 70px #000
 }
 
 .gameHeader{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px
 }
 
 .gameTitle{
-  font-size:20px;
-  font-weight:bold;
+font-size:20px;
+font-weight:bold
 }
 
 .closeGame{
-  width:38px;
-  height:38px;
-  border:0;
-  border-radius:10px;
-  background:#a92d38;
-  color:#fff;
-  font-size:22px;
+width:38px;
+height:38px;
+border:0;
+border-radius:10px;
+background:#a92d38;
+color:#fff;
+font-size:22px
 }
 
 /* XO */
 
-.xoInfo{
-  text-align:center;
-  color:#cbd5e1;
-  margin-bottom:12px;
+.xoInfo,
+.backgammonInfo{
+text-align:center;
+color:#cbd5e1;
+margin-bottom:12px;
+line-height:1.6
 }
 
 .xoBoard{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:7px;
-  max-width:350px;
-  margin:auto;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:7px;
+max-width:350px;
+margin:auto
 }
 
 .xoCell{
-  aspect-ratio:1;
-  border:1px solid #344255;
-  border-radius:12px;
-  background:#18222e;
-  color:#fff;
-  font-size:48px;
-  font-weight:bold;
+aspect-ratio:1;
+border:1px solid #344255;
+border-radius:12px;
+background:#18222e;
+color:#fff;
+font-size:48px;
+font-weight:bold
 }
 
-.xoCell:disabled{
-  opacity:1;
-}
+.xoCell:disabled{opacity:1}
 
 .gameMessage{
-  text-align:center;
-  min-height:30px;
-  padding:12px 5px;
-  color:#8ee0b1;
-  font-weight:bold;
+text-align:center;
+min-height:30px;
+padding:12px 5px;
+color:#8ee0b1;
+font-weight:bold
 }
 
 .restart{
-  width:100%;
-  border:0;
-  border-radius:10px;
-  padding:12px;
-  background:#283444;
-  color:#fff;
-  font-weight:bold;
+width:100%;
+border:0;
+border-radius:10px;
+padding:12px;
+background:#283444;
+color:#fff;
+font-weight:bold
 }
 
 /* BACKGAMMON */
 
-.backgammonInfo{
-  text-align:center;
-  color:#cbd5e1;
-  margin-bottom:10px;
-  line-height:1.6;
-}
-
 .backgammonBoard{
-  position:relative;
-  width:100%;
-  aspect-ratio:1/1.05;
-  border-radius:15px;
-  padding:10px;
-  background:
-    linear-gradient(90deg,#7a4a28 0 49%,#542f1c 49% 51%,#7a4a28 51%);
-  border:5px solid #342016;
-  box-shadow:inset 0 0 30px #0008;
+position:relative;
+width:100%;
+aspect-ratio:1/1.08;
+border-radius:15px;
+padding:10px;
+background:#70401f;
+border:5px solid #321c0e;
+box-shadow:inset 0 0 30px #0008
 }
 
 .boardHalf{
-  position:absolute;
-  left:10px;
-  right:10px;
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:4px;
+position:absolute;
+left:10px;
+right:10px;
+display:grid;
+grid-template-columns:repeat(6,1fr);
+gap:3px
 }
 
-.boardTop{
-  top:10px;
-}
-
-.boardBottom{
-  bottom:10px;
-}
+.boardTop{top:10px}
+.boardBottom{bottom:10px}
 
 .point{
-  position:relative;
-  height:145px;
-  overflow:visible;
-  cursor:pointer;
+position:relative;
+height:145px;
+cursor:pointer
 }
 
 .pointTriangle{
-  position:absolute;
-  left:5%;
-  right:5%;
-  width:90%;
-  height:105px;
+position:absolute;
+left:5%;
+width:90%;
+height:105px
 }
 
 .boardTop .pointTriangle{
-  top:0;
-  background:#d8a45b;
-  clip-path:polygon(50% 100%,0 0,100% 0);
+top:0;
+clip-path:polygon(50% 100%,0 0,100% 0);
+background:#d6a15c
 }
 
 .boardTop .point:nth-child(even) .pointTriangle{
-  background:#4a2b1b;
+background:#472919
 }
 
 .boardBottom .pointTriangle{
-  bottom:0;
-  background:#d8a45b;
-  clip-path:polygon(0 100%,100% 100%,50% 0);
+bottom:0;
+clip-path:polygon(0 100%,100% 100%,50% 0);
+background:#d6a15c
 }
 
 .boardBottom .point:nth-child(even) .pointTriangle{
-  background:#4a2b1b;
+background:#472919
 }
 
 .checkers{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:2px;
-  z-index:5;
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:2px;
+z-index:5
 }
 
-.boardTop .checkers{
-  top:8px;
-}
-
+.boardTop .checkers{top:7px}
 .boardBottom .checkers{
-  bottom:8px;
-  flex-direction:column-reverse;
+bottom:7px;
+flex-direction:column-reverse
 }
 
 .checker{
-  width:32px;
-  height:32px;
-  border-radius:50%;
-  border:2px solid #222;
-  box-shadow:0 2px 5px #0009;
+width:31px;
+height:31px;
+border-radius:50%;
+border:2px solid #222;
+box-shadow:0 2px 5px #0009
 }
 
-.checker.white{
-  background:#f1f1f1;
-}
-
+.checker.white{background:#f1f1f1}
 .checker.black{
-  background:#171717;
-  border-color:#555;
+background:#111;
+border-color:#666
 }
 
 .point.selected .pointTriangle{
-  filter:brightness(1.5);
+filter:brightness(1.5)
+}
+
+.point.possible .pointTriangle{
+filter:brightness(1.35)
 }
 
 .diceArea{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:10px;
-  margin:12px 0;
-  flex-wrap:wrap;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+margin:12px 0;
+flex-wrap:wrap
 }
 
 .die{
-  width:48px;
-  height:48px;
-  border-radius:10px;
-  background:#fff;
-  color:#111;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:25px;
-  font-weight:bold;
-  box-shadow:0 4px 10px #0007;
+width:48px;
+height:48px;
+border-radius:10px;
+background:#fff;
+color:#111;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:25px;
+font-weight:bold;
+box-shadow:0 4px 10px #0007
 }
 
 .rollDice{
-  border:0;
-  background:#1687ff;
-  color:#fff;
-  padding:11px 18px;
-  border-radius:10px;
-  font-weight:bold;
+border:0;
+background:#1687ff;
+color:#fff;
+padding:11px 18px;
+border-radius:10px;
+font-weight:bold
 }
 
 .rollDice:disabled{
-  opacity:.45;
+opacity:.45
 }
 
 @media(max-width:420px){
 
-  .title{
-    font-size:16px;
-  }
+.title{font-size:16px}
 
-  .gameOpen,
-  .logout{
-    padding:7px 8px;
-    font-size:12px;
-  }
+.gameOpen,
+.logout{
+padding:7px 8px;
+font-size:12px
+}
 
-  .point{
-    height:118px;
-  }
+.point{height:115px}
+.pointTriangle{height:88px}
 
-  .pointTriangle{
-    height:90px;
-  }
+.checker{
+width:26px;
+height:26px
+}
 
-  .checker{
-    width:27px;
-    height:27px;
-  }
-
-  .xoCell{
-    font-size:38px;
-  }
+.xoCell{font-size:38px}
 }
 </style>
 </head>
@@ -635,2426 +569,1502 @@ button{cursor:pointer}
 <!-- LOGIN -->
 
 <div id="loginPage">
+<div class="loginBox">
 
-  <div class="loginBox">
+<div class="logo">🔥 طليان الشعلة</div>
 
-    <div class="logo">🔥 طليان الشعلة</div>
+<div class="description">
+أهلاً بك في الدردشة<br>
+اختر طريقة الدخول للمتابعة
+</div>
 
-    <div class="description">
-      أهلاً بك في الدردشة<br>
-      اختر طريقة الدخول للمتابعة
-    </div>
+<div class="tabs">
+<button class="tab active" data-tab="visitor">دخول الزوار</button>
+<button class="tab" data-tab="login">دخول الأعضاء</button>
+<button class="tab" data-tab="signup">تسجيل عضوية</button>
+</div>
 
-    <div class="tabs">
+<div id="visitorForm" class="form active">
+<input id="visitorName" type="text" placeholder="أكتب الاسم المستعار">
+<button id="visitorButton" class="btn primary">دخول</button>
+</div>
 
-      <button class="tab active" data-tab="visitor">
-        دخول الزوار
-      </button>
+<div id="loginForm" class="form">
+<input id="emailInput" type="email" placeholder="البريد الإلكتروني">
+<input id="passwordInput" type="password" placeholder="كلمة المرور">
+<button id="loginButton" class="btn primary">دخول</button>
+</div>
 
-      <button class="tab" data-tab="login">
-        دخول الأعضاء
-      </button>
+<div id="signupForm" class="form">
+<input id="nameInput" type="text" placeholder="اسم العضو">
+<input id="signupEmail" type="email" placeholder="البريد الإلكتروني">
+<input id="signupPassword" type="password" placeholder="كلمة المرور">
+<button id="signupButton" class="btn primary">إنشاء حساب</button>
+</div>
 
-      <button class="tab" data-tab="signup">
-        تسجيل عضوية
-      </button>
+<div id="authMessage"></div>
+<div class="status">● متصل</div>
 
-    </div>
-
-    <div id="visitorForm" class="form active">
-
-      <input
-        id="visitorName"
-        type="text"
-        placeholder="أكتب الاسم المستعار"
-      >
-
-      <button id="visitorButton" class="btn primary">
-        دخول
-      </button>
-
-    </div>
-
-    <div id="loginForm" class="form">
-
-      <input
-        id="emailInput"
-        type="email"
-        placeholder="البريد الإلكتروني"
-      >
-
-      <input
-        id="passwordInput"
-        type="password"
-        placeholder="كلمة المرور"
-      >
-
-      <button id="loginButton" class="btn primary">
-        دخول
-      </button>
-
-    </div>
-
-    <div id="signupForm" class="form">
-
-      <input
-        id="nameInput"
-        type="text"
-        placeholder="اسم العضو"
-      >
-
-      <input
-        id="signupEmail"
-        type="email"
-        placeholder="البريد الإلكتروني"
-      >
-
-      <input
-        id="signupPassword"
-        type="password"
-        placeholder="كلمة المرور"
-      >
-
-      <button id="signupButton" class="btn primary">
-        إنشاء حساب
-      </button>
-
-    </div>
-
-    <div id="authMessage"></div>
-
-    <div class="status">
-      ● متصل
-    </div>
-
-  </div>
-
+</div>
 </div>
 
 <!-- CHAT -->
 
 <div id="chatApp" class="hidden">
 
-  <div class="header">
+<div class="header">
 
-    <div>
-      <div class="title">🔥 طليان الشعلة</div>
-      <div id="currentUsername" class="username">عضو</div>
-    </div>
+<div>
+<div class="title">🔥 طليان الشعلة</div>
+<div id="currentUsername" class="username">عضو</div>
+</div>
 
-    <div class="headerRight">
-
-      <button id="xoOpen" class="gameOpen">
-        ❌⭕
-      </button>
-
-      <button id="backgammonOpen" class="gameOpen">
-        🎲
-      </button>
-
-      <button id="logoutButton" class="logout">
-        خروج
-      </button>
-
-    </div>
-
-  </div>
-
-  <!-- VOICE -->
-
-  <div class="voicePanel">
-
-    <div class="voiceTitle">
-      🎤 المايكات العامة
-    </div>
-
-    <div class="voiceSlots">
-
-      <div id="voiceSlot1" class="voiceSlot">
-
-        <div>🎤 المايك 1</div>
-
-        <div id="voiceName1" class="voiceName">
-          شاغر
-        </div>
-
-        <div id="voiceStatus1" class="voiceStatus">
-          اضغط للتحدث
-        </div>
-
-        <button id="voiceButton1">
-          تشغيل المايك
-        </button>
-
-      </div>
-
-      <div id="voiceSlot2" class="voiceSlot">
-
-        <div>🎤 المايك 2</div>
-
-        <div id="voiceName2" class="voiceName">
-          شاغر
-        </div>
-
-        <div id="voiceStatus2" class="voiceStatus">
-          اضغط للتحدث
-        </div>
-
-        <button id="voiceButton2">
-          تشغيل المايك
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- MESSAGES -->
-
-  <div id="messages" class="messages">
-
-    <div class="empty">
-      جاري تحميل الدردشة...
-    </div>
-
-  </div>
-
-  <div class="composer">
-
-    <input
-      id="messageInput"
-      type="text"
-      placeholder="اكتب رسالتك..."
-    >
-
-    <button id="sendButton" class="send">
-      ➤
-    </button>
-
-  </div>
+<div class="headerRight">
+<button id="xoOpen" class="gameOpen">❌⭕</button>
+<button id="backgammonOpen" class="gameOpen">🎲</button>
+<button id="logoutButton" class="logout">خروج</button>
+</div>
 
 </div>
 
-<!-- XO MODAL -->
+<div class="voicePanel">
+
+<div class="voiceTitle">🎤 المايكات العامة</div>
+
+<div class="voiceSlots">
+
+<div id="voiceSlot1" class="voiceSlot">
+<div>🎤 المايك 1</div>
+<div id="voiceName1" class="voiceName">شاغر</div>
+<div id="voiceStatus1" class="voiceStatus">اضغط للتحدث</div>
+<button id="voiceButton1">تشغيل المايك</button>
+</div>
+
+<div id="voiceSlot2" class="voiceSlot">
+<div>🎤 المايك 2</div>
+<div id="voiceName2" class="voiceName">شاغر</div>
+<div id="voiceStatus2" class="voiceStatus">اضغط للتحدث</div>
+<button id="voiceButton2">تشغيل المايك</button>
+</div>
+
+</div>
+</div>
+
+<div id="messages" class="messages">
+<div class="empty">جاري تحميل الدردشة...</div>
+</div>
+
+<div class="composer">
+<input id="messageInput" type="text" placeholder="اكتب رسالتك...">
+<button id="sendButton" class="send">➤</button>
+</div>
+
+</div>
+
+<!-- XO -->
 
 <div id="xoModal" class="gameModal">
+<div class="gameBox">
 
-  <div class="gameBox">
-
-    <div class="gameHeader">
-
-      <div class="gameTitle">
-        ❌⭕ XO ضد الروبوت
-      </div>
-
-      <button id="xoClose" class="closeGame">
-        ×
-      </button>
-
-    </div>
-
-    <div class="xoInfo">
-      أنت ❌ — الروبوت ⭕
-    </div>
-
-    <div id="xoBoard" class="xoBoard"></div>
-
-    <div id="xoMessage" class="gameMessage">
-      دورك
-    </div>
-
-    <button id="xoRestart" class="restart">
-      🔄 لعبة جديدة
-    </button>
-
-  </div>
-
+<div class="gameHeader">
+<div class="gameTitle">❌⭕ XO ضد الروبوت</div>
+<button id="xoClose" class="closeGame">×</button>
 </div>
 
-<!-- BACKGAMMON MODAL -->
+<div class="xoInfo">أنت ❌ — الروبوت ⭕</div>
+
+<div id="xoBoard" class="xoBoard"></div>
+
+<div id="xoMessage" class="gameMessage">دورك</div>
+
+<button id="xoRestart" class="restart">🔄 لعبة جديدة</button>
+
+</div>
+</div>
+
+<!-- BACKGAMMON -->
 
 <div id="backgammonModal" class="gameModal">
+<div class="gameBox">
 
-  <div class="gameBox">
+<div class="gameHeader">
+<div class="gameTitle">🎲 الطاولي ضد الروبوت</div>
+<button id="backgammonClose" class="closeGame">×</button>
+</div>
 
-    <div class="gameHeader">
+<div class="backgammonInfo">
+أنت ⚪ الأبيض — الروبوت ⚫ الأسود<br>
+الأبيض يتحرك من النقاط 0 باتجاه 23
+</div>
 
-      <div class="gameTitle">
-        🎲 الطاولي ضد الروبوت
-      </div>
+<div class="backgammonBoard">
 
-      <button id="backgammonClose" class="closeGame">
-        ×
-      </button>
-
-    </div>
-
-    <div class="backgammonInfo">
-      أنت: ⚪ الأبيض<br>
-      الروبوت: ⚫ الأسود
-    </div>
-
-    <div class="backgammonBoard">
-
-      <div id="boardTop" class="boardHalf boardTop"></div>
-
-      <div id="boardBottom" class="boardHalf boardBottom"></div>
-
-    </div>
-
-    <div class="diceArea">
-
-      <div id="die1" class="die">–</div>
-
-      <div id="die2" class="die">–</div>
-
-      <button id="rollDice" class="rollDice">
-        🎲 رمي النرد
-      </button>
-
-    </div>
-
-    <div id="gameMessage" class="gameMessage">
-      اضغط «رمي النرد» للبدء
-    </div>
-
-    <button id="restartGame" class="restart">
-      🔄 لعبة جديدة
-    </button>
-
-  </div>
+<div id="boardTop" class="boardHalf boardTop"></div>
+<div id="boardBottom" class="boardHalf boardBottom"></div>
 
 </div>
 
-<!-- AUDIO -->
+<div class="diceArea">
+<div id="die1" class="die">–</div>
+<div id="die2" class="die">–</div>
+<button id="rollDice" class="rollDice">🎲 رمي النرد</button>
+</div>
 
-<div id="audioContainer"></div>
+<div id="gameMessage" class="gameMessage">
+اضغط «رمي النرد» للبدء
+</div>
 
-<button id="enableAudioButton">
-  🔊 تفعيل الصوت
+<button id="restartGame" class="restart">
+🔄 لعبة جديدة
 </button>
+
+</div>
+</div>
 
 <script type="module">
 
-/* =====================================================
-   FIREBASE
-===================================================== */
-
 import {
-  initializeApp
+initializeApp
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 
 import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signInAnonymously,
-  updateProfile,
-  onAuthStateChanged,
-  signOut
+getAuth,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+signInAnonymously,
+updateProfile,
+onAuthStateChanged,
+signOut
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
 import {
-  getFirestore,
-  collection,
-  addDoc,
-  query,
-  orderBy,
-  onSnapshot,
-  serverTimestamp,
-  doc,
-  setDoc,
-  deleteDoc,
-  getDoc
+getFirestore,
+collection,
+addDoc,
+query,
+orderBy,
+onSnapshot,
+serverTimestamp,
+doc,
+setDoc,
+deleteDoc,
+getDoc
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
 
 const firebaseConfig={
-
-  apiKey:"AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
-
-  authDomain:"dardashti-chat.firebaseapp.com",
-
-  projectId:"dardashti-chat",
-
-  storageBucket:"dardashti-chat.firebasestorage.app",
-
-  messagingSenderId:"779042757468",
-
-  appId:"1:779042757468:web:7646d3cdadf46f315a3f99"
-
+apiKey:"AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
+authDomain:"dardashti-chat.firebaseapp.com",
+projectId:"dardashti-chat",
+storageBucket:"dardashti-chat.firebasestorage.app",
+messagingSenderId:"779042757468",
+appId:"1:779042757468:web:7646d3cdadf46f315a3f99"
 };
 
 const app=initializeApp(firebaseConfig);
-
 const auth=getAuth(app);
-
 const db=getFirestore(app);
 
-
-/* =====================================================
-   ELEMENTS
-===================================================== */
-
-const loginPage=
-document.getElementById("loginPage");
-
-const chatApp=
-document.getElementById("chatApp");
-
-const authMessage=
-document.getElementById("authMessage");
+const loginPage=document.getElementById("loginPage");
+const chatApp=document.getElementById("chatApp");
+const authMessage=document.getElementById("authMessage");
 
 let stopMessages=null;
 let stopSlots=null;
-
 let mySlot=null;
 let localStream=null;
 
 
-/* =====================================================
-   TABS
-===================================================== */
+/* TABS */
 
 document.querySelectorAll(".tab").forEach(btn=>{
+btn.onclick=()=>{
 
-  btn.onclick=()=>{
+document.querySelectorAll(".tab")
+.forEach(x=>x.classList.remove("active"));
 
-    document
-      .querySelectorAll(".tab")
-      .forEach(x=>x.classList.remove("active"));
+document.querySelectorAll(".form")
+.forEach(x=>x.classList.remove("active"));
 
-    document
-      .querySelectorAll(".form")
-      .forEach(x=>x.classList.remove("active"));
+btn.classList.add("active");
 
-    btn.classList.add("active");
+document
+.getElementById(btn.dataset.tab+"Form")
+.classList.add("active");
 
-    document
-      .getElementById(btn.dataset.tab+"Form")
-      .classList.add("active");
+authMessage.textContent="";
+};
+});
 
-    authMessage.textContent="";
 
-  };
+/* VISITOR */
+
+async function enterVisitor(){
+
+const name=document
+.getElementById("visitorName")
+.value.trim();
+
+if(name.length<2){
+authMessage.textContent="⚠️ اكتب اسمًا صحيحًا";
+return;
+}
+
+try{
+
+localStorage.setItem("visitorName",name);
+
+if(!auth.currentUser)
+await signInAnonymously(auth);
+
+showChat(name);
+
+}catch(e){
+
+authMessage.textContent=
+"❌ تعذر الدخول: "+(e.code||e.message);
+
+}
+}
+
+document.getElementById("visitorButton").onclick=enterVisitor;
+
+
+/* SIGNUP */
+
+document.getElementById("signupButton").onclick=async()=>{
+
+const name=document.getElementById("nameInput").value.trim();
+const email=document.getElementById("signupEmail").value.trim();
+const password=document.getElementById("signupPassword").value;
+
+if(name.length<2){
+authMessage.textContent="⚠️ اكتب اسم العضو";
+return;
+}
+
+if(!email||password.length<6){
+authMessage.textContent="⚠️ البريد صحيح وكلمة المرور 6 أحرف على الأقل";
+return;
+}
+
+try{
+
+const r=await createUserWithEmailAndPassword(
+auth,email,password
+);
+
+await updateProfile(r.user,{displayName:name});
+
+await setDoc(
+doc(db,"users",r.user.uid),
+{
+uid:r.user.uid,
+name:name,
+email:email,
+role:"user",
+banned:false,
+createdAt:serverTimestamp()
+},
+{merge:true}
+);
+
+authMessage.textContent="✅ تم إنشاء الحساب";
+
+}catch(e){
+
+authMessage.textContent="❌ "+(e.code||e.message);
+
+}
+};
+
+
+/* LOGIN */
+
+document.getElementById("loginButton").onclick=async()=>{
+
+const email=document.getElementById("emailInput").value.trim();
+const password=document.getElementById("passwordInput").value;
+
+if(!email||!password){
+authMessage.textContent="⚠️ اكتب البريد وكلمة المرور";
+return;
+}
+
+try{
+
+await signInWithEmailAndPassword(auth,email,password);
+
+}catch(e){
+
+authMessage.textContent="❌ "+(e.code||e.message);
+
+}
+};
+
+
+/* MODERATION */
+
+async function getModeration(uid){
+
+try{
+
+const s=await getDoc(doc(db,"moderation",uid));
+
+return s.exists()?s.data():{};
+
+}catch{
+return {};
+}
+}
+
+
+/* CHAT */
+
+function showChat(name){
+
+loginPage.classList.add("hidden");
+chatApp.classList.remove("hidden");
+
+document.getElementById("currentUsername").textContent=name;
+
+loadMessages();
+watchSlots();
+}
+
+
+/* AUTH */
+
+onAuthStateChanged(auth,async user=>{
+
+if(user){
+
+const mod=await getModeration(user.uid);
+
+if(mod.banned){
+
+await signOut(auth);
+authMessage.textContent="🚫 حسابك محظور";
+return;
+}
+
+const visitorName=localStorage.getItem("visitorName");
+
+showChat(
+user.isAnonymous
+?(visitorName||"زائر")
+:(user.displayName||"عضو")
+);
+
+}else{
+
+cleanupVoice();
+
+loginPage.classList.remove("hidden");
+chatApp.classList.add("hidden");
+
+if(stopMessages){
+stopMessages();
+stopMessages=null;
+}
+
+if(stopSlots){
+stopSlots();
+stopSlots=null;
+}
+}
 
 });
 
 
-/* =====================================================
-   VISITOR
-===================================================== */
+/* LOGOUT */
 
-async function enterVisitor(){
+document.getElementById("logoutButton").onclick=async()=>{
 
-  const name=
-  document
-  .getElementById("visitorName")
-  .value
-  .trim();
+cleanupVoice();
+localStorage.removeItem("visitorName");
 
-  if(name.length<2){
-
-    authMessage.textContent=
-    "⚠️ اكتب اسمًا صحيحًا";
-
-    return;
-  }
-
-  authMessage.textContent=
-  "جاري الدخول كزائر...";
-
-  localStorage.setItem(
-    "visitorName",
-    name
-  );
-
-  try{
-
-    if(!auth.currentUser){
-
-      await signInAnonymously(auth);
-
-    }
-
-    showChat(name);
-
-  }catch(e){
-
-    console.error(e);
-
-    authMessage.textContent=
-    "❌ تعذر دخول الزائر: "+
-    (e.code||e.message);
-
-  }
-
-}
-
-document
-.getElementById("visitorButton")
-.onclick=enterVisitor;
-
-document
-.getElementById("visitorName")
-.onkeydown=e=>{
-
-  if(e.key==="Enter")
-    enterVisitor();
+if(auth.currentUser)
+await signOut(auth);
 
 };
 
 
-/* =====================================================
-   SIGN UP
-===================================================== */
-
-document
-.getElementById("signupButton")
-.onclick=async()=>{
-
-  const name=
-  document
-  .getElementById("nameInput")
-  .value
-  .trim();
-
-  const email=
-  document
-  .getElementById("signupEmail")
-  .value
-  .trim();
-
-  const password=
-  document
-  .getElementById("signupPassword")
-  .value;
-
-  if(name.length<2){
-
-    authMessage.textContent=
-    "⚠️ اكتب اسم العضو";
-
-    return;
-  }
-
-  if(!email){
-
-    authMessage.textContent=
-    "⚠️ اكتب البريد الإلكتروني";
-
-    return;
-  }
-
-  if(password.length<6){
-
-    authMessage.textContent=
-    "⚠️ كلمة المرور 6 أحرف على الأقل";
-
-    return;
-  }
-
-  authMessage.textContent=
-  "جاري إنشاء الحساب...";
-
-  try{
-
-    const r=
-    await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-    await updateProfile(
-      r.user,
-      {displayName:name}
-    );
-
-    await setDoc(
-      doc(db,"users",r.user.uid),
-      {
-        uid:r.user.uid,
-        name,
-        email,
-        role:"user",
-        banned:false,
-        createdAt:serverTimestamp()
-      },
-      {merge:true}
-    );
-
-    await setDoc(
-      doc(db,"moderation",r.user.uid),
-      {
-        banned:false,
-        micMuted:false,
-        updatedAt:serverTimestamp()
-      },
-      {merge:true}
-    );
-
-    authMessage.textContent=
-    "✅ تم إنشاء الحساب";
-
-  }catch(e){
-
-    authMessage.textContent=
-    "❌ "+(e.code||e.message);
-
-  }
-
-};
-
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-document
-.getElementById("loginButton")
-.onclick=async()=>{
-
-  const email=
-  document
-  .getElementById("emailInput")
-  .value
-  .trim();
-
-  const password=
-  document
-  .getElementById("passwordInput")
-  .value;
-
-  if(!email||!password){
-
-    authMessage.textContent=
-    "⚠️ اكتب البريد وكلمة المرور";
-
-    return;
-  }
-
-  authMessage.textContent=
-  "جاري تسجيل الدخول...";
-
-  try{
-
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-  }catch(e){
-
-    authMessage.textContent=
-    "❌ "+(e.code||e.message);
-
-  }
-
-};
-
-
-/* =====================================================
-   MODERATION
-===================================================== */
-
-async function getModeration(uid){
-
-  try{
-
-    const s=
-    await getDoc(
-      doc(db,"moderation",uid)
-    );
-
-    return s.exists()
-      ?s.data()
-      :{};
-
-  }catch{
-
-    return {};
-
-  }
-
-}
-
-
-/* =====================================================
-   SHOW CHAT
-===================================================== */
-
-function showChat(name){
-
-  loginPage.classList.add("hidden");
-
-  chatApp.classList.remove("hidden");
-
-  document
-  .getElementById("currentUsername")
-  .textContent=name;
-
-  loadMessages();
-
-  watchSlots();
-
-}
-
-
-/* =====================================================
-   AUTH STATE
-===================================================== */
-
-onAuthStateChanged(
-  auth,
-  async user=>{
-
-    if(user){
-
-      const mod=
-      await getModeration(user.uid);
-
-      if(mod.banned){
-
-        await signOut(auth);
-
-        authMessage.textContent=
-        "🚫 حسابك محظور";
-
-        return;
-
-      }
-
-      const visitorName=
-      localStorage.getItem("visitorName");
-
-      showChat(
-        user.isAnonymous
-        ?(visitorName||"زائر")
-        :(user.displayName||"عضو")
-      );
-
-    }else{
-
-      cleanupVoice();
-
-      loginPage.classList.remove("hidden");
-
-      chatApp.classList.add("hidden");
-
-      if(stopMessages){
-
-        stopMessages();
-
-        stopMessages=null;
-
-      }
-
-      if(stopSlots){
-
-        stopSlots();
-
-        stopSlots=null;
-
-      }
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-document
-.getElementById("logoutButton")
-.onclick=async()=>{
-
-  try{
-
-    cleanupVoice();
-
-    localStorage.removeItem(
-      "visitorName"
-    );
-
-    if(auth.currentUser){
-
-      await signOut(auth);
-
-    }
-
-  }catch(e){
-
-    console.error(e);
-
-  }
-
-};
-
-
-/* =====================================================
-   SEND MESSAGE
-===================================================== */
+/* MESSAGES */
 
 async function sendMessage(){
 
-  const input=
-  document.getElementById(
-    "messageInput"
-  );
+const input=document.getElementById("messageInput");
+const text=input.value.trim();
+const u=auth.currentUser;
 
-  const text=
-  input.value.trim();
+if(!text||!u)return;
 
-  const u=auth.currentUser;
+try{
 
-  const visitor=
-  localStorage.getItem(
-    "visitorName"
-  );
+const mod=await getModeration(u.uid);
 
-  if(!text)return;
-
-  try{
-
-    if(u){
-
-      const mod=
-      await getModeration(u.uid);
-
-      if(mod.banned){
-
-        alert("🚫 حسابك محظور");
-
-        return;
-
-      }
-
-      await addDoc(
-        collection(db,"messages"),
-        {
-          uid:u.uid,
-          name:u.displayName||"عضو",
-          text,
-          createdAt:serverTimestamp()
-        }
-      );
-
-    }
-
-    input.value="";
-
-  }catch(e){
-
-    alert(
-      "تعذر إرسال الرسالة: "+
-      (e.code||e.message)
-    );
-
-  }
-
+if(mod.banned){
+alert("🚫 حسابك محظور");
+return;
 }
 
-document
-.getElementById("sendButton")
-.onclick=sendMessage;
+await addDoc(
+collection(db,"messages"),
+{
+uid:u.uid,
+name:u.displayName||localStorage.getItem("visitorName")||"زائر",
+text:text,
+createdAt:serverTimestamp()
+}
+);
 
-document
-.getElementById("messageInput")
-.onkeydown=e=>{
+input.value="";
 
-  if(e.key==="Enter"){
+}catch(e){
 
-    e.preventDefault();
+alert("❌ تعذر إرسال الرسالة: "+(e.code||e.message));
 
-    sendMessage();
+}
+}
 
-  }
+document.getElementById("sendButton").onclick=sendMessage;
 
+document.getElementById("messageInput").onkeydown=e=>{
+if(e.key==="Enter"){
+e.preventDefault();
+sendMessage();
+}
 };
 
-
-/* =====================================================
-   LOAD MESSAGES
-===================================================== */
 
 function loadMessages(){
 
-  if(stopMessages)
-    stopMessages();
+if(stopMessages)stopMessages();
 
-  const box=
-  document.getElementById("messages");
+const box=document.getElementById("messages");
 
-  stopMessages=
-  onSnapshot(
+stopMessages=onSnapshot(
+query(
+collection(db,"messages"),
+orderBy("createdAt","asc")
+),
+snap=>{
 
-    query(
-      collection(db,"messages"),
-      orderBy("createdAt","asc")
-    ),
+box.innerHTML="";
 
-    snap=>{
+if(snap.empty){
+box.innerHTML='<div class="empty">لا توجد رسائل بعد</div>';
+return;
+}
 
-      box.innerHTML="";
+snap.forEach(s=>{
 
-      if(snap.empty){
+const d=s.data();
 
-        box.innerHTML=
-        '<div class="empty">لا توجد رسائل بعد</div>';
+const row=document.createElement("div");
+row.className="message";
 
-        return;
+const avatar=document.createElement("img");
+avatar.className="avatar";
 
-      }
+avatar.src=
+"https://ui-avatars.com/api/?name="+
+encodeURIComponent(d.name||"عضو")+
+"&background=1687ff&color=fff";
 
-      snap.forEach(s=>{
+const content=document.createElement("div");
+content.className="messageContent";
 
-        const d=s.data();
+const name=document.createElement("div");
+name.className="messageName";
+name.textContent=d.name||"عضو";
 
-        const row=
-        document.createElement("div");
+const text=document.createElement("div");
+text.className="messageText";
+text.textContent=d.text||"";
 
-        row.className="message";
+content.append(name,text);
+row.append(avatar,content);
+box.appendChild(row);
 
-        const avatar=
-        document.createElement("img");
+});
 
-        avatar.className="avatar";
+box.scrollTop=box.scrollHeight;
 
-        avatar.src=
-        "https://ui-avatars.com/api/?name="+
-        encodeURIComponent(d.name||"عضو")+
-        "&background=1687ff&color=fff";
-
-        const content=
-        document.createElement("div");
-
-        content.className=
-        "messageContent";
-
-        const name=
-        document.createElement("div");
-
-        name.className=
-        "messageName";
-
-        name.textContent=
-        d.name||"عضو";
-
-        const text=
-        document.createElement("div");
-
-        text.className=
-        "messageText";
-
-        text.textContent=
-        d.text||"";
-
-        content.append(
-          name,
-          text
-        );
-
-        row.append(
-          avatar,
-          content
-        );
-
-        box.appendChild(row);
-
-      });
-
-      box.scrollTop=
-      box.scrollHeight;
-
-    },
-
-    e=>{
-
-      console.error(e);
-
-      box.innerHTML=
-      '<div class="empty">❌ تعذر تحميل الرسائل</div>';
-
-    }
-
-  );
-
+},
+e=>{
+console.error(e);
+box.innerHTML='<div class="empty">❌ تعذر تحميل الرسائل</div>';
+}
+);
 }
 
 
-/* =====================================================
-   VOICE
-===================================================== */
-
-const rtcConfig={
-
-  iceServers:[
-    {
-      urls:[
-        "stun:stun.l.google.com:19302",
-        "stun:stun1.l.google.com:19302"
-      ]
-    }
-  ],
-
-  iceCandidatePoolSize:10
-
-};
+/* VOICE */
 
 const slots=[
-
-  {
-    id:"slot1",
-    el:document.getElementById("voiceSlot1"),
-    name:document.getElementById("voiceName1"),
-    status:document.getElementById("voiceStatus1"),
-    button:document.getElementById("voiceButton1")
-  },
-
-  {
-    id:"slot2",
-    el:document.getElementById("voiceSlot2"),
-    name:document.getElementById("voiceName2"),
-    status:document.getElementById("voiceStatus2"),
-    button:document.getElementById("voiceButton2")
-  }
-
+{
+id:"slot1",
+el:document.getElementById("voiceSlot1"),
+name:document.getElementById("voiceName1"),
+status:document.getElementById("voiceStatus1"),
+button:document.getElementById("voiceButton1")
+},
+{
+id:"slot2",
+el:document.getElementById("voiceSlot2"),
+name:document.getElementById("voiceName2"),
+status:document.getElementById("voiceStatus2"),
+button:document.getElementById("voiceButton2")
+}
 ];
-
-const peerConnections=
-new Map();
-
-const peerUnsubs=
-new Map();
-
-const candidateQueues=
-new Map();
-
 
 async function toggleMic(index){
 
-  const u=auth.currentUser;
+const u=auth.currentUser;
 
-  if(!u){
-
-    alert(
-      "🎤 المايك يحتاج تسجيل دخول عضو"
-    );
-
-    return;
-
-  }
-
-  const slot=slots[index];
-
-  const slotId=
-  "slot"+(index+1);
-
-  const ref=
-  doc(db,"voiceSlots",slotId);
-
-  try{
-
-    const snap=
-    await getDoc(ref);
-
-    if(
-      snap.exists() &&
-      snap.data().uid===u.uid
-    ){
-
-      await leaveMic(slotId);
-
-      return;
-
-    }
-
-    if(snap.exists()){
-
-      slot.status.textContent=
-      "🔊 البث يعمل تلقائيًا";
-
-      return;
-
-    }
-
-    if(mySlot){
-
-      alert(
-        "⚠️ لديك مايك مفتوح بالفعل"
-      );
-
-      return;
-
-    }
-
-    const mod=
-    await getModeration(u.uid);
-
-    if(mod.banned){
-
-      alert("🚫 حسابك محظور");
-
-      return;
-
-    }
-
-    if(mod.micMuted){
-
-      alert(
-        "🎤 تم منعك من استخدام المايك"
-      );
-
-      return;
-
-    }
-
-    localStream=
-    await navigator.mediaDevices
-    .getUserMedia({
-
-      audio:{
-        echoCancellation:true,
-        noiseSuppression:true,
-        autoGainControl:true
-      },
-
-      video:false
-
-    });
-
-    mySlot=slotId;
-
-    await setDoc(
-      ref,
-      {
-        uid:u.uid,
-        name:u.displayName||"عضو",
-        createdAt:serverTimestamp()
-      }
-    );
-
-    slot.status.textContent=
-    "🎤 أنت تتحدث";
-
-    slot.button.textContent=
-    "إيقاف المايك";
-
-  }catch(e){
-
-    console.error(e);
-
-    if(localStream){
-
-      localStream
-      .getTracks()
-      .forEach(t=>t.stop());
-
-    }
-
-    localStream=null;
-
-    mySlot=null;
-
-    alert(
-      "❌ تعذر تشغيل المايك:\n"+
-      (e.code||e.message||e.name)
-    );
-
-  }
-
+if(!u){
+alert("🎤 سجل الدخول أولاً");
+return;
 }
 
-slots.forEach(
-  (s,i)=>{
-    s.button.onclick=
-    ()=>toggleMic(i);
-  }
-);
+const slot=slots[index];
+const slotId=slot.id;
+const ref=doc(db,"voiceSlots",slotId);
+
+try{
+
+const snap=await getDoc(ref);
+
+if(snap.exists()&&snap.data().uid===u.uid){
+await leaveMic(slotId);
+return;
+}
+
+if(snap.exists()){
+alert("🎤 هذا المايك مشغول");
+return;
+}
+
+if(mySlot){
+alert("⚠️ لديك مايك مفتوح بالفعل");
+return;
+}
+
+if(!navigator.mediaDevices||
+!navigator.mediaDevices.getUserMedia){
+
+alert("❌ المتصفح لا يدعم المايك");
+return;
+}
+
+const mod=await getModeration(u.uid);
+
+if(mod.banned){
+alert("🚫 حسابك محظور");
+return;
+}
+
+if(mod.micMuted){
+alert("🎤 تم منعك من استخدام المايك");
+return;
+}
+
+localStream=await navigator.mediaDevices.getUserMedia({
+audio:true,
+video:false
+});
+
+mySlot=slotId;
+
+await setDoc(ref,{
+uid:u.uid,
+name:u.displayName||"عضو",
+createdAt:serverTimestamp()
+});
+
+}catch(e){
+
+console.error(e);
+
+if(localStream)
+localStream.getTracks().forEach(t=>t.stop());
+
+localStream=null;
+mySlot=null;
+
+alert("❌ تعذر تشغيل المايك:\n"+(e.code||e.message||e.name));
+}
+}
+
+slots.forEach((s,i)=>{
+s.button.onclick=()=>toggleMic(i);
+});
 
 
 async function leaveMic(slotId){
 
-  try{
+try{
+await deleteDoc(doc(db,"voiceSlots",slotId));
+}catch(e){
+console.error(e);
+}
 
-    await deleteDoc(
-      doc(db,"voiceSlots",slotId)
-    );
+if(localStream)
+localStream.getTracks().forEach(t=>t.stop());
 
-  }catch(e){
+localStream=null;
 
-    console.error(e);
-
-  }
-
-  if(localStream){
-
-    localStream
-    .getTracks()
-    .forEach(t=>t.stop());
-
-  }
-
-  localStream=null;
-
-  if(mySlot===slotId)
-    mySlot=null;
-
+if(mySlot===slotId)
+mySlot=null;
 }
 
 
 function watchSlots(){
 
-  if(stopSlots)
-    stopSlots();
+if(stopSlots)stopSlots();
 
-  stopSlots=
-  onSnapshot(
-    collection(db,"voiceSlots"),
+stopSlots=onSnapshot(
+collection(db,"voiceSlots"),
+snap=>{
 
-    snap=>{
+const data={};
 
-      const data={};
+snap.forEach(x=>data[x.id]=x.data());
 
-      snap.forEach(
-        x=>data[x.id]=x.data()
-      );
+slots.forEach(slot=>{
 
-      slots.forEach(slot=>{
+const d=data[slot.id];
 
-        const d=data[slot.id];
+if(!d){
 
-        const mine=
-        d &&
-        auth.currentUser &&
-        d.uid===auth.currentUser.uid;
+slot.el.classList.remove("active");
+slot.name.textContent="شاغر";
+slot.status.textContent="اضغط للتحدث";
+slot.button.textContent="تشغيل المايك";
+slot.button.disabled=false;
+return;
+}
 
-        if(!d){
+slot.el.classList.add("active");
+slot.name.textContent=d.name||"عضو";
 
-          slot.el.classList.remove("active");
+const mine=
+auth.currentUser&&
+d.uid===auth.currentUser.uid;
 
-          slot.name.textContent="شاغر";
+if(mine){
 
-          slot.status.textContent=
-          "اضغط للتحدث";
+slot.status.textContent="🎤 أنت تتحدث";
+slot.button.textContent="إيقاف المايك";
+slot.button.disabled=false;
 
-          slot.button.textContent=
-          "تشغيل المايك";
+}else{
 
-          slot.button.disabled=false;
+slot.status.textContent="🔊 البث مباشر";
+slot.button.textContent="🔊 مشغول";
+slot.button.disabled=true;
 
-          return;
+}
 
-        }
+});
 
-        slot.el.classList.add("active");
-
-        slot.name.textContent=
-        d.name||"عضو";
-
-        if(mine){
-
-          slot.status.textContent=
-          "🎤 أنت تتحدث";
-
-          slot.button.textContent=
-          "إيقاف المايك";
-
-          slot.button.disabled=false;
-
-        }else{
-
-          slot.status.textContent=
-          "🔊 البث مباشر";
-
-          slot.button.textContent=
-          "🔊 مباشر";
-
-          slot.button.disabled=true;
-
-        }
-
-      });
-
-    },
-
-    e=>console.error(
-      "voiceSlots",
-      e
-    )
-
-  );
-
+}
+);
 }
 
 
 function cleanupVoice(){
 
-  if(mySlot)
-    leaveMic(mySlot).catch(()=>{});
+if(mySlot)
+leaveMic(mySlot).catch(()=>{});
 
-  if(localStream){
+if(localStream)
+localStream.getTracks().forEach(t=>t.stop());
 
-    localStream
-    .getTracks()
-    .forEach(t=>t.stop());
-
-  }
-
-  localStream=null;
-
-  mySlot=null;
-
+localStream=null;
+mySlot=null;
 }
 
 
-/* =====================================================
-   AUDIO BUTTON
-===================================================== */
+/* XO */
 
-document
-.getElementById("enableAudioButton")
-.onclick=async()=>{
+const xoModal=document.getElementById("xoModal");
+const xoBoard=document.getElementById("xoBoard");
+const xoMessage=document.getElementById("xoMessage");
 
-  for(
-    const a of
-    document.querySelectorAll(
-      "#audioContainer audio"
-    )
-  ){
-
-    try{
-
-      await a.play();
-
-    }catch{}
-
-  }
-
-  document
-  .getElementById(
-    "enableAudioButton"
-  )
-  .style.display="none";
-
-};
-
-
-/* =====================================================
-   XO GAME
-===================================================== */
-
-const xoModal=
-document.getElementById("xoModal");
-
-const xoBoard=
-document.getElementById("xoBoard");
-
-const xoMessage=
-document.getElementById("xoMessage");
-
-let xoState=
-Array(9).fill("");
-
+let xoState=[];
 let xoGameOver=false;
-
 
 function createXO(){
 
-  xoBoard.innerHTML="";
+xoState=Array(9).fill("");
+xoGameOver=false;
+xoBoard.innerHTML="";
+xoMessage.textContent="دورك ❌";
 
-  xoState=
-  Array(9).fill("");
+for(let i=0;i<9;i++){
 
-  xoGameOver=false;
+const c=document.createElement("button");
+c.className="xoCell";
+c.onclick=()=>playerXO(i);
 
-  xoMessage.textContent=
-  "دورك ❌";
-
-  for(let i=0;i<9;i++){
-
-    const cell=
-    document.createElement("button");
-
-    cell.className="xoCell";
-
-    cell.onclick=()=>playerXO(i);
-
-    xoBoard.appendChild(cell);
-
-  }
+xoBoard.appendChild(c);
 
 }
+
+renderXO();
+}
+
 
 function renderXO(){
 
-  [...xoBoard.children]
-  .forEach((cell,i)=>{
-
-    cell.textContent=
-    xoState[i];
-
-    cell.disabled=
-    xoState[i]!==""||
-    xoGameOver;
-
-  });
+[...xoBoard.children].forEach((c,i)=>{
+c.textContent=xoState[i];
+c.disabled=xoGameOver||xoState[i]!=="";
+});
 
 }
+
+
+function checkXO(p){
+
+const wins=[
+[0,1,2],[3,4,5],[6,7,8],
+[0,3,6],[1,4,7],[2,5,8],
+[0,4,8],[2,4,6]
+];
+
+return wins.some(w=>w.every(i=>xoState[i]===p));
+}
+
+
+function winningMove(p){
+
+for(let i=0;i<9;i++){
+
+if(xoState[i])continue;
+
+xoState[i]=p;
+
+const win=checkXO(p);
+
+xoState[i]="";
+
+if(win)return i;
+
+}
+
+return null;
+}
+
 
 function playerXO(i){
 
-  if(
-    xoGameOver||
-    xoState[i]!==""
-  )return;
+if(xoGameOver||xoState[i])return;
 
-  xoState[i]="❌";
+xoState[i]="❌";
+renderXO();
 
-  renderXO();
-
-  if(checkXO("❌")){
-
-    xoMessage.textContent=
-    "🎉 فزت!";
-
-    xoGameOver=true;
-
-    renderXO();
-
-    return;
-
-  }
-
-  if(xoState.every(Boolean)){
-
-    xoMessage.textContent=
-    "🤝 تعادل";
-
-    xoGameOver=true;
-
-    return;
-
-  }
-
-  xoMessage.textContent=
-  "🤖 الروبوت يفكر...";
-
-  setTimeout(robotXO,500);
-
+if(checkXO("❌")){
+xoGameOver=true;
+xoMessage.textContent="🎉 فزت!";
+renderXO();
+return;
 }
+
+if(xoState.every(Boolean)){
+xoGameOver=true;
+xoMessage.textContent="🤝 تعادل";
+return;
+}
+
+xoMessage.textContent="🤖 الروبوت يفكر...";
+
+setTimeout(robotXO,450);
+}
+
 
 function robotXO(){
 
-  if(xoGameOver)return;
+if(xoGameOver)return;
 
-  let moves=
-  xoState
-  .map((v,i)=>v===""?i:null)
-  .filter(v=>v!==null);
+let move=winningMove("⭕");
 
-  if(!moves.length)return;
+if(move===null)
+move=winningMove("❌");
 
-  /*
-    يحاول الفوز أولاً
-  */
+if(move===null&&xoState[4]==="")
+move=4;
 
-  let move=
-  findWinningMove("⭕");
+if(move===null){
 
-  if(move===null){
+const free=xoState
+.map((x,i)=>x===""?i:null)
+.filter(x=>x!==null);
 
-    move=
-    findWinningMove("❌");
-
-  }
-
-  if(move===null){
-
-    if(
-      xoState[4]===""
-    ){
-
-      move=4;
-
-    }else{
-
-      move=
-      moves[
-        Math.floor(
-          Math.random()*moves.length
-        )
-      ];
-
-    }
-
-  }
-
-  xoState[move]="⭕";
-
-  renderXO();
-
-  if(checkXO("⭕")){
-
-    xoMessage.textContent=
-    "🤖 الروبوت فاز";
-
-    xoGameOver=true;
-
-    renderXO();
-
-    return;
-
-  }
-
-  if(xoState.every(Boolean)){
-
-    xoMessage.textContent=
-    "🤝 تعادل";
-
-    xoGameOver=true;
-
-    return;
-
-  }
-
-  xoMessage.textContent=
-  "دورك ❌";
+move=free[Math.floor(Math.random()*free.length)];
 
 }
 
-function findWinningMove(player){
+xoState[move]="⭕";
+renderXO();
 
-  for(let i=0;i<9;i++){
-
-    if(xoState[i]!=="")
-      continue;
-
-    xoState[i]=player;
-
-    const win=
-    checkXO(player);
-
-    xoState[i]="";
-
-    if(win)return i;
-
-  }
-
-  return null;
-
+if(checkXO("⭕")){
+xoGameOver=true;
+xoMessage.textContent="🤖 الروبوت فاز";
+renderXO();
+return;
 }
 
-function checkXO(player){
-
-  const wins=[
-
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-
-    [0,4,8],
-    [2,4,6]
-
-  ];
-
-  return wins.some(
-    x=>
-    x.every(
-      i=>xoState[i]===player
-    )
-  );
-
+if(xoState.every(Boolean)){
+xoGameOver=true;
+xoMessage.textContent="🤝 تعادل";
+return;
 }
 
-document
-.getElementById("xoOpen")
-.onclick=()=>{
+xoMessage.textContent="دورك ❌";
+}
 
-  xoModal.classList.add("show");
 
-  createXO();
+/* OPEN XO */
 
+document.getElementById("xoOpen").onclick=()=>{
+xoModal.classList.add("show");
+createXO();
 };
 
-document
-.getElementById("xoClose")
-.onclick=()=>{
-
-  xoModal.classList.remove("show");
-
+document.getElementById("xoClose").onclick=()=>{
+xoModal.classList.remove("show");
 };
 
-document
-.getElementById("xoRestart")
-.onclick=createXO;
+document.getElementById("xoRestart").onclick=createXO;
 
 
 /* =====================================================
-   BACKGAMMON
+   BACKGAMMON - CORRECTED
 ===================================================== */
 
-const bgModal=
-document.getElementById(
-  "backgammonModal"
-);
+const bgModal=document.getElementById("backgammonModal");
+const boardTop=document.getElementById("boardTop");
+const boardBottom=document.getElementById("boardBottom");
 
-const boardTop=
-document.getElementById(
-  "boardTop"
-);
-
-const boardBottom=
-document.getElementById(
-  "boardBottom"
-);
-
-const die1El=
-document.getElementById("die1");
-
-const die2El=
-document.getElementById("die2");
-
-const rollBtn=
-document.getElementById("rollDice");
-
-const restartBtn=
-document.getElementById("restartGame");
-
-const bgMessage=
-document.getElementById("gameMessage");
+const die1El=document.getElementById("die1");
+const die2El=document.getElementById("die2");
+const rollBtn=document.getElementById("rollDice");
+const restartBtn=document.getElementById("restartGame");
+const bgMessage=document.getElementById("gameMessage");
 
 let bgBoard=[];
 let bgDice=[];
 let bgSelected=null;
-let bgPlayerTurn=true;
 let bgGameOver=false;
+let bgBearOff=0;
+
+
+/*
+الترقيم:
+
+0 → 23 للأبيض
+23 → 0 للأسود
+*/
+
+function newPoint(){
+return {color:null,count:0};
+}
 
 
 function createInitialBoard(){
 
-  bgBoard=
-  new Array(24)
-  .fill(null)
-  .map(
-    ()=>({
-      color:null,
-      count:0
-    })
-  );
+bgBoard=Array.from({length:24},newPoint);
 
-  bgBoard[0]={
-    color:"white",
-    count:2
-  };
+bgBoard[0]={color:"white",count:2};
+bgBoard[11]={color:"white",count:5};
+bgBoard[16]={color:"white",count:3};
+bgBoard[18]={color:"white",count:5};
 
-  bgBoard[11]={
-    color:"white",
-    count:5
-  };
+bgBoard[23]={color:"black",count:2};
+bgBoard[12]={color:"black",count:5};
+bgBoard[7]={color:"black",count:3};
+bgBoard[5]={color:"black",count:5};
 
-  bgBoard[16]={
-    color:"white",
-    count:3
-  };
+bgDice=[];
+bgSelected=null;
+bgGameOver=false;
+bgBearOff=0;
 
-  bgBoard[18]={
-    color:"white",
-    count:5
-  };
+die1El.textContent="–";
+die2El.textContent="–";
 
-  bgBoard[23]={
-    color:"black",
-    count:2
-  };
+rollBtn.disabled=false;
 
-  bgBoard[12]={
-    color:"black",
-    count:5
-  };
+bgMessage.textContent="اضغط «رمي النرد» للبدء";
 
-  bgBoard[7]={
-    color:"black",
-    count:3
-  };
-
-  bgBoard[5]={
-    color:"black",
-    count:5
-  };
-
-  bgDice=[];
-  bgSelected=null;
-  bgPlayerTurn=true;
-  bgGameOver=false;
-
-  die1El.textContent="–";
-  die2El.textContent="–";
-
-  bgMessage.textContent=
-  "اضغط «رمي النرد» للبدء";
-
-  rollBtn.disabled=false;
-
-  drawBoard();
-
+drawBoard();
 }
 
 
 function drawBoard(){
 
-  boardTop.innerHTML="";
-  boardBottom.innerHTML="";
+boardTop.innerHTML="";
+boardBottom.innerHTML="";
 
-  const topPoints=[
-    12,13,14,15,16,17
-  ];
+/*
+الجزء العلوي يعرض 12 إلى 17
+الجزء السفلي يعرض 5 إلى 0
+*/
 
-  const bottomPoints=[
-    5,4,3,2,1,0
-  ];
+[12,13,14,15,16,17].forEach(i=>{
+boardTop.appendChild(createPoint(i));
+});
 
-  topPoints.forEach(
-    index=>{
-      boardTop.appendChild(
-        createPoint(index)
-      );
-    }
-  );
-
-  bottomPoints.forEach(
-    index=>{
-      boardBottom.appendChild(
-        createPoint(index)
-      );
-    }
-  );
+[5,4,3,2,1,0].forEach(i=>{
+boardBottom.appendChild(createPoint(i));
+});
 
 }
 
 
 function createPoint(index){
 
-  const point=
-  document.createElement("div");
+const point=document.createElement("div");
+point.className="point";
+point.dataset.index=index;
 
-  point.className="point";
+const triangle=document.createElement("div");
+triangle.className="pointTriangle";
 
-  point.dataset.index=index;
+const checkers=document.createElement("div");
+checkers.className="checkers";
 
-  const triangle=
-  document.createElement("div");
+const p=bgBoard[index];
 
-  triangle.className=
-  "pointTriangle";
+if(p.count>0){
 
-  const checkers=
-  document.createElement("div");
+for(let i=0;i<p.count;i++){
 
-  checkers.className="checkers";
+const checker=document.createElement("div");
+checker.className="checker "+p.color;
 
-  const data=
-  bgBoard[index];
-
-  if(
-    data &&
-    data.count>0
-  ){
-
-    for(
-      let i=0;
-      i<data.count;
-      i++
-    ){
-
-      const checker=
-      document.createElement("div");
-
-      checker.className=
-      "checker "+
-      data.color;
-
-      checkers.appendChild(
-        checker
-      );
-
-    }
-
-  }
-
-  point.appendChild(triangle);
-
-  point.appendChild(checkers);
-
-  point.onclick=
-  ()=>selectPoint(index);
-
-  if(bgSelected===index){
-
-    point.classList.add(
-      "selected"
-    );
-
-  }
-
-  return point;
+checkers.appendChild(checker);
 
 }
 
+}
+
+point.append(triangle,checkers);
+
+if(bgSelected===index)
+point.classList.add("selected");
+
+if(bgSelected!==null&&
+bgDice.some(d=>isLegalMove(bgSelected,index,d)))
+point.classList.add("possible");
+
+point.onclick=()=>selectPoint(index);
+
+return point;
+}
+
+
+/* ROLL */
 
 function rollDice(){
 
-  if(
-    !bgPlayerTurn||
-    bgGameOver
-  )return;
+if(bgGameOver||bgDice.length)return;
 
-  bgSelected=null;
+const a=Math.floor(Math.random()*6)+1;
+const b=Math.floor(Math.random()*6)+1;
 
-  const a=
-  Math.floor(
-    Math.random()*6
-  )+1;
+bgDice=a===b
+?[a,a,a,a]
+:[a,b];
 
-  const b=
-  Math.floor(
-    Math.random()*6
-  )+1;
+die1El.textContent=a;
+die2El.textContent=b;
 
-  bgDice=[a,b];
+bgSelected=null;
 
-  if(a===b){
+if(!hasAnyPlayerMove()){
 
-    bgDice=[
-      a,a,a,a
-    ];
+bgMessage.textContent=
+"لا توجد حركة ممكنة... دور الروبوت";
 
-  }
+bgDice=[];
 
-  die1El.textContent=a;
-  die2El.textContent=b;
+setTimeout(robotTurn,700);
 
-  rollBtn.disabled=true;
+return;
+}
 
-  drawBoard();
+rollBtn.disabled=true;
 
-  if(!hasAnyPlayerMove()){
+bgMessage.textContent=
+"اختر قطعة بيضاء";
 
-    bgMessage.textContent=
-    "لا توجد حركة ممكنة... دور الروبوت";
+drawBoard();
+}
 
-    setTimeout(
-      robotTurn,
-      900
-    );
 
-    return;
+/* LEGAL MOVE */
 
-  }
+function isLegalMove(from,to,distance){
 
-  bgMessage.textContent=
-  "اختر قطعة بيضاء لتحريكها";
+if(from<0||from>23||to<0||to>23)
+return false;
 
+if(bgBoard[from].color!=="white")
+return false;
+
+if(to!==from+distance)
+return false;
+
+const target=bgBoard[to];
+
+if(target.color==="black"&&target.count>=2)
+return false;
+
+return true;
+}
+
+
+/* BEARING OFF */
+
+function canBearOff(from,distance){
+
+if(from+distance<24)return false;
+
+for(let i=0;i<18;i++){
+
+if(bgBoard[i].color==="white"&&bgBoard[i].count>0)
+return false;
+
+}
+
+return true;
 }
 
 
 function selectPoint(index){
 
-  if(
-    !bgPlayerTurn||
-    bgGameOver
-  )return;
+if(bgGameOver||!rollBtn.disabled)return;
 
-  const p=
-  bgBoard[index];
+const p=bgBoard[index];
 
-  if(
-    !p||
-    p.color!=="white"||
-    p.count<=0
-  ){
+if(bgSelected===null){
 
-    if(
-      bgSelected!==null
-    ){
+if(p.color!=="white"){
+bgMessage.textContent="⚠️ اختر قطعة بيضاء";
+return;
+}
 
-      movePlayer(
-        bgSelected,
-        index
-      );
+bgSelected=index;
 
-    }
+bgMessage.textContent=
+"اختر مكان تحريك القطعة";
 
-    return;
+drawBoard();
+return;
+}
 
-  }
 
-  bgSelected=index;
+/* clicking another white checker */
 
-  drawBoard();
+if(p.color==="white"){
 
-  bgMessage.textContent=
-  "اختر النقطة التي تريد تحريك القطعة إليها";
+bgSelected=index;
+
+drawBoard();
+
+return;
+}
+
+
+/* try move */
+
+let usedDice=null;
+
+for(const d of bgDice){
+
+if(isLegalMove(bgSelected,index,d)){
+usedDice=d;
+break;
+}
+
+}
+
+if(usedDice===null){
+
+bgMessage.textContent=
+"❌ هذه الحركة غير متاحة";
+
+return;
+}
+
+movePlayer(bgSelected,index,usedDice);
+}
+
+
+/* PLAYER MOVE */
+
+function movePlayer(from,to,distance){
+
+const target=bgBoard[to];
+
+bgBoard[from].count--;
+
+if(bgBoard[from].count===0)
+bgBoard[from]=newPoint();
+
+
+if(target.color==="black"&&target.count===1){
+
+/*
+ضرب القطعة المنفردة.
+في هذه النسخة تُعاد للعب عند
+أقرب نقطة بداية.
+*/
+
+target.color="white";
+target.count=1;
+
+}else{
+
+if(target.color!=="white")
+target.color="white";
+
+target.count++;
 
 }
 
 
-function movePlayer(from,to){
+removeDie(distance);
 
-  if(bgSelected===null)
-    return;
+bgSelected=null;
 
-  const distance=
-  Math.abs(to-from);
+if(checkWhiteWin()){
 
-  if(
-    !bgDice.includes(distance)
-  ){
+finishGame("🎉 فزت! لقد أخرجت جميع قطعك");
 
-    bgMessage.textContent=
-    "❌ هذه الحركة غير متاحة بالنرد";
+return;
+}
 
-    return;
+if(bgDice.length===0){
 
-  }
+endPlayerTurn();
 
-  if(
-    to<0||
-    to>23
-  )return;
+}else{
 
-  const target=
-  bgBoard[to];
+bgMessage.textContent="اختر حركة أخرى";
+drawBoard();
 
-  if(
-    target.color==="black" &&
-    target.count>=2
-  ){
-
-    bgMessage.textContent=
-    "❌ النقطة مغلقة";
-
-    return;
-
-  }
-
-  bgBoard[from].count--;
-
-  if(
-    bgBoard[from].count===0
-  ){
-
-    bgBoard[from].color=null;
-
-  }
-
-  if(
-    target.color==="black" &&
-    target.count===1
-  ){
-
-    target.color="white";
-    target.count=1;
-
-  }else{
-
-    target.color="white";
-    target.count++;
-
-  }
-
-  removeDice(distance);
-
-  bgSelected=null;
-
-  drawBoard();
-
-  if(
-    checkWinner("white")
-  ){
-
-    endGame(
-      "🎉 فزت على الروبوت!"
-    );
-
-    return;
-
-  }
-
-  if(bgDice.length===0){
-
-    bgPlayerTurn=false;
-
-    bgMessage.textContent=
-    "🤖 دور الروبوت...";
-
-    setTimeout(
-      robotTurn,
-      900
-    );
-
-  }else{
-
-    bgMessage.textContent=
-    "اختر حركة أخرى";
-
-  }
+}
 
 }
 
 
-function removeDice(value){
+/* REMOVE DIE */
 
-  const i=
-  bgDice.indexOf(value);
+function removeDie(d){
 
-  if(i!==-1){
+const i=bgDice.indexOf(d);
 
-    bgDice.splice(i,1);
-
-  }
-
+if(i>=0)
+bgDice.splice(i,1);
 }
 
+
+/* CAN MOVE */
 
 function hasAnyPlayerMove(){
 
-  if(!bgDice.length)
-    return false;
+for(let from=0;from<24;from++){
 
-  for(
-    let i=0;
-    i<24;
-    i++
-  ){
+if(bgBoard[from].color!=="white")
+continue;
 
-    if(
-      bgBoard[i].color!=="white"
-    )continue;
+for(const d of bgDice){
 
-    for(
-      const dice of bgDice
-    ){
+const to=from+d;
 
-      const to=
-      i+dice;
+if(to<24&&isLegalMove(from,to,d))
+return true;
 
-      if(to>23)continue;
-
-      const target=
-      bgBoard[to];
-
-      if(
-        !target.color||
-        target.color==="white"||
-        target.count<2
-      ){
-
-        return true;
-
-      }
-
-    }
-
-  }
-
-  return false;
+if(to>=24&&canBearOff(from,d))
+return true;
 
 }
 
+}
+
+return false;
+}
+
+
+/* PLAYER BEAR OFF */
+
+function bearOff(from,distance){
+
+if(!canBearOff(from,distance))
+return false;
+
+bgBoard[from].count--;
+
+if(bgBoard[from].count===0)
+bgBoard[from]=newPoint();
+
+bgBearOff++;
+
+removeDie(distance);
+
+bgSelected=null;
+
+if(bgBearOff>=15){
+
+finishGame("🎉 فزت! أخرجت جميع القطع");
+
+return true;
+}
+
+return true;
+}
+
+
+/* PLAYER END */
+
+function endPlayerTurn(){
+
+bgSelected=null;
+bgDice=[];
+
+drawBoard();
+
+bgMessage.textContent=
+"🤖 دور الروبوت...";
+
+setTimeout(robotTurn,700);
+}
+
+
+/* ROBOT */
 
 function robotTurn(){
 
-  if(bgGameOver)return;
+if(bgGameOver)return;
 
-  bgPlayerTurn=false;
+const a=Math.floor(Math.random()*6)+1;
+const b=Math.floor(Math.random()*6)+1;
 
-  const d1=
-  Math.floor(
-    Math.random()*6
-  )+1;
+const dice=a===b
+?[a,a,a,a]
+:[a,b];
 
-  const d2=
-  Math.floor(
-    Math.random()*6
-  )+1;
+die1El.textContent=a;
+die2El.textContent=b;
 
-  let dice=[d1,d2];
+bgMessage.textContent="🤖 الروبوت يفكر...";
 
-  if(d1===d2){
+let i=0;
 
-    dice=[
-      d1,d1,d1,d1
-    ];
+function next(){
 
-  }
+if(bgGameOver)return;
 
-  die1El.textContent=d1;
-  die2El.textContent=d2;
+if(i>=dice.length){
 
-  bgMessage.textContent=
-  "🤖 الروبوت يفكر...";
+setTimeout(()=>{
+rollBtn.disabled=false;
+bgMessage.textContent="دورك 🎲";
+drawBoard();
+},400);
 
-  let moveIndex=0;
+return;
+}
 
-  function nextMove(){
+const d=dice[i];
 
-    if(
-      moveIndex>=dice.length
-    ){
+const move=findRobotMove(d);
 
-      bgPlayerTurn=true;
+if(move){
 
-      if(
-        checkWinner("black")
-      ){
+performRobotMove(move.from,move.to);
 
-        endGame(
-          "🤖 الروبوت فاز!"
-        );
+}else{
 
-        return;
-
-      }
-
-      rollBtn.disabled=false;
-
-      bgMessage.textContent=
-      "دورك الآن 🎲";
-
-      return;
-
-    }
-
-    const distance=
-    dice[moveIndex];
-
-    const move=
-    findRobotMove(distance);
-
-    if(move){
-
-      performRobotMove(
-        move.from,
-        move.to
-      );
-
-    }
-
-    moveIndex++;
-
-    setTimeout(
-      nextMove,
-      500
-    );
-
-  }
-
-  setTimeout(
-    nextMove,
-    700
-  );
+/* إذا لا توجد حركة يتجاوز النرد */
 
 }
 
+i++;
+
+setTimeout(next,350);
+}
+
+setTimeout(next,500);
+}
+
+
+/* FIND ROBOT MOVE */
 
 function findRobotMove(distance){
 
-  let normal=[];
-  let attack=[];
+let attacks=[];
+let normal=[];
+let safe=[];
 
-  for(
-    let i=0;
-    i<24;
-    i++
-  ){
+for(let from=0;from<24;from++){
 
-    const p=
-    bgBoard[i];
+const p=bgBoard[from];
 
-    if(
-      !p||
-      p.color!=="black"||
-      p.count<=0
-    )continue;
+if(p.color!=="black"||p.count<=0)
+continue;
 
-    const to=
-    i-distance;
+const to=from-distance;
 
-    if(to<0)continue;
+if(to<0)
+continue;
 
-    const target=
-    bgBoard[to];
+const target=bgBoard[to];
 
-    if(
-      target.color==="black"
-    )continue;
+if(target.color==="black")
+continue;
 
-    if(
-      target.color==="white" &&
-      target.count>=2
-    )continue;
+if(target.color==="white"&&target.count>=2)
+continue;
 
-    const move={
-      from:i,
-      to
-    };
+const move={from,to};
 
-    if(
-      target.color==="white" &&
-      target.count===1
-    ){
-
-      attack.push(move);
-
-    }else{
-
-      normal.push(move);
-
-    }
-
-  }
-
-  if(attack.length){
-
-    return attack[
-      Math.floor(
-        Math.random()*attack.length
-      )
-    ];
-
-  }
-
-  if(normal.length){
-
-    return normal[
-      Math.floor(
-        Math.random()*normal.length
-      )
-    ];
-
-  }
-
-  return null;
-
+if(target.color==="white"&&target.count===1)
+attacks.push(move);
+else if(!target.color)
+safe.push(move);
+else
+normal.push(move);
 }
 
+if(attacks.length)
+return attacks[Math.floor(Math.random()*attacks.length)];
+
+if(safe.length)
+return safe[Math.floor(Math.random()*safe.length)];
+
+if(normal.length)
+return normal[Math.floor(Math.random()*normal.length)];
+
+return null;
+}
+
+
+/* ROBOT MOVE */
 
 function performRobotMove(from,to){
 
-  const source=
-  bgBoard[from];
+const source=bgBoard[from];
+const target=bgBoard[to];
 
-  const target=
-  bgBoard[to];
+source.count--;
 
-  source.count--;
+if(source.count===0)
+bgBoard[from]=newPoint();
 
-  if(
-    source.count===0
-  ){
+if(target.color==="white"&&target.count===1){
 
-    source.color=null;
+/*
+إرجاع القطعة المضروبة
+إلى نقطة البداية البيضاء.
+*/
 
-  }
+target.color="black";
+target.count=1;
 
-  if(
-    target.color==="white" &&
-    target.count===1
-  ){
+}else{
 
-    target.color="black";
-    target.count=1;
+if(target.color!=="black")
+target.color="black";
 
-  }else{
+target.count++;
 
-    target.color="black";
-    target.count++;
+}
 
-  }
-
-  drawBoard();
+drawBoard();
 
 }
 
 
-function checkWinner(color){
+/* WIN */
 
-  let total=0;
+function checkWhiteWin(){
 
-  for(
-    const p of bgBoard
-  ){
+if(bgBearOff>=15)
+return true;
 
-    if(
-      p.color===color
-    ){
+let remaining=0;
 
-      total+=p.count;
+for(const p of bgBoard){
 
-    }
-
-  }
-
-  if(color==="white"){
-
-    let home=0;
-
-    for(
-      let i=18;
-      i<24;
-      i++
-    ){
-
-      if(
-        bgBoard[i].color==="white"
-      ){
-
-        home+=bgBoard[i].count;
-
-      }
-
-    }
-
-    if(home===15)
-      return true;
-
-  }else{
-
-    let home=0;
-
-    for(
-      let i=0;
-      i<6;
-      i++
-    ){
-
-      if(
-        bgBoard[i].color==="black"
-      ){
-
-        home+=bgBoard[i].count;
-
-      }
-
-    }
-
-    if(home===15)
-      return true;
-
-  }
-
-  return total===0;
+if(p.color==="white")
+remaining+=p.count;
 
 }
 
-
-function endGame(text){
-
-  bgGameOver=true;
-
-  rollBtn.disabled=true;
-
-  bgMessage.textContent=text;
-
+return remaining===0;
 }
 
 
-/* =====================================================
-   OPEN / CLOSE BACKGAMMON
-===================================================== */
+function finishGame(text){
 
-document
-.getElementById("backgammonOpen")
-.onclick=()=>{
+bgGameOver=true;
+bgDice=[];
+rollBtn.disabled=true;
+bgMessage.textContent=text;
+drawBoard();
+}
 
-  bgModal.classList.add("show");
 
-  createInitialBoard();
+/* OPEN / CLOSE */
 
+document.getElementById("backgammonOpen").onclick=()=>{
+bgModal.classList.add("show");
+createInitialBoard();
 };
 
-
-document
-.getElementById("backgammonClose")
-.onclick=()=>{
-
-  bgModal.classList.remove("show");
-
+document.getElementById("backgammonClose").onclick=()=>{
+bgModal.classList.remove("show");
 };
 
-
-restartBtn.onclick=
-createInitialBoard;
-
-rollBtn.onclick=
-rollDice;
+restartBtn.onclick=createInitialBoard;
+rollBtn.onclick=rollDice;
 
 
-/* =====================================================
-   CLOSE MODALS
-===================================================== */
+/* MODAL CLOSE */
 
-xoModal.addEventListener(
-  "click",
-  e=>{
+xoModal.addEventListener("click",e=>{
+if(e.target===xoModal)
+xoModal.classList.remove("show");
+});
 
-    if(e.target===xoModal){
+bgModal.addEventListener("click",e=>{
+if(e.target===bgModal)
+bgModal.classList.remove("show");
+});
 
-      xoModal.classList.remove(
-        "show"
-      );
+document.addEventListener("keydown",e=>{
 
-    }
+if(e.key==="Escape"){
 
-  }
-);
+xoModal.classList.remove("show");
+bgModal.classList.remove("show");
 
-bgModal.addEventListener(
-  "click",
-  e=>{
+}
 
-    if(e.target===bgModal){
+});
 
-      bgModal.classList.remove(
-        "show"
-      );
 
-    }
+/* START */
 
-  }
-);
-
-document.addEventListener(
-  "keydown",
-  e=>{
-
-    if(e.key==="Escape"){
-
-      xoModal.classList.remove(
-        "show"
-      );
-
-      bgModal.classList.remove(
-        "show"
-      );
-
-    }
-
-  }
-);
+createInitialBoard();
 
 </script>
-
 </body>
 </html>
