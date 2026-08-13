@@ -132,6 +132,21 @@ const db=getFirestore(app);
 // ضع UID حساب المشرف هنا بعد إنشاء الحساب. لا تعتمد على إخفاء الأزرار وحده للأمان؛ يجب أيضًا ضبط Firestore Rules.
 const ADMIN_UIDS=["PUT_ADMIN_UID_HERE"];
 const isAdmin=()=>!!auth.currentUser&&ADMIN_UIDS.includes(auth.currentUser.uid);
+
+async function getMyModeration(){
+  const u=auth.currentUser;
+  if(!u) return {banned:false,micMuted:false};
+  try{
+    const s=await getDoc(doc(db,"moderation",u.uid));
+    return s.exists()?{banned:s.data().banned===true,micMuted:s.data().micMuted===true}:{banned:false,micMuted:false};
+  }catch(e){
+    // If rules deny the moderation read, do not break the whole chat.
+    // The server-side Firestore Rules must still enforce the actual ban.
+    console.error("moderation read",e);
+    return {banned:false,micMuted:false};
+  }
+}
+
 const rtcConfig={iceServers:[{urls:"stun:stun.l.google.com:19302"},{urls:"stun:stun1.l.google.com:19302"}],iceCandidatePoolSize:10};
 
 const loginPage=document.getElementById("loginPage");
@@ -219,12 +234,16 @@ async function adminAction(action){
 
     if(action==="ban"){
       await setDoc(ref,{banned:true,updatedAt:serverTimestamp()},{merge:true});
+      await setDoc(doc(db,"users",target),{banned:true},{merge:true});
     }else if(action==="unban"){
       await setDoc(ref,{banned:false,updatedAt:serverTimestamp()},{merge:true});
+      await setDoc(doc(db,"users",target),{banned:false},{merge:true});
     }else if(action==="mute"){
       await setDoc(ref,{micMuted:true,updatedAt:serverTimestamp()},{merge:true});
+      await setDoc(doc(db,"users",target),{micBanned:true},{merge:true});
     }else if(action==="unmute"){
       await setDoc(ref,{micMuted:false,updatedAt:serverTimestamp()},{merge:true});
+      await setDoc(doc(db,"users",target),{micBanned:false},{merge:true});
     }
 
     msg.textContent="✅ تم تنفيذ الأمر";
@@ -237,10 +256,13 @@ async function adminAction(action){
 function friendlyFirebaseError(e){
   const c=e?.code||"";
   const map={
-    "permission-denied":"لا توجد صلاحية في Firebase Rules",
-    "failed-precondition":"تحقق من إعدادات Firestore",
-    "unavailable":"Firebase غير متاح حاليًا",
-    "not-found":"المستند غير موجود"
+    "permission-denied":"تم رفض العملية من Firebase Rules. تحقق من قواعد Firestore.",
+    "failed-precondition":"تحقق من إعدادات Firestore والفهارس.",
+    "unavailable":"Firebase غير متاح حاليًا.",
+    "not-found":"المستند غير موجود.",
+    "unauthenticated":"يجب تسجيل الدخول أولًا.",
+    "network-request-failed":"تحقق من اتصال الإنترنت.",
+    "permission-denied":"تم رفض العملية من قواعد Firebase."
   };
   return map[c]||c||e?.message||"خطأ غير معروف";
 }
@@ -251,26 +273,30 @@ document.getElementById("muteButton").onclick=()=>adminAction("mute");
 document.getElementById("unmuteButton").onclick=()=>adminAction("unmute");
 
 async function sendMessage(){
-const input=document.getElementById("messageInput");
-const text=input.value.trim(),u=auth.currentUser;
-if(!u||!text)return;
-try{
-const mod=await getDoc(doc(db,"moderation",u.uid));
-if(mod.exists() && mod.data().banned===true){
-  alert("🚫 حسابك محظور من الدردشة");
-  return;
-}
-await addDoc(collection(db,"messages"),{
-  uid:u.uid,
-  name:u.displayName||"عضو",
-  text,
-  createdAt:serverTimestamp()
-});
-input.value="";
-}catch(e){
-console.error(e);
-alert("تعذر إرسال الرسالة: "+friendlyFirebaseError(e));
-}
+  const input=document.getElementById("messageInput");
+  const text=input.value.trim();
+  const u=auth.currentUser;
+  if(!u||!text)return;
+
+  try{
+    const mod=await getMyModeration();
+    if(mod.banned){
+      alert("🚫 حسابك محظور من الدردشة");
+      return;
+    }
+
+    await addDoc(collection(db,"messages"),{
+      uid:u.uid,
+      name:u.displayName||"عضو",
+      text:text,
+      createdAt:serverTimestamp()
+    });
+
+    input.value="";
+  }catch(e){
+    console.error("sendMessage",e);
+    alert("تعذر إرسال الرسالة: "+friendlyFirebaseError(e));
+  }
 }
 document.getElementById("sendButton").onclick=sendMessage;
 document.getElementById("messageInput").onkeydown=e=>{if(e.key==="Enter")sendMessage()};
@@ -405,13 +431,18 @@ async function toggleMic(index){
   }
 
   try{
-    const modSnap=await getDoc(doc(db,"moderation",u.uid));
-    if(modSnap.exists() && (modSnap.data().micMuted===true || modSnap.data().banned===true)){
-  alert(modSnap.data().banned===true ? "🚫 حسابك محظور" : "🎤 تم منعك من استخدام المايك");
-  return;
-}
+    const mod=await getMyModeration();
+    if(mod.banned){
+      alert("🚫 حسابك محظور");
+      return;
+    }
+    if(mod.micMuted){
+      alert("🎤 تم منعك من استخدام المايك");
+      return;
+    }
+    slots[index].status.textContent="🎤 جاري طلب صلاحية الميكروفون...";
     localStream=await navigator.mediaDevices.getUserMedia({
-      audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true,channelCount:1,sampleRate:48000},
+      audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true},
       video:false
     });
 
@@ -703,8 +734,11 @@ function watchSlots(){
       }
     });
   },e=>{
-    console.error(e);
-    slots.forEach(s=>s.status.textContent="تعذر تحميل المايك");
+    console.error("voiceSlots",e);
+    slots.forEach(s=>{
+      s.status.textContent="❌ تعذر تحميل المايك: "+friendlyFirebaseError(e);
+      s.button.disabled=true;
+    });
   });
 }
 
