@@ -4,182 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>طليان الشعلة</title>
-
 <style>
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family:Arial;
-  background:#111;
-  color:#fff;
-}
-
-.screen{
-  min-height:100vh;
-}
-
-.auth{
-  max-width:420px;
-  margin:auto;
-  padding:40px 20px;
-}
-
-.card{
-  background:#222;
-  border-radius:18px;
-  padding:25px;
-}
-
-h1,h2{text-align:center}
-
-input,button{
-  width:100%;
-  padding:13px;
-  margin:7px 0;
-  border:0;
-  border-radius:9px;
-}
-
-input{
-  background:#333;
-  color:#fff;
-}
-
-button{
-  background:#1877f2;
-  color:white;
-  font-weight:bold;
-}
-
-#message{
-  margin-top:10px;
-  text-align:center;
-}
-
-#chat{
-  display:none;
-  min-height:100vh;
-  flex-direction:column;
-}
-
-header{
-  background:#222;
-  padding:15px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-header h2{
-  margin:0;
-}
-
-.logout{
-  width:auto;
-  padding:9px 14px;
-  background:#b3261e;
-}
-
-.messages{
-  flex:1;
-  padding:15px;
-  overflow-y:auto;
-}
-
-.msg{
-  background:#222;
-  padding:10px;
-  margin:8px 0;
-  border-radius:12px;
-}
-
-.msg strong{
-  color:#4da3ff;
-}
-
-.composer{
-  display:flex;
-  gap:7px;
-  padding:10px;
-  background:#222;
-}
-
-.composer input{
-  margin:0;
-}
-
-.send{
-  width:70px;
-  margin:0;
-}
+body{font-family:Arial;background:#111;color:#fff;margin:0}
+.box{max-width:400px;margin:60px auto;padding:25px;background:#222;border-radius:15px}
+input,button{width:100%;padding:14px;margin:8px 0;box-sizing:border-box;border:0;border-radius:8px}
+input{background:#333;color:#fff}
+button{background:#1877f2;color:#fff;font-weight:bold}
+#msg{text-align:center;margin-top:15px}
 </style>
 </head>
 
 <body>
 
-<!-- تسجيل الدخول -->
+<div class="box">
+<h2>🔥 طليان الشعلة</h2>
 
-<div id="authScreen" class="screen">
-  <div class="auth">
-    <div class="card">
+<input id="email" type="email" placeholder="البريد الإلكتروني">
+<input id="password" type="password" placeholder="كلمة المرور">
 
-      <h1>🔥 طليان الشعلة</h1>
+<button id="login">تسجيل الدخول</button>
 
-      <input
-        id="name"
-        type="text"
-        placeholder="اسم العضو"
-      >
-
-      <input
-        id="email"
-        type="email"
-        placeholder="البريد الإلكتروني"
-      >
-
-      <input
-        id="password"
-        type="password"
-        placeholder="كلمة المرور"
-      >
-
-      <button id="signup">إنشاء حساب</button>
-
-      <button id="login">تسجيل الدخول</button>
-
-      <div id="message"></div>
-
-    </div>
-  </div>
+<div id="msg"></div>
 </div>
-
-
-<!-- الدردشة -->
-
-<div id="chat">
-
-  <header>
-    <h2>🔥 طليان الشعلة</h2>
-    <button id="logout" class="logout">خروج</button>
-  </header>
-
-  <div id="messages" class="messages"></div>
-
-  <div class="composer">
-
-    <input
-      id="text"
-      type="text"
-      placeholder="اكتب رسالتك..."
-    >
-
-    <button id="send" class="send">إرسال</button>
-
-  </div>
-
-</div>
-
 
 <script type="module">
 
@@ -187,8 +33,63 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 
 import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  updateProfile,
-  onAuthStateChanged,
+getAuth,
+signInWithEmailAndPassword
+}
+from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
+
+const firebaseConfig={
+apiKey:"AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
+authDomain:"dardashti-chat.firebaseapp.com",
+projectId:"dardashti-chat",
+storageBucket:"dardashti-chat.firebasestorage.app",
+messagingSenderId:"779042757468",
+appId:"1:779042757468:web:7646d3cdadf46f315a3f99"
+};
+
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+
+const msg=document.getElementById("msg");
+
+
+document.getElementById("login").addEventListener("click",async()=>{
+
+msg.textContent="جاري تسجيل الدخول...";
+
+const email=document.getElementById("email").value.trim();
+const password=document.getElementById("password").value;
+
+
+if(!email || !password){
+msg.textContent="⚠️ اكتب البريد وكلمة المرور";
+return;
+}
+
+
+try{
+
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+msg.textContent="✅ تم تسجيل الدخول بنجاح";
+
+}catch(error){
+
+msg.textContent="❌ "+error.code;
+
+console.error(error);
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
