@@ -69,6 +69,20 @@ button{cursor:pointer}.hidden{display:none!important}
 <button id="logoutButton" class="logout">خروج</button>
 </div>
 
+
+<div id="adminPanel" class="hidden" style="background:#121a24;border-bottom:1px solid #293646;padding:10px">
+  <div style="font-weight:bold;margin-bottom:8px">🛡️ لوحة الإشراف</div>
+  <input id="adminTarget" type="text" placeholder="UID العضو"
+    style="width:100%;padding:11px;border:1px solid #344255;border-radius:9px;background:#0d131b;color:#fff;margin-bottom:7px">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
+    <button id="banButton" class="btn" style="background:#a92d38">🚫 حظر</button>
+    <button id="unbanButton" class="btn" style="background:#1687ff">🔓 فك الحظر</button>
+    <button id="muteButton" class="btn" style="background:#7b4ab8">🎤 منع المايك</button>
+    <button id="unmuteButton" class="btn" style="background:#168b61">🎤 السماح بالمايك</button>
+  </div>
+  <div id="adminMessage" style="text-align:center;color:#aebaca;margin-top:7px;font-size:12px"></div>
+</div>
+
 <div class="voicePanel">
 <div class="voiceTitle">🎤 المايكات العامة</div>
 <div class="voiceSlots">
@@ -136,6 +150,23 @@ authMessage.textContent="جاري إنشاء الحساب...";
 try{
 const r=await createUserWithEmailAndPassword(auth,email,password);
 await updateProfile(r.user,{displayName:name});
+
+await setDoc(doc(db,"users",r.user.uid),{
+  uid:r.user.uid,
+  name:name,
+  email:email,
+  role:"user",
+  banned:false,
+  micBanned:false,
+  createdAt:serverTimestamp()
+},{merge:true});
+
+await setDoc(doc(db,"moderation",r.user.uid),{
+  banned:false,
+  micMuted:false,
+  updatedAt:serverTimestamp()
+},{merge:true});
+
 authMessage.textContent="✅ تم إنشاء الحساب بنجاح";
 }catch(e){console.error(e);authMessage.textContent="❌ "+e.code}
 };
@@ -154,6 +185,7 @@ if(user){
 loginPage.classList.add("hidden");
 chatApp.classList.remove("hidden");
 document.getElementById("currentUsername").textContent=user.displayName||"عضو";
+document.getElementById("adminPanel").classList.toggle("hidden",!isAdmin());
 loadMessages();
 watchSlots();
 }else{
@@ -167,30 +199,78 @@ if(stopSlots){stopSlots();stopSlots=null}
 
 document.getElementById("logoutButton").onclick=()=>signOut(auth);
 
+
 async function adminAction(action){
-  if(!isAdmin()){alert("ليس لديك صلاحية إشراف");return}
-  const uid=document.getElementById("adminTarget").value.trim();
-  if(!uid){alert("اكتب UID العضو");return}
+  if(!isAdmin()){
+    alert("ليس لديك صلاحية إشراف");
+    return;
+  }
+
+  const target=document.getElementById("adminTarget").value.trim();
+  const msg=document.getElementById("adminMessage");
+
+  if(!target){
+    msg.textContent="⚠️ اكتب UID العضو";
+    return;
+  }
+
   try{
-    const ref=doc(db,"moderation",uid);
-    if(action==="ban") await setDoc(ref,{banned:true,updatedAt:serverTimestamp()},{merge:true});
-    if(action==="unban") await setDoc(ref,{banned:false,updatedAt:serverTimestamp()},{merge:true});
-    if(action==="mute") await setDoc(ref,{micMuted:true,updatedAt:serverTimestamp()},{merge:true});
-    alert("تم تنفيذ الأمر");
-  }catch(e){console.error(e);alert("تعذر تنفيذ الأمر: "+e.code)}
+    const ref=doc(db,"moderation",target);
+
+    if(action==="ban"){
+      await setDoc(ref,{banned:true,updatedAt:serverTimestamp()},{merge:true});
+    }else if(action==="unban"){
+      await setDoc(ref,{banned:false,updatedAt:serverTimestamp()},{merge:true});
+    }else if(action==="mute"){
+      await setDoc(ref,{micMuted:true,updatedAt:serverTimestamp()},{merge:true});
+    }else if(action==="unmute"){
+      await setDoc(ref,{micMuted:false,updatedAt:serverTimestamp()},{merge:true});
+    }
+
+    msg.textContent="✅ تم تنفيذ الأمر";
+  }catch(e){
+    console.error(e);
+    msg.textContent="❌ "+friendlyFirebaseError(e);
+  }
 }
+
+function friendlyFirebaseError(e){
+  const c=e?.code||"";
+  const map={
+    "permission-denied":"لا توجد صلاحية في Firebase Rules",
+    "failed-precondition":"تحقق من إعدادات Firestore",
+    "unavailable":"Firebase غير متاح حاليًا",
+    "not-found":"المستند غير موجود"
+  };
+  return map[c]||c||e?.message||"خطأ غير معروف";
+}
+
 document.getElementById("banButton").onclick=()=>adminAction("ban");
 document.getElementById("unbanButton").onclick=()=>adminAction("unban");
 document.getElementById("muteButton").onclick=()=>adminAction("mute");
+document.getElementById("unmuteButton").onclick=()=>adminAction("unmute");
 
 async function sendMessage(){
 const input=document.getElementById("messageInput");
 const text=input.value.trim(),u=auth.currentUser;
 if(!u||!text)return;
 try{
-await addDoc(collection(db,"messages"),{uid:u.uid,name:u.displayName||"عضو",text,createdAt:serverTimestamp()});
+const mod=await getDoc(doc(db,"moderation",u.uid));
+if(mod.exists() && mod.data().banned===true){
+  alert("🚫 حسابك محظور من الدردشة");
+  return;
+}
+await addDoc(collection(db,"messages"),{
+  uid:u.uid,
+  name:u.displayName||"عضو",
+  text,
+  createdAt:serverTimestamp()
+});
 input.value="";
-}catch(e){console.error(e);alert("تعذر إرسال الرسالة: "+e.code)}
+}catch(e){
+console.error(e);
+alert("تعذر إرسال الرسالة: "+friendlyFirebaseError(e));
+}
 }
 document.getElementById("sendButton").onclick=sendMessage;
 document.getElementById("messageInput").onkeydown=e=>{if(e.key==="Enter")sendMessage()};
@@ -309,7 +389,7 @@ async function toggleMic(index){
       await joinAsListener(slotId,d);
     }catch(e){
       console.error(e);
-      alert("❌ تعذر الاتصال بالصوت: "+(e.code||e.message));
+      alert("❌ تعذر الاتصال بالصوت: "+friendlyFirebaseError(e));
     }
     return;
   }
@@ -326,7 +406,10 @@ async function toggleMic(index){
 
   try{
     const modSnap=await getDoc(doc(db,"moderation",u.uid));
-    if(modSnap.exists() && modSnap.data().micMuted){alert("🚫 تم منعك من استخدام المايك");return}
+    if(modSnap.exists() && (modSnap.data().micMuted===true || modSnap.data().banned===true)){
+  alert(modSnap.data().banned===true ? "🚫 حسابك محظور" : "🎤 تم منعك من استخدام المايك");
+  return;
+}
     localStream=await navigator.mediaDevices.getUserMedia({
       audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true,channelCount:1,sampleRate:48000},
       video:false
