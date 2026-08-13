@@ -6,82 +6,177 @@
 <title>طليان الشعلة</title>
 
 <style>
+*{box-sizing:border-box}
+
 body{
+  margin:0;
   font-family:Arial;
   background:#111;
-  color:white;
-  margin:0;
+  color:#fff;
 }
 
-.box{
-  max-width:400px;
-  margin:50px auto;
-  padding:25px;
+.screen{
+  min-height:100vh;
+}
+
+.auth{
+  max-width:420px;
+  margin:auto;
+  padding:40px 20px;
+}
+
+.card{
   background:#222;
-  border-radius:15px;
+  border-radius:18px;
+  padding:25px;
 }
 
-h2{
-  text-align:center;
-}
+h1,h2{text-align:center}
 
 input,button{
   width:100%;
   padding:13px;
   margin:7px 0;
-  box-sizing:border-box;
-  border-radius:8px;
   border:0;
+  border-radius:9px;
 }
 
 input{
   background:#333;
-  color:white;
+  color:#fff;
 }
 
 button{
   background:#1877f2;
   color:white;
   font-weight:bold;
-  cursor:pointer;
 }
 
-#msg{
+#message{
+  margin-top:10px;
   text-align:center;
-  margin-top:12px;
+}
+
+#chat{
+  display:none;
+  min-height:100vh;
+  flex-direction:column;
+}
+
+header{
+  background:#222;
+  padding:15px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+header h2{
+  margin:0;
+}
+
+.logout{
+  width:auto;
+  padding:9px 14px;
+  background:#b3261e;
+}
+
+.messages{
+  flex:1;
+  padding:15px;
+  overflow-y:auto;
+}
+
+.msg{
+  background:#222;
+  padding:10px;
+  margin:8px 0;
+  border-radius:12px;
+}
+
+.msg strong{
+  color:#4da3ff;
+}
+
+.composer{
+  display:flex;
+  gap:7px;
+  padding:10px;
+  background:#222;
+}
+
+.composer input{
+  margin:0;
+}
+
+.send{
+  width:70px;
+  margin:0;
 }
 </style>
 </head>
 
 <body>
 
-<div class="box">
+<!-- تسجيل الدخول -->
 
-<h2>🔥 طليان الشعلة</h2>
+<div id="authScreen" class="screen">
+  <div class="auth">
+    <div class="card">
 
-<input
-  id="name"
-  type="text"
-  placeholder="اسم العضو"
->
+      <h1>🔥 طليان الشعلة</h1>
 
-<input
-  id="email"
-  type="email"
-  placeholder="البريد الإلكتروني"
->
+      <input
+        id="name"
+        type="text"
+        placeholder="اسم العضو"
+      >
 
-<input
-  id="password"
-  type="password"
-  placeholder="كلمة المرور"
->
+      <input
+        id="email"
+        type="email"
+        placeholder="البريد الإلكتروني"
+      >
 
-<button id="signup">إنشاء حساب</button>
+      <input
+        id="password"
+        type="password"
+        placeholder="كلمة المرور"
+      >
 
-<button id="login">تسجيل الدخول</button>
+      <button id="signup">إنشاء حساب</button>
 
-<div id="msg"></div>
+      <button id="login">تسجيل الدخول</button>
+
+      <div id="message"></div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- الدردشة -->
+
+<div id="chat">
+
+  <header>
+    <h2>🔥 طليان الشعلة</h2>
+    <button id="logout" class="logout">خروج</button>
+  </header>
+
+  <div id="messages" class="messages"></div>
+
+  <div class="composer">
+
+    <input
+      id="text"
+      type="text"
+      placeholder="اكتب رسالتك..."
+    >
+
+    <button id="send" class="send">إرسال</button>
+
+  </div>
 
 </div>
 
@@ -95,126 +190,5 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  updateProfile
-}
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
-
-
-const firebaseConfig = {
-
-  apiKey:"AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
-
-  authDomain:"dardashti-chat.firebaseapp.com",
-
-  projectId:"dardashti-chat",
-
-  storageBucket:"dardashti-chat.firebasestorage.app",
-
-  messagingSenderId:"779042757468",
-
-  appId:"1:779042757468:web:7646d3cdadf46f315a3f99"
-
-};
-
-
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-
-const msg = document.getElementById("msg");
-
-
-document.getElementById("signup").onclick = async () => {
-
-  const name =
-    document.getElementById("name").value.trim();
-
-  const email =
-    document.getElementById("email").value.trim();
-
-  const password =
-    document.getElementById("password").value;
-
-
-  if (!name || !email || !password) {
-
-    msg.textContent = "⚠️ املأ جميع الحقول";
-
-    return;
-  }
-
-
-  try {
-
-    const userCredential =
-      await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-
-    await updateProfile(
-      userCredential.user,
-      {
-        displayName: name
-      }
-    );
-
-
-    msg.textContent =
-      "✅ تم إنشاء الحساب باسم " + name;
-
-  }
-
-  catch(e) {
-
-    msg.textContent =
-      "❌ " + e.message;
-
-  }
-
-};
-
-
-document.getElementById("login").onclick = async () => {
-
-  const email =
-    document.getElementById("email").value.trim();
-
-  const password =
-    document.getElementById("password").value;
-
-
-  try {
-
-    const userCredential =
-      await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-
-    const name =
-      userCredential.user.displayName || "عضو";
-
-
-    msg.textContent =
-      "✅ مرحبًا " + name;
-
-  }
-
-  catch(e) {
-
-    msg.textContent =
-      "❌ " + e.message;
-
-  }
-
-};
-
-</script>
-
-</body>
-</html>
+  updateProfile,
+  onAuthStateChanged,
