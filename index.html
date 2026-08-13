@@ -2,746 +2,2750 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>طليان الشعلة</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,Tahoma,sans-serif;background:#080b10;color:#fff}
+body{
+  margin:0;
+  font-family:Arial,Tahoma,sans-serif;
+  background:#080b10;
+  color:#fff;
+}
 button,input{font-family:inherit}
-button{cursor:pointer}.hidden{display:none!important}
-#loginPage{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(145deg,#18283d,#090d13)}
-.loginBox{width:100%;max-width:420px;background:#151d28;padding:25px;border-radius:20px;border:1px solid #2d3a4b;box-shadow:0 20px 60px #0009}
-.logo{text-align:center;font-size:29px;font-weight:bold;margin-bottom:8px}
-.description{text-align:center;color:#a4afbd;margin-bottom:22px}
-.loginBox input{width:100%;padding:14px;margin:6px 0;border:1px solid #344255;border-radius:10px;background:#0d131b;color:#fff;outline:none}
-.btn{width:100%;padding:14px;margin-top:8px;border:0;border-radius:10px;font-weight:bold;color:#fff}
-.signup{background:#1687ff}.login{background:#283444}
-#authMessage{text-align:center;min-height:24px;margin-top:12px;color:#ffb6b6}
-#adminPanel input{width:100%;margin:0}
-#adminPanel .btn{width:auto;flex:1;padding:10px}
-#chatApp{height:100vh;display:flex;flex-direction:column}
-.header{height:64px;background:#151d28;border-bottom:1px solid #293646;display:flex;align-items:center;justify-content:space-between;padding:0 12px}
-.title{font-size:20px;font-weight:bold}.username{font-size:12px;color:#6ee7a0;margin-top:3px}
-.logout{border:0;background:#a92d38;color:#fff;padding:9px 12px;border-radius:9px}
-.voicePanel{background:#101720;border-bottom:1px solid #293646;padding:10px}
-.voiceTitle{text-align:center;font-weight:bold;margin-bottom:8px;color:#dce7f5}
-.voiceSlots{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.voiceSlot{min-height:90px;background:#18222e;border:1px solid #344255;border-radius:13px;padding:9px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px}
-.voiceSlot.active{border-color:#24c77a}.voiceSlot.listen{border-color:#4e8cff}
-.voiceSlot button{border:0;border-radius:9px;padding:8px 12px;background:#1687ff;color:#fff;font-weight:bold}
-.voiceSlot.active button{background:#b52d39}
-.voiceName{font-size:13px;color:#aebaca;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.voiceStatus{font-size:11px;color:#7e8a99;text-align:center}
-.messages{flex:1;overflow-y:auto;padding:14px}
-.message{display:flex;gap:9px;margin-bottom:13px}
-.avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;background:#293646}
-.messageContent{background:#18222e;border-radius:13px;padding:8px 11px;max-width:80%}
-.messageName{color:#61a8ff;font-size:12px;font-weight:bold;margin-bottom:3px}
-.messageText{line-height:1.5;word-break:break-word}
-.composer{display:flex;gap:7px;padding:9px;background:#151d28;border-top:1px solid #293646}
-.composer input{flex:1;min-width:0;padding:13px;border:1px solid #344255;border-radius:10px;background:#0d131b;color:#fff;outline:none}
-.send{width:50px;border:0;border-radius:10px;background:#1687ff;color:#fff;font-size:18px}
-.empty{text-align:center;color:#7e8a99;padding:35px 10px}
-@media(max-width:420px){.voiceSlot button{padding:7px 9px;font-size:12px}}
+button{cursor:pointer}
+.hidden{display:none!important}
+
+#loginPage{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:linear-gradient(145deg,#18283d,#090d13)
+}
+
+.loginBox{
+  width:100%;
+  max-width:420px;
+  background:#151d28;
+  padding:25px;
+  border-radius:20px;
+  border:1px solid #2d3a4b;
+  box-shadow:0 20px 60px #0009
+}
+
+.logo{
+  text-align:center;
+  font-size:29px;
+  font-weight:bold;
+  margin-bottom:8px
+}
+
+.description{
+  text-align:center;
+  color:#a4afbd;
+  margin-bottom:22px
+}
+
+.loginBox input{
+  width:100%;
+  padding:14px;
+  margin:6px 0;
+  border:1px solid #344255;
+  border-radius:10px;
+  background:#0d131b;
+  color:#fff;
+  outline:none
+}
+
+.btn{
+  width:100%;
+  padding:14px;
+  margin-top:8px;
+  border:0;
+  border-radius:10px;
+  font-weight:bold;
+  color:#fff
+}
+
+.signup{background:#1687ff}
+.login{background:#283444}
+
+#authMessage{
+  text-align:center;
+  min-height:24px;
+  margin-top:12px;
+  color:#ffb6b6
+}
+
+#chatApp{
+  height:100vh;
+  display:flex;
+  flex-direction:column
+}
+
+.header{
+  height:64px;
+  background:#151d28;
+  border-bottom:1px solid #293646;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 12px
+}
+
+.title{font-size:20px;font-weight:bold}
+
+.username{
+  font-size:12px;
+  color:#6ee7a0;
+  margin-top:3px
+}
+
+.logout{
+  border:0;
+  background:#a92d38;
+  color:#fff;
+  padding:9px 12px;
+  border-radius:9px
+}
+
+.voicePanel{
+  background:#101720;
+  border-bottom:1px solid #293646;
+  padding:10px
+}
+
+.voiceTitle{
+  text-align:center;
+  font-weight:bold;
+  margin-bottom:8px;
+  color:#dce7f5
+}
+
+.voiceSlots{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px
+}
+
+.voiceSlot{
+  min-height:100px;
+  background:#18222e;
+  border:1px solid #344255;
+  border-radius:13px;
+  padding:9px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:5px
+}
+
+.voiceSlot.active{border-color:#24c77a}
+.voiceSlot.listen{border-color:#4e8cff}
+
+.voiceSlot button{
+  border:0;
+  border-radius:9px;
+  padding:8px 12px;
+  background:#1687ff;
+  color:#fff;
+  font-weight:bold
+}
+
+.voiceSlot.active button{
+  background:#b52d39
+}
+
+.voiceName{
+  font-size:13px;
+  color:#aebaca;
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap
+}
+
+.voiceStatus{
+  font-size:11px;
+  color:#7e8a99;
+  text-align:center
+}
+
+.messages{
+  flex:1;
+  overflow-y:auto;
+  padding:14px
+}
+
+.message{
+  display:flex;
+  gap:9px;
+  margin-bottom:13px
+}
+
+.avatar{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  object-fit:cover;
+  background:#293646
+}
+
+.messageContent{
+  background:#18222e;
+  border-radius:13px;
+  padding:8px 11px;
+  max-width:80%
+}
+
+.messageName{
+  color:#61a8ff;
+  font-size:12px;
+  font-weight:bold;
+  margin-bottom:3px
+}
+
+.messageText{
+  line-height:1.5;
+  word-break:break-word
+}
+
+.composer{
+  display:flex;
+  gap:7px;
+  padding:9px;
+  background:#151d28;
+  border-top:1px solid #293646
+}
+
+.composer input{
+  flex:1;
+  min-width:0;
+  padding:13px;
+  border:1px solid #344255;
+  border-radius:10px;
+  background:#0d131b;
+  color:#fff;
+  outline:none
+}
+
+.send{
+  width:50px;
+  border:0;
+  border-radius:10px;
+  background:#1687ff;
+  color:#fff;
+  font-size:18px
+}
+
+.empty{
+  text-align:center;
+  color:#7e8a99;
+  padding:35px 10px
+}
+
+#audioPanel{
+  position:fixed;
+  left:10px;
+  right:10px;
+  bottom:75px;
+  z-index:99999;
+  background:#151d28;
+  border:1px solid #344255;
+  border-radius:13px;
+  padding:10px;
+  text-align:center;
+  box-shadow:0 8px 30px #0008
+}
+
+#audioPanel audio{
+  width:100%;
+  margin:7px 0
+}
+
+.audioButtons{
+  display:flex;
+  gap:7px
+}
+
+.audioButtons button{
+  flex:1;
+  border:0;
+  border-radius:8px;
+  padding:10px;
+  color:#fff;
+  font-weight:bold
+}
+
+.playAudio{background:#1687ff}
+.closeAudio{background:#a92d38}
+
+@media(max-width:420px){
+  .voiceSlot button{
+    padding:7px 9px;
+    font-size:12px
+  }
+}
 </style>
 </head>
+
 <body>
 
 <div id="loginPage">
-<div class="loginBox">
-<div class="logo">🔥 طليان الشعلة</div>
-<div class="description">مرحبًا بك في الدردشة</div>
-<input id="nameInput" type="text" placeholder="اسم العضو">
-<input id="emailInput" type="email" placeholder="البريد الإلكتروني">
-<input id="passwordInput" type="password" placeholder="كلمة المرور">
-<button id="signupButton" class="btn signup">إنشاء حساب</button>
-<button id="loginButton" class="btn login">تسجيل الدخول</button>
-<div id="authMessage"></div>
+  <div class="loginBox">
+
+    <div class="logo">🔥 طليان الشعلة</div>
+
+    <div class="description">
+      مرحبًا بك في الدردشة
+    </div>
+
+    <input id="nameInput" type="text" placeholder="اسم العضو">
+    <input id="emailInput" type="email" placeholder="البريد الإلكتروني">
+    <input id="passwordInput" type="password" placeholder="كلمة المرور">
+
+    <button id="signupButton" class="btn signup">
+      إنشاء حساب
+    </button>
+
+    <button id="loginButton" class="btn login">
+      تسجيل الدخول
+    </button>
+
+    <div id="authMessage"></div>
+
+  </div>
 </div>
-</div>
+
 
 <div id="chatApp" class="hidden">
-<div class="header">
-<div>
-<div class="title">🔥 طليان الشعلة</div>
-<div id="currentUsername" class="username">عضو</div>
-</div>
-<button id="logoutButton" class="logout">خروج</button>
-</div>
 
+  <div class="header">
 
-<div id="adminPanel" class="hidden" style="background:#121a24;border-bottom:1px solid #293646;padding:10px">
-  <div style="font-weight:bold;margin-bottom:8px">🛡️ لوحة الإشراف</div>
-  <input id="adminTarget" type="text" placeholder="UID العضو"
-    style="width:100%;padding:11px;border:1px solid #344255;border-radius:9px;background:#0d131b;color:#fff;margin-bottom:7px">
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
-    <button id="banButton" class="btn" style="background:#a92d38">🚫 حظر</button>
-    <button id="unbanButton" class="btn" style="background:#1687ff">🔓 فك الحظر</button>
-    <button id="muteButton" class="btn" style="background:#7b4ab8">🎤 منع المايك</button>
-    <button id="unmuteButton" class="btn" style="background:#168b61">🎤 السماح بالمايك</button>
+    <div>
+      <div class="title">🔥 طليان الشعلة</div>
+      <div id="currentUsername" class="username">عضو</div>
+    </div>
+
+    <button id="logoutButton" class="logout">
+      خروج
+    </button>
+
   </div>
-  <div id="adminMessage" style="text-align:center;color:#aebaca;margin-top:7px;font-size:12px"></div>
+
+
+  <div id="adminPanel"
+       class="hidden"
+       style="background:#121a24;border-bottom:1px solid #293646;padding:10px">
+
+    <div style="font-weight:bold;margin-bottom:8px">
+      🛡️ لوحة الإشراف
+    </div>
+
+    <input
+      id="adminTarget"
+      type="text"
+      placeholder="UID العضو"
+      style="width:100%;padding:11px;border:1px solid #344255;border-radius:9px;background:#0d131b;color:#fff;margin-bottom:7px">
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
+
+      <button id="banButton" class="btn" style="background:#a92d38">
+        🚫 حظر
+      </button>
+
+      <button id="unbanButton" class="btn" style="background:#1687ff">
+        🔓 فك الحظر
+      </button>
+
+      <button id="muteButton" class="btn" style="background:#7b4ab8">
+        🎤 منع المايك
+      </button>
+
+      <button id="unmuteButton" class="btn" style="background:#168b61">
+        🎤 السماح بالمايك
+      </button>
+
+    </div>
+
+    <div id="adminMessage"
+         style="text-align:center;color:#aebaca;margin-top:7px;font-size:12px">
+    </div>
+
+  </div>
+
+
+  <div class="voicePanel">
+
+    <div class="voiceTitle">
+      🎤 المايكات العامة
+    </div>
+
+    <div class="voiceSlots">
+
+      <div id="voiceSlot1" class="voiceSlot">
+
+        <div>🎤 المايك 1</div>
+
+        <div id="voiceName1" class="voiceName">
+          شاغر
+        </div>
+
+        <div id="voiceStatus1" class="voiceStatus">
+          اضغط للتحدث
+        </div>
+
+        <button id="voiceButton1">
+          تشغيل المايك
+        </button>
+
+      </div>
+
+
+      <div id="voiceSlot2" class="voiceSlot">
+
+        <div>🎤 المايك 2</div>
+
+        <div id="voiceName2" class="voiceName">
+          شاغر
+        </div>
+
+        <div id="voiceStatus2" class="voiceStatus">
+          اضغط للتحدث
+        </div>
+
+        <button id="voiceButton2">
+          تشغيل المايك
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <div id="messages" class="messages">
+    <div class="empty">
+      جاري تحميل الدردشة...
+    </div>
+  </div>
+
+
+  <div class="composer">
+
+    <input
+      id="messageInput"
+      type="text"
+      placeholder="اكتب رسالتك...">
+
+    <button id="sendButton" class="send">
+      ➤
+    </button>
+
+  </div>
+
 </div>
 
-<div class="voicePanel">
-<div class="voiceTitle">🎤 المايكات العامة</div>
-<div class="voiceSlots">
-<div id="voiceSlot1" class="voiceSlot">
-<div>🎤 المايك 1</div>
-<div id="voiceName1" class="voiceName">شاغر</div>
-<div id="voiceStatus1" class="voiceStatus">اضغط للتحدث</div>
-<button id="voiceButton1">تشغيل المايك</button>
-</div>
-<div id="voiceSlot2" class="voiceSlot">
-<div>🎤 المايك 2</div>
-<div id="voiceName2" class="voiceName">شاغر</div>
-<div id="voiceStatus2" class="voiceStatus">اضغط للتحدث</div>
-<button id="voiceButton2">تشغيل المايك</button>
-</div>
-</div>
-</div>
-
-<div id="messages" class="messages"><div class="empty">جاري تحميل الدردشة...</div></div>
-
-<div class="composer">
-<input id="messageInput" type="text" placeholder="اكتب رسالتك...">
-<button id="sendButton" class="send">➤</button>
-</div>
-</div>
 
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
-import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile,onAuthStateChanged,signOut}
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
-import {getFirestore,collection,addDoc,query,orderBy,onSnapshot,serverTimestamp,doc,setDoc,deleteDoc,getDoc,getDocs,where,limit}
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
-const firebaseConfig={
-apiKey:"AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
-authDomain:"dardashti-chat.firebaseapp.com",
-projectId:"dardashti-chat",
-storageBucket:"dardashti-chat.firebasestorage.app",
-messagingSenderId:"779042757468",
-appId:"1:779042757468:web:7646d3cdadf46f315a3f99"
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  serverTimestamp,
+  doc,
+  setDoc,
+  deleteDoc,
+  getDoc,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+
+
+/* =========================
+   FIREBASE
+========================= */
+
+const firebaseConfig = {
+  apiKey:"AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
+  authDomain:"dardashti-chat.firebaseapp.com",
+  projectId:"dardashti-chat",
+  storageBucket:"dardashti-chat.firebasestorage.app",
+  messagingSenderId:"779042757468",
+  appId:"1:779042757468:web:7646d3cdadf46f315a3f99"
 };
 
-const app=initializeApp(firebaseConfig);
-const auth=getAuth(app);
-const db=getFirestore(app);
-
-// ضع UID حساب المشرف هنا بعد إنشاء الحساب. لا تعتمد على إخفاء الأزرار وحده للأمان؛ يجب أيضًا ضبط Firestore Rules.
-const ADMIN_UIDS=["PUT_ADMIN_UID_HERE"];
-const isAdmin=()=>!!auth.currentUser&&ADMIN_UIDS.includes(auth.currentUser.uid);
-
-async function getMyModeration(){
-  const u=auth.currentUser;
-  if(!u) return {banned:false,micMuted:false};
-  try{
-    const s=await getDoc(doc(db,"moderation",u.uid));
-    return s.exists()?{banned:s.data().banned===true,micMuted:s.data().micMuted===true}:{banned:false,micMuted:false};
-  }catch(e){
-    // If rules deny the moderation read, do not break the whole chat.
-    // The server-side Firestore Rules must still enforce the actual ban.
-    console.error("moderation read",e);
-    return {banned:false,micMuted:false};
-  }
-}
-
-const rtcConfig={iceServers:[{urls:"stun:stun.l.google.com:19302"},{urls:"stun:stun1.l.google.com:19302"}],iceCandidatePoolSize:10};
-
-const loginPage=document.getElementById("loginPage");
-const chatApp=document.getElementById("chatApp");
-const authMessage=document.getElementById("authMessage");
-let stopMessages=null,stopSlots=null;
-
-document.getElementById("signupButton").onclick=async()=>{
-const name=document.getElementById("nameInput").value.trim();
-const email=document.getElementById("emailInput").value.trim();
-const password=document.getElementById("passwordInput").value;
-if(name.length<2){authMessage.textContent="⚠️ اكتب اسم العضو";return}
-if(!email){authMessage.textContent="⚠️ اكتب البريد الإلكتروني";return}
-if(password.length<6){authMessage.textContent="⚠️ كلمة المرور يجب أن تكون 6 أحرف على الأقل";return}
-authMessage.textContent="جاري إنشاء الحساب...";
-try{
-const r=await createUserWithEmailAndPassword(auth,email,password);
-await updateProfile(r.user,{displayName:name});
-
-await setDoc(doc(db,"users",r.user.uid),{
-  uid:r.user.uid,
-  name:name,
-  email:email,
-  role:"user",
-  banned:false,
-  micBanned:false,
-  createdAt:serverTimestamp()
-},{merge:true});
-
-await setDoc(doc(db,"moderation",r.user.uid),{
-  banned:false,
-  micMuted:false,
-  updatedAt:serverTimestamp()
-},{merge:true});
-
-authMessage.textContent="✅ تم إنشاء الحساب بنجاح";
-}catch(e){console.error(e);authMessage.textContent="❌ "+e.code}
-};
-
-document.getElementById("loginButton").onclick=async()=>{
-const email=document.getElementById("emailInput").value.trim();
-const password=document.getElementById("passwordInput").value;
-if(!email||!password){authMessage.textContent="⚠️ اكتب البريد وكلمة المرور";return}
-authMessage.textContent="جاري تسجيل الدخول...";
-try{await signInWithEmailAndPassword(auth,email,password)}
-catch(e){console.error(e);authMessage.textContent="❌ "+e.code}
-};
-
-onAuthStateChanged(auth,user=>{
-if(user){
-loginPage.classList.add("hidden");
-chatApp.classList.remove("hidden");
-document.getElementById("currentUsername").textContent=user.displayName||"عضو";
-document.getElementById("adminPanel").classList.toggle("hidden",!isAdmin());
-loadMessages();
-watchSlots();
-}else{
-cleanupAllVoice();
-loginPage.classList.remove("hidden");
-chatApp.classList.add("hidden");
-if(stopMessages){stopMessages();stopMessages=null}
-if(stopSlots){stopSlots();stopSlots=null}
-}
-});
-
-document.getElementById("logoutButton").onclick=()=>signOut(auth);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 
-async function adminAction(action){
-  if(!isAdmin()){
-    alert("ليس لديك صلاحية إشراف");
-    return;
-  }
+/* =========================
+   ADMIN
+========================= */
 
-  const target=document.getElementById("adminTarget").value.trim();
-  const msg=document.getElementById("adminMessage");
-
-  if(!target){
-    msg.textContent="⚠️ اكتب UID العضو";
-    return;
-  }
-
-  try{
-    const ref=doc(db,"moderation",target);
-
-    if(action==="ban"){
-      await setDoc(ref,{banned:true,updatedAt:serverTimestamp()},{merge:true});
-      await setDoc(doc(db,"users",target),{banned:true},{merge:true});
-    }else if(action==="unban"){
-      await setDoc(ref,{banned:false,updatedAt:serverTimestamp()},{merge:true});
-      await setDoc(doc(db,"users",target),{banned:false},{merge:true});
-    }else if(action==="mute"){
-      await setDoc(ref,{micMuted:true,updatedAt:serverTimestamp()},{merge:true});
-      await setDoc(doc(db,"users",target),{micBanned:true},{merge:true});
-    }else if(action==="unmute"){
-      await setDoc(ref,{micMuted:false,updatedAt:serverTimestamp()},{merge:true});
-      await setDoc(doc(db,"users",target),{micBanned:false},{merge:true});
-    }
-
-    msg.textContent="✅ تم تنفيذ الأمر";
-  }catch(e){
-    console.error(e);
-    msg.textContent="❌ "+friendlyFirebaseError(e);
-  }
-}
-
-function friendlyFirebaseError(e){
-  const c=e?.code||"";
-  const map={
-    "permission-denied":"تم رفض العملية من Firebase Rules. تحقق من قواعد Firestore.",
-    "failed-precondition":"تحقق من إعدادات Firestore والفهارس.",
-    "unavailable":"Firebase غير متاح حاليًا.",
-    "not-found":"المستند غير موجود.",
-    "unauthenticated":"يجب تسجيل الدخول أولًا.",
-    "network-request-failed":"تحقق من اتصال الإنترنت.",
-    "permission-denied":"تم رفض العملية من قواعد Firebase."
-  };
-  return map[c]||c||e?.message||"خطأ غير معروف";
-}
-
-document.getElementById("banButton").onclick=()=>adminAction("ban");
-document.getElementById("unbanButton").onclick=()=>adminAction("unban");
-document.getElementById("muteButton").onclick=()=>adminAction("mute");
-document.getElementById("unmuteButton").onclick=()=>adminAction("unmute");
-
-async function sendMessage(){
-  const input=document.getElementById("messageInput");
-  const text=input.value.trim();
-  const u=auth.currentUser;
-  if(!u||!text)return;
-
-  try{
-    const mod=await getMyModeration();
-    if(mod.banned){
-      alert("🚫 حسابك محظور من الدردشة");
-      return;
-    }
-
-    await addDoc(collection(db,"messages"),{
-      uid:u.uid,
-      name:u.displayName||"عضو",
-      text:text,
-      createdAt:serverTimestamp()
-    });
-
-    input.value="";
-  }catch(e){
-    console.error("sendMessage",e);
-    alert("تعذر إرسال الرسالة: "+friendlyFirebaseError(e));
-  }
-}
-document.getElementById("sendButton").onclick=sendMessage;
-document.getElementById("messageInput").onkeydown=e=>{if(e.key==="Enter")sendMessage()};
-
-function loadMessages(){
-if(stopMessages)stopMessages();
-const box=document.getElementById("messages");
-stopMessages=onSnapshot(query(collection(db,"messages"),orderBy("createdAt","asc")),snap=>{
-box.innerHTML="";
-if(snap.empty){box.innerHTML='<div class="empty">لا توجد رسائل بعد</div>';return}
-snap.forEach(s=>{
-const d=s.data(),row=document.createElement("div");
-row.className="message";
-const avatar=document.createElement("img");
-avatar.className="avatar";
-avatar.src="https://ui-avatars.com/api/?name="+encodeURIComponent(d.name||"عضو")+"&background=1687ff&color=fff";
-const content=document.createElement("div");
-content.className="messageContent";
-const name=document.createElement("div");
-name.className="messageName";
-name.textContent=d.name||"عضو";
-const text=document.createElement("div");
-text.className="messageText";
-text.textContent=d.text||"";
-content.append(name,text);row.append(avatar,content);box.appendChild(row);
-});
-box.scrollTop=box.scrollHeight;
-},e=>{console.error(e);box.innerHTML='<div class="empty">❌ تعذر تحميل الرسائل: '+e.code+'</div>'});
-}
-
-/* ---------- TWO PUBLIC MICS / WEBRTC ---------- */
-
-const slots=[
-{id:"slot1",el:document.getElementById("voiceSlot1"),name:document.getElementById("voiceName1"),status:document.getElementById("voiceStatus1"),button:document.getElementById("voiceButton1")},
-{id:"slot2",el:document.getElementById("voiceSlot2"),name:document.getElementById("voiceName2"),status:document.getElementById("voiceStatus2"),button:document.getElementById("voiceButton2")}
+const ADMIN_UIDS = [
+  "PUT_ADMIN_UID_HERE"
 ];
 
-let mySlot=null;
-let localStream=null;
-const peerConnections=new Map();
-const peerUnsubs=new Map();
-const candidateQueues=new Map();
+const isAdmin = () =>
+  !!auth.currentUser &&
+  ADMIN_UIDS.includes(auth.currentUser.uid);
 
 
+/* =========================
+   MODERATION
+========================= */
 
-slots.forEach((s,i)=>s.button.onclick=()=>toggleMic(i));
+async function getMyModeration(){
 
-function slotPeerRef(slotId, uid){
-  return doc(db,"voiceCalls",slotId,"peers",uid);
-}
+  const u = auth.currentUser;
 
-function setAudioPlayer(slotId, stream){
-  let wrap=document.getElementById("audio-wrap-"+slotId);
-  if(!wrap){
-    wrap=document.createElement("div");
-    wrap.id="audio-wrap-"+slotId;
-    wrap.style.cssText="position:fixed;bottom:75px;left:10px;right:10px;z-index:9999;background:#151d28;border:1px solid #344255;border-radius:12px;padding:8px;text-align:center;box-shadow:0 8px 30px #0008";
-
-    const label=document.createElement("span");
-    label.textContent="🔊 الصوت";
-    label.style.marginLeft="8px";
-
-    const audio=document.createElement("audio");
-    audio.id="audio-"+slotId;
-    audio.autoplay=true;
-    audio.playsInline=true;
-    audio.controls=true;
-    audio.style.width="55%";
-
-    const play=document.createElement("button");
-    play.textContent="▶ تشغيل الصوت";
-    play.style.cssText="border:0;border-radius:8px;padding:8px 10px;background:#1687ff;color:#fff;font-weight:bold;margin-right:6px";
-    play.onclick=()=>audio.play().catch(console.error);
-
-    const close=document.createElement("button");
-    close.textContent="✕";
-    close.style.cssText="border:0;border-radius:8px;padding:8px 10px;background:#a92d38;color:#fff;font-weight:bold";
-    close.onclick=()=>{audio.pause();wrap.remove()};
-
-    wrap.append(label,audio,play,close);
-    document.body.appendChild(wrap);
+  if(!u){
+    return {
+      banned:false,
+      micMuted:false
+    };
   }
-  const audio=document.getElementById("audio-"+slotId);
-  audio.srcObject=stream;
-  audio.play().catch(()=>{});
+
+  try{
+
+    const s = await getDoc(
+      doc(db,"moderation",u.uid)
+    );
+
+    if(!s.exists()){
+      return {
+        banned:false,
+        micMuted:false
+      };
+    }
+
+    const d = s.data();
+
+    return {
+      banned:d.banned === true,
+      micMuted:d.micMuted === true
+    };
+
+  }catch(e){
+
+    console.error("moderation",e);
+
+    return {
+      banned:false,
+      micMuted:false
+    };
+  }
 }
 
-function removeAudioPlayer(slotId){
-  const wrap=document.getElementById("audio-wrap-"+slotId);
-  if(wrap)wrap.remove();
+
+/* =========================
+   WEBRTC
+========================= */
+
+const rtcConfig = {
+
+  iceServers:[
+    {
+      urls:[
+        "stun:stun.l.google.com:19302",
+        "stun:stun1.l.google.com:19302"
+      ]
+    }
+  ],
+
+  iceCandidatePoolSize:10
+};
+
+
+/* =========================
+   UI
+========================= */
+
+const loginPage =
+  document.getElementById("loginPage");
+
+const chatApp =
+  document.getElementById("chatApp");
+
+const authMessage =
+  document.getElementById("authMessage");
+
+
+let stopMessages = null;
+let stopSlots = null;
+
+
+/* =========================
+   REGISTER
+========================= */
+
+document.getElementById("signupButton").onclick =
+async () => {
+
+  const name =
+    document.getElementById("nameInput").value.trim();
+
+  const email =
+    document.getElementById("emailInput").value.trim();
+
+  const password =
+    document.getElementById("passwordInput").value;
+
+  if(name.length < 2){
+    authMessage.textContent =
+      "⚠️ اكتب اسم العضو";
+    return;
+  }
+
+  if(!email){
+    authMessage.textContent =
+      "⚠️ اكتب البريد الإلكتروني";
+    return;
+  }
+
+  if(password.length < 6){
+    authMessage.textContent =
+      "⚠️ كلمة المرور يجب أن تكون 6 أحرف على الأقل";
+    return;
+  }
+
+  authMessage.textContent =
+    "جاري إنشاء الحساب...";
+
+  try{
+
+    const r =
+      await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+    await updateProfile(
+      r.user,
+      {
+        displayName:name
+      }
+    );
+
+    await setDoc(
+      doc(db,"users",r.user.uid),
+      {
+        uid:r.user.uid,
+        name:name,
+        email:email,
+        role:"user",
+        banned:false,
+        micBanned:false,
+        createdAt:serverTimestamp()
+      },
+      {
+        merge:true
+      }
+    );
+
+    await setDoc(
+      doc(db,"moderation",r.user.uid),
+      {
+        banned:false,
+        micMuted:false,
+        updatedAt:serverTimestamp()
+      },
+      {
+        merge:true
+      }
+    );
+
+    authMessage.textContent =
+      "✅ تم إنشاء الحساب بنجاح";
+
+  }catch(e){
+
+    console.error(e);
+
+    authMessage.textContent =
+      "❌ " + (e.code || e.message);
+
+  }
+
+};
+
+
+/* =========================
+   LOGIN
+========================= */
+
+document.getElementById("loginButton").onclick =
+async () => {
+
+  const email =
+    document.getElementById("emailInput").value.trim();
+
+  const password =
+    document.getElementById("passwordInput").value;
+
+  if(!email || !password){
+
+    authMessage.textContent =
+      "⚠️ اكتب البريد وكلمة المرور";
+
+    return;
+  }
+
+  authMessage.textContent =
+    "جاري تسجيل الدخول...";
+
+  try{
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+  }catch(e){
+
+    console.error(e);
+
+    authMessage.textContent =
+      "❌ " + (e.code || e.message);
+
+  }
+
+};
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+onAuthStateChanged(auth,user => {
+
+  if(user){
+
+    loginPage.classList.add("hidden");
+    chatApp.classList.remove("hidden");
+
+    document.getElementById(
+      "currentUsername"
+    ).textContent =
+      user.displayName || "عضو";
+
+    document.getElementById(
+      "adminPanel"
+    ).classList.toggle(
+      "hidden",
+      !isAdmin()
+    );
+
+    loadMessages();
+    watchSlots();
+
+  }else{
+
+    cleanupAllVoice();
+
+    loginPage.classList.remove("hidden");
+    chatApp.classList.add("hidden");
+
+    if(stopMessages){
+      stopMessages();
+      stopMessages = null;
+    }
+
+    if(stopSlots){
+      stopSlots();
+      stopSlots = null;
+    }
+
+  }
+
+});
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+document.getElementById("logoutButton").onclick =
+async () => {
+
+  await cleanupAllVoice();
+
+  await signOut(auth);
+
+};
+
+
+/* =========================
+   FIREBASE ERROR
+========================= */
+
+function friendlyFirebaseError(e){
+
+  const c = e?.code || "";
+
+  const map = {
+
+    "permission-denied":
+      "تم رفض العملية من Firebase Rules.",
+
+    "failed-precondition":
+      "تحقق من إعدادات Firestore.",
+
+    "unavailable":
+      "Firebase غير متاح حاليًا.",
+
+    "not-found":
+      "المستند غير موجود.",
+
+    "unauthenticated":
+      "يجب تسجيل الدخول أولًا.",
+
+    "network-request-failed":
+      "تحقق من اتصال الإنترنت."
+
+  };
+
+  return map[c] ||
+    c ||
+    e?.message ||
+    "خطأ غير معروف";
 }
+
+
+/* =========================
+   ADMIN
+========================= */
+
+async function adminAction(action){
+
+  if(!isAdmin()){
+
+    alert("ليس لديك صلاحية إشراف");
+
+    return;
+  }
+
+  const target =
+    document.getElementById(
+      "adminTarget"
+    ).value.trim();
+
+  const msg =
+    document.getElementById(
+      "adminMessage"
+    );
+
+  if(!target){
+
+    msg.textContent =
+      "⚠️ اكتب UID العضو";
+
+    return;
+  }
+
+  try{
+
+    const ref =
+      doc(db,"moderation",target);
+
+    if(action === "ban"){
+
+      await setDoc(
+        ref,
+        {
+          banned:true,
+          updatedAt:serverTimestamp()
+        },
+        {merge:true}
+      );
+
+      await setDoc(
+        doc(db,"users",target),
+        {banned:true},
+        {merge:true}
+      );
+
+    }
+
+    if(action === "unban"){
+
+      await setDoc(
+        ref,
+        {
+          banned:false,
+          updatedAt:serverTimestamp()
+        },
+        {merge:true}
+      );
+
+      await setDoc(
+        doc(db,"users",target),
+        {banned:false},
+        {merge:true}
+      );
+
+    }
+
+    if(action === "mute"){
+
+      await setDoc(
+        ref,
+        {
+          micMuted:true,
+          updatedAt:serverTimestamp()
+        },
+        {merge:true}
+      );
+
+      await setDoc(
+        doc(db,"users",target),
+        {micBanned:true},
+        {merge:true}
+      );
+
+    }
+
+    if(action === "unmute"){
+
+      await setDoc(
+        ref,
+        {
+          micMuted:false,
+          updatedAt:serverTimestamp()
+        },
+        {merge:true}
+      );
+
+      await setDoc(
+        doc(db,"users",target),
+        {micBanned:false},
+        {merge:true}
+      );
+
+    }
+
+    msg.textContent =
+      "✅ تم تنفيذ الأمر";
+
+  }catch(e){
+
+    console.error(e);
+
+    msg.textContent =
+      "❌ " +
+      friendlyFirebaseError(e);
+
+  }
+
+}
+
+document.getElementById("banButton").onclick =
+() => adminAction("ban");
+
+document.getElementById("unbanButton").onclick =
+() => adminAction("unban");
+
+document.getElementById("muteButton").onclick =
+() => adminAction("mute");
+
+document.getElementById("unmuteButton").onclick =
+() => adminAction("unmute");
+
+
+/* =========================
+   CHAT
+========================= */
+
+async function sendMessage(){
+
+  const input =
+    document.getElementById("messageInput");
+
+  const text =
+    input.value.trim();
+
+  const u =
+    auth.currentUser;
+
+  if(!u || !text)return;
+
+  try{
+
+    const mod =
+      await getMyModeration();
+
+    if(mod.banned){
+
+      alert(
+        "🚫 حسابك محظور من الدردشة"
+      );
+
+      return;
+    }
+
+    await addDoc(
+      collection(db,"messages"),
+      {
+        uid:u.uid,
+        name:u.displayName || "عضو",
+        text:text,
+        createdAt:serverTimestamp()
+      }
+    );
+
+    input.value = "";
+
+  }catch(e){
+
+    console.error(e);
+
+    alert(
+      "تعذر إرسال الرسالة: " +
+      friendlyFirebaseError(e)
+    );
+
+  }
+
+}
+
+document.getElementById("sendButton").onclick =
+sendMessage;
+
+document.getElementById(
+  "messageInput"
+).onkeydown = e => {
+
+  if(e.key === "Enter"){
+    sendMessage();
+  }
+
+};
+
+
+/* =========================
+   LOAD MESSAGES
+========================= */
+
+function loadMessages(){
+
+  if(stopMessages){
+    stopMessages();
+  }
+
+  const box =
+    document.getElementById("messages");
+
+  stopMessages =
+    onSnapshot(
+      query(
+        collection(db,"messages"),
+        orderBy("createdAt","asc")
+      ),
+
+      snap => {
+
+        box.innerHTML = "";
+
+        if(snap.empty){
+
+          box.innerHTML =
+            '<div class="empty">لا توجد رسائل بعد</div>';
+
+          return;
+        }
+
+        snap.forEach(s => {
+
+          const d = s.data();
+
+          const row =
+            document.createElement("div");
+
+          row.className = "message";
+
+          const avatar =
+            document.createElement("img");
+
+          avatar.className = "avatar";
+
+          avatar.src =
+            "https://ui-avatars.com/api/?name=" +
+            encodeURIComponent(
+              d.name || "عضو"
+            ) +
+            "&background=1687ff&color=fff";
+
+          const content =
+            document.createElement("div");
+
+          content.className =
+            "messageContent";
+
+          const name =
+            document.createElement("div");
+
+          name.className =
+            "messageName";
+
+          name.textContent =
+            d.name || "عضو";
+
+          const text =
+            document.createElement("div");
+
+          text.className =
+            "messageText";
+
+          text.textContent =
+            d.text || "";
+
+          content.append(
+            name,
+            text
+          );
+
+          row.append(
+            avatar,
+            content
+          );
+
+          box.appendChild(row);
+
+        });
+
+        box.scrollTop =
+          box.scrollHeight;
+
+      },
+
+      e => {
+
+        console.error(e);
+
+        box.innerHTML =
+          '<div class="empty">❌ تعذر تحميل الرسائل: ' +
+          e.code +
+          '</div>';
+
+      }
+    );
+
+}
+
+
+/* ==================================================
+   VOICE
+================================================== */
+
+const slots = [
+
+  {
+    id:"slot1",
+    el:document.getElementById("voiceSlot1"),
+    name:document.getElementById("voiceName1"),
+    status:document.getElementById("voiceStatus1"),
+    button:document.getElementById("voiceButton1")
+  },
+
+  {
+    id:"slot2",
+    el:document.getElementById("voiceSlot2"),
+    name:document.getElementById("voiceName2"),
+    status:document.getElementById("voiceStatus2"),
+    button:document.getElementById("voiceButton2")
+  }
+
+];
+
+
+let mySlot = null;
+
+let localStream = null;
+
+const peerConnections =
+  new Map();
+
+const peerUnsubs =
+  new Map();
+
+const candidateQueues =
+  new Map();
+
+
+slots.forEach((s,index) => {
+
+  s.button.onclick =
+    () => toggleMic(index);
+
+});
+
+
+function slotPeerRef(
+  slotId,
+  uid
+){
+
+  return doc(
+    db,
+    "voiceCalls",
+    slotId,
+    "peers",
+    uid
+  );
+
+}
+
+
+/* =========================
+   AUDIO PLAYER
+========================= */
+
+function showAudioPlayer(
+  slotId,
+  stream
+){
+
+  let panel =
+    document.getElementById(
+      "audioPanel"
+    );
+
+  if(!panel){
+
+    panel =
+      document.createElement("div");
+
+    panel.id =
+      "audioPanel";
+
+    panel.innerHTML = `
+
+      <div style="font-weight:bold">
+        🔊 الاستماع إلى المايك
+      </div>
+
+      <audio
+        id="remoteAudio"
+        autoplay
+        playsinline
+        controls>
+      </audio>
+
+      <div class="audioButtons">
+
+        <button
+          id="playRemoteAudio"
+          class="playAudio">
+          ▶ تشغيل الصوت
+        </button>
+
+        <button
+          id="closeRemoteAudio"
+          class="closeAudio">
+          ✕ إغلاق
+        </button>
+
+      </div>
+
+    `;
+
+    document.body.appendChild(panel);
+
+
+    document.getElementById(
+      "playRemoteAudio"
+    ).onclick = async () => {
+
+      const audio =
+        document.getElementById(
+          "remoteAudio"
+        );
+
+      try{
+
+        await audio.play();
+
+      }catch(e){
+
+        console.error(
+          "audio play",
+          e
+        );
+
+        alert(
+          "اضغط زر تشغيل الصوت مرة أخرى."
+        );
+
+      }
+
+    };
+
+
+    document.getElementById(
+      "closeRemoteAudio"
+    ).onclick = () => {
+
+      const audio =
+        document.getElementById(
+          "remoteAudio"
+        );
+
+      audio.pause();
+
+      panel.remove();
+
+    };
+
+  }
+
+
+  const audio =
+    document.getElementById(
+      "remoteAudio"
+    );
+
+  audio.srcObject =
+    stream;
+
+  audio.autoplay = true;
+  audio.playsInline = true;
+
+  audio.play().catch(() => {
+
+    console.log(
+      "iPhone requires user interaction"
+    );
+
+  });
+
+}
+
+
+function removeAudioPlayer(){
+
+  const panel =
+    document.getElementById(
+      "audioPanel"
+    );
+
+  if(panel){
+
+    const audio =
+      document.getElementById(
+        "remoteAudio"
+      );
+
+    if(audio){
+
+      audio.pause();
+
+      audio.srcObject = null;
+
+    }
+
+    panel.remove();
+
+  }
+
+}
+
+
+/* =========================
+   TOGGLE MIC
+========================= */
 
 async function toggleMic(index){
-  const u=auth.currentUser;
+
+  const u =
+    auth.currentUser;
+
   if(!u)return;
 
-  const slotId="slot"+(index+1);
-  const ref=doc(db,"voiceSlots",slotId);
-  const snap=await getDoc(ref);
+  const slotId =
+    "slot" + (index + 1);
 
-  if(mySlot===slotId){
-    await leaveMic(slotId);
-    return;
-  }
+  const ref =
+    doc(
+      db,
+      "voiceSlots",
+      slotId
+    );
 
-  if(snap.exists()){
-    const d=snap.data();
-    if(d.uid===u.uid){
-      mySlot=slotId;
-      await leaveMic(slotId);
-      return;
-    }
-
-    // A busy mic is a listener button. No microphone permission is needed.
-    try{
-      await joinAsListener(slotId,d);
-    }catch(e){
-      console.error(e);
-      alert("❌ تعذر الاتصال بالصوت: "+friendlyFirebaseError(e));
-    }
-    return;
-  }
-
-  if(mySlot){
-    alert("لديك مايك مفتوح بالفعل.");
-    return;
-  }
-
-  if(!navigator.mediaDevices?.getUserMedia){
-    alert("❌ الميكروفون يحتاج HTTPS ومتصفحًا يدعم WebRTC.");
-    return;
-  }
 
   try{
-    const mod=await getMyModeration();
+
+    const snap =
+      await getDoc(ref);
+
+
+    /* =====================
+       ALREADY MY MIC
+    ===================== */
+
+    if(
+      mySlot === slotId
+    ){
+
+      await leaveMic(slotId);
+
+      return;
+
+    }
+
+
+    /* =====================
+       SLOT BUSY
+    ===================== */
+
+    if(snap.exists()){
+
+      const d =
+        snap.data();
+
+
+      if(d.uid === u.uid){
+
+        await leaveMic(
+          slotId
+        );
+
+        return;
+
+      }
+
+
+      await joinAsListener(
+        slotId,
+        d
+      );
+
+      return;
+
+    }
+
+
+    /* =====================
+       ALREADY USING MIC
+    ===================== */
+
+    if(mySlot){
+
+      alert(
+        "لديك مايك مفتوح بالفعل."
+      );
+
+      return;
+
+    }
+
+
+    /* =====================
+       CHECK MIC
+    ===================== */
+
+    if(
+      !navigator.mediaDevices ||
+      !navigator.mediaDevices.getUserMedia
+    ){
+
+      alert(
+        "❌ المتصفح لا يدعم الميكروفون أو الموقع يحتاج HTTPS."
+      );
+
+      return;
+
+    }
+
+
+    const mod =
+      await getMyModeration();
+
+
     if(mod.banned){
-      alert("🚫 حسابك محظور");
+
+      alert(
+        "🚫 حسابك محظور"
+      );
+
       return;
+
     }
+
+
     if(mod.micMuted){
-      alert("🎤 تم منعك من استخدام المايك");
+
+      alert(
+        "🎤 تم منعك من استخدام المايك"
+      );
+
       return;
+
     }
-    slots[index].status.textContent="🎤 جاري طلب صلاحية الميكروفون...";
-    localStream=await navigator.mediaDevices.getUserMedia({
-      audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true},
-      video:false
-    });
 
-    mySlot=slotId;
 
-    await setDoc(ref,{
-      uid:u.uid,
-      name:u.displayName||"عضو",
-      createdAt:serverTimestamp()
-    });
+    slots[index].status.textContent =
+      "🎤 جاري طلب الميكروفون...";
 
-    startOwnerSignaling(slotId);
+
+    /* =====================
+       GET MICROPHONE
+    ===================== */
+
+    localStream =
+      await navigator.mediaDevices
+      .getUserMedia({
+
+        audio:{
+          echoCancellation:true,
+          noiseSuppression:true,
+          autoGainControl:true,
+          channelCount:1
+        },
+
+        video:false
+
+      });
+
+
+    mySlot =
+      slotId;
+
+
+    /* =====================
+       CLAIM SLOT
+    ===================== */
+
+    await setDoc(
+      ref,
+      {
+        uid:u.uid,
+        name:u.displayName || "عضو",
+        createdAt:serverTimestamp()
+      }
+    );
+
+
+    slots[index].status.textContent =
+      "🎤 أنت تتحدث";
+
+
+    startOwnerSignaling(
+      slotId
+    );
+
+
   }catch(e){
-    console.error(e);
+
+    console.error(
+      "toggleMic",
+      e
+    );
+
     releaseLocalStream();
-    if(e.name==="NotAllowedError"){
-      alert("⚠️ اسمح للموقع باستخدام الميكروفون من إعدادات الآيفون.");
+
+    mySlot = null;
+
+
+    if(
+      e.name === "NotAllowedError"
+    ){
+
+      alert(
+        "⚠️ اسمح للموقع باستخدام الميكروفون من إعدادات الآيفون."
+      );
+
+    }else if(
+      e.name === "NotFoundError"
+    ){
+
+      alert(
+        "❌ لم يتم العثور على ميكروفون."
+      );
+
     }else{
-      alert("❌ تعذر تشغيل المايك: "+(e.code||e.message));
+
+      alert(
+        "❌ تعذر تشغيل المايك: " +
+        friendlyFirebaseError(e)
+      );
+
     }
+
   }
+
 }
 
-async function leaveMic(slotId){
-  const u=auth.currentUser;
-  try{
-    if(u)await deleteDoc(doc(db,"voiceSlots",slotId));
-  }catch(e){console.error(e)}
 
-  const peersSnap=await getDocs(collection(db,"voiceCalls",slotId,"peers"));
-  for(const s of peersSnap.docs){
-    try{await deleteDoc(s.ref)}catch(e){console.error(e)}
+/* =========================
+   LEAVE MIC
+========================= */
+
+async function leaveMic(
+  slotId
+){
+
+  try{
+
+    await deleteDoc(
+      doc(
+        db,
+        "voiceSlots",
+        slotId
+      )
+    );
+
+  }catch(e){
+
+    console.error(e);
+
   }
 
-  [...peerConnections.keys()].forEach(key=>{
-    if(key.startsWith(slotId+"-"))closePeer(key);
-  });
+
+  try{
+
+    const peersSnap =
+      await getDocs(
+        collection(
+          db,
+          "voiceCalls",
+          slotId,
+          "peers"
+        )
+      );
+
+
+    for(
+      const s of peersSnap.docs
+    ){
+
+      try{
+
+        await deleteDoc(
+          s.ref
+        );
+
+      }catch(e){
+
+        console.error(e);
+
+      }
+
+    }
+
+  }catch(e){
+
+    console.error(e);
+
+  }
+
+
+  [...peerConnections.keys()]
+    .forEach(key => {
+
+      if(
+        key.startsWith(
+          slotId + "-"
+        )
+      ){
+
+        closePeer(key);
+
+      }
+
+    });
+
 
   releaseLocalStream();
-  if(mySlot===slotId)mySlot=null;
+
+
+  if(mySlot === slotId){
+
+    mySlot = null;
+
+  }
+
 }
+
+
+/* =========================
+   RELEASE MICROPHONE
+========================= */
 
 function releaseLocalStream(){
+
   if(localStream){
-    localStream.getTracks().forEach(t=>t.stop());
-    localStream=null;
+
+    localStream
+      .getTracks()
+      .forEach(track => {
+
+        try{
+          track.stop();
+        }catch{}
+
+      });
+
+    localStream = null;
+
   }
+
 }
 
-function startOwnerSignaling(slotId){
-  const key="owner-"+slotId;
-  if(peerUnsubs.has(key))return;
 
-  const unsub=onSnapshot(collection(db,"voiceCalls",slotId,"peers"),snap=>{
-    snap.docChanges().forEach(change=>{
-      if(change.type==="added"){
-        createOwnerPeer(slotId,change.doc.id).catch(console.error);
-      }
-      if(change.type==="removed"){
-        closePeer(slotId+"-"+change.doc.id);
-      }
-    });
-  },e=>console.error("owner signaling",e));
+/* =========================
+   OWNER SIGNALING
+========================= */
 
-  peerUnsubs.set(key,unsub);
-}
+function startOwnerSignaling(
+  slotId
+){
 
-async function createOwnerPeer(slotId,listenerUid){
-  const key=slotId+"-"+listenerUid;
-  if(peerConnections.has(key)||!localStream)return;
+  const key =
+    "owner-" + slotId;
 
-  const peerRef=slotPeerRef(slotId,listenerUid);
-  const pc=new RTCPeerConnection(rtcConfig);
-  peerConnections.set(key,pc);
-  candidateQueues.set(key,[]);
 
-  localStream.getTracks().forEach(track=>pc.addTrack(track,localStream));
+  if(
+    peerUnsubs.has(key)
+  ){
 
-  pc.onicecandidate=e=>{
-    if(e.candidate){
-      addDoc(collection(peerRef,"callerCandidates"),{
-        candidate:e.candidate.toJSON(),
-        createdAt:serverTimestamp()
-      }).catch(console.error);
-    }
-  };
+    return;
 
-  const unsubAnswer=onSnapshot(peerRef,async snap=>{
-    const d=snap.data();
-    if(!d?.answer||pc.currentRemoteDescription)return;
-
-    try{
-      await pc.setRemoteDescription(new RTCSessionDescription(d.answer));
-      await flushCandidateQueue(key);
-    }catch(e){console.error("answer",e)}
-  });
-
-  peerUnsubs.set("answer-"+key,unsubAnswer);
-
-  const offer=await pc.createOffer();
-  await pc.setLocalDescription(offer);
-
-  await setDoc(peerRef,{
-    offer:{type:offer.type,sdp:offer.sdp},
-    ownerUid:auth.currentUser.uid,
-    updatedAt:serverTimestamp()
-  },{merge:true});
-
-  watchCalleeCandidates(pc,peerRef,key);
-
-  pc.onconnectionstatechange=()=>{
-    if(["failed","closed"].includes(pc.connectionState)){
-      closePeer(key);
-    }
-  };
-}
-
-function watchCalleeCandidates(pc,peerRef,key){
-  const unsub=onSnapshot(collection(peerRef,"calleeCandidates"),snap=>{
-    snap.docChanges().forEach(change=>{
-      if(change.type!=="added")return;
-      const c=change.doc.data()?.candidate;
-      if(!c)return;
-
-      if(pc.remoteDescription){
-        pc.addIceCandidate(new RTCIceCandidate(c)).catch(console.error);
-      }else{
-        candidateQueues.get(key)?.push(c);
-      }
-    });
-  });
-  peerUnsubs.set("callee-"+key,unsub);
-}
-
-async function flushCandidateQueue(key){
-  const pc=peerConnections.get(key);
-  const queue=candidateQueues.get(key)||[];
-  if(!pc?.remoteDescription)return;
-
-  while(queue.length){
-    const c=queue.shift();
-    try{await pc.addIceCandidate(new RTCIceCandidate(c))}
-    catch(e){console.error(e)}
   }
+
+
+  const unsub =
+    onSnapshot(
+      collection(
+        db,
+        "voiceCalls",
+        slotId,
+        "peers"
+      ),
+
+      snap => {
+
+        snap.docChanges()
+          .forEach(change => {
+
+            const listenerUid =
+              change.doc.id;
+
+
+            if(
+              change.type === "added"
+            ){
+
+              createOwnerPeer(
+                slotId,
+                listenerUid
+              )
+              .catch(console.error);
+
+            }
+
+
+            if(
+              change.type === "removed"
+            ){
+
+              closePeer(
+                slotId +
+                "-" +
+                listenerUid
+              );
+
+            }
+
+          });
+
+      },
+
+      e => {
+
+        console.error(
+          "owner signaling",
+          e
+        );
+
+      }
+    );
+
+
+  peerUnsubs.set(
+    key,
+    unsub
+  );
+
 }
 
-async function joinAsListener(slotId,slotData){
-  const u=auth.currentUser;
+
+/* =========================
+   OWNER PEER
+========================= */
+
+async function createOwnerPeer(
+  slotId,
+  listenerUid
+){
+
+  const key =
+    slotId +
+    "-" +
+    listenerUid;
+
+
+  if(
+    peerConnections.has(key)
+  ){
+
+    return;
+
+  }
+
+
+  if(!localStream){
+
+    return;
+
+  }
+
+
+  const peerRef =
+    slotPeerRef(
+      slotId,
+      listenerUid
+    );
+
+
+  const pc =
+    new RTCPeerConnection(
+      rtcConfig
+    );
+
+
+  peerConnections.set(
+    key,
+    pc
+  );
+
+  candidateQueues.set(
+    key,
+    []
+  );
+
+
+  /* =====================
+     AUDIO TRACK
+  ===================== */
+
+  localStream
+    .getTracks()
+    .forEach(track => {
+
+      pc.addTrack(
+        track,
+        localStream
+      );
+
+    });
+
+
+  /* =====================
+     ICE
+  ===================== */
+
+  pc.onicecandidate =
+    event => {
+
+      if(!event.candidate)
+        return;
+
+
+      addDoc(
+        collection(
+          peerRef,
+          "callerCandidates"
+        ),
+        {
+          candidate:
+            event.candidate.toJSON(),
+          createdAt:
+            serverTimestamp()
+        }
+      )
+      .catch(console.error);
+
+    };
+
+
+  /* =====================
+     ANSWER
+  ===================== */
+
+  const unsubAnswer =
+    onSnapshot(
+      peerRef,
+      async snap => {
+
+        const d =
+          snap.data();
+
+
+        if(
+          !d?.answer ||
+          pc.currentRemoteDescription
+        ){
+
+          return;
+
+        }
+
+
+        try{
+
+          await pc.setRemoteDescription(
+            new RTCSessionDescription(
+              d.answer
+            )
+          );
+
+
+          await flushCandidateQueue(
+            key
+          );
+
+        }catch(e){
+
+          console.error(
+            "set answer",
+            e
+          );
+
+        }
+
+      }
+    );
+
+
+  peerUnsubs.set(
+    "answer-" + key,
+    unsubAnswer
+  );
+
+
+  /* =====================
+     OFFER
+  ===================== */
+
+  const offer =
+    await pc.createOffer();
+
+
+  await pc.setLocalDescription(
+    offer
+  );
+
+
+  await setDoc(
+    peerRef,
+    {
+      offer:{
+        type:offer.type,
+        sdp:offer.sdp
+      },
+
+      ownerUid:
+        auth.currentUser.uid,
+
+      updatedAt:
+        serverTimestamp()
+
+    },
+    {
+      merge:true
+    }
+  );
+
+
+  watchCalleeCandidates(
+    pc,
+    peerRef,
+    key
+  );
+
+
+  pc.onconnectionstatechange =
+    () => {
+
+      console.log(
+        "OWNER",
+        key,
+        pc.connectionState
+      );
+
+
+      if(
+        ["failed","closed","disconnected"]
+        .includes(
+          pc.connectionState
+        )
+      ){
+
+        if(
+          pc.connectionState ===
+          "failed" ||
+          pc.connectionState ===
+          "closed"
+        ){
+
+          closePeer(key);
+
+        }
+
+      }
+
+    };
+
+}
+
+
+/* =========================
+   WATCH CALLEE
+========================= */
+
+function watchCalleeCandidates(
+  pc,
+  peerRef,
+  key
+){
+
+  const unsub =
+    onSnapshot(
+      collection(
+        peerRef,
+        "calleeCandidates"
+      ),
+
+      snap => {
+
+        snap.docChanges()
+          .forEach(change => {
+
+            if(
+              change.type !== "added"
+            ){
+
+              return;
+
+            }
+
+
+            const c =
+              change.doc
+                .data()
+                ?.candidate;
+
+
+            if(!c)return;
+
+
+            if(
+              pc.remoteDescription
+            ){
+
+              pc.addIceCandidate(
+                new RTCIceCandidate(c)
+              )
+              .catch(console.error);
+
+            }else{
+
+              candidateQueues
+                .get(key)
+                ?.push(c);
+
+            }
+
+          });
+
+      }
+    );
+
+
+  peerUnsubs.set(
+    "callee-" + key,
+    unsub
+  );
+
+}
+
+
+/* =========================
+   LISTENER
+========================= */
+
+async function joinAsListener(
+  slotId,
+  slotData
+){
+
+  const u =
+    auth.currentUser;
+
   if(!u)return;
 
-  const key=slotId+"-"+u.uid;
-  if(peerConnections.has(key))return;
 
-  const peerRef=slotPeerRef(slotId,u.uid);
-  const pc=new RTCPeerConnection(rtcConfig);
-  peerConnections.set(key,pc);
-  candidateQueues.set(key,[]);
+  const key =
+    slotId +
+    "-" +
+    u.uid;
 
-  pc.ontrack=e=>{
-    if(e.streams?.[0]){
-      setAudioPlayer(slotId,e.streams[0]);
-      const slot=slots.find(x=>x.id===slotId);
-      if(slot)slot.status.textContent="🔊 تستمع الآن";
-    }
-  };
 
-  pc.onicecandidate=e=>{
-    if(e.candidate){
-      addDoc(collection(peerRef,"calleeCandidates"),{
-        candidate:e.candidate.toJSON(),
-        createdAt:serverTimestamp()
-      }).catch(console.error);
-    }
-  };
+  if(
+    peerConnections.has(key)
+  ){
 
-  const unsub=onSnapshot(peerRef,async snap=>{
-    const d=snap.data();
-    if(!d?.offer||pc.currentRemoteDescription)return;
+    return;
 
-    try{
-      await pc.setRemoteDescription(new RTCSessionDescription(d.offer));
-      await flushCandidateQueue(key);
-
-      const answer=await pc.createAnswer();
-      await pc.setLocalDescription(answer);
-
-      await setDoc(peerRef,{
-        answer:{type:answer.type,sdp:answer.sdp},
-        listenerUid:u.uid,
-        answeredAt:serverTimestamp()
-      },{merge:true});
-
-      await flushCandidateQueue(key);
-    }catch(e){console.error("listener answer",e)}
-  });
-
-  peerUnsubs.set("listener-"+key,unsub);
-
-  const unsubCaller=onSnapshot(collection(peerRef,"callerCandidates"),snap=>{
-    snap.docChanges().forEach(change=>{
-      if(change.type!=="added")return;
-      const c=change.doc.data()?.candidate;
-      if(!c)return;
-
-      if(pc.remoteDescription){
-        pc.addIceCandidate(new RTCIceCandidate(c)).catch(console.error);
-      }else{
-        candidateQueues.get(key)?.push(c);
-      }
-    });
-  });
-  peerUnsubs.set("caller-"+key,unsubCaller);
-
-  await setDoc(peerRef,{
-    listenerUid:u.uid,
-    name:u.displayName||"عضو",
-    joinedAt:serverTimestamp()
-  },{merge:true});
-
-  pc.onconnectionstatechange=()=>{
-    if(["failed","closed"].includes(pc.connectionState)){
-      closePeer(key);
-      removeAudioPlayer(slotId);
-    }
-  };
-}
-
-function closePeer(key){
-  const pc=peerConnections.get(key);
-  if(pc){
-    try{pc.close()}catch{}
-    peerConnections.delete(key);
   }
 
-  candidateQueues.delete(key);
 
-  ["answer-","callee-","listener-","caller-"].forEach(prefix=>{
-    const k=prefix+key;
-    const unsub=peerUnsubs.get(k);
-    if(unsub){
-      try{unsub()}catch{}
-      peerUnsubs.delete(k);
+  const peerRef =
+    slotPeerRef(
+      slotId,
+      u.uid
+    );
+
+
+  const pc =
+    new RTCPeerConnection(
+      rtcConfig
+    );
+
+
+  peerConnections.set(
+    key,
+    pc
+  );
+
+  candidateQueues.set(
+    key,
+    []
+  );
+
+
+  /* =====================
+     IMPORTANT
+  ===================== */
+
+  pc.addTransceiver(
+    "audio",
+    {
+      direction:"recvonly"
     }
+  );
+
+
+  /* =====================
+     RECEIVE AUDIO
+  ===================== */
+
+  pc.ontrack =
+    event => {
+
+      console.log(
+        "REMOTE AUDIO TRACK",
+        event
+      );
+
+
+      let stream =
+        event.streams &&
+        event.streams[0];
+
+
+      if(!stream){
+
+        stream =
+          new MediaStream([
+            event.track
+          ]);
+
+      }
+
+
+      showAudioPlayer(
+        slotId,
+        stream
+      );
+
+
+      const slot =
+        slots.find(
+          x => x.id === slotId
+        );
+
+
+      if(slot){
+
+        slot.status.textContent =
+          "🔊 تستمع الآن";
+
+        slot.el.classList.add(
+          "listen"
+        );
+
+      }
+
+    };
+
+
+  /* =====================
+     ICE
+  ===================== */
+
+  pc.onicecandidate =
+    event => {
+
+      if(!event.candidate)
+        return;
+
+
+      addDoc(
+        collection(
+          peerRef,
+          "calleeCandidates"
+        ),
+        {
+          candidate:
+            event.candidate.toJSON(),
+
+          createdAt:
+            serverTimestamp()
+        }
+      )
+      .catch(console.error);
+
+    };
+
+
+  /* =====================
+     RECEIVE OFFER
+  ===================== */
+
+  const unsubOffer =
+    onSnapshot(
+      peerRef,
+      async snap => {
+
+        const d =
+          snap.data();
+
+
+        if(
+          !d?.offer ||
+          pc.currentRemoteDescription
+        ){
+
+          return;
+
+        }
+
+
+        try{
+
+          await pc.setRemoteDescription(
+            new RTCSessionDescription(
+              d.offer
+            )
+          );
+
+
+          await flushCandidateQueue(
+            key
+          );
+
+
+          const answer =
+            await pc.createAnswer();
+
+
+          await pc.setLocalDescription(
+            answer
+          );
+
+
+          await setDoc(
+            peerRef,
+            {
+              answer:{
+                type:answer.type,
+                sdp:answer.sdp
+              },
+
+              listenerUid:
+                u.uid,
+
+              answeredAt:
+                serverTimestamp()
+
+            },
+            {
+              merge:true
+            }
+          );
+
+
+          await flushCandidateQueue(
+            key
+          );
+
+
+        }catch(e){
+
+          console.error(
+            "listener answer",
+            e
+          );
+
+        }
+
+      }
+    );
+
+
+  peerUnsubs.set(
+    "listener-" + key,
+    unsubOffer
+  );
+
+
+  /* =====================
+     CALLER ICE
+  ===================== */
+
+  const unsubCaller =
+    onSnapshot(
+      collection(
+        peerRef,
+        "callerCandidates"
+      ),
+
+      snap => {
+
+        snap.docChanges()
+          .forEach(change => {
+
+            if(
+              change.type !== "added"
+            ){
+
+              return;
+
+            }
+
+
+            const c =
+              change.doc
+                .data()
+                ?.candidate;
+
+
+            if(!c)return;
+
+
+            if(
+              pc.remoteDescription
+            ){
+
+              pc.addIceCandidate(
+                new RTCIceCandidate(c)
+              )
+              .catch(console.error);
+
+            }else{
+
+              candidateQueues
+                .get(key)
+                ?.push(c);
+
+            }
+
+          });
+
+      }
+    );
+
+
+  peerUnsubs.set(
+    "caller-" + key,
+    unsubCaller
+  );
+
+
+  /* =====================
+     CREATE PEER DOCUMENT
+  ===================== */
+
+  await setDoc(
+    peerRef,
+    {
+      listenerUid:u.uid,
+      name:u.displayName || "عضو",
+      joinedAt:serverTimestamp()
+    },
+    {
+      merge:true
+    }
+  );
+
+
+  pc.onconnectionstatechange =
+    () => {
+
+      console.log(
+        "LISTENER",
+        key,
+        pc.connectionState
+      );
+
+
+      if(
+        ["failed","closed"]
+        .includes(
+          pc.connectionState
+        )
+      ){
+
+        closePeer(key);
+        removeAudioPlayer();
+
+      }
+
+    };
+
+}
+
+
+/* =========================
+   FLUSH ICE
+========================= */
+
+async function flushCandidateQueue(
+  key
+){
+
+  const pc =
+    peerConnections.get(key);
+
+  const queue =
+    candidateQueues.get(key) || [];
+
+
+  if(
+    !pc ||
+    !pc.remoteDescription
+  ){
+
+    return;
+
+  }
+
+
+  while(
+    queue.length
+  ){
+
+    const c =
+      queue.shift();
+
+
+    try{
+
+      await pc.addIceCandidate(
+        new RTCIceCandidate(c)
+      );
+
+    }catch(e){
+
+      console.error(
+        "ICE",
+        e
+      );
+
+    }
+
+  }
+
+}
+
+
+/* =========================
+   CLOSE PEER
+========================= */
+
+function closePeer(key){
+
+  const pc =
+    peerConnections.get(key);
+
+
+  if(pc){
+
+    try{
+      pc.close();
+    }catch{}
+
+    peerConnections.delete(key);
+
+  }
+
+
+  candidateQueues.delete(
+    key
+  );
+
+
+  [
+    "answer-",
+    "callee-",
+    "listener-",
+    "caller-"
+  ]
+  .forEach(prefix => {
+
+    const k =
+      prefix + key;
+
+    const unsub =
+      peerUnsubs.get(k);
+
+
+    if(unsub){
+
+      try{
+        unsub();
+      }catch{}
+
+      peerUnsubs.delete(k);
+
+    }
+
   });
+
 }
 
-function cleanupAllVoice(){
-  if(mySlot)leaveMic(mySlot).catch(console.error);
-  releaseLocalStream();
 
-  peerConnections.forEach(pc=>{try{pc.close()}catch{}});
-  peerConnections.clear();
-
-  peerUnsubs.forEach(unsub=>{try{unsub()}catch{}});
-  peerUnsubs.clear();
-  candidateQueues.clear();
-
-  document.querySelectorAll('[id^="audio-wrap-"]').forEach(x=>x.remove());
-  mySlot=null;
-}
+/* =========================
+   WATCH SLOTS
+========================= */
 
 function watchSlots(){
-  if(stopSlots)stopSlots();
 
-  stopSlots=onSnapshot(collection(db,"voiceSlots"),snap=>{
-    const data={};
-    snap.forEach(x=>data[x.id]=x.data());
+  if(stopSlots){
 
-    slots.forEach(s=>{
-      const d=data[s.id];
-      const mine=d&&auth.currentUser&&d.uid===auth.currentUser.uid;
+    stopSlots();
 
-      s.el.classList.toggle("active",!!d);
-      s.name.textContent=d?(d.name||"عضو"):"شاغر";
+  }
 
-      if(!d){
-        s.status.textContent="اضغط للتحدث";
-        s.button.textContent="تشغيل المايك";
-        s.button.disabled=false;
-        removeAudioPlayer(s.id);
-      }else if(mine){
-        s.status.textContent="🎤 أنت تتحدث";
-        s.button.textContent="إيقاف المايك";
-        s.button.disabled=false;
-      }else{
-        s.status.textContent="🔊 اضغط للاستماع";
-        s.button.textContent="استماع";
-        s.button.disabled=false;
+
+  stopSlots =
+    onSnapshot(
+      collection(
+        db,
+        "voiceSlots"
+      ),
+
+      snap => {
+
+        const data = {};
+
+
+        snap.forEach(x => {
+
+          data[x.id] =
+            x.data();
+
+        });
+
+
+        slots.forEach(s => {
+
+          const d =
+            data[s.id];
+
+
+          const mine =
+            d &&
+            auth.currentUser &&
+            d.uid ===
+            auth.currentUser.uid;
+
+
+          s.el.classList.toggle(
+            "active",
+            !!d
+          );
+
+
+          s.name.textContent =
+            d
+              ? (d.name || "عضو")
+              : "شاغر";
+
+
+          if(!d){
+
+            s.status.textContent =
+              "اضغط للتحدث";
+
+            s.button.textContent =
+              "تشغيل المايك";
+
+            s.button.disabled =
+              false;
+
+            s.el.classList.remove(
+              "listen"
+            );
+
+          }else if(mine){
+
+            s.status.textContent =
+              "🎤 أنت تتحدث";
+
+            s.button.textContent =
+              "إيقاف المايك";
+
+            s.button.disabled =
+              false;
+
+          }else{
+
+            s.status.textContent =
+              "🔊 اضغط للاستماع";
+
+            s.button.textContent =
+              "استماع";
+
+            s.button.disabled =
+              false;
+
+          }
+
+        });
+
+      },
+
+      e => {
+
+        console.error(
+          "voiceSlots",
+          e
+        );
+
+
+        slots.forEach(s => {
+
+          s.status.textContent =
+            "❌ تعذر تحميل المايك: " +
+            friendlyFirebaseError(e);
+
+          s.button.disabled =
+            true;
+
+        });
+
       }
+    );
+
+}
+
+
+/* =========================
+   CLEANUP
+========================= */
+
+async function cleanupAllVoice(){
+
+  try{
+
+    if(mySlot){
+
+      await leaveMic(
+        mySlot
+      );
+
+    }
+
+  }catch(e){
+
+    console.error(e);
+
+  }
+
+
+  releaseLocalStream();
+
+
+  peerConnections
+    .forEach(pc => {
+
+      try{
+        pc.close();
+      }catch{}
+
     });
-  },e=>{
-    console.error("voiceSlots",e);
-    slots.forEach(s=>{
-      s.status.textContent="❌ تعذر تحميل المايك: "+friendlyFirebaseError(e);
-      s.button.disabled=true;
+
+
+  peerConnections.clear();
+
+
+  peerUnsubs
+    .forEach(unsub => {
+
+      try{
+        unsub();
+      }catch{}
+
     });
-  });
+
+
+  peerUnsubs.clear();
+
+  candidateQueues.clear();
+
+  removeAudioPlayer();
+
+  mySlot = null;
+
 }
 
 </script>
+
 </body>
 </html>
