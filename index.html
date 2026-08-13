@@ -1,769 +1,423 @@
-```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>طليان الشعلة</title>
-
 <style>
-*{
-  box-sizing:border-box;
-}
-
-body{
-  margin:0;
-  font-family:Arial,Tahoma,sans-serif;
-  background:#090d13;
-  color:white;
-}
-
-button,input{
-  font-family:inherit;
-}
-
-.hidden{
-  display:none !important;
-}
-
-/* LOGIN */
-
-#loginPage{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:linear-gradient(145deg,#18283d,#090d13);
-}
-
-.loginBox{
-  width:100%;
-  max-width:420px;
-  background:#151d28;
-  padding:25px;
-  border-radius:20px;
-  border:1px solid #2d3a4b;
-  box-shadow:0 20px 60px #0009;
-}
-
-.logo{
-  text-align:center;
-  font-size:29px;
-  font-weight:bold;
-  margin-bottom:8px;
-}
-
-.description{
-  text-align:center;
-  color:#a4afbd;
-  margin-bottom:22px;
-}
-
-.loginBox input{
-  width:100%;
-  padding:14px;
-  margin:6px 0;
-  border:1px solid #344255;
-  border-radius:10px;
-  background:#0d131b;
-  color:white;
-  outline:none;
-}
-
-.loginBox input:focus{
-  border-color:#2587ff;
-}
-
-.btn{
-  width:100%;
-  padding:14px;
-  margin-top:8px;
-  border:0;
-  border-radius:10px;
-  font-weight:bold;
-  color:white;
-}
-
-.signup{
-  background:#1687ff;
-}
-
-.login{
-  background:#283444;
-}
-
-#authMessage{
-  text-align:center;
-  min-height:24px;
-  margin-top:12px;
-  color:#ffb6b6;
-}
-
-/* CHAT */
-
-#chatApp{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-}
-
-.header{
-  height:64px;
-  background:#151d28;
-  border-bottom:1px solid #293646;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 12px;
-}
-
-.title{
-  font-size:20px;
-  font-weight:bold;
-}
-
-.username{
-  font-size:12px;
-  color:#6ee7a0;
-  margin-top:3px;
-}
-
-.logout{
-  border:0;
-  background:#a92d38;
-  color:white;
-  padding:9px 12px;
-  border-radius:9px;
-}
-
-.messages{
-  flex:1;
-  overflow-y:auto;
-  padding:14px;
-}
-
-.message{
-  display:flex;
-  gap:9px;
-  margin-bottom:13px;
-}
-
-.avatar{
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  object-fit:cover;
-  background:#293646;
-}
-
-.messageContent{
-  background:#18222e;
-  border-radius:13px;
-  padding:8px 11px;
-  max-width:80%;
-}
-
-.messageName{
-  color:#61a8ff;
-  font-size:12px;
-  font-weight:bold;
-  margin-bottom:3px;
-}
-
-.messageText{
-  line-height:1.5;
-  word-break:break-word;
-}
-
-.composer{
-  display:flex;
-  gap:7px;
-  padding:9px;
-  background:#151d28;
-  border-top:1px solid #293646;
-}
-
-.composer input{
-  flex:1;
-  min-width:0;
-  padding:13px;
-  border:1px solid #344255;
-  border-radius:10px;
-  background:#0d131b;
-  color:white;
-  outline:none;
-}
-
-.send{
-  width:50px;
-  border:0;
-  border-radius:10px;
-  background:#1687ff;
-  color:white;
-  font-size:18px;
-}
-
-.empty{
-  text-align:center;
-  color:#7e8a99;
-  padding:35px 10px;
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Tahoma,sans-serif;background:#080b10;color:#fff}
+button,input{font-family:inherit}
+button{cursor:pointer}.hidden{display:none!important}
+#loginPage{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(145deg,#18283d,#090d13)}
+.loginBox{width:100%;max-width:420px;background:#151d28;padding:25px;border-radius:20px;border:1px solid #2d3a4b;box-shadow:0 20px 60px #0009}
+.logo{text-align:center;font-size:29px;font-weight:bold;margin-bottom:8px}
+.description{text-align:center;color:#a4afbd;margin-bottom:22px}
+.loginBox input{width:100%;padding:14px;margin:6px 0;border:1px solid #344255;border-radius:10px;background:#0d131b;color:#fff;outline:none}
+.btn{width:100%;padding:14px;margin-top:8px;border:0;border-radius:10px;font-weight:bold;color:#fff}
+.signup{background:#1687ff}.login{background:#283444}
+#authMessage{text-align:center;min-height:24px;margin-top:12px;color:#ffb6b6}
+#chatApp{height:100vh;display:flex;flex-direction:column}
+.header{height:64px;background:#151d28;border-bottom:1px solid #293646;display:flex;align-items:center;justify-content:space-between;padding:0 12px}
+.title{font-size:20px;font-weight:bold}.username{font-size:12px;color:#6ee7a0;margin-top:3px}
+.logout{border:0;background:#a92d38;color:#fff;padding:9px 12px;border-radius:9px}
+.voicePanel{background:#101720;border-bottom:1px solid #293646;padding:10px}
+.voiceTitle{text-align:center;font-weight:bold;margin-bottom:8px;color:#dce7f5}
+.voiceSlots{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.voiceSlot{min-height:90px;background:#18222e;border:1px solid #344255;border-radius:13px;padding:9px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px}
+.voiceSlot.active{border-color:#24c77a}.voiceSlot.listen{border-color:#4e8cff}
+.voiceSlot button{border:0;border-radius:9px;padding:8px 12px;background:#1687ff;color:#fff;font-weight:bold}
+.voiceSlot.active button{background:#b52d39}
+.voiceName{font-size:13px;color:#aebaca;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.voiceStatus{font-size:11px;color:#7e8a99;text-align:center}
+.messages{flex:1;overflow-y:auto;padding:14px}
+.message{display:flex;gap:9px;margin-bottom:13px}
+.avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;background:#293646}
+.messageContent{background:#18222e;border-radius:13px;padding:8px 11px;max-width:80%}
+.messageName{color:#61a8ff;font-size:12px;font-weight:bold;margin-bottom:3px}
+.messageText{line-height:1.5;word-break:break-word}
+.composer{display:flex;gap:7px;padding:9px;background:#151d28;border-top:1px solid #293646}
+.composer input{flex:1;min-width:0;padding:13px;border:1px solid #344255;border-radius:10px;background:#0d131b;color:#fff;outline:none}
+.send{width:50px;border:0;border-radius:10px;background:#1687ff;color:#fff;font-size:18px}
+.empty{text-align:center;color:#7e8a99;padding:35px 10px}
+@media(max-width:420px){.voiceSlot button{padding:7px 9px;font-size:12px}}
 </style>
 </head>
-
 <body>
 
-<!-- LOGIN PAGE -->
-
 <div id="loginPage">
-
-  <div class="loginBox">
-
-    <div class="logo">🔥 طليان الشعلة</div>
-
-    <div class="description">
-      مرحبًا بك في الدردشة
-    </div>
-
-    <input
-      id="nameInput"
-      type="text"
-      placeholder="اسم العضو"
-    >
-
-    <input
-      id="emailInput"
-      type="email"
-      placeholder="البريد الإلكتروني"
-    >
-
-    <input
-      id="passwordInput"
-      type="password"
-      placeholder="كلمة المرور"
-    >
-
-    <button id="signupButton" class="btn signup">
-      إنشاء حساب
-    </button>
-
-    <button id="loginButton" class="btn login">
-      تسجيل الدخول
-    </button>
-
-    <div id="authMessage"></div>
-
-  </div>
-
+<div class="loginBox">
+<div class="logo">🔥 طليان الشعلة</div>
+<div class="description">مرحبًا بك في الدردشة</div>
+<input id="nameInput" type="text" placeholder="اسم العضو">
+<input id="emailInput" type="email" placeholder="البريد الإلكتروني">
+<input id="passwordInput" type="password" placeholder="كلمة المرور">
+<button id="signupButton" class="btn signup">إنشاء حساب</button>
+<button id="loginButton" class="btn login">تسجيل الدخول</button>
+<div id="authMessage"></div>
 </div>
-
-
-<!-- CHAT APP -->
+</div>
 
 <div id="chatApp" class="hidden">
-
-  <div class="header">
-
-    <div>
-      <div class="title">🔥 طليان الشعلة</div>
-      <div id="currentUsername" class="username">
-        عضو
-      </div>
-    </div>
-
-    <button id="logoutButton" class="logout">
-      خروج
-    </button>
-
-  </div>
-
-
-  <div id="messages" class="messages">
-
-    <div class="empty">
-      جاري تحميل الدردشة...
-    </div>
-
-  </div>
-
-
-  <div class="composer">
-
-    <input
-      id="messageInput"
-      type="text"
-      placeholder="اكتب رسالتك..."
-    >
-
-    <button id="sendButton" class="send">
-      ➤
-    </button>
-
-  </div>
-
+<div class="header">
+<div>
+<div class="title">🔥 طليان الشعلة</div>
+<div id="currentUsername" class="username">عضو</div>
+</div>
+<button id="logoutButton" class="logout">خروج</button>
 </div>
 
+<div class="voicePanel">
+<div class="voiceTitle">🎤 المايكات العامة</div>
+<div class="voiceSlots">
+<div id="voiceSlot1" class="voiceSlot">
+<div>🎤 المايك 1</div>
+<div id="voiceName1" class="voiceName">شاغر</div>
+<div id="voiceStatus1" class="voiceStatus">اضغط للتحدث</div>
+<button id="voiceButton1">تشغيل المايك</button>
+</div>
+<div id="voiceSlot2" class="voiceSlot">
+<div>🎤 المايك 2</div>
+<div id="voiceName2" class="voiceName">شاغر</div>
+<div id="voiceStatus2" class="voiceStatus">اضغط للتحدث</div>
+<button id="voiceButton2">تشغيل المايك</button>
+</div>
+</div>
+</div>
+
+<div id="messages" class="messages"><div class="empty">جاري تحميل الدردشة...</div></div>
+
+<div class="composer">
+<input id="messageInput" type="text" placeholder="اكتب رسالتك...">
+<button id="sendButton" class="send">➤</button>
+</div>
+</div>
 
 <script type="module">
-
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
-
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  updateProfile,
-  onAuthStateChanged,
-  signOut
-}
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile,onAuthStateChanged,signOut}
 from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
-
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  query,
-  orderBy,
-  onSnapshot,
-  serverTimestamp
-}
+import {getFirestore,collection,addDoc,query,orderBy,onSnapshot,serverTimestamp,doc,setDoc,deleteDoc,getDoc,getDocs,where,limit}
 from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
-
-/* FIREBASE */
-
-const firebaseConfig = {
-
-  apiKey:
-  "AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
-
-  authDomain:
-  "dardashti-chat.firebaseapp.com",
-
-  projectId:
-  "dardashti-chat",
-
-  storageBucket:
-  "dardashti-chat.firebasestorage.app",
-
-  messagingSenderId:
-  "779042757468",
-
-  appId:
-  "1:779042757468:web:7646d3cdadf46f315a3f99"
+const firebaseConfig={
+apiKey:"AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
+authDomain:"dardashti-chat.firebaseapp.com",
+projectId:"dardashti-chat",
+storageBucket:"dardashti-chat.firebasestorage.app",
+messagingSenderId:"779042757468",
+appId:"1:779042757468:web:7646d3cdadf46f315a3f99"
 };
 
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+const rtcConfig={iceServers:[{urls:"stun:stun.l.google.com:19302"},{urls:"stun:stun1.l.google.com:19302"}]};
 
-const firebaseApp =
-  initializeApp(firebaseConfig);
+const loginPage=document.getElementById("loginPage");
+const chatApp=document.getElementById("chatApp");
+const authMessage=document.getElementById("authMessage");
+let stopMessages=null,stopSlots=null;
+let mySlot=null,localStream=null;
+const peerConnections=new Map();
+const unsubscribers=new Map();
 
-const auth =
-  getAuth(firebaseApp);
+document.getElementById("signupButton").onclick=async()=>{
+const name=document.getElementById("nameInput").value.trim();
+const email=document.getElementById("emailInput").value.trim();
+const password=document.getElementById("passwordInput").value;
+if(name.length<2){authMessage.textContent="⚠️ اكتب اسم العضو";return}
+if(!email){authMessage.textContent="⚠️ اكتب البريد الإلكتروني";return}
+if(password.length<6){authMessage.textContent="⚠️ كلمة المرور يجب أن تكون 6 أحرف على الأقل";return}
+authMessage.textContent="جاري إنشاء الحساب...";
+try{
+const r=await createUserWithEmailAndPassword(auth,email,password);
+await updateProfile(r.user,{displayName:name});
+authMessage.textContent="✅ تم إنشاء الحساب بنجاح";
+}catch(e){console.error(e);authMessage.textContent="❌ "+e.code}
+};
 
-const db =
-  getFirestore(firebaseApp);
+document.getElementById("loginButton").onclick=async()=>{
+const email=document.getElementById("emailInput").value.trim();
+const password=document.getElementById("passwordInput").value;
+if(!email||!password){authMessage.textContent="⚠️ اكتب البريد وكلمة المرور";return}
+authMessage.textContent="جاري تسجيل الدخول...";
+try{await signInWithEmailAndPassword(auth,email,password)}
+catch(e){console.error(e);authMessage.textContent="❌ "+e.code}
+};
 
-
-/* ELEMENTS */
-
-const loginPage =
-  document.getElementById("loginPage");
-
-const chatApp =
-  document.getElementById("chatApp");
-
-const authMessage =
-  document.getElementById("authMessage");
-
-
-/* CREATE ACCOUNT */
-
-document
-.getElementById("signupButton")
-.addEventListener("click", async () => {
-
-  const name =
-    document.getElementById("nameInput")
-    .value.trim();
-
-  const email =
-    document.getElementById("emailInput")
-    .value.trim();
-
-  const password =
-    document.getElementById("passwordInput")
-    .value;
-
-
-  if(name.length < 2){
-
-    authMessage.textContent =
-      "⚠️ اكتب اسم العضو";
-
-    return;
-  }
-
-
-  if(!email){
-
-    authMessage.textContent =
-      "⚠️ اكتب البريد الإلكتروني";
-
-    return;
-  }
-
-
-  if(password.length < 6){
-
-    authMessage.textContent =
-      "⚠️ كلمة المرور يجب أن تكون 6 أحرف على الأقل";
-
-    return;
-  }
-
-
-  authMessage.textContent =
-    "جاري إنشاء الحساب...";
-
-
-  try{
-
-    const result =
-      await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-
-    await updateProfile(
-      result.user,
-      {
-        displayName:name
-      }
-    );
-
-
-    authMessage.textContent =
-      "✅ تم إنشاء الحساب بنجاح";
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    authMessage.textContent =
-      "❌ " + error.code;
-
-  }
-
+onAuthStateChanged(auth,user=>{
+if(user){
+loginPage.classList.add("hidden");
+chatApp.classList.remove("hidden");
+document.getElementById("currentUsername").textContent=user.displayName||"عضو";
+loadMessages();
+watchSlots();
+}else{
+cleanupAllVoice();
+loginPage.classList.remove("hidden");
+chatApp.classList.add("hidden");
+if(stopMessages){stopMessages();stopMessages=null}
+if(stopSlots){stopSlots();stopSlots=null}
+}
 });
 
-
-/* LOGIN */
-
-document
-.getElementById("loginButton")
-.addEventListener("click", async () => {
-
-  const email =
-    document.getElementById("emailInput")
-    .value.trim();
-
-  const password =
-    document.getElementById("passwordInput")
-    .value;
-
-
-  if(!email || !password){
-
-    authMessage.textContent =
-      "⚠️ اكتب البريد وكلمة المرور";
-
-    return;
-  }
-
-
-  authMessage.textContent =
-    "جاري تسجيل الدخول...";
-
-
-  try{
-
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    authMessage.textContent =
-      "❌ " + error.code;
-
-  }
-
-});
-
-
-/* AUTH STATE */
-
-onAuthStateChanged(
-  auth,
-  user => {
-
-    if(user){
-
-      loginPage.classList.add("hidden");
-
-      chatApp.classList.remove("hidden");
-
-      document
-      .getElementById("currentUsername")
-      .textContent =
-      user.displayName || "عضو";
-
-      loadMessages();
-
-    }
-
-    else{
-
-      loginPage.classList.remove("hidden");
-
-      chatApp.classList.add("hidden");
-
-    }
-
-  }
-);
-
-
-/* LOGOUT */
-
-document
-.getElementById("logoutButton")
-.addEventListener("click", async () => {
-
-  await signOut(auth);
-
-});
-
-
-/* SEND MESSAGE */
+document.getElementById("logoutButton").onclick=()=>signOut(auth);
 
 async function sendMessage(){
-
-  const input =
-    document.getElementById("messageInput");
-
-  const text =
-    input.value.trim();
-
-  const user =
-    auth.currentUser;
-
-
-  if(!user || !text){
-
-    return;
-  }
-
-
-  try{
-
-    await addDoc(
-      collection(db,"messages"),
-      {
-        uid:user.uid,
-
-        name:
-        user.displayName || "عضو",
-
-        text:text,
-
-        createdAt:
-        serverTimestamp()
-      }
-    );
-
-
-    input.value = "";
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-    alert(
-      "تعذر إرسال الرسالة: "
-      + error.code
-    );
-
-  }
-
+const input=document.getElementById("messageInput");
+const text=input.value.trim(),u=auth.currentUser;
+if(!u||!text)return;
+try{
+await addDoc(collection(db,"messages"),{uid:u.uid,name:u.displayName||"عضو",text,createdAt:serverTimestamp()});
+input.value="";
+}catch(e){console.error(e);alert("تعذر إرسال الرسالة: "+e.code)}
 }
-
-
-/* SEND BUTTON */
-
-document
-.getElementById("sendButton")
-.addEventListener(
-  "click",
-  sendMessage
-);
-
-
-/* ENTER */
-
-document
-.getElementById("messageInput")
-.addEventListener(
-  "keydown",
-  event => {
-
-    if(event.key === "Enter"){
-
-      sendMessage();
-
-    }
-
-  }
-);
-
-
-/* LOAD MESSAGES */
+document.getElementById("sendButton").onclick=sendMessage;
+document.getElementById("messageInput").onkeydown=e=>{if(e.key==="Enter")sendMessage()};
 
 function loadMessages(){
-
-  const messagesBox =
-    document.getElementById("messages");
-
-
-  const messagesQuery =
-    query(
-      collection(db,"messages"),
-      orderBy("createdAt","asc")
-    );
-
-
-  onSnapshot(
-    messagesQuery,
-
-    snapshot => {
-
-      messagesBox.innerHTML = "";
-
-
-      if(snapshot.empty){
-
-        messagesBox.innerHTML =
-          '<div class="empty">لا توجد رسائل بعد</div>';
-
-        return;
-      }
-
-
-      snapshot.forEach(
-        documentSnapshot => {
-
-          const data =
-            documentSnapshot.data();
-
-
-          const row =
-            document.createElement("div");
-
-          row.className =
-            "message";
-
-
-          const avatar =
-            document.createElement("img");
-
-          avatar.className =
-            "avatar";
-
-          avatar.src =
-            "https://ui-avatars.com/api/?name="
-            + encodeURIComponent(
-              data.name || "عضو"
-            )
-            + "&background=1687ff&color=fff";
-
-
-          const content =
-            document.createElement("div");
-
-          content.className =
-            "messageContent";
-
-
-          const name =
-            document.createElement("div");
-
-          name.className =
-            "messageName";
-
-          name.textContent =
-            data.name || "عضو";
-
-
-          const text =
-            document.createElement("div");
-
-          text.className =
-            "messageText";
-
-          text.textContent =
-            data.text || "";
-
-
-          content.appendChild(name);
-
-          content.appendChild(text);
-
-          row.appendChild(avatar);
-
-          row.appendChild(content);
-
-          messagesBox.appendChild(row);
-
-        }
-      );
-
-
-      messagesBox.scrollTop =
-        messagesBox.scrollHeight;
-
-    },
-
-    error => {
-
-      console.error(error);
-
-      messagesBox.innerHTML =
-        '<div class="empty">❌ تعذر تحميل الرسائل: '
-        + error.code
-        + '</div>';
-
-    }
-
-  );
-
+if(stopMessages)stopMessages();
+const box=document.getElementById("messages");
+stopMessages=onSnapshot(query(collection(db,"messages"),orderBy("createdAt","asc")),snap=>{
+box.innerHTML="";
+if(snap.empty){box.innerHTML='<div class="empty">لا توجد رسائل بعد</div>';return}
+snap.forEach(s=>{
+const d=s.data(),row=document.createElement("div");
+row.className="message";
+const avatar=document.createElement("img");
+avatar.className="avatar";
+avatar.src="https://ui-avatars.com/api/?name="+encodeURIComponent(d.name||"عضو")+"&background=1687ff&color=fff";
+const content=document.createElement("div");
+content.className="messageContent";
+const name=document.createElement("div");
+name.className="messageName";
+name.textContent=d.name||"عضو";
+const text=document.createElement("div");
+text.className="messageText";
+text.textContent=d.text||"";
+content.append(name,text);row.append(avatar,content);box.appendChild(row);
+});
+box.scrollTop=box.scrollHeight;
+},e=>{console.error(e);box.innerHTML='<div class="empty">❌ تعذر تحميل الرسائل: '+e.code+'</div>'});
 }
 
-</script>
+/* ---------- TWO PUBLIC MICS ---------- */
 
+const slots=[
+{id:"slot1",el:document.getElementById("voiceSlot1"),name:document.getElementById("voiceName1"),status:document.getElementById("voiceStatus1"),button:document.getElementById("voiceButton1")},
+{id:"slot2",el:document.getElementById("voiceSlot2"),name:document.getElementById("voiceName2"),status:document.getElementById("voiceStatus2"),button:document.getElementById("voiceButton2")}
+];
+
+slots.forEach((s,i)=>s.button.onclick=()=>toggleMic(i));
+
+function watchSlots(){
+if(stopSlots)stopSlots();
+stopSlots=onSnapshot(collection(db,"voiceSlots"),snap=>{
+const data={};
+snap.forEach(x=>data[x.id]=x.data());
+slots.forEach(s=>{
+const d=data[s.id],mine=d&&auth.currentUser&&d.uid===auth.currentUser.uid;
+s.el.classList.toggle("active",!!d);
+s.name.textContent=d?(d.name||"عضو"):"شاغر";
+s.status.textContent=d?(mine?"أنت تتحدث":"متحدث الآن"):"اضغط للتحدث";
+s.button.textContent=mine?"إيقاف المايك":(d?"استماع":"تشغيل المايك");
+s.button.disabled=!!d&&!mine;
+});
+if(mySlot&&!data[mySlot])releaseLocalStream();
+});
+}
+
+async function toggleMic(index){
+const u=auth.currentUser;
+if(!u)return;
+const slotId="slot"+(index+1);
+
+if(mySlot===slotId){await leaveMic(slotId);return}
+if(mySlot){alert("لديك مايك مفتوح بالفعل.");return}
+
+const ref=doc(db,"voiceSlots",slotId);
+const existing=await getDoc(ref);
+if(existing.exists()){alert("هذا المايك مشغول حاليًا.");return}
+
+if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+alert("المتصفح لا يدعم الميكروفون هنا. افتح الموقع عبر HTTPS.");
+return;
+}
+
+try{
+localStream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true},video:false});
+mySlot=slotId;
+await setDoc(ref,{uid:u.uid,name:u.displayName||"عضو",createdAt:serverTimestamp()});
+startOwnerSignaling(slotId);
+}catch(e){
+console.error(e);
+releaseLocalStream();
+if(e.name==="NotAllowedError")alert("⚠️ اسمح للموقع باستخدام الميكروفون من إعدادات الآيفون.");
+else alert("❌ تعذر تشغيل المايك: "+e.message);
+}
+}
+
+async function leaveMic(slotId){
+try{await deleteDoc(doc(db,"voiceSlots",slotId))}catch(e){console.error(e)}
+await cleanupOwnerPeers(slotId);
+releaseLocalStream();
+mySlot=null;
+}
+
+function releaseLocalStream(){
+if(localStream){localStream.getTracks().forEach(t=>t.stop());localStream=null}
+}
+
+async function startOwnerSignaling(slotId){
+const u=auth.currentUser;
+const peersCol=collection(db,"voiceCalls",slotId,"peers");
+
+const unsub=onSnapshot(peersCol,snap=>{
+snap.docChanges().forEach(change=>{
+if(change.type==="added")createOwnerPeer(slotId,change.doc.id).catch(console.error);
+if(change.type==="removed")closePeer(change.doc.id);
+});
+});
+unsubscribers.set("owner-"+slotId,unsub);
+}
+
+async function createOwnerPeer(slotId,listenerUid){
+const key=slotId+"-"+listenerUid;
+if(peerConnections.has(key)||!localStream)return;
+
+const pc=new RTCPeerConnection(rtcConfig);
+peerConnections.set(key,pc);
+localStream.getTracks().forEach(track=>pc.addTrack(track,localStream));
+
+const peerRef=doc(db,"voiceCalls",slotId,"peers",listenerUid);
+const callerCandidates=collection(peerRef,"callerCandidates");
+const calleeCandidates=collection(peerRef,"calleeCandidates");
+
+pc.onicecandidate=e=>{
+if(e.candidate)addDoc(callerCandidates,{candidate:e.candidate.toJSON(),createdAt:serverTimestamp()}).catch(console.error);
+};
+
+const unsubAnswer=onSnapshot(peerRef,async snap=>{
+const d=snap.data();
+if(d&&d.answer&&!pc.currentRemoteDescription){
+try{await pc.setRemoteDescription(new RTCSessionDescription(d.answer))}catch(e){console.error(e)}
+}
+});
+unsubscribers.set("answer-"+key,unsubAnswer);
+
+onSnapshot(calleeCandidates,snap=>{
+snap.docChanges().forEach(async c=>{
+if(c.type==="added"){
+try{await pc.addIceCandidate(new RTCIceCandidate(c.doc.data().candidate))}catch(e){console.error(e)}
+}
+});
+});
+
+const offer=await pc.createOffer();
+await pc.setLocalDescription(offer);
+await setDoc(peerRef,{offer:{type:offer.type,sdp:offer.sdp},ownerUid:auth.currentUser.uid},{merge:true});
+
+pc.onconnectionstatechange=()=>{
+if(["failed","closed","disconnected"].includes(pc.connectionState))closePeer(key);
+};
+}
+
+async function joinAsListener(slotId){
+const u=auth.currentUser;
+const key=slotId+"-"+u.uid;
+if(peerConnections.has(key))return;
+
+const peerRef=doc(db,"voiceCalls",slotId,"peers",u.uid);
+const callerCandidates=collection(peerRef,"callerCandidates");
+const calleeCandidates=collection(peerRef,"calleeCandidates");
+
+await setDoc(peerRef,{listenerUid:u.uid,name:u.displayName||"عضو",joinedAt:serverTimestamp()},{merge:true});
+
+const pc=new RTCPeerConnection(rtcConfig);
+peerConnections.set(key,pc);
+
+pc.ontrack=e=>{
+let audio=document.getElementById("audio-"+slotId);
+if(!audio){
+audio=document.createElement("audio");
+audio.id="audio-"+slotId;
+audio.autoplay=true;
+audio.playsInline=true;
+audio.style.display="none";
+document.body.appendChild(audio);
+}
+audio.srcObject=e.streams[0];
+audio.play().catch(()=>{});
+};
+
+pc.onicecandidate=e=>{
+if(e.candidate)addDoc(calleeCandidates,{candidate:e.candidate.toJSON(),createdAt:serverTimestamp()}).catch(console.error);
+};
+
+onSnapshot(callerCandidates,snap=>{
+snap.docChanges().forEach(async c=>{
+if(c.type==="added"){
+try{await pc.addIceCandidate(new RTCIceCandidate(c.doc.data().candidate))}catch(e){console.error(e)}
+}
+});
+});
+
+const unsub=onSnapshot(peerRef,async snap=>{
+const d=snap.data();
+if(!d||!d.offer||pc.currentRemoteDescription)return;
+try{
+await pc.setRemoteDescription(new RTCSessionDescription(d.offer));
+const answer=await pc.createAnswer();
+await pc.setLocalDescription(answer);
+await setDoc(peerRef,{answer:{type:answer.type,sdp:answer.sdp}},{merge:true});
+}catch(e){console.error(e)}
+});
+unsubscribers.set("listener-"+key,unsub);
+
+pc.onconnectionstatechange=()=>{
+if(["failed","closed"].includes(pc.connectionState))closePeer(key);
+};
+}
+
+async function cleanupOwnerPeers(slotId){
+const snap=await getDocs(collection(db,"voiceCalls",slotId,"peers"));
+for(const s of snap.docs){
+try{await deleteDoc(s.ref)}catch(e){console.error(e)}
+}
+}
+
+function closePeer(key){
+const pc=peerConnections.get(key);
+if(pc){try{pc.close()}catch{}peerConnections.delete(key)}
+const un=unsubscribers.get("answer-"+key)||unsubscribers.get("listener-"+key);
+if(un){try{un()}catch{}unsubscribers.delete("answer-"+key);unsubscribers.delete("listener-"+key)}
+}
+
+function cleanupAllVoice(){
+if(mySlot)leaveMic(mySlot).catch(console.error);
+releaseLocalStream();
+peerConnections.forEach((pc)=>{try{pc.close()}catch{}});
+peerConnections.clear();
+unsubscribers.forEach(u=>{try{u()}catch{}});
+unsubscribers.clear();
+document.querySelectorAll("audio[id^='audio-']").forEach(a=>a.remove());
+mySlot=null;
+}
+
+/* When a user clicks a busy mic, allow listening after microphone permission is not required.
+   The actual peer is created here. */
+slots.forEach((s,i)=>{
+s.el.addEventListener("dblclick",async()=>{
+const u=auth.currentUser;
+if(!u||mySlot)return;
+const snap=await getDoc(doc(db,"voiceSlots",s.id));
+if(snap.exists()&&snap.data().uid!==u.uid){
+try{await joinAsListener(s.id);s.el.classList.add("listen");s.status.textContent="أنت تستمع";}
+catch(e){console.error(e);alert("تعذر الاتصال بالصوت: "+e.message)}
+}
+});
+});
+</script>
 </body>
 </html>
-```
