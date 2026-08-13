@@ -202,222 +202,413 @@ box.scrollTop=box.scrollHeight;
 },e=>{console.error(e);box.innerHTML='<div class="empty">❌ تعذر تحميل الرسائل: '+e.code+'</div>'});
 }
 
-/* ---------- TWO PUBLIC MICS ---------- */
+/* ---------- TWO PUBLIC MICS / WEBRTC ---------- */
 
 const slots=[
 {id:"slot1",el:document.getElementById("voiceSlot1"),name:document.getElementById("voiceName1"),status:document.getElementById("voiceStatus1"),button:document.getElementById("voiceButton1")},
 {id:"slot2",el:document.getElementById("voiceSlot2"),name:document.getElementById("voiceName2"),status:document.getElementById("voiceStatus2"),button:document.getElementById("voiceButton2")}
 ];
 
+let mySlot=null;
+let localStream=null;
+const peerConnections=new Map();
+const peerUnsubs=new Map();
+const candidateQueues=new Map();
+
+const rtcConfig={
+  iceServers:[
+    {urls:"stun:stun.l.google.com:19302"},
+    {urls:"stun:stun1.l.google.com:19302"}
+  ]
+};
+
 slots.forEach((s,i)=>s.button.onclick=()=>toggleMic(i));
 
-function watchSlots(){
-if(stopSlots)stopSlots();
-stopSlots=onSnapshot(collection(db,"voiceSlots"),snap=>{
-const data={};
-snap.forEach(x=>data[x.id]=x.data());
-slots.forEach(s=>{
-const d=data[s.id],mine=d&&auth.currentUser&&d.uid===auth.currentUser.uid;
-s.el.classList.toggle("active",!!d);
-s.name.textContent=d?(d.name||"عضو"):"شاغر";
-s.status.textContent=d?(mine?"أنت تتحدث":"متحدث الآن"):"اضغط للتحدث";
-s.button.textContent=mine?"إيقاف المايك":(d?"استماع":"تشغيل المايك");
-s.button.disabled=!!d&&!mine;
-});
-if(mySlot&&!data[mySlot])releaseLocalStream();
-});
+function slotPeerRef(slotId, uid){
+  return doc(db,"voiceCalls",slotId,"peers",uid);
+}
+
+function setAudioPlayer(slotId, stream){
+  let wrap=document.getElementById("audio-wrap-"+slotId);
+  if(!wrap){
+    wrap=document.createElement("div");
+    wrap.id="audio-wrap-"+slotId;
+    wrap.style.cssText="position:fixed;bottom:75px;left:10px;right:10px;z-index:9999;background:#151d28;border:1px solid #344255;border-radius:12px;padding:8px;text-align:center;box-shadow:0 8px 30px #0008";
+
+    const label=document.createElement("span");
+    label.textContent="🔊 الصوت";
+    label.style.marginLeft="8px";
+
+    const audio=document.createElement("audio");
+    audio.id="audio-"+slotId;
+    audio.autoplay=true;
+    audio.playsInline=true;
+    audio.controls=true;
+    audio.style.width="55%";
+
+    const play=document.createElement("button");
+    play.textContent="▶ تشغيل الصوت";
+    play.style.cssText="border:0;border-radius:8px;padding:8px 10px;background:#1687ff;color:#fff;font-weight:bold;margin-right:6px";
+    play.onclick=()=>audio.play().catch(console.error);
+
+    const close=document.createElement("button");
+    close.textContent="✕";
+    close.style.cssText="border:0;border-radius:8px;padding:8px 10px;background:#a92d38;color:#fff;font-weight:bold";
+    close.onclick=()=>{audio.pause();wrap.remove()};
+
+    wrap.append(label,audio,play,close);
+    document.body.appendChild(wrap);
+  }
+  const audio=document.getElementById("audio-"+slotId);
+  audio.srcObject=stream;
+  audio.play().catch(()=>{});
+}
+
+function removeAudioPlayer(slotId){
+  const wrap=document.getElementById("audio-wrap-"+slotId);
+  if(wrap)wrap.remove();
 }
 
 async function toggleMic(index){
-const u=auth.currentUser;
-if(!u)return;
-const slotId="slot"+(index+1);
+  const u=auth.currentUser;
+  if(!u)return;
 
-if(mySlot===slotId){await leaveMic(slotId);return}
-if(mySlot){alert("لديك مايك مفتوح بالفعل.");return}
+  const slotId="slot"+(index+1);
+  const ref=doc(db,"voiceSlots",slotId);
+  const snap=await getDoc(ref);
 
-const ref=doc(db,"voiceSlots",slotId);
-const existing=await getDoc(ref);
-if(existing.exists()){alert("هذا المايك مشغول حاليًا.");return}
+  if(mySlot===slotId){
+    await leaveMic(slotId);
+    return;
+  }
 
-if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
-alert("المتصفح لا يدعم الميكروفون هنا. افتح الموقع عبر HTTPS.");
-return;
-}
+  if(snap.exists()){
+    const d=snap.data();
+    if(d.uid===u.uid){
+      mySlot=slotId;
+      await leaveMic(slotId);
+      return;
+    }
 
-try{
-localStream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true},video:false});
-mySlot=slotId;
-await setDoc(ref,{uid:u.uid,name:u.displayName||"عضو",createdAt:serverTimestamp()});
-startOwnerSignaling(slotId);
-}catch(e){
-console.error(e);
-releaseLocalStream();
-if(e.name==="NotAllowedError")alert("⚠️ اسمح للموقع باستخدام الميكروفون من إعدادات الآيفون.");
-else alert("❌ تعذر تشغيل المايك: "+e.message);
-}
+    // A busy mic is a listener button. No microphone permission is needed.
+    try{
+      await joinAsListener(slotId,d);
+    }catch(e){
+      console.error(e);
+      alert("❌ تعذر الاتصال بالصوت: "+(e.code||e.message));
+    }
+    return;
+  }
+
+  if(mySlot){
+    alert("لديك مايك مفتوح بالفعل.");
+    return;
+  }
+
+  if(!navigator.mediaDevices?.getUserMedia){
+    alert("❌ الميكروفون يحتاج HTTPS ومتصفحًا يدعم WebRTC.");
+    return;
+  }
+
+  try{
+    localStream=await navigator.mediaDevices.getUserMedia({
+      audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true},
+      video:false
+    });
+
+    mySlot=slotId;
+
+    await setDoc(ref,{
+      uid:u.uid,
+      name:u.displayName||"عضو",
+      createdAt:serverTimestamp()
+    });
+
+    startOwnerSignaling(slotId);
+  }catch(e){
+    console.error(e);
+    releaseLocalStream();
+    if(e.name==="NotAllowedError"){
+      alert("⚠️ اسمح للموقع باستخدام الميكروفون من إعدادات الآيفون.");
+    }else{
+      alert("❌ تعذر تشغيل المايك: "+(e.code||e.message));
+    }
+  }
 }
 
 async function leaveMic(slotId){
-try{await deleteDoc(doc(db,"voiceSlots",slotId))}catch(e){console.error(e)}
-await cleanupOwnerPeers(slotId);
-releaseLocalStream();
-mySlot=null;
+  const u=auth.currentUser;
+  try{
+    if(u)await deleteDoc(doc(db,"voiceSlots",slotId));
+  }catch(e){console.error(e)}
+
+  const peersSnap=await getDocs(collection(db,"voiceCalls",slotId,"peers"));
+  for(const s of peersSnap.docs){
+    try{await deleteDoc(s.ref)}catch(e){console.error(e)}
+  }
+
+  [...peerConnections.keys()].forEach(key=>{
+    if(key.startsWith(slotId+"-"))closePeer(key);
+  });
+
+  releaseLocalStream();
+  if(mySlot===slotId)mySlot=null;
 }
 
 function releaseLocalStream(){
-if(localStream){localStream.getTracks().forEach(t=>t.stop());localStream=null}
+  if(localStream){
+    localStream.getTracks().forEach(t=>t.stop());
+    localStream=null;
+  }
 }
 
-async function startOwnerSignaling(slotId){
-const u=auth.currentUser;
-const peersCol=collection(db,"voiceCalls",slotId,"peers");
+function startOwnerSignaling(slotId){
+  const key="owner-"+slotId;
+  if(peerUnsubs.has(key))return;
 
-const unsub=onSnapshot(peersCol,snap=>{
-snap.docChanges().forEach(change=>{
-if(change.type==="added")createOwnerPeer(slotId,change.doc.id).catch(console.error);
-if(change.type==="removed")closePeer(change.doc.id);
-});
-});
-unsubscribers.set("owner-"+slotId,unsub);
+  const unsub=onSnapshot(collection(db,"voiceCalls",slotId,"peers"),snap=>{
+    snap.docChanges().forEach(change=>{
+      if(change.type==="added"){
+        createOwnerPeer(slotId,change.doc.id).catch(console.error);
+      }
+      if(change.type==="removed"){
+        closePeer(slotId+"-"+change.doc.id);
+      }
+    });
+  },e=>console.error("owner signaling",e));
+
+  peerUnsubs.set(key,unsub);
 }
 
 async function createOwnerPeer(slotId,listenerUid){
-const key=slotId+"-"+listenerUid;
-if(peerConnections.has(key)||!localStream)return;
+  const key=slotId+"-"+listenerUid;
+  if(peerConnections.has(key)||!localStream)return;
 
-const pc=new RTCPeerConnection(rtcConfig);
-peerConnections.set(key,pc);
-localStream.getTracks().forEach(track=>pc.addTrack(track,localStream));
+  const peerRef=slotPeerRef(slotId,listenerUid);
+  const pc=new RTCPeerConnection(rtcConfig);
+  peerConnections.set(key,pc);
+  candidateQueues.set(key,[]);
 
-const peerRef=doc(db,"voiceCalls",slotId,"peers",listenerUid);
-const callerCandidates=collection(peerRef,"callerCandidates");
-const calleeCandidates=collection(peerRef,"calleeCandidates");
+  localStream.getTracks().forEach(track=>pc.addTrack(track,localStream));
 
-pc.onicecandidate=e=>{
-if(e.candidate)addDoc(callerCandidates,{candidate:e.candidate.toJSON(),createdAt:serverTimestamp()}).catch(console.error);
-};
+  pc.onicecandidate=e=>{
+    if(e.candidate){
+      addDoc(collection(peerRef,"callerCandidates"),{
+        candidate:e.candidate.toJSON(),
+        createdAt:serverTimestamp()
+      }).catch(console.error);
+    }
+  };
 
-const unsubAnswer=onSnapshot(peerRef,async snap=>{
-const d=snap.data();
-if(d&&d.answer&&!pc.currentRemoteDescription){
-try{await pc.setRemoteDescription(new RTCSessionDescription(d.answer))}catch(e){console.error(e)}
-}
-});
-unsubscribers.set("answer-"+key,unsubAnswer);
+  const unsubAnswer=onSnapshot(peerRef,async snap=>{
+    const d=snap.data();
+    if(!d?.answer||pc.currentRemoteDescription)return;
 
-onSnapshot(calleeCandidates,snap=>{
-snap.docChanges().forEach(async c=>{
-if(c.type==="added"){
-try{await pc.addIceCandidate(new RTCIceCandidate(c.doc.data().candidate))}catch(e){console.error(e)}
-}
-});
-});
+    try{
+      await pc.setRemoteDescription(new RTCSessionDescription(d.answer));
+      await flushCandidateQueue(key);
+    }catch(e){console.error("answer",e)}
+  });
 
-const offer=await pc.createOffer();
-await pc.setLocalDescription(offer);
-await setDoc(peerRef,{offer:{type:offer.type,sdp:offer.sdp},ownerUid:auth.currentUser.uid},{merge:true});
+  peerUnsubs.set("answer-"+key,unsubAnswer);
 
-pc.onconnectionstatechange=()=>{
-if(["failed","closed","disconnected"].includes(pc.connectionState))closePeer(key);
-};
-}
+  const offer=await pc.createOffer();
+  await pc.setLocalDescription(offer);
 
-async function joinAsListener(slotId){
-const u=auth.currentUser;
-const key=slotId+"-"+u.uid;
-if(peerConnections.has(key))return;
+  await setDoc(peerRef,{
+    offer:{type:offer.type,sdp:offer.sdp},
+    ownerUid:auth.currentUser.uid,
+    updatedAt:serverTimestamp()
+  },{merge:true});
 
-const peerRef=doc(db,"voiceCalls",slotId,"peers",u.uid);
-const callerCandidates=collection(peerRef,"callerCandidates");
-const calleeCandidates=collection(peerRef,"calleeCandidates");
+  watchCalleeCandidates(pc,peerRef,key);
 
-await setDoc(peerRef,{listenerUid:u.uid,name:u.displayName||"عضو",joinedAt:serverTimestamp()},{merge:true});
-
-const pc=new RTCPeerConnection(rtcConfig);
-peerConnections.set(key,pc);
-
-pc.ontrack=e=>{
-let audio=document.getElementById("audio-"+slotId);
-if(!audio){
-audio=document.createElement("audio");
-audio.id="audio-"+slotId;
-audio.autoplay=true;
-audio.playsInline=true;
-audio.style.display="none";
-document.body.appendChild(audio);
-}
-audio.srcObject=e.streams[0];
-audio.play().catch(()=>{});
-};
-
-pc.onicecandidate=e=>{
-if(e.candidate)addDoc(calleeCandidates,{candidate:e.candidate.toJSON(),createdAt:serverTimestamp()}).catch(console.error);
-};
-
-onSnapshot(callerCandidates,snap=>{
-snap.docChanges().forEach(async c=>{
-if(c.type==="added"){
-try{await pc.addIceCandidate(new RTCIceCandidate(c.doc.data().candidate))}catch(e){console.error(e)}
-}
-});
-});
-
-const unsub=onSnapshot(peerRef,async snap=>{
-const d=snap.data();
-if(!d||!d.offer||pc.currentRemoteDescription)return;
-try{
-await pc.setRemoteDescription(new RTCSessionDescription(d.offer));
-const answer=await pc.createAnswer();
-await pc.setLocalDescription(answer);
-await setDoc(peerRef,{answer:{type:answer.type,sdp:answer.sdp}},{merge:true});
-}catch(e){console.error(e)}
-});
-unsubscribers.set("listener-"+key,unsub);
-
-pc.onconnectionstatechange=()=>{
-if(["failed","closed"].includes(pc.connectionState))closePeer(key);
-};
+  pc.onconnectionstatechange=()=>{
+    if(["failed","closed"].includes(pc.connectionState)){
+      closePeer(key);
+    }
+  };
 }
 
-async function cleanupOwnerPeers(slotId){
-const snap=await getDocs(collection(db,"voiceCalls",slotId,"peers"));
-for(const s of snap.docs){
-try{await deleteDoc(s.ref)}catch(e){console.error(e)}
+function watchCalleeCandidates(pc,peerRef,key){
+  const unsub=onSnapshot(collection(peerRef,"calleeCandidates"),snap=>{
+    snap.docChanges().forEach(change=>{
+      if(change.type!=="added")return;
+      const c=change.doc.data()?.candidate;
+      if(!c)return;
+
+      if(pc.remoteDescription){
+        pc.addIceCandidate(new RTCIceCandidate(c)).catch(console.error);
+      }else{
+        candidateQueues.get(key)?.push(c);
+      }
+    });
+  });
+  peerUnsubs.set("callee-"+key,unsub);
 }
+
+async function flushCandidateQueue(key){
+  const pc=peerConnections.get(key);
+  const queue=candidateQueues.get(key)||[];
+  if(!pc?.remoteDescription)return;
+
+  while(queue.length){
+    const c=queue.shift();
+    try{await pc.addIceCandidate(new RTCIceCandidate(c))}
+    catch(e){console.error(e)}
+  }
+}
+
+async function joinAsListener(slotId,slotData){
+  const u=auth.currentUser;
+  if(!u)return;
+
+  const key=slotId+"-"+u.uid;
+  if(peerConnections.has(key))return;
+
+  const peerRef=slotPeerRef(slotId,u.uid);
+  const pc=new RTCPeerConnection(rtcConfig);
+  peerConnections.set(key,pc);
+  candidateQueues.set(key,[]);
+
+  pc.ontrack=e=>{
+    if(e.streams?.[0]){
+      setAudioPlayer(slotId,e.streams[0]);
+      const slot=slots.find(x=>x.id===slotId);
+      if(slot)slot.status.textContent="🔊 تستمع الآن";
+    }
+  };
+
+  pc.onicecandidate=e=>{
+    if(e.candidate){
+      addDoc(collection(peerRef,"calleeCandidates"),{
+        candidate:e.candidate.toJSON(),
+        createdAt:serverTimestamp()
+      }).catch(console.error);
+    }
+  };
+
+  const unsub=onSnapshot(peerRef,async snap=>{
+    const d=snap.data();
+    if(!d?.offer||pc.currentRemoteDescription)return;
+
+    try{
+      await pc.setRemoteDescription(new RTCSessionDescription(d.offer));
+      await flushCandidateQueue(key);
+
+      const answer=await pc.createAnswer();
+      await pc.setLocalDescription(answer);
+
+      await setDoc(peerRef,{
+        answer:{type:answer.type,sdp:answer.sdp},
+        listenerUid:u.uid,
+        answeredAt:serverTimestamp()
+      },{merge:true});
+
+      await flushCandidateQueue(key);
+    }catch(e){console.error("listener answer",e)}
+  });
+
+  peerUnsubs.set("listener-"+key,unsub);
+
+  const unsubCaller=onSnapshot(collection(peerRef,"callerCandidates"),snap=>{
+    snap.docChanges().forEach(change=>{
+      if(change.type!=="added")return;
+      const c=change.doc.data()?.candidate;
+      if(!c)return;
+
+      if(pc.remoteDescription){
+        pc.addIceCandidate(new RTCIceCandidate(c)).catch(console.error);
+      }else{
+        candidateQueues.get(key)?.push(c);
+      }
+    });
+  });
+  peerUnsubs.set("caller-"+key,unsubCaller);
+
+  await setDoc(peerRef,{
+    listenerUid:u.uid,
+    name:u.displayName||"عضو",
+    joinedAt:serverTimestamp()
+  },{merge:true});
+
+  pc.onconnectionstatechange=()=>{
+    if(["failed","closed"].includes(pc.connectionState)){
+      closePeer(key);
+      removeAudioPlayer(slotId);
+    }
+  };
 }
 
 function closePeer(key){
-const pc=peerConnections.get(key);
-if(pc){try{pc.close()}catch{}peerConnections.delete(key)}
-const un=unsubscribers.get("answer-"+key)||unsubscribers.get("listener-"+key);
-if(un){try{un()}catch{}unsubscribers.delete("answer-"+key);unsubscribers.delete("listener-"+key)}
+  const pc=peerConnections.get(key);
+  if(pc){
+    try{pc.close()}catch{}
+    peerConnections.delete(key);
+  }
+
+  candidateQueues.delete(key);
+
+  ["answer-","callee-","listener-","caller-"].forEach(prefix=>{
+    const k=prefix+key;
+    const unsub=peerUnsubs.get(k);
+    if(unsub){
+      try{unsub()}catch{}
+      peerUnsubs.delete(k);
+    }
+  });
 }
 
 function cleanupAllVoice(){
-if(mySlot)leaveMic(mySlot).catch(console.error);
-releaseLocalStream();
-peerConnections.forEach((pc)=>{try{pc.close()}catch{}});
-peerConnections.clear();
-unsubscribers.forEach(u=>{try{u()}catch{}});
-unsubscribers.clear();
-document.querySelectorAll("audio[id^='audio-']").forEach(a=>a.remove());
-mySlot=null;
+  if(mySlot)leaveMic(mySlot).catch(console.error);
+  releaseLocalStream();
+
+  peerConnections.forEach(pc=>{try{pc.close()}catch{}});
+  peerConnections.clear();
+
+  peerUnsubs.forEach(unsub=>{try{unsub()}catch{}});
+  peerUnsubs.clear();
+  candidateQueues.clear();
+
+  document.querySelectorAll('[id^="audio-wrap-"]').forEach(x=>x.remove());
+  mySlot=null;
 }
 
-/* When a user clicks a busy mic, allow listening after microphone permission is not required.
-   The actual peer is created here. */
-slots.forEach((s,i)=>{
-s.el.addEventListener("dblclick",async()=>{
-const u=auth.currentUser;
-if(!u||mySlot)return;
-const snap=await getDoc(doc(db,"voiceSlots",s.id));
-if(snap.exists()&&snap.data().uid!==u.uid){
-try{await joinAsListener(s.id);s.el.classList.add("listen");s.status.textContent="أنت تستمع";}
-catch(e){console.error(e);alert("تعذر الاتصال بالصوت: "+e.message)}
+function watchSlots(){
+  if(stopSlots)stopSlots();
+
+  stopSlots=onSnapshot(collection(db,"voiceSlots"),snap=>{
+    const data={};
+    snap.forEach(x=>data[x.id]=x.data());
+
+    slots.forEach(s=>{
+      const d=data[s.id];
+      const mine=d&&auth.currentUser&&d.uid===auth.currentUser.uid;
+
+      s.el.classList.toggle("active",!!d);
+      s.name.textContent=d?(d.name||"عضو"):"شاغر";
+
+      if(!d){
+        s.status.textContent="اضغط للتحدث";
+        s.button.textContent="تشغيل المايك";
+        s.button.disabled=false;
+        removeAudioPlayer(s.id);
+      }else if(mine){
+        s.status.textContent="🎤 أنت تتحدث";
+        s.button.textContent="إيقاف المايك";
+        s.button.disabled=false;
+      }else{
+        s.status.textContent="🔊 اضغط للاستماع";
+        s.button.textContent="استماع";
+        s.button.disabled=false;
+      }
+    });
+  },e=>{
+    console.error(e);
+    slots.forEach(s=>s.status.textContent="تعذر تحميل المايك");
+  });
 }
-});
-});
+
 </script>
 </body>
 </html>
