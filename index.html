@@ -164,7 +164,7 @@ button{cursor:pointer}
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 import {
   getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,
-  updateProfile,onAuthStateChanged,signOut
+  signInAnonymously,updateProfile,onAuthStateChanged,signOut
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 import {
   getFirestore,collection,addDoc,query,orderBy,onSnapshot,serverTimestamp,
@@ -207,11 +207,23 @@ document.querySelectorAll(".tab").forEach(btn=>{
   };
 });
 
-function enterVisitor(){
+async function enterVisitor(){
   const name=document.getElementById("visitorName").value.trim();
   if(name.length<2){authMessage.textContent="⚠️ اكتب اسمًا صحيحًا";return}
+
+  authMessage.textContent="جاري الدخول كزائر...";
   localStorage.setItem("visitorName",name);
-  showChat(name);
+
+  try{
+    // تسجيل دخول Firebase مجهول للزائر حتى تسمح Firestore Rules بإرسال الرسائل
+    if(!auth.currentUser){
+      await signInAnonymously(auth);
+    }
+    showChat(name);
+  }catch(e){
+    console.error(e);
+    authMessage.textContent="❌ تعذر دخول الزائر: "+(e.code||e.message);
+  }
 }
 document.getElementById("visitorButton").onclick=enterVisitor;
 document.getElementById("visitorName").onkeydown=e=>{if(e.key==="Enter")enterVisitor()};
@@ -269,7 +281,8 @@ onAuthStateChanged(auth,async user=>{
       authMessage.textContent="🚫 حسابك محظور";
       return;
     }
-    showChat(user.displayName||"عضو");
+    const visitorName=localStorage.getItem("visitorName");
+    showChat(user.isAnonymous ? (visitorName||"زائر") : (user.displayName||"عضو"));
   }else{
     cleanupVoice();
     loginPage.classList.remove("hidden");
@@ -280,12 +293,12 @@ onAuthStateChanged(auth,async user=>{
 });
 
 document.getElementById("logoutButton").onclick=async()=>{
-  if(auth.currentUser) await signOut(auth);
-  else{
+  try{
     cleanupVoice();
     localStorage.removeItem("visitorName");
-    loginPage.classList.remove("hidden");
-    chatApp.classList.add("hidden");
+    if(auth.currentUser) await signOut(auth);
+  }catch(e){
+    console.error(e);
   }
 };
 
