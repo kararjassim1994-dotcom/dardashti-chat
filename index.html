@@ -3,19 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
 <title>طليان الشعلة</title>
 
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:Arial,Tahoma,sans-serif;
   background:#080b10;
   color:#fff;
 }
-button,input{font-family:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
+
+button,input{
+  font-family:inherit
+}
+
+button{
+  cursor:pointer
+}
+
+.hidden{
+  display:none!important
+}
 
 #loginPage{
   min-height:100vh;
@@ -70,8 +81,13 @@ button{cursor:pointer}
   color:#fff
 }
 
-.signup{background:#1687ff}
-.login{background:#283444}
+.signup{
+  background:#1687ff
+}
+
+.login{
+  background:#283444
+}
 
 #authMessage{
   text-align:center;
@@ -96,7 +112,10 @@ button{cursor:pointer}
   padding:0 12px
 }
 
-.title{font-size:20px;font-weight:bold}
+.title{
+  font-size:20px;
+  font-weight:bold
+}
 
 .username{
   font-size:12px;
@@ -132,7 +151,7 @@ button{cursor:pointer}
 }
 
 .voiceSlot{
-  min-height:100px;
+  min-height:90px;
   background:#18222e;
   border:1px solid #344255;
   border-radius:13px;
@@ -144,8 +163,9 @@ button{cursor:pointer}
   gap:5px
 }
 
-.voiceSlot.active{border-color:#24c77a}
-.voiceSlot.listen{border-color:#4e8cff}
+.voiceSlot.active{
+  border-color:#24c77a
+}
 
 .voiceSlot button{
   border:0;
@@ -248,41 +268,36 @@ button{cursor:pointer}
   padding:35px 10px
 }
 
-#audioPanel{
+/* نافذة الصوت */
+#audioContainer{
+  position:fixed;
+  width:1px;
+  height:1px;
+  left:-100px;
+  top:-100px;
+  overflow:hidden;
+}
+
+#audioContainer audio{
+  width:1px;
+  height:1px;
+}
+
+#enableAudioButton{
   position:fixed;
   left:10px;
   right:10px;
   bottom:75px;
   z-index:99999;
-  background:#151d28;
-  border:1px solid #344255;
-  border-radius:13px;
-  padding:10px;
-  text-align:center;
+  display:none;
+  border:0;
+  border-radius:12px;
+  padding:13px;
+  background:#1687ff;
+  color:#fff;
+  font-weight:bold;
   box-shadow:0 8px 30px #0008
 }
-
-#audioPanel audio{
-  width:100%;
-  margin:7px 0
-}
-
-.audioButtons{
-  display:flex;
-  gap:7px
-}
-
-.audioButtons button{
-  flex:1;
-  border:0;
-  border-radius:8px;
-  padding:10px;
-  color:#fff;
-  font-weight:bold
-}
-
-.playAudio{background:#1687ff}
-.closeAudio{background:#a92d38}
 
 @media(max-width:420px){
   .voiceSlot button{
@@ -295,54 +310,92 @@ button{cursor:pointer}
 
 <body>
 
+<!-- LOGIN -->
+
 <div id="loginPage">
+
   <div class="loginBox">
 
-    <div class="logo">🔥 طليان الشعلة</div>
+    <div class="logo">
+      🔥 طليان الشعلة
+    </div>
 
     <div class="description">
       مرحبًا بك في الدردشة
     </div>
 
-    <input id="nameInput" type="text" placeholder="اسم العضو">
-    <input id="emailInput" type="email" placeholder="البريد الإلكتروني">
-    <input id="passwordInput" type="password" placeholder="كلمة المرور">
+    <input
+      id="nameInput"
+      type="text"
+      placeholder="اسم العضو">
 
-    <button id="signupButton" class="btn signup">
+    <input
+      id="emailInput"
+      type="email"
+      placeholder="البريد الإلكتروني">
+
+    <input
+      id="passwordInput"
+      type="password"
+      placeholder="كلمة المرور">
+
+    <button
+      id="signupButton"
+      class="btn signup">
       إنشاء حساب
     </button>
 
-    <button id="loginButton" class="btn login">
+    <button
+      id="loginButton"
+      class="btn login">
       تسجيل الدخول
     </button>
 
     <div id="authMessage"></div>
 
   </div>
+
 </div>
 
+
+<!-- CHAT -->
 
 <div id="chatApp" class="hidden">
 
   <div class="header">
 
     <div>
-      <div class="title">🔥 طليان الشعلة</div>
-      <div id="currentUsername" class="username">عضو</div>
+
+      <div class="title">
+        🔥 طليان الشعلة
+      </div>
+
+      <div
+        id="currentUsername"
+        class="username">
+        عضو
+      </div>
+
     </div>
 
-    <button id="logoutButton" class="logout">
+    <button
+      id="logoutButton"
+      class="logout">
       خروج
     </button>
 
   </div>
 
 
-  <div id="adminPanel"
-       class="hidden"
-       style="background:#121a24;border-bottom:1px solid #293646;padding:10px">
+  <!-- ADMIN -->
 
-    <div style="font-weight:bold;margin-bottom:8px">
+  <div
+    id="adminPanel"
+    class="hidden"
+    style="background:#121a24;border-bottom:1px solid #293646;padding:10px">
+
+    <div
+      style="font-weight:bold;margin-bottom:8px">
       🛡️ لوحة الإشراف
     </div>
 
@@ -352,32 +405,48 @@ button{cursor:pointer}
       placeholder="UID العضو"
       style="width:100%;padding:11px;border:1px solid #344255;border-radius:9px;background:#0d131b;color:#fff;margin-bottom:7px">
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
+    <div
+      style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
 
-      <button id="banButton" class="btn" style="background:#a92d38">
+      <button
+        id="banButton"
+        class="btn"
+        style="background:#a92d38">
         🚫 حظر
       </button>
 
-      <button id="unbanButton" class="btn" style="background:#1687ff">
+      <button
+        id="unbanButton"
+        class="btn"
+        style="background:#1687ff">
         🔓 فك الحظر
       </button>
 
-      <button id="muteButton" class="btn" style="background:#7b4ab8">
+      <button
+        id="muteButton"
+        class="btn"
+        style="background:#7b4ab8">
         🎤 منع المايك
       </button>
 
-      <button id="unmuteButton" class="btn" style="background:#168b61">
+      <button
+        id="unmuteButton"
+        class="btn"
+        style="background:#168b61">
         🎤 السماح بالمايك
       </button>
 
     </div>
 
-    <div id="adminMessage"
-         style="text-align:center;color:#aebaca;margin-top:7px;font-size:12px">
+    <div
+      id="adminMessage"
+      style="text-align:center;color:#aebaca;margin-top:7px;font-size:12px">
     </div>
 
   </div>
 
+
+  <!-- VOICE -->
 
   <div class="voicePanel">
 
@@ -387,15 +456,23 @@ button{cursor:pointer}
 
     <div class="voiceSlots">
 
-      <div id="voiceSlot1" class="voiceSlot">
+      <div
+        id="voiceSlot1"
+        class="voiceSlot">
 
-        <div>🎤 المايك 1</div>
+        <div>
+          🎤 المايك 1
+        </div>
 
-        <div id="voiceName1" class="voiceName">
+        <div
+          id="voiceName1"
+          class="voiceName">
           شاغر
         </div>
 
-        <div id="voiceStatus1" class="voiceStatus">
+        <div
+          id="voiceStatus1"
+          class="voiceStatus">
           اضغط للتحدث
         </div>
 
@@ -406,15 +483,23 @@ button{cursor:pointer}
       </div>
 
 
-      <div id="voiceSlot2" class="voiceSlot">
+      <div
+        id="voiceSlot2"
+        class="voiceSlot">
 
-        <div>🎤 المايك 2</div>
+        <div>
+          🎤 المايك 2
+        </div>
 
-        <div id="voiceName2" class="voiceName">
+        <div
+          id="voiceName2"
+          class="voiceName">
           شاغر
         </div>
 
-        <div id="voiceStatus2" class="voiceStatus">
+        <div
+          id="voiceStatus2"
+          class="voiceStatus">
           اضغط للتحدث
         </div>
 
@@ -425,15 +510,24 @@ button{cursor:pointer}
       </div>
 
     </div>
+
   </div>
 
 
-  <div id="messages" class="messages">
+  <!-- MESSAGES -->
+
+  <div
+    id="messages"
+    class="messages">
+
     <div class="empty">
       جاري تحميل الدردشة...
     </div>
+
   </div>
 
+
+  <!-- COMPOSER -->
 
   <div class="composer">
 
@@ -442,13 +536,24 @@ button{cursor:pointer}
       type="text"
       placeholder="اكتب رسالتك...">
 
-    <button id="sendButton" class="send">
+    <button
+      id="sendButton"
+      class="send">
       ➤
     </button>
 
   </div>
 
 </div>
+
+
+<!-- AUDIO -->
+
+<div id="audioContainer"></div>
+
+<button id="enableAudioButton">
+  🔊 تفعيل الصوت
+</button>
 
 
 <script type="module">
@@ -495,9 +600,14 @@ const firebaseConfig = {
   appId:"1:779042757468:web:7646d3cdadf46f315a3f99"
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+const app =
+  initializeApp(firebaseConfig);
+
+const auth =
+  getAuth(app);
+
+const db =
+  getFirestore(app);
 
 
 /* =========================
@@ -510,58 +620,13 @@ const ADMIN_UIDS = [
 
 const isAdmin = () =>
   !!auth.currentUser &&
-  ADMIN_UIDS.includes(auth.currentUser.uid);
+  ADMIN_UIDS.includes(
+    auth.currentUser.uid
+  );
 
 
 /* =========================
-   MODERATION
-========================= */
-
-async function getMyModeration(){
-
-  const u = auth.currentUser;
-
-  if(!u){
-    return {
-      banned:false,
-      micMuted:false
-    };
-  }
-
-  try{
-
-    const s = await getDoc(
-      doc(db,"moderation",u.uid)
-    );
-
-    if(!s.exists()){
-      return {
-        banned:false,
-        micMuted:false
-      };
-    }
-
-    const d = s.data();
-
-    return {
-      banned:d.banned === true,
-      micMuted:d.micMuted === true
-    };
-
-  }catch(e){
-
-    console.error("moderation",e);
-
-    return {
-      banned:false,
-      micMuted:false
-    };
-  }
-}
-
-
-/* =========================
-   WEBRTC
+   RTC
 ========================= */
 
 const rtcConfig = {
@@ -576,590 +641,40 @@ const rtcConfig = {
   ],
 
   iceCandidatePoolSize:10
+
 };
 
 
 /* =========================
-   UI
+   VARIABLES
 ========================= */
-
-const loginPage =
-  document.getElementById("loginPage");
-
-const chatApp =
-  document.getElementById("chatApp");
-
-const authMessage =
-  document.getElementById("authMessage");
-
 
 let stopMessages = null;
 let stopSlots = null;
 
+let mySlot = null;
+let localStream = null;
 
-/* =========================
-   REGISTER
-========================= */
+const peerConnections =
+  new Map();
 
-document.getElementById("signupButton").onclick =
-async () => {
+const peerUnsubs =
+  new Map();
 
-  const name =
-    document.getElementById("nameInput").value.trim();
+const candidateQueues =
+  new Map();
 
-  const email =
-    document.getElementById("emailInput").value.trim();
 
-  const password =
-    document.getElementById("passwordInput").value;
-
-  if(name.length < 2){
-    authMessage.textContent =
-      "⚠️ اكتب اسم العضو";
-    return;
-  }
-
-  if(!email){
-    authMessage.textContent =
-      "⚠️ اكتب البريد الإلكتروني";
-    return;
-  }
-
-  if(password.length < 6){
-    authMessage.textContent =
-      "⚠️ كلمة المرور يجب أن تكون 6 أحرف على الأقل";
-    return;
-  }
-
-  authMessage.textContent =
-    "جاري إنشاء الحساب...";
-
-  try{
-
-    const r =
-      await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-    await updateProfile(
-      r.user,
-      {
-        displayName:name
-      }
-    );
-
-    await setDoc(
-      doc(db,"users",r.user.uid),
-      {
-        uid:r.user.uid,
-        name:name,
-        email:email,
-        role:"user",
-        banned:false,
-        micBanned:false,
-        createdAt:serverTimestamp()
-      },
-      {
-        merge:true
-      }
-    );
-
-    await setDoc(
-      doc(db,"moderation",r.user.uid),
-      {
-        banned:false,
-        micMuted:false,
-        updatedAt:serverTimestamp()
-      },
-      {
-        merge:true
-      }
-    );
-
-    authMessage.textContent =
-      "✅ تم إنشاء الحساب بنجاح";
-
-  }catch(e){
-
-    console.error(e);
-
-    authMessage.textContent =
-      "❌ " + (e.code || e.message);
-
-  }
-
-};
+/*
+  المستمعون الذين بدأنا لهم اتصالًا
+*/
+const autoListeners =
+  new Set();
 
 
 /* =========================
-   LOGIN
+   SLOTS
 ========================= */
-
-document.getElementById("loginButton").onclick =
-async () => {
-
-  const email =
-    document.getElementById("emailInput").value.trim();
-
-  const password =
-    document.getElementById("passwordInput").value;
-
-  if(!email || !password){
-
-    authMessage.textContent =
-      "⚠️ اكتب البريد وكلمة المرور";
-
-    return;
-  }
-
-  authMessage.textContent =
-    "جاري تسجيل الدخول...";
-
-  try{
-
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-  }catch(e){
-
-    console.error(e);
-
-    authMessage.textContent =
-      "❌ " + (e.code || e.message);
-
-  }
-
-};
-
-
-/* =========================
-   AUTH STATE
-========================= */
-
-onAuthStateChanged(auth,user => {
-
-  if(user){
-
-    loginPage.classList.add("hidden");
-    chatApp.classList.remove("hidden");
-
-    document.getElementById(
-      "currentUsername"
-    ).textContent =
-      user.displayName || "عضو";
-
-    document.getElementById(
-      "adminPanel"
-    ).classList.toggle(
-      "hidden",
-      !isAdmin()
-    );
-
-    loadMessages();
-    watchSlots();
-
-  }else{
-
-    cleanupAllVoice();
-
-    loginPage.classList.remove("hidden");
-    chatApp.classList.add("hidden");
-
-    if(stopMessages){
-      stopMessages();
-      stopMessages = null;
-    }
-
-    if(stopSlots){
-      stopSlots();
-      stopSlots = null;
-    }
-
-  }
-
-});
-
-
-/* =========================
-   LOGOUT
-========================= */
-
-document.getElementById("logoutButton").onclick =
-async () => {
-
-  await cleanupAllVoice();
-
-  await signOut(auth);
-
-};
-
-
-/* =========================
-   FIREBASE ERROR
-========================= */
-
-function friendlyFirebaseError(e){
-
-  const c = e?.code || "";
-
-  const map = {
-
-    "permission-denied":
-      "تم رفض العملية من Firebase Rules.",
-
-    "failed-precondition":
-      "تحقق من إعدادات Firestore.",
-
-    "unavailable":
-      "Firebase غير متاح حاليًا.",
-
-    "not-found":
-      "المستند غير موجود.",
-
-    "unauthenticated":
-      "يجب تسجيل الدخول أولًا.",
-
-    "network-request-failed":
-      "تحقق من اتصال الإنترنت."
-
-  };
-
-  return map[c] ||
-    c ||
-    e?.message ||
-    "خطأ غير معروف";
-}
-
-
-/* =========================
-   ADMIN
-========================= */
-
-async function adminAction(action){
-
-  if(!isAdmin()){
-
-    alert("ليس لديك صلاحية إشراف");
-
-    return;
-  }
-
-  const target =
-    document.getElementById(
-      "adminTarget"
-    ).value.trim();
-
-  const msg =
-    document.getElementById(
-      "adminMessage"
-    );
-
-  if(!target){
-
-    msg.textContent =
-      "⚠️ اكتب UID العضو";
-
-    return;
-  }
-
-  try{
-
-    const ref =
-      doc(db,"moderation",target);
-
-    if(action === "ban"){
-
-      await setDoc(
-        ref,
-        {
-          banned:true,
-          updatedAt:serverTimestamp()
-        },
-        {merge:true}
-      );
-
-      await setDoc(
-        doc(db,"users",target),
-        {banned:true},
-        {merge:true}
-      );
-
-    }
-
-    if(action === "unban"){
-
-      await setDoc(
-        ref,
-        {
-          banned:false,
-          updatedAt:serverTimestamp()
-        },
-        {merge:true}
-      );
-
-      await setDoc(
-        doc(db,"users",target),
-        {banned:false},
-        {merge:true}
-      );
-
-    }
-
-    if(action === "mute"){
-
-      await setDoc(
-        ref,
-        {
-          micMuted:true,
-          updatedAt:serverTimestamp()
-        },
-        {merge:true}
-      );
-
-      await setDoc(
-        doc(db,"users",target),
-        {micBanned:true},
-        {merge:true}
-      );
-
-    }
-
-    if(action === "unmute"){
-
-      await setDoc(
-        ref,
-        {
-          micMuted:false,
-          updatedAt:serverTimestamp()
-        },
-        {merge:true}
-      );
-
-      await setDoc(
-        doc(db,"users",target),
-        {micBanned:false},
-        {merge:true}
-      );
-
-    }
-
-    msg.textContent =
-      "✅ تم تنفيذ الأمر";
-
-  }catch(e){
-
-    console.error(e);
-
-    msg.textContent =
-      "❌ " +
-      friendlyFirebaseError(e);
-
-  }
-
-}
-
-document.getElementById("banButton").onclick =
-() => adminAction("ban");
-
-document.getElementById("unbanButton").onclick =
-() => adminAction("unban");
-
-document.getElementById("muteButton").onclick =
-() => adminAction("mute");
-
-document.getElementById("unmuteButton").onclick =
-() => adminAction("unmute");
-
-
-/* =========================
-   CHAT
-========================= */
-
-async function sendMessage(){
-
-  const input =
-    document.getElementById("messageInput");
-
-  const text =
-    input.value.trim();
-
-  const u =
-    auth.currentUser;
-
-  if(!u || !text)return;
-
-  try{
-
-    const mod =
-      await getMyModeration();
-
-    if(mod.banned){
-
-      alert(
-        "🚫 حسابك محظور من الدردشة"
-      );
-
-      return;
-    }
-
-    await addDoc(
-      collection(db,"messages"),
-      {
-        uid:u.uid,
-        name:u.displayName || "عضو",
-        text:text,
-        createdAt:serverTimestamp()
-      }
-    );
-
-    input.value = "";
-
-  }catch(e){
-
-    console.error(e);
-
-    alert(
-      "تعذر إرسال الرسالة: " +
-      friendlyFirebaseError(e)
-    );
-
-  }
-
-}
-
-document.getElementById("sendButton").onclick =
-sendMessage;
-
-document.getElementById(
-  "messageInput"
-).onkeydown = e => {
-
-  if(e.key === "Enter"){
-    sendMessage();
-  }
-
-};
-
-
-/* =========================
-   LOAD MESSAGES
-========================= */
-
-function loadMessages(){
-
-  if(stopMessages){
-    stopMessages();
-  }
-
-  const box =
-    document.getElementById("messages");
-
-  stopMessages =
-    onSnapshot(
-      query(
-        collection(db,"messages"),
-        orderBy("createdAt","asc")
-      ),
-
-      snap => {
-
-        box.innerHTML = "";
-
-        if(snap.empty){
-
-          box.innerHTML =
-            '<div class="empty">لا توجد رسائل بعد</div>';
-
-          return;
-        }
-
-        snap.forEach(s => {
-
-          const d = s.data();
-
-          const row =
-            document.createElement("div");
-
-          row.className = "message";
-
-          const avatar =
-            document.createElement("img");
-
-          avatar.className = "avatar";
-
-          avatar.src =
-            "https://ui-avatars.com/api/?name=" +
-            encodeURIComponent(
-              d.name || "عضو"
-            ) +
-            "&background=1687ff&color=fff";
-
-          const content =
-            document.createElement("div");
-
-          content.className =
-            "messageContent";
-
-          const name =
-            document.createElement("div");
-
-          name.className =
-            "messageName";
-
-          name.textContent =
-            d.name || "عضو";
-
-          const text =
-            document.createElement("div");
-
-          text.className =
-            "messageText";
-
-          text.textContent =
-            d.text || "";
-
-          content.append(
-            name,
-            text
-          );
-
-          row.append(
-            avatar,
-            content
-          );
-
-          box.appendChild(row);
-
-        });
-
-        box.scrollTop =
-          box.scrollHeight;
-
-      },
-
-      e => {
-
-        console.error(e);
-
-        box.innerHTML =
-          '<div class="empty">❌ تعذر تحميل الرسائل: ' +
-          e.code +
-          '</div>';
-
-      }
-    );
-
-}
-
-
-/* ==================================================
-   VOICE
-================================================== */
 
 const slots = [
 
@@ -1182,27 +697,873 @@ const slots = [
 ];
 
 
-let mySlot = null;
+slots.forEach(
+  (slot,index) => {
 
-let localStream = null;
+    slot.button.onclick =
+      () => toggleMic(index);
 
-const peerConnections =
-  new Map();
-
-const peerUnsubs =
-  new Map();
-
-const candidateQueues =
-  new Map();
+  }
+);
 
 
-slots.forEach((s,index) => {
+/* =========================
+   AUTH UI
+========================= */
 
-  s.button.onclick =
-    () => toggleMic(index);
+const loginPage =
+  document.getElementById("loginPage");
 
-});
+const chatApp =
+  document.getElementById("chatApp");
 
+const authMessage =
+  document.getElementById("authMessage");
+
+
+/* =========================
+   MODERATION
+========================= */
+
+async function getMyModeration(){
+
+  const u =
+    auth.currentUser;
+
+  if(!u){
+
+    return {
+      banned:false,
+      micMuted:false
+    };
+
+  }
+
+  try{
+
+    const s =
+      await getDoc(
+        doc(
+          db,
+          "moderation",
+          u.uid
+        )
+      );
+
+    if(!s.exists()){
+
+      return {
+        banned:false,
+        micMuted:false
+      };
+
+    }
+
+    const d =
+      s.data();
+
+    return {
+
+      banned:
+        d.banned === true,
+
+      micMuted:
+        d.micMuted === true
+
+    };
+
+  }catch(e){
+
+    console.error(
+      "moderation",
+      e
+    );
+
+    return {
+      banned:false,
+      micMuted:false
+    };
+
+  }
+
+}
+
+
+/* =========================
+   REGISTER
+========================= */
+
+document.getElementById(
+  "signupButton"
+).onclick = async () => {
+
+  const name =
+    document.getElementById(
+      "nameInput"
+    ).value.trim();
+
+  const email =
+    document.getElementById(
+      "emailInput"
+    ).value.trim();
+
+  const password =
+    document.getElementById(
+      "passwordInput"
+    ).value;
+
+
+  if(name.length < 2){
+
+    authMessage.textContent =
+      "⚠️ اكتب اسم العضو";
+
+    return;
+
+  }
+
+
+  if(!email){
+
+    authMessage.textContent =
+      "⚠️ اكتب البريد الإلكتروني";
+
+    return;
+
+  }
+
+
+  if(password.length < 6){
+
+    authMessage.textContent =
+      "⚠️ كلمة المرور يجب أن تكون 6 أحرف على الأقل";
+
+    return;
+
+  }
+
+
+  authMessage.textContent =
+    "جاري إنشاء الحساب...";
+
+
+  try{
+
+    const r =
+      await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+
+    await updateProfile(
+      r.user,
+      {
+        displayName:name
+      }
+    );
+
+
+    await setDoc(
+      doc(
+        db,
+        "users",
+        r.user.uid
+      ),
+      {
+        uid:r.user.uid,
+        name:name,
+        email:email,
+        role:"user",
+        banned:false,
+        micBanned:false,
+        createdAt:serverTimestamp()
+      },
+      {
+        merge:true
+      }
+    );
+
+
+    await setDoc(
+      doc(
+        db,
+        "moderation",
+        r.user.uid
+      ),
+      {
+        banned:false,
+        micMuted:false,
+        updatedAt:serverTimestamp()
+      },
+      {
+        merge:true
+      }
+    );
+
+
+    authMessage.textContent =
+      "✅ تم إنشاء الحساب بنجاح";
+
+  }catch(e){
+
+    console.error(e);
+
+    authMessage.textContent =
+      "❌ " +
+      (e.code || e.message);
+
+  }
+
+};
+
+
+/* =========================
+   LOGIN
+========================= */
+
+document.getElementById(
+  "loginButton"
+).onclick = async () => {
+
+  const email =
+    document.getElementById(
+      "emailInput"
+    ).value.trim();
+
+  const password =
+    document.getElementById(
+      "passwordInput"
+    ).value;
+
+
+  if(!email || !password){
+
+    authMessage.textContent =
+      "⚠️ اكتب البريد وكلمة المرور";
+
+    return;
+
+  }
+
+
+  authMessage.textContent =
+    "جاري تسجيل الدخول...";
+
+
+  try{
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+  }catch(e){
+
+    console.error(e);
+
+    authMessage.textContent =
+      "❌ " +
+      (e.code || e.message);
+
+  }
+
+};
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+onAuthStateChanged(
+  auth,
+  user => {
+
+    if(user){
+
+      loginPage.classList.add(
+        "hidden"
+      );
+
+      chatApp.classList.remove(
+        "hidden"
+      );
+
+
+      document.getElementById(
+        "currentUsername"
+      ).textContent =
+        user.displayName ||
+        "عضو";
+
+
+      document.getElementById(
+        "adminPanel"
+      ).classList.toggle(
+        "hidden",
+        !isAdmin()
+      );
+
+
+      loadMessages();
+
+      watchSlots();
+
+    }else{
+
+      cleanupAllVoice();
+
+      loginPage.classList.remove(
+        "hidden"
+      );
+
+      chatApp.classList.add(
+        "hidden"
+      );
+
+
+      if(stopMessages){
+
+        stopMessages();
+        stopMessages = null;
+
+      }
+
+
+      if(stopSlots){
+
+        stopSlots();
+        stopSlots = null;
+
+      }
+
+    }
+
+  }
+);
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+document.getElementById(
+  "logoutButton"
+).onclick = async () => {
+
+  await cleanupAllVoice();
+
+  await signOut(auth);
+
+};
+
+
+/* =========================
+   FIREBASE ERROR
+========================= */
+
+function friendlyFirebaseError(e){
+
+  const c =
+    e?.code || "";
+
+  const map = {
+
+    "permission-denied":
+      "تم رفض العملية من Firebase Rules.",
+
+    "failed-precondition":
+      "تحقق من إعدادات Firestore.",
+
+    "unavailable":
+      "Firebase غير متاح حاليًا.",
+
+    "not-found":
+      "المستند غير موجود.",
+
+    "unauthenticated":
+      "يجب تسجيل الدخول أولًا."
+
+  };
+
+  return (
+    map[c] ||
+    c ||
+    e?.message ||
+    "خطأ غير معروف"
+  );
+
+}
+
+
+/* =========================
+   ADMIN
+========================= */
+
+async function adminAction(
+  action
+){
+
+  if(!isAdmin()){
+
+    alert(
+      "ليس لديك صلاحية إشراف"
+    );
+
+    return;
+
+  }
+
+
+  const target =
+    document.getElementById(
+      "adminTarget"
+    ).value.trim();
+
+
+  const msg =
+    document.getElementById(
+      "adminMessage"
+    );
+
+
+  if(!target){
+
+    msg.textContent =
+      "⚠️ اكتب UID العضو";
+
+    return;
+
+  }
+
+
+  try{
+
+    const ref =
+      doc(
+        db,
+        "moderation",
+        target
+      );
+
+
+    if(action === "ban"){
+
+      await setDoc(
+        ref,
+        {
+          banned:true,
+          updatedAt:
+            serverTimestamp()
+        },
+        {
+          merge:true
+        }
+      );
+
+      await setDoc(
+        doc(
+          db,
+          "users",
+          target
+        ),
+        {
+          banned:true
+        },
+        {
+          merge:true
+        }
+      );
+
+    }
+
+
+    if(action === "unban"){
+
+      await setDoc(
+        ref,
+        {
+          banned:false,
+          updatedAt:
+            serverTimestamp()
+        },
+        {
+          merge:true
+        }
+      );
+
+      await setDoc(
+        doc(
+          db,
+          "users",
+          target
+        ),
+        {
+          banned:false
+        },
+        {
+          merge:true
+        }
+      );
+
+    }
+
+
+    if(action === "mute"){
+
+      await setDoc(
+        ref,
+        {
+          micMuted:true,
+          updatedAt:
+            serverTimestamp()
+        },
+        {
+          merge:true
+        }
+      );
+
+      await setDoc(
+        doc(
+          db,
+          "users",
+          target
+        ),
+        {
+          micBanned:true
+        },
+        {
+          merge:true
+        }
+      );
+
+    }
+
+
+    if(action === "unmute"){
+
+      await setDoc(
+        ref,
+        {
+          micMuted:false,
+          updatedAt:
+            serverTimestamp()
+        },
+        {
+          merge:true
+        }
+      );
+
+      await setDoc(
+        doc(
+          db,
+          "users",
+          target
+        ),
+        {
+          micBanned:false
+        },
+        {
+          merge:true
+        }
+      );
+
+    }
+
+
+    msg.textContent =
+      "✅ تم تنفيذ الأمر";
+
+  }catch(e){
+
+    console.error(e);
+
+    msg.textContent =
+      "❌ " +
+      friendlyFirebaseError(e);
+
+  }
+
+}
+
+
+document.getElementById(
+  "banButton"
+).onclick =
+  () => adminAction("ban");
+
+
+document.getElementById(
+  "unbanButton"
+).onclick =
+  () => adminAction("unban");
+
+
+document.getElementById(
+  "muteButton"
+).onclick =
+  () => adminAction("mute");
+
+
+document.getElementById(
+  "unmuteButton"
+).onclick =
+  () => adminAction("unmute");
+
+
+/* =========================
+   CHAT
+========================= */
+
+async function sendMessage(){
+
+  const input =
+    document.getElementById(
+      "messageInput"
+    );
+
+  const text =
+    input.value.trim();
+
+  const u =
+    auth.currentUser;
+
+
+  if(!u || !text)
+    return;
+
+
+  try{
+
+    const mod =
+      await getMyModeration();
+
+
+    if(mod.banned){
+
+      alert(
+        "🚫 حسابك محظور من الدردشة"
+      );
+
+      return;
+
+    }
+
+
+    await addDoc(
+      collection(
+        db,
+        "messages"
+      ),
+      {
+        uid:u.uid,
+        name:
+          u.displayName ||
+          "عضو",
+        text:text,
+        createdAt:
+          serverTimestamp()
+      }
+    );
+
+
+    input.value = "";
+
+  }catch(e){
+
+    console.error(e);
+
+    alert(
+      "تعذر إرسال الرسالة: " +
+      friendlyFirebaseError(e)
+    );
+
+  }
+
+}
+
+
+document.getElementById(
+  "sendButton"
+).onclick =
+  sendMessage;
+
+
+document.getElementById(
+  "messageInput"
+).onkeydown =
+  e => {
+
+    if(e.key === "Enter"){
+      sendMessage();
+    }
+
+  };
+
+
+/* =========================
+   LOAD MESSAGES
+========================= */
+
+function loadMessages(){
+
+  if(stopMessages){
+
+    stopMessages();
+
+  }
+
+
+  const box =
+    document.getElementById(
+      "messages"
+    );
+
+
+  stopMessages =
+    onSnapshot(
+
+      query(
+        collection(
+          db,
+          "messages"
+        ),
+        orderBy(
+          "createdAt",
+          "asc"
+        )
+      ),
+
+      snap => {
+
+        box.innerHTML = "";
+
+
+        if(snap.empty){
+
+          box.innerHTML =
+            '<div class="empty">لا توجد رسائل بعد</div>';
+
+          return;
+
+        }
+
+
+        snap.forEach(
+          s => {
+
+            const d =
+              s.data();
+
+
+            const row =
+              document.createElement(
+                "div"
+              );
+
+            row.className =
+              "message";
+
+
+            const avatar =
+              document.createElement(
+                "img"
+              );
+
+            avatar.className =
+              "avatar";
+
+
+            avatar.src =
+              "https://ui-avatars.com/api/?name=" +
+              encodeURIComponent(
+                d.name || "عضو"
+              ) +
+              "&background=1687ff&color=fff";
+
+
+            const content =
+              document.createElement(
+                "div"
+              );
+
+            content.className =
+              "messageContent";
+
+
+            const name =
+              document.createElement(
+                "div"
+              );
+
+            name.className =
+              "messageName";
+
+            name.textContent =
+              d.name || "عضو";
+
+
+            const text =
+              document.createElement(
+                "div"
+              );
+
+            text.className =
+              "messageText";
+
+            text.textContent =
+              d.text || "";
+
+
+            content.append(
+              name,
+              text
+            );
+
+
+            row.append(
+              avatar,
+              content
+            );
+
+
+            box.appendChild(
+              row
+            );
+
+          }
+        );
+
+
+        box.scrollTop =
+          box.scrollHeight;
+
+      },
+
+      e => {
+
+        console.error(e);
+
+        box.innerHTML =
+          '<div class="empty">❌ تعذر تحميل الرسائل</div>';
+
+      }
+
+    );
+
+}
+
+
+/* =====================================================
+   VOICE
+===================================================== */
+
+
+/* =========================
+   PEER REF
+========================= */
 
 function slotPeerRef(
   slotId,
@@ -1221,432 +1582,31 @@ function slotPeerRef(
 
 
 /* =========================
-   AUDIO PLAYER
+   ENABLE AUDIO
 ========================= */
 
-function showAudioPlayer(
-  slotId,
-  stream
-){
+const enableAudioButton =
+  document.getElementById(
+    "enableAudioButton"
+  );
 
-  let panel =
-    document.getElementById(
-      "audioPanel"
-    );
 
-  if(!panel){
+enableAudioButton.onclick =
+  async () => {
 
-    panel =
-      document.createElement("div");
-
-    panel.id =
-      "audioPanel";
-
-    panel.innerHTML = `
-
-      <div style="font-weight:bold">
-        🔊 الاستماع إلى المايك
-      </div>
-
-      <audio
-        id="remoteAudio"
-        autoplay
-        playsinline
-        controls>
-      </audio>
-
-      <div class="audioButtons">
-
-        <button
-          id="playRemoteAudio"
-          class="playAudio">
-          ▶ تشغيل الصوت
-        </button>
-
-        <button
-          id="closeRemoteAudio"
-          class="closeAudio">
-          ✕ إغلاق
-        </button>
-
-      </div>
-
-    `;
-
-    document.body.appendChild(panel);
-
-
-    document.getElementById(
-      "playRemoteAudio"
-    ).onclick = async () => {
-
-      const audio =
-        document.getElementById(
-          "remoteAudio"
-        );
-
-      try{
-
-        await audio.play();
-
-      }catch(e){
-
-        console.error(
-          "audio play",
-          e
-        );
-
-        alert(
-          "اضغط زر تشغيل الصوت مرة أخرى."
-        );
-
-      }
-
-    };
-
-
-    document.getElementById(
-      "closeRemoteAudio"
-    ).onclick = () => {
-
-      const audio =
-        document.getElementById(
-          "remoteAudio"
-        );
-
-      audio.pause();
-
-      panel.remove();
-
-    };
-
-  }
-
-
-  const audio =
-    document.getElementById(
-      "remoteAudio"
-    );
-
-  audio.srcObject =
-    stream;
-
-  audio.autoplay = true;
-  audio.playsInline = true;
-
-  audio.play().catch(() => {
-
-    console.log(
-      "iPhone requires user interaction"
-    );
-
-  });
-
-}
-
-
-function removeAudioPlayer(){
-
-  const panel =
-    document.getElementById(
-      "audioPanel"
-    );
-
-  if(panel){
-
-    const audio =
-      document.getElementById(
-        "remoteAudio"
-      );
-
-    if(audio){
-
-      audio.pause();
-
-      audio.srcObject = null;
-
-    }
-
-    panel.remove();
-
-  }
-
-}
-
-
-/* =========================
-   TOGGLE MIC
-========================= */
-
-async function toggleMic(index){
-
-  const u =
-    auth.currentUser;
-
-  if(!u)return;
-
-  const slotId =
-    "slot" + (index + 1);
-
-  const ref =
-    doc(
-      db,
-      "voiceSlots",
-      slotId
-    );
-
-
-  try{
-
-    const snap =
-      await getDoc(ref);
-
-
-    /* =====================
-       ALREADY MY MIC
-    ===================== */
-
-    if(
-      mySlot === slotId
-    ){
-
-      await leaveMic(slotId);
-
-      return;
-
-    }
-
-
-    /* =====================
-       SLOT BUSY
-    ===================== */
-
-    if(snap.exists()){
-
-      const d =
-        snap.data();
-
-
-      if(d.uid === u.uid){
-
-        await leaveMic(
-          slotId
-        );
-
-        return;
-
-      }
-
-
-      await joinAsListener(
-        slotId,
-        d
-      );
-
-      return;
-
-    }
-
-
-    /* =====================
-       ALREADY USING MIC
-    ===================== */
-
-    if(mySlot){
-
-      alert(
-        "لديك مايك مفتوح بالفعل."
-      );
-
-      return;
-
-    }
-
-
-    /* =====================
-       CHECK MIC
-    ===================== */
-
-    if(
-      !navigator.mediaDevices ||
-      !navigator.mediaDevices.getUserMedia
-    ){
-
-      alert(
-        "❌ المتصفح لا يدعم الميكروفون أو الموقع يحتاج HTTPS."
-      );
-
-      return;
-
-    }
-
-
-    const mod =
-      await getMyModeration();
-
-
-    if(mod.banned){
-
-      alert(
-        "🚫 حسابك محظور"
-      );
-
-      return;
-
-    }
-
-
-    if(mod.micMuted){
-
-      alert(
-        "🎤 تم منعك من استخدام المايك"
-      );
-
-      return;
-
-    }
-
-
-    slots[index].status.textContent =
-      "🎤 جاري طلب الميكروفون...";
-
-
-    /* =====================
-       GET MICROPHONE
-    ===================== */
-
-    localStream =
-      await navigator.mediaDevices
-      .getUserMedia({
-
-        audio:{
-          echoCancellation:true,
-          noiseSuppression:true,
-          autoGainControl:true,
-          channelCount:1
-        },
-
-        video:false
-
-      });
-
-
-    mySlot =
-      slotId;
-
-
-    /* =====================
-       CLAIM SLOT
-    ===================== */
-
-    await setDoc(
-      ref,
-      {
-        uid:u.uid,
-        name:u.displayName || "عضو",
-        createdAt:serverTimestamp()
-      }
-    );
-
-
-    slots[index].status.textContent =
-      "🎤 أنت تتحدث";
-
-
-    startOwnerSignaling(
-      slotId
-    );
-
-
-  }catch(e){
-
-    console.error(
-      "toggleMic",
-      e
-    );
-
-    releaseLocalStream();
-
-    mySlot = null;
-
-
-    if(
-      e.name === "NotAllowedError"
-    ){
-
-      alert(
-        "⚠️ اسمح للموقع باستخدام الميكروفون من إعدادات الآيفون."
-      );
-
-    }else if(
-      e.name === "NotFoundError"
-    ){
-
-      alert(
-        "❌ لم يتم العثور على ميكروفون."
-      );
-
-    }else{
-
-      alert(
-        "❌ تعذر تشغيل المايك: " +
-        friendlyFirebaseError(e)
-      );
-
-    }
-
-  }
-
-}
-
-
-/* =========================
-   LEAVE MIC
-========================= */
-
-async function leaveMic(
-  slotId
-){
-
-  try{
-
-    await deleteDoc(
-      doc(
-        db,
-        "voiceSlots",
-        slotId
-      )
-    );
-
-  }catch(e){
-
-    console.error(e);
-
-  }
-
-
-  try{
-
-    const peersSnap =
-      await getDocs(
-        collection(
-          db,
-          "voiceCalls",
-          slotId,
-          "peers"
-        )
+    const audios =
+      document.querySelectorAll(
+        "#audioContainer audio"
       );
 
 
     for(
-      const s of peersSnap.docs
+      const audio of audios
     ){
 
       try{
 
-        await deleteDoc(
-          s.ref
-        );
+        await audio.play();
 
       }catch(e){
 
@@ -1656,60 +1616,173 @@ async function leaveMic(
 
     }
 
-  }catch(e){
 
-    console.error(e);
+    enableAudioButton.style.display =
+      "none";
+
+  };
+
+
+/*
+  محاولة تشغيل كل الأصوات الموجودة
+*/
+async function tryPlayAllAudio(){
+
+  const audios =
+    document.querySelectorAll(
+      "#audioContainer audio"
+    );
+
+
+  let failed = false;
+
+
+  for(
+    const audio of audios
+  ){
+
+    try{
+
+      await audio.play();
+
+    }catch(e){
+
+      failed = true;
+
+    }
 
   }
 
 
-  [...peerConnections.keys()]
-    .forEach(key => {
+  if(failed){
 
-      if(
-        key.startsWith(
-          slotId + "-"
-        )
-      ){
+    enableAudioButton.style.display =
+      "block";
 
-        closePeer(key);
+  }
 
-      }
+}
+
+
+/*
+  أي لمسة على الصفحة تساعد Safari
+  على السماح بتشغيل الصوت
+*/
+document.addEventListener(
+  "touchstart",
+  () => {
+
+    tryPlayAllAudio();
+
+  },
+  {
+    passive:true
+  }
+);
+
+
+/* =========================
+   CREATE AUDIO
+========================= */
+
+function attachRemoteAudio(
+  slotId,
+  stream
+){
+
+  const id =
+    "remote-audio-" +
+    slotId;
+
+
+  let audio =
+    document.getElementById(id);
+
+
+  if(!audio){
+
+    audio =
+      document.createElement(
+        "audio"
+      );
+
+    audio.id = id;
+
+    audio.autoplay = true;
+
+    audio.playsInline = true;
+
+    audio.setAttribute(
+      "playsinline",
+      ""
+    );
+
+    audio.setAttribute(
+      "webkit-playsinline",
+      ""
+    );
+
+    audio.muted = false;
+
+    document
+      .getElementById(
+        "audioContainer"
+      )
+      .appendChild(audio);
+
+  }
+
+
+  audio.srcObject =
+    stream;
+
+
+  audio.autoplay = true;
+
+  audio.playsInline = true;
+
+  audio.muted = false;
+
+
+  audio.play()
+    .then(() => {
+
+      enableAudioButton.style.display =
+        "none";
+
+    })
+    .catch(() => {
+
+      enableAudioButton.style.display =
+        "block";
 
     });
 
-
-  releaseLocalStream();
-
-
-  if(mySlot === slotId){
-
-    mySlot = null;
-
-  }
-
 }
 
 
 /* =========================
-   RELEASE MICROPHONE
+   REMOVE AUDIO
 ========================= */
 
-function releaseLocalStream(){
+function removeRemoteAudio(
+  slotId
+){
 
-  if(localStream){
+  const audio =
+    document.getElementById(
+      "remote-audio-" +
+      slotId
+    );
 
-    localStream
-      .getTracks()
-      .forEach(track => {
 
-        try{
-          track.stop();
-        }catch{}
+  if(audio){
 
-      });
+    audio.pause();
 
-    localStream = null;
+    audio.srcObject = null;
+
+    audio.remove();
 
   }
 
@@ -1717,7 +1790,7 @@ function releaseLocalStream(){
 
 
 /* =========================
-   OWNER SIGNALING
+   START OWNER
 ========================= */
 
 function startOwnerSignaling(
@@ -1725,7 +1798,8 @@ function startOwnerSignaling(
 ){
 
   const key =
-    "owner-" + slotId;
+    "owner-" +
+    slotId;
 
 
   if(
@@ -1739,6 +1813,7 @@ function startOwnerSignaling(
 
   const unsub =
     onSnapshot(
+
       collection(
         db,
         "voiceCalls",
@@ -1749,38 +1824,42 @@ function startOwnerSignaling(
       snap => {
 
         snap.docChanges()
-          .forEach(change => {
+          .forEach(
+            change => {
 
-            const listenerUid =
-              change.doc.id;
+              const uid =
+                change.doc.id;
 
 
-            if(
-              change.type === "added"
-            ){
+              if(
+                change.type === "added"
+              ){
 
-              createOwnerPeer(
-                slotId,
-                listenerUid
-              )
-              .catch(console.error);
+                createOwnerPeer(
+                  slotId,
+                  uid
+                )
+                .catch(
+                  console.error
+                );
+
+              }
+
+
+              if(
+                change.type === "removed"
+              ){
+
+                closePeer(
+                  slotId +
+                  "-" +
+                  uid
+                );
+
+              }
 
             }
-
-
-            if(
-              change.type === "removed"
-            ){
-
-              closePeer(
-                slotId +
-                "-" +
-                listenerUid
-              );
-
-            }
-
-          });
+          );
 
       },
 
@@ -1792,6 +1871,7 @@ function startOwnerSignaling(
         );
 
       }
+
     );
 
 
@@ -1852,37 +1932,37 @@ async function createOwnerPeer(
     pc
   );
 
+
   candidateQueues.set(
     key,
     []
   );
 
 
-  /* =====================
-     AUDIO TRACK
-  ===================== */
-
   localStream
     .getTracks()
-    .forEach(track => {
+    .forEach(
+      track => {
 
-      pc.addTrack(
-        track,
-        localStream
-      );
+        pc.addTrack(
+          track,
+          localStream
+        );
 
-    });
+      }
+    );
 
-
-  /* =====================
-     ICE
-  ===================== */
 
   pc.onicecandidate =
     event => {
 
-      if(!event.candidate)
+      if(
+        !event.candidate
+      ){
+
         return;
+
+      }
 
 
       addDoc(
@@ -1893,18 +1973,17 @@ async function createOwnerPeer(
         {
           candidate:
             event.candidate.toJSON(),
+
           createdAt:
             serverTimestamp()
         }
       )
-      .catch(console.error);
+      .catch(
+        console.error
+      );
 
     };
 
-
-  /* =====================
-     ANSWER
-  ===================== */
 
   const unsubAnswer =
     onSnapshot(
@@ -1941,7 +2020,7 @@ async function createOwnerPeer(
         }catch(e){
 
           console.error(
-            "set answer",
+            "answer",
             e
           );
 
@@ -1952,14 +2031,11 @@ async function createOwnerPeer(
 
 
   peerUnsubs.set(
-    "answer-" + key,
+    "answer-" +
+    key,
     unsubAnswer
   );
 
-
-  /* =====================
-     OFFER
-  ===================== */
 
   const offer =
     await pc.createOffer();
@@ -2009,22 +2085,13 @@ async function createOwnerPeer(
 
 
       if(
-        ["failed","closed","disconnected"]
-        .includes(
-          pc.connectionState
-        )
+        pc.connectionState ===
+        "failed" ||
+        pc.connectionState ===
+        "closed"
       ){
 
-        if(
-          pc.connectionState ===
-          "failed" ||
-          pc.connectionState ===
-          "closed"
-        ){
-
-          closePeer(key);
-
-        }
+        closePeer(key);
 
       }
 
@@ -2034,7 +2101,7 @@ async function createOwnerPeer(
 
 
 /* =========================
-   WATCH CALLEE
+   CALLEE ICE
 ========================= */
 
 function watchCalleeCandidates(
@@ -2045,6 +2112,7 @@ function watchCalleeCandidates(
 
   const unsub =
     onSnapshot(
+
       collection(
         peerRef,
         "calleeCandidates"
@@ -2053,53 +2121,129 @@ function watchCalleeCandidates(
       snap => {
 
         snap.docChanges()
-          .forEach(change => {
+          .forEach(
+            change => {
 
-            if(
-              change.type !== "added"
-            ){
+              if(
+                change.type !==
+                "added"
+              ){
 
-              return;
+                return;
+
+              }
+
+
+              const c =
+                change.doc.data()
+                  ?.candidate;
+
+
+              if(!c)
+                return;
+
+
+              if(
+                pc.remoteDescription
+              ){
+
+                pc.addIceCandidate(
+                  new RTCIceCandidate(c)
+                )
+                .catch(
+                  console.error
+                );
+
+              }else{
+
+                candidateQueues
+                  .get(key)
+                  ?.push(c);
+
+              }
 
             }
-
-
-            const c =
-              change.doc
-                .data()
-                ?.candidate;
-
-
-            if(!c)return;
-
-
-            if(
-              pc.remoteDescription
-            ){
-
-              pc.addIceCandidate(
-                new RTCIceCandidate(c)
-              )
-              .catch(console.error);
-
-            }else{
-
-              candidateQueues
-                .get(key)
-                ?.push(c);
-
-            }
-
-          });
+          );
 
       }
+
     );
 
 
   peerUnsubs.set(
-    "callee-" + key,
+    "callee-" +
+    key,
     unsub
   );
+
+}
+
+
+/* =========================
+   AUTOMATIC LISTENER
+========================= */
+
+async function autoJoinSlot(
+  slotId,
+  slotData
+){
+
+  const u =
+    auth.currentUser;
+
+
+  if(!u)
+    return;
+
+
+  /*
+    لا يستمع صاحب المايك لنفسه
+  */
+  if(
+    slotData.uid === u.uid
+  ){
+
+    return;
+
+  }
+
+
+  const key =
+    slotId +
+    "-" +
+    u.uid;
+
+
+  if(
+    peerConnections.has(key) ||
+    autoListeners.has(key)
+  ){
+
+    return;
+
+  }
+
+
+  autoListeners.add(key);
+
+
+  try{
+
+    await joinAsListener(
+      slotId,
+      slotData
+    );
+
+  }catch(e){
+
+    console.error(
+      "automatic listener",
+      e
+    );
+
+    autoListeners.delete(key);
+
+  }
 
 }
 
@@ -2116,7 +2260,9 @@ async function joinAsListener(
   const u =
     auth.currentUser;
 
-  if(!u)return;
+
+  if(!u)
+    return;
 
 
   const key =
@@ -2152,15 +2298,16 @@ async function joinAsListener(
     pc
   );
 
+
   candidateQueues.set(
     key,
     []
   );
 
 
-  /* =====================
-     IMPORTANT
-  ===================== */
+  /*
+    هذا جهاز مستمع فقط
+  */
 
   pc.addTransceiver(
     "audio",
@@ -2170,16 +2317,16 @@ async function joinAsListener(
   );
 
 
-  /* =====================
-     RECEIVE AUDIO
-  ===================== */
+  /*
+    وصول الصوت
+  */
 
   pc.ontrack =
     event => {
 
       console.log(
-        "REMOTE AUDIO TRACK",
-        event
+        "REMOTE VOICE",
+        slotId
       );
 
 
@@ -2198,7 +2345,7 @@ async function joinAsListener(
       }
 
 
-      showAudioPlayer(
+      attachRemoteAudio(
         slotId,
         stream
       );
@@ -2213,26 +2360,27 @@ async function joinAsListener(
       if(slot){
 
         slot.status.textContent =
-          "🔊 تستمع الآن";
-
-        slot.el.classList.add(
-          "listen"
-        );
+          "🔊 بث مباشر";
 
       }
 
     };
 
 
-  /* =====================
-     ICE
-  ===================== */
+  /*
+    ICE
+  */
 
   pc.onicecandidate =
     event => {
 
-      if(!event.candidate)
+      if(
+        !event.candidate
+      ){
+
         return;
+
+      }
 
 
       addDoc(
@@ -2248,14 +2396,16 @@ async function joinAsListener(
             serverTimestamp()
         }
       )
-      .catch(console.error);
+      .catch(
+        console.error
+      );
 
     };
 
 
-  /* =====================
-     RECEIVE OFFER
-  ===================== */
+  /*
+    نراقب عرض المايك
+  */
 
   const unsubOffer =
     onSnapshot(
@@ -2328,7 +2478,7 @@ async function joinAsListener(
         }catch(e){
 
           console.error(
-            "listener answer",
+            "listener",
             e
           );
 
@@ -2339,17 +2489,19 @@ async function joinAsListener(
 
 
   peerUnsubs.set(
-    "listener-" + key,
+    "listener-" +
+    key,
     unsubOffer
   );
 
 
-  /* =====================
-     CALLER ICE
-  ===================== */
+  /*
+    نستقبل ICE من صاحب المايك
+  */
 
   const unsubCaller =
     onSnapshot(
+
       collection(
         peerRef,
         "callerCandidates"
@@ -2358,65 +2510,77 @@ async function joinAsListener(
       snap => {
 
         snap.docChanges()
-          .forEach(change => {
+          .forEach(
+            change => {
 
-            if(
-              change.type !== "added"
-            ){
+              if(
+                change.type !==
+                "added"
+              ){
 
-              return;
+                return;
+
+              }
+
+
+              const c =
+                change.doc.data()
+                  ?.candidate;
+
+
+              if(!c)
+                return;
+
+
+              if(
+                pc.remoteDescription
+              ){
+
+                pc.addIceCandidate(
+                  new RTCIceCandidate(c)
+                )
+                .catch(
+                  console.error
+                );
+
+              }else{
+
+                candidateQueues
+                  .get(key)
+                  ?.push(c);
+
+              }
 
             }
-
-
-            const c =
-              change.doc
-                .data()
-                ?.candidate;
-
-
-            if(!c)return;
-
-
-            if(
-              pc.remoteDescription
-            ){
-
-              pc.addIceCandidate(
-                new RTCIceCandidate(c)
-              )
-              .catch(console.error);
-
-            }else{
-
-              candidateQueues
-                .get(key)
-                ?.push(c);
-
-            }
-
-          });
+          );
 
       }
+
     );
 
 
   peerUnsubs.set(
-    "caller-" + key,
+    "caller-" +
+    key,
     unsubCaller
   );
 
 
-  /* =====================
-     CREATE PEER DOCUMENT
-  ===================== */
+  /*
+    إنشاء سجل المستمع تلقائيًا
+  */
 
   await setDoc(
     peerRef,
     {
       listenerUid:u.uid,
-      name:u.displayName || "عضو",
-      joinedAt:serverTimestamp()
+      name:
+        u.displayName ||
+        "عضو",
+
+      joinedAt:
+        serverTimestamp()
+
     },
     {
       merge:true
@@ -2435,18 +2599,352 @@ async function joinAsListener(
 
 
       if(
-        ["failed","closed"]
-        .includes(
-          pc.connectionState
-        )
+        pc.connectionState ===
+        "failed" ||
+        pc.connectionState ===
+        "closed"
       ){
 
         closePeer(key);
-        removeAudioPlayer();
+
+        removeRemoteAudio(
+          slotId
+        );
 
       }
 
     };
+
+}
+
+
+/* =========================
+   TOGGLE MIC ONLY
+========================= */
+
+async function toggleMic(
+  index
+){
+
+  const u =
+    auth.currentUser;
+
+
+  if(!u)
+    return;
+
+
+  const slot =
+    slots[index];
+
+
+  const slotId =
+    "slot" +
+    (index + 1);
+
+
+  const ref =
+    doc(
+      db,
+      "voiceSlots",
+      slotId
+    );
+
+
+  try{
+
+    const snap =
+      await getDoc(ref);
+
+
+    /*
+      إذا كان هذا مايك المستخدم
+    */
+
+    if(
+      snap.exists() &&
+      snap.data().uid === u.uid
+    ){
+
+      await leaveMic(
+        slotId
+      );
+
+      return;
+
+    }
+
+
+    /*
+      إذا المايك مشغول:
+      لا نعمل استماع يدوي.
+    */
+
+    if(
+      snap.exists()
+    ){
+
+      slot.status.textContent =
+        "🔊 البث يعمل تلقائيًا";
+
+      await autoJoinSlot(
+        slotId,
+        snap.data()
+      );
+
+      return;
+
+    }
+
+
+    /*
+      المايك فارغ
+    */
+
+    if(mySlot){
+
+      alert(
+        "⚠️ لديك مايك مفتوح بالفعل"
+      );
+
+      return;
+
+    }
+
+
+    if(
+      !navigator.mediaDevices ||
+      !navigator.mediaDevices.getUserMedia
+    ){
+
+      alert(
+        "❌ الميكروفون يحتاج HTTPS ومتصفحًا يدعم WebRTC."
+      );
+
+      return;
+
+    }
+
+
+    const mod =
+      await getMyModeration();
+
+
+    if(mod.banned){
+
+      alert(
+        "🚫 حسابك محظور"
+      );
+
+      return;
+
+    }
+
+
+    if(mod.micMuted){
+
+      alert(
+        "🎤 تم منعك من استخدام المايك"
+      );
+
+      return;
+
+    }
+
+
+    slot.status.textContent =
+      "🎤 جاري تشغيل المايك...";
+
+
+    localStream =
+      await navigator.mediaDevices
+      .getUserMedia({
+
+        audio:{
+          echoCancellation:true,
+          noiseSuppression:true,
+          autoGainControl:true,
+          channelCount:1
+        },
+
+        video:false
+
+      });
+
+
+    mySlot =
+      slotId;
+
+
+    await setDoc(
+      ref,
+      {
+        uid:u.uid,
+
+        name:
+          u.displayName ||
+          "عضو",
+
+        createdAt:
+          serverTimestamp()
+
+      }
+    );
+
+
+    slot.status.textContent =
+      "🎤 أنت تتحدث";
+
+    slot.button.textContent =
+      "إيقاف المايك";
+
+
+    startOwnerSignaling(
+      slotId
+    );
+
+
+  }catch(e){
+
+    console.error(
+      "MIC ERROR",
+      e
+    );
+
+
+    releaseLocalStream();
+
+    mySlot = null;
+
+
+    alert(
+      "❌ تعذر تشغيل المايك:\n" +
+      (e.code ||
+       e.message ||
+       e.name)
+    );
+
+  }
+
+}
+
+
+/* =========================
+   LEAVE MIC
+========================= */
+
+async function leaveMic(
+  slotId
+){
+
+  try{
+
+    await deleteDoc(
+      doc(
+        db,
+        "voiceSlots",
+        slotId
+      )
+    );
+
+  }catch(e){
+
+    console.error(e);
+
+  }
+
+
+  try{
+
+    const peers =
+      await getDocs(
+        collection(
+          db,
+          "voiceCalls",
+          slotId,
+          "peers"
+        )
+      );
+
+
+    for(
+      const s of peers.docs
+    ){
+
+      try{
+
+        await deleteDoc(
+          s.ref
+        );
+
+      }catch(e){
+
+        console.error(e);
+
+      }
+
+    }
+
+  }catch(e){
+
+    console.error(e);
+
+  }
+
+
+  [...peerConnections.keys()]
+    .forEach(
+      key => {
+
+        if(
+          key.startsWith(
+            slotId + "-"
+          )
+        ){
+
+          closePeer(key);
+
+        }
+
+      }
+    );
+
+
+  releaseLocalStream();
+
+
+  if(mySlot === slotId){
+
+    mySlot = null;
+
+  }
+
+}
+
+
+/* =========================
+   RELEASE MIC
+========================= */
+
+function releaseLocalStream(){
+
+  if(localStream){
+
+    localStream
+      .getTracks()
+      .forEach(
+        track => {
+
+          try{
+            track.stop();
+          }catch{}
+
+        }
+      );
+
+    localStream = null;
+
+  }
 
 }
 
@@ -2462,8 +2960,10 @@ async function flushCandidateQueue(
   const pc =
     peerConnections.get(key);
 
+
   const queue =
-    candidateQueues.get(key) || [];
+    candidateQueues.get(key) ||
+    [];
 
 
   if(
@@ -2508,7 +3008,9 @@ async function flushCandidateQueue(
    CLOSE PEER
 ========================= */
 
-function closePeer(key){
+function closePeer(
+  key
+){
 
   const pc =
     peerConnections.get(key);
@@ -2530,38 +3032,45 @@ function closePeer(key){
   );
 
 
+  autoListeners.delete(
+    key
+  );
+
+
   [
     "answer-",
     "callee-",
     "listener-",
     "caller-"
-  ]
-  .forEach(prefix => {
+  ].forEach(
+    prefix => {
 
-    const k =
-      prefix + key;
-
-    const unsub =
-      peerUnsubs.get(k);
+      const k =
+        prefix + key;
 
 
-    if(unsub){
+      const unsub =
+        peerUnsubs.get(k);
 
-      try{
-        unsub();
-      }catch{}
 
-      peerUnsubs.delete(k);
+      if(unsub){
+
+        try{
+          unsub();
+        }catch{}
+
+        peerUnsubs.delete(k);
+
+      }
 
     }
-
-  });
+  );
 
 }
 
 
 /* =========================
-   WATCH SLOTS
+   WATCH VOICE SLOTS
 ========================= */
 
 function watchSlots(){
@@ -2575,6 +3084,7 @@ function watchSlots(){
 
   stopSlots =
     onSnapshot(
+
       collection(
         db,
         "voiceSlots"
@@ -2585,79 +3095,123 @@ function watchSlots(){
         const data = {};
 
 
-        snap.forEach(x => {
+        snap.forEach(
+          x => {
 
-          data[x.id] =
-            x.data();
-
-        });
-
-
-        slots.forEach(s => {
-
-          const d =
-            data[s.id];
-
-
-          const mine =
-            d &&
-            auth.currentUser &&
-            d.uid ===
-            auth.currentUser.uid;
-
-
-          s.el.classList.toggle(
-            "active",
-            !!d
-          );
-
-
-          s.name.textContent =
-            d
-              ? (d.name || "عضو")
-              : "شاغر";
-
-
-          if(!d){
-
-            s.status.textContent =
-              "اضغط للتحدث";
-
-            s.button.textContent =
-              "تشغيل المايك";
-
-            s.button.disabled =
-              false;
-
-            s.el.classList.remove(
-              "listen"
-            );
-
-          }else if(mine){
-
-            s.status.textContent =
-              "🎤 أنت تتحدث";
-
-            s.button.textContent =
-              "إيقاف المايك";
-
-            s.button.disabled =
-              false;
-
-          }else{
-
-            s.status.textContent =
-              "🔊 اضغط للاستماع";
-
-            s.button.textContent =
-              "استماع";
-
-            s.button.disabled =
-              false;
+            data[x.id] =
+              x.data();
 
           }
+        );
 
-        });
+
+        slots.forEach(
+          (slot,index) => {
+
+            const d =
+              data[slot.id];
+
+
+            const mine =
+              d &&
+              auth.currentUser &&
+              d.uid ===
+              auth.currentUser.uid;
+
+
+            if(!d){
+
+              slot.el.classList.remove(
+                "active"
+              );
+
+
+              slot.name.textContent =
+                "شاغر";
+
+
+              slot.status.textContent =
+                "اضغط للتحدث";
+
+
+              slot.button.textContent =
+                "تشغيل المايك";
+
+
+              slot.button.disabled =
+                false;
+
+
+              removeRemoteAudio(
+                slot.id
+              );
+
+
+              return;
+
+            }
+
+
+            slot.el.classList.add(
+              "active"
+            );
+
+
+            slot.name.textContent =
+              d.name ||
+              "عضو";
+
+
+            /*
+              صاحب المايك
+            */
+
+            if(mine){
+
+              slot.status.textContent =
+                "🎤 أنت تتحدث";
+
+
+              slot.button.textContent =
+                "إيقاف المايك";
+
+
+              slot.button.disabled =
+                false;
+
+
+              return;
+
+            }
+
+
+            /*
+              مستخدم آخر:
+              الاتصال يبدأ تلقائيًا
+            */
+
+            slot.status.textContent =
+              "🔊 بث مباشر";
+
+
+            slot.button.textContent =
+              "🔊 مباشر";
+
+
+            slot.button.disabled =
+              true;
+
+
+            autoJoinSlot(
+              slot.id,
+              d
+            )
+            .catch(
+              console.error
+            );
+
+          }
+        );
 
       },
 
@@ -2669,18 +3223,17 @@ function watchSlots(){
         );
 
 
-        slots.forEach(s => {
+        slots.forEach(
+          slot => {
 
-          s.status.textContent =
-            "❌ تعذر تحميل المايك: " +
-            friendlyFirebaseError(e);
+            slot.status.textContent =
+              "❌ تعذر تحميل المايك";
 
-          s.button.disabled =
-            true;
-
-        });
+          }
+        );
 
       }
+
     );
 
 }
@@ -2713,33 +3266,58 @@ async function cleanupAllVoice(){
 
 
   peerConnections
-    .forEach(pc => {
+    .forEach(
+      pc => {
 
-      try{
-        pc.close();
-      }catch{}
+        try{
+          pc.close();
+        }catch{}
 
-    });
+      }
+    );
 
 
   peerConnections.clear();
 
 
   peerUnsubs
-    .forEach(unsub => {
+    .forEach(
+      unsub => {
 
-      try{
-        unsub();
-      }catch{}
+        try{
+          unsub();
+        }catch{}
 
-    });
+      }
+    );
 
 
   peerUnsubs.clear();
 
+
   candidateQueues.clear();
 
-  removeAudioPlayer();
+  autoListeners.clear();
+
+
+  document
+    .querySelectorAll(
+      "#audioContainer audio"
+    )
+    .forEach(
+      audio => {
+
+        audio.pause();
+        audio.srcObject = null;
+        audio.remove();
+
+      }
+    );
+
+
+  enableAudioButton.style.display =
+    "none";
+
 
   mySlot = null;
 
