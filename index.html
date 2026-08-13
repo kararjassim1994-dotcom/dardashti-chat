@@ -4,436 +4,1763 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>طليان الشعلة</title>
+
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;width:100%;min-height:100%;font-family:Arial,Tahoma,sans-serif;background:#080b10;color:#fff}
+
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  font-family:Arial,Tahoma,sans-serif;
+  background:#080b10;
+  color:#fff;
+}
+
 body{
   background:
     linear-gradient(#0009,#0009),
     url("./background.jpeg") center/cover fixed no-repeat;
 }
-button,input{font-family:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
+
+button,input{
+  font-family:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* LOGIN */
 
 #loginPage{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;
-  padding:20px;background:transparent
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
 }
+
 .loginBox{
-  width:100%;max-width:430px;background:#101722ee;padding:25px;
-  border-radius:20px;border:1px solid #ffffff25;box-shadow:0 20px 60px #000b;
-  backdrop-filter:blur(8px)
+  width:100%;
+  max-width:430px;
+  background:#101722ee;
+  padding:25px;
+  border-radius:20px;
+  border:1px solid #ffffff25;
+  box-shadow:0 20px 60px #000b;
+  backdrop-filter:blur(8px);
 }
-.logo{text-align:center;font-size:30px;font-weight:bold;margin-bottom:8px}
-.description{text-align:center;color:#c0cad6;margin-bottom:20px;line-height:1.7}
-.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:12px}
-.tab{border:1px solid #344255;background:#18222e;color:#cbd5e1;padding:11px 5px;border-radius:9px;font-weight:bold}
-.tab.active{background:#1687ff;color:#fff}
-.form{display:none}.form.active{display:block}
-.loginBox input,.composer input{
-  width:100%;padding:14px;margin:6px 0;border:1px solid #344255;
-  border-radius:10px;background:#0d131b;color:#fff;outline:none
-}
-.btn{width:100%;padding:14px;margin-top:8px;border:0;border-radius:10px;font-weight:bold;color:#fff}
-.primary{background:#1687ff}.secondary{background:#283444}
-#authMessage{text-align:center;min-height:24px;margin-top:12px;color:#ffb6b6}
-.status{text-align:center;color:#8ee0b1;font-size:12px;margin-top:8px}
 
-#chatApp{height:100vh;display:flex;flex-direction:column}
+.logo{
+  text-align:center;
+  font-size:30px;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.description{
+  text-align:center;
+  color:#c0cad6;
+  margin-bottom:20px;
+  line-height:1.7;
+}
+
+.tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:6px;
+  margin-bottom:12px;
+}
+
+.tab{
+  border:1px solid #344255;
+  background:#18222e;
+  color:#cbd5e1;
+  padding:11px 5px;
+  border-radius:9px;
+  font-weight:bold;
+}
+
+.tab.active{
+  background:#1687ff;
+  color:#fff;
+}
+
+.form{
+  display:none;
+}
+
+.form.active{
+  display:block;
+}
+
+.loginBox input,
+.composer input{
+  width:100%;
+  padding:14px;
+  margin:6px 0;
+  border:1px solid #344255;
+  border-radius:10px;
+  background:#0d131b;
+  color:#fff;
+  outline:none;
+}
+
+.btn{
+  width:100%;
+  padding:14px;
+  margin-top:8px;
+  border:0;
+  border-radius:10px;
+  font-weight:bold;
+  color:#fff;
+}
+
+.primary{
+  background:#1687ff;
+}
+
+.status{
+  text-align:center;
+  color:#8ee0b1;
+  font-size:12px;
+  margin-top:8px;
+}
+
+#authMessage{
+  text-align:center;
+  min-height:24px;
+  margin-top:12px;
+  color:#ffb6b6;
+}
+
+/* CHAT */
+
+#chatApp{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
 .header{
-  min-height:64px;background:#101722ee;border-bottom:1px solid #293646;
-  display:flex;align-items:center;justify-content:space-between;padding:0 12px;
-  backdrop-filter:blur(8px)
+  min-height:64px;
+  background:#101722ee;
+  border-bottom:1px solid #293646;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 12px;
+  backdrop-filter:blur(8px);
 }
-.title{font-size:20px;font-weight:bold}.username{font-size:12px;color:#6ee7a0;margin-top:3px}
-.logout{border:0;background:#a92d38;color:#fff;padding:9px 12px;border-radius:9px}
 
-.voicePanel{background:#101720dd;border-bottom:1px solid #293646;padding:10px}
-.voiceTitle{text-align:center;font-weight:bold;margin-bottom:8px;color:#dce7f5}
-.voiceSlots{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.title{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.username{
+  font-size:12px;
+  color:#6ee7a0;
+  margin-top:3px;
+}
+
+.logout{
+  border:0;
+  background:#a92d38;
+  color:#fff;
+  padding:9px 12px;
+  border-radius:9px;
+}
+
+/* VOICE */
+
+.voicePanel{
+  background:#101720dd;
+  border-bottom:1px solid #293646;
+  padding:10px;
+}
+
+.voiceTitle{
+  text-align:center;
+  font-weight:bold;
+  margin-bottom:8px;
+  color:#dce7f5;
+}
+
+.voiceSlots{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
 .voiceSlot{
-  min-height:90px;background:#18222ecc;border:1px solid #344255;border-radius:13px;
-  padding:9px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px
+  min-height:90px;
+  background:#18222ecc;
+  border:1px solid #344255;
+  border-radius:13px;
+  padding:9px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
 }
-.voiceSlot.active{border-color:#24c77a}
-.voiceSlot button{border:0;border-radius:9px;padding:8px 12px;background:#1687ff;color:#fff;font-weight:bold}
-.voiceSlot.active button{background:#b52d39}
-.voiceName{font-size:13px;color:#aebaca;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.voiceStatus{font-size:11px;color:#7e8a99;text-align:center}
 
-.messages{flex:1;overflow-y:auto;padding:14px;background:#0004}
-.message{display:flex;gap:9px;margin-bottom:13px}
-.avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;background:#293646}
-.messageContent{background:#18222eea;border-radius:13px;padding:8px 11px;max-width:80%}
-.messageName{color:#61a8ff;font-size:12px;font-weight:bold;margin-bottom:3px}
-.messageText{line-height:1.5;word-break:break-word}
-.composer{display:flex;gap:7px;padding:9px;background:#151d28ee;border-top:1px solid #293646}
-.composer input{flex:1;min-width:0;margin:0}.send{width:50px;border:0;border-radius:10px;background:#1687ff;color:#fff;font-size:18px}
-.empty{text-align:center;color:#7e8a99;padding:35px 10px}
+.voiceSlot.active{
+  border-color:#24c77a;
+}
 
-#audioContainer{position:fixed;width:1px;height:1px;left:-100px;top:-100px;overflow:hidden}
-#audioContainer audio{width:1px;height:1px}
+.voiceSlot button{
+  border:0;
+  border-radius:9px;
+  padding:8px 12px;
+  background:#1687ff;
+  color:#fff;
+  font-weight:bold;
+}
+
+.voiceSlot.active button{
+  background:#b52d39;
+}
+
+.voiceName{
+  font-size:13px;
+  color:#aebaca;
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.voiceStatus{
+  font-size:11px;
+  color:#7e8a99;
+  text-align:center;
+}
+
+/* MESSAGES */
+
+.messages{
+  flex:1;
+  overflow-y:auto;
+  padding:14px;
+  background:#0004;
+}
+
+.message{
+  display:flex;
+  gap:9px;
+  margin-bottom:13px;
+}
+
+.avatar{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  object-fit:cover;
+  background:#293646;
+}
+
+.messageContent{
+  background:#18222eea;
+  border-radius:13px;
+  padding:8px 11px;
+  max-width:80%;
+}
+
+.messageName{
+  color:#61a8ff;
+  font-size:12px;
+  font-weight:bold;
+  margin-bottom:3px;
+}
+
+.messageText{
+  line-height:1.5;
+  word-break:break-word;
+}
+
+.empty{
+  text-align:center;
+  color:#7e8a99;
+  padding:35px 10px;
+}
+
+/* COMPOSER */
+
+.composer{
+  display:flex;
+  gap:7px;
+  padding:9px;
+  background:#151d28ee;
+  border-top:1px solid #293646;
+}
+
+.composer input{
+  flex:1;
+  min-width:0;
+  margin:0;
+}
+
+.send{
+  width:50px;
+  border:0;
+  border-radius:10px;
+  background:#1687ff;
+  color:#fff;
+  font-size:18px;
+}
+
 #enableAudioButton{
-  position:fixed;left:10px;right:10px;bottom:75px;z-index:99999;display:none;
-  border:0;border-radius:12px;padding:13px;background:#1687ff;color:#fff;font-weight:bold;box-shadow:0 8px 30px #0008
+  position:fixed;
+  left:10px;
+  right:10px;
+  bottom:75px;
+  z-index:99999;
+  display:none;
+  border:0;
+  border-radius:12px;
+  padding:13px;
+  background:#1687ff;
+  color:#fff;
+  font-weight:bold;
 }
-@media(max-width:420px){.voiceSlot button{padding:7px 9px;font-size:12px}}
+
+@media(max-width:420px){
+  .voiceSlot button{
+    padding:7px 9px;
+    font-size:12px;
+  }
+}
 </style>
 </head>
+
 <body>
 
+<!-- LOGIN -->
+
 <div id="loginPage">
+
   <div class="loginBox">
-    <div class="logo">🔥 طليان الشعلة</div>
+
+    <div class="logo">
+      🔥 طليان الشعلة
+    </div>
+
     <div class="description">
       أهلاً بك في الدردشة<br>
       اختر طريقة الدخول للمتابعة
     </div>
 
     <div class="tabs">
-      <button class="tab active" data-tab="visitor">دخول الزوار</button>
-      <button class="tab" data-tab="login">دخول الأعضاء</button>
-      <button class="tab" data-tab="signup">تسجيل عضوية</button>
+
+      <button class="tab active" data-tab="visitor">
+        دخول الزوار
+      </button>
+
+      <button class="tab" data-tab="login">
+        دخول الأعضاء
+      </button>
+
+      <button class="tab" data-tab="signup">
+        تسجيل عضوية
+      </button>
+
     </div>
+
+    <!-- VISITOR -->
 
     <div id="visitorForm" class="form active">
-      <input id="visitorName" type="text" placeholder="أكتب الاسم المستعار">
-      <button id="visitorButton" class="btn primary">دخول</button>
+
+      <input
+        id="visitorName"
+        type="text"
+        placeholder="أكتب الاسم المستعار"
+      >
+
+      <button
+        id="visitorButton"
+        class="btn primary"
+      >
+        دخول
+      </button>
+
     </div>
+
+    <!-- LOGIN -->
 
     <div id="loginForm" class="form">
-      <input id="emailInput" type="email" placeholder="البريد الإلكتروني">
-      <input id="passwordInput" type="password" placeholder="كلمة المرور">
-      <button id="loginButton" class="btn primary">دخول</button>
+
+      <input
+        id="emailInput"
+        type="email"
+        placeholder="البريد الإلكتروني"
+      >
+
+      <input
+        id="passwordInput"
+        type="password"
+        placeholder="كلمة المرور"
+      >
+
+      <button
+        id="loginButton"
+        class="btn primary"
+      >
+        دخول
+      </button>
+
     </div>
 
+    <!-- SIGNUP -->
+
     <div id="signupForm" class="form">
-      <input id="nameInput" type="text" placeholder="اسم العضو">
-      <input id="signupEmail" type="email" placeholder="البريد الإلكتروني">
-      <input id="signupPassword" type="password" placeholder="كلمة المرور">
-      <button id="signupButton" class="btn primary">إنشاء حساب</button>
+
+      <input
+        id="nameInput"
+        type="text"
+        placeholder="اسم العضو"
+      >
+
+      <input
+        id="signupEmail"
+        type="email"
+        placeholder="البريد الإلكتروني"
+      >
+
+      <input
+        id="signupPassword"
+        type="password"
+        placeholder="كلمة المرور"
+      >
+
+      <button
+        id="signupButton"
+        class="btn primary"
+      >
+        إنشاء حساب
+      </button>
+
     </div>
 
     <div id="authMessage"></div>
-    <div class="status">● متصل</div>
+
+    <div class="status">
+      ● متصل
+    </div>
+
   </div>
+
 </div>
+
+
+<!-- CHAT -->
 
 <div id="chatApp" class="hidden">
+
   <div class="header">
+
     <div>
-      <div class="title">🔥 طليان الشعلة</div>
-      <div id="currentUsername" class="username">عضو</div>
+
+      <div class="title">
+        🔥 طليان الشعلة
+      </div>
+
+      <div
+        id="currentUsername"
+        class="username"
+      >
+        عضو
+      </div>
+
     </div>
-    <button id="logoutButton" class="logout">خروج</button>
+
+    <button
+      id="logoutButton"
+      class="logout"
+    >
+      خروج
+    </button>
+
   </div>
+
+
+  <!-- VOICE -->
 
   <div class="voicePanel">
-    <div class="voiceTitle">🎤 المايكات العامة</div>
-    <div class="voiceSlots">
-      <div id="voiceSlot1" class="voiceSlot">
-        <div>🎤 المايك 1</div>
-        <div id="voiceName1" class="voiceName">شاغر</div>
-        <div id="voiceStatus1" class="voiceStatus">اضغط للتحدث</div>
-        <button id="voiceButton1">تشغيل المايك</button>
-      </div>
-      <div id="voiceSlot2" class="voiceSlot">
-        <div>🎤 المايك 2</div>
-        <div id="voiceName2" class="voiceName">شاغر</div>
-        <div id="voiceStatus2" class="voiceStatus">اضغط للتحدث</div>
-        <button id="voiceButton2">تشغيل المايك</button>
-      </div>
+
+    <div class="voiceTitle">
+      🎤 المايكات العامة
     </div>
+
+    <div class="voiceSlots">
+
+      <div
+        id="voiceSlot1"
+        class="voiceSlot"
+      >
+
+        <div>
+          🎤 المايك 1
+        </div>
+
+        <div
+          id="voiceName1"
+          class="voiceName"
+        >
+          شاغر
+        </div>
+
+        <div
+          id="voiceStatus1"
+          class="voiceStatus"
+        >
+          اضغط للتحدث
+        </div>
+
+        <button id="voiceButton1">
+          تشغيل المايك
+        </button>
+
+      </div>
+
+
+      <div
+        id="voiceSlot2"
+        class="voiceSlot"
+      >
+
+        <div>
+          🎤 المايك 2
+        </div>
+
+        <div
+          id="voiceName2"
+          class="voiceName"
+        >
+          شاغر
+        </div>
+
+        <div
+          id="voiceStatus2"
+          class="voiceStatus"
+        >
+          اضغط للتحدث
+        </div>
+
+        <button id="voiceButton2">
+          تشغيل المايك
+        </button>
+
+      </div>
+
+    </div>
+
   </div>
 
-  <div id="messages" class="messages">
-    <div class="empty">جاري تحميل الدردشة...</div>
+
+  <!-- MESSAGES -->
+
+  <div
+    id="messages"
+    class="messages"
+  >
+
+    <div class="empty">
+      جاري تحميل الدردشة...
+    </div>
+
   </div>
+
+
+  <!-- COMPOSER -->
 
   <div class="composer">
-    <input id="messageInput" type="text" placeholder="اكتب رسالتك...">
-    <button id="sendButton" class="send">➤</button>
+
+    <input
+      id="messageInput"
+      type="text"
+      placeholder="اكتب رسالتك..."
+    >
+
+    <button
+      id="sendButton"
+      class="send"
+    >
+      ➤
+    </button>
+
   </div>
+
 </div>
 
-<div id="audioContainer"></div>
-<button id="enableAudioButton">🔊 تفعيل الصوت</button>
+
+<button id="enableAudioButton">
+  🔊 تفعيل الصوت
+</button>
+
+
+<!-- FIREBASE -->
 
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
 import {
-  getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,
-  signInAnonymously,updateProfile,onAuthStateChanged,signOut
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInAnonymously,
+  updateProfile,
+  onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
+
 import {
-  getFirestore,collection,addDoc,query,orderBy,onSnapshot,serverTimestamp,
-  doc,setDoc,deleteDoc,getDoc,getDocs
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  serverTimestamp,
+  doc,
+  setDoc,
+  deleteDoc,
+  getDoc
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
-const firebaseConfig={
-  apiKey:"AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
-  authDomain:"dardashti-chat.firebaseapp.com",
-  projectId:"dardashti-chat",
-  storageBucket:"dardashti-chat.firebasestorage.app",
-  messagingSenderId:"779042757468",
-  appId:"1:779042757468:web:7646d3cdadf46f315a3f99"
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
+
+  authDomain:
+    "dardashti-chat.firebaseapp.com",
+
+  projectId:
+    "dardashti-chat",
+
+  storageBucket:
+    "dardashti-chat.firebasestorage.app",
+
+  messagingSenderId:
+    "779042757468",
+
+  appId:
+    "1:779042757468:web:7646d3cdadf46f315a3f99"
+
 };
-const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
 
-const loginPage=document.getElementById("loginPage");
-const chatApp=document.getElementById("chatApp");
-const authMessage=document.getElementById("authMessage");
-let stopMessages=null,stopSlots=null;
-let mySlot=null,localStream=null;
 
-const rtcConfig={
-  iceServers:[{urls:["stun:stun.l.google.com:19302","stun:stun1.l.google.com:19302"]}],
-  iceCandidatePoolSize:10
-};
+const app = initializeApp(firebaseConfig);
 
-const slots=[
- {id:"slot1",el:document.getElementById("voiceSlot1"),name:document.getElementById("voiceName1"),status:document.getElementById("voiceStatus1"),button:document.getElementById("voiceButton1")},
- {id:"slot2",el:document.getElementById("voiceSlot2"),name:document.getElementById("voiceName2"),status:document.getElementById("voiceStatus2"),button:document.getElementById("voiceButton2")}
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+/* HELPERS */
+
+const $ = id =>
+  document.getElementById(id);
+
+
+let stopMessages = null;
+let stopSlots = null;
+
+let mySlot = null;
+
+let localStream = null;
+
+let sending = false;
+
+
+/* VOICE SLOTS */
+
+const slots = [
+
+  {
+    id:"slot1",
+    el:$("voiceSlot1"),
+    name:$("voiceName1"),
+    status:$("voiceStatus1"),
+    button:$("voiceButton1")
+  },
+
+  {
+    id:"slot2",
+    el:$("voiceSlot2"),
+    name:$("voiceName2"),
+    status:$("voiceStatus2"),
+    button:$("voiceButton2")
+  }
+
 ];
 
-document.querySelectorAll(".tab").forEach(btn=>{
-  btn.onclick=()=>{
-    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
-    document.querySelectorAll(".form").forEach(x=>x.classList.remove("active"));
-    btn.classList.add("active");
-    document.getElementById(btn.dataset.tab+"Form").classList.add("active");
-    authMessage.textContent="";
+
+/* TABS */
+
+document
+.querySelectorAll(".tab")
+.forEach(button => {
+
+  button.onclick = () => {
+
+    document
+    .querySelectorAll(".tab")
+    .forEach(x =>
+      x.classList.remove("active")
+    );
+
+    document
+    .querySelectorAll(".form")
+    .forEach(x =>
+      x.classList.remove("active")
+    );
+
+    button.classList.add("active");
+
+    $(
+      button.dataset.tab + "Form"
+    ).classList.add("active");
+
+    $("authMessage").textContent = "";
+
   };
+
 });
+
+
+/* VISITOR LOGIN */
 
 async function enterVisitor(){
-  const name=document.getElementById("visitorName").value.trim();
-  if(name.length<2){authMessage.textContent="⚠️ اكتب اسمًا صحيحًا";return}
 
-  authMessage.textContent="جاري الدخول كزائر...";
-  localStorage.setItem("visitorName",name);
+  const name =
+    $("visitorName")
+    .value
+    .trim();
 
-  try{
-    // تسجيل دخول Firebase مجهول للزائر حتى تسمح Firestore Rules بإرسال الرسائل
-    if(!auth.currentUser){
-      await signInAnonymously(auth);
-    }
-    showChat(name);
-  }catch(e){
-    console.error(e);
-    authMessage.textContent="❌ تعذر دخول الزائر: "+(e.code||e.message);
+  if(name.length < 2){
+
+    $("authMessage").textContent =
+      "⚠️ اكتب اسمًا صحيحًا";
+
+    return;
+
   }
-}
-document.getElementById("visitorButton").onclick=enterVisitor;
-document.getElementById("visitorName").onkeydown=e=>{if(e.key==="Enter")enterVisitor()};
 
-document.getElementById("signupButton").onclick=async()=>{
-  const name=document.getElementById("nameInput").value.trim();
-  const email=document.getElementById("signupEmail").value.trim();
-  const password=document.getElementById("signupPassword").value;
-  if(name.length<2){authMessage.textContent="⚠️ اكتب اسم العضو";return}
-  if(!email){authMessage.textContent="⚠️ اكتب البريد الإلكتروني";return}
-  if(password.length<6){authMessage.textContent="⚠️ كلمة المرور 6 أحرف على الأقل";return}
-  authMessage.textContent="جاري إنشاء الحساب...";
+  localStorage.setItem(
+    "visitorName",
+    name
+  );
+
+  $("authMessage").textContent =
+    "جاري الدخول...";
+
   try{
-    const r=await createUserWithEmailAndPassword(auth,email,password);
-    await updateProfile(r.user,{displayName:name});
-    await setDoc(doc(db,"users",r.user.uid),{
-      uid:r.user.uid,name,email,role:"user",banned:false,createdAt:serverTimestamp()
-    },{merge:true});
-    await setDoc(doc(db,"moderation",r.user.uid),{
-      banned:false,micMuted:false,updatedAt:serverTimestamp()
-    },{merge:true});
-    authMessage.textContent="✅ تم إنشاء الحساب";
-  }catch(e){authMessage.textContent="❌ "+(e.code||e.message)}
+
+    if(!auth.currentUser){
+
+      await signInAnonymously(auth);
+
+    }
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    $("authMessage").textContent =
+      "❌ " +
+      (
+        error.code ||
+        error.message
+      );
+
+  }
+
+}
+
+
+$("visitorButton").onclick =
+  enterVisitor;
+
+
+$("visitorName").onkeydown =
+  event => {
+
+    if(event.key === "Enter"){
+
+      enterVisitor();
+
+    }
+
+  };
+
+
+/* SIGNUP */
+
+$("signupButton").onclick =
+async () => {
+
+  const name =
+    $("nameInput")
+    .value
+    .trim();
+
+  const email =
+    $("signupEmail")
+    .value
+    .trim();
+
+  const password =
+    $("signupPassword")
+    .value;
+
+
+  if(
+    name.length < 2 ||
+    !email ||
+    password.length < 6
+  ){
+
+    $("authMessage").textContent =
+      "⚠️ تأكد من البيانات";
+
+    return;
+
+  }
+
+
+  $("authMessage").textContent =
+    "جاري إنشاء الحساب...";
+
+
+  try{
+
+    const result =
+      await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+
+    await updateProfile(
+      result.user,
+      {
+        displayName:name
+      }
+    );
+
+
+    await setDoc(
+      doc(
+        db,
+        "users",
+        result.user.uid
+      ),
+      {
+        uid:result.user.uid,
+        name:name,
+        email:email,
+        role:"user",
+        banned:false,
+        createdAt:serverTimestamp()
+      },
+      {
+        merge:true
+      }
+    );
+
+
+    await setDoc(
+      doc(
+        db,
+        "moderation",
+        result.user.uid
+      ),
+      {
+        banned:false,
+        micMuted:false,
+        updatedAt:serverTimestamp()
+      },
+      {
+        merge:true
+      }
+    );
+
+
+    $("authMessage").textContent =
+      "✅ تم إنشاء الحساب";
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    $("authMessage").textContent =
+      "❌ " +
+      (
+        error.code ||
+        error.message
+      );
+
+  }
+
 };
 
-document.getElementById("loginButton").onclick=async()=>{
-  const email=document.getElementById("emailInput").value.trim();
-  const password=document.getElementById("passwordInput").value;
-  if(!email||!password){authMessage.textContent="⚠️ اكتب البريد وكلمة المرور";return}
-  authMessage.textContent="جاري تسجيل الدخول...";
-  try{await signInWithEmailAndPassword(auth,email,password)}
-  catch(e){authMessage.textContent="❌ "+(e.code||e.message)}
+
+/* LOGIN */
+
+$("loginButton").onclick =
+async () => {
+
+  const email =
+    $("emailInput")
+    .value
+    .trim();
+
+  const password =
+    $("passwordInput")
+    .value;
+
+
+  if(!email || !password){
+
+    $("authMessage").textContent =
+      "⚠️ اكتب البريد وكلمة المرور";
+
+    return;
+
+  }
+
+
+  $("authMessage").textContent =
+    "جاري تسجيل الدخول...";
+
+
+  try{
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    $("authMessage").textContent =
+      "❌ " +
+      (
+        error.code ||
+        error.message
+      );
+
+  }
+
 };
+
+
+/* MODERATION */
 
 async function getModeration(uid){
+
   try{
-    const s=await getDoc(doc(db,"moderation",uid));
-    return s.exists()?s.data():{};
-  }catch{return {}}
+
+    const snapshot =
+      await getDoc(
+        doc(
+          db,
+          "moderation",
+          uid
+        )
+      );
+
+    if(snapshot.exists()){
+
+      return snapshot.data();
+
+    }
+
+    return {};
+
+  }
+
+  catch{
+
+    return {};
+
+  }
+
 }
+
+
+/* SHOW CHAT */
 
 function showChat(name){
-  loginPage.classList.add("hidden");
-  chatApp.classList.remove("hidden");
-  document.getElementById("currentUsername").textContent=name;
+
+  $("loginPage")
+    .classList
+    .add("hidden");
+
+  $("chatApp")
+    .classList
+    .remove("hidden");
+
+  $("currentUsername")
+    .textContent = name;
+
   loadMessages();
+
   watchSlots();
+
 }
 
-onAuthStateChanged(auth,async user=>{
-  if(user){
-    const mod=await getModeration(user.uid);
-    if(mod.banned){
-      await signOut(auth);
-      authMessage.textContent="🚫 حسابك محظور";
-      return;
-    }
-    const visitorName=localStorage.getItem("visitorName");
-    showChat(user.isAnonymous ? (visitorName||"زائر") : (user.displayName||"عضو"));
-  }else{
-    cleanupVoice();
-    loginPage.classList.remove("hidden");
-    chatApp.classList.add("hidden");
-    if(stopMessages){stopMessages();stopMessages=null}
-    if(stopSlots){stopSlots();stopSlots=null}
-  }
-});
 
-document.getElementById("logoutButton").onclick=async()=>{
-  try{
-    cleanupVoice();
-    localStorage.removeItem("visitorName");
-    if(auth.currentUser) await signOut(auth);
-  }catch(e){
-    console.error(e);
+/* AUTH STATE */
+
+onAuthStateChanged(
+  auth,
+  async user => {
+
+    if(user){
+
+      const moderation =
+        await getModeration(
+          user.uid
+        );
+
+
+      if(moderation.banned){
+
+        await signOut(auth);
+
+        $("authMessage").textContent =
+          "🚫 حسابك محظور";
+
+        return;
+
+      }
+
+
+      const visitorName =
+        localStorage.getItem(
+          "visitorName"
+        );
+
+
+      showChat(
+
+        user.isAnonymous
+
+          ? (
+              visitorName ||
+              "زائر"
+            )
+
+          : (
+              user.displayName ||
+              "عضو"
+            )
+
+      );
+
+    }
+
+    else{
+
+      $("loginPage")
+        .classList
+        .remove("hidden");
+
+      $("chatApp")
+        .classList
+        .add("hidden");
+
+
+      if(stopMessages){
+
+        stopMessages();
+
+        stopMessages = null;
+
+      }
+
+
+      if(stopSlots){
+
+        stopSlots();
+
+        stopSlots = null;
+
+      }
+
+    }
+
   }
+);
+
+
+/* LOGOUT */
+
+$("logoutButton").onclick =
+async () => {
+
+  try{
+
+    localStorage.removeItem(
+      "visitorName"
+    );
+
+    await signOut(auth);
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+  }
+
 };
+
+
+/* SEND MESSAGE */
 
 async function sendMessage(){
-  const input=document.getElementById("messageInput"),text=input.value.trim();
-  const u=auth.currentUser;
-  const visitor=localStorage.getItem("visitorName");
-  if(!text)return;
-  try{
-    if(u){
-      const mod=await getModeration(u.uid);
-      if(mod.banned){alert("🚫 حسابك محظور");return}
-      await addDoc(collection(db,"messages"),{
-        uid:u.uid,name:u.displayName||"عضو",text,createdAt:serverTimestamp()
-      });
-    }else{
-      await addDoc(collection(db,"messages"),{
-        uid:"visitor",name:visitor||"زائر",text,createdAt:serverTimestamp()
-      });
-    }
-    input.value="";
-  }catch(e){alert("تعذر إرسال الرسالة: "+(e.code||e.message))}
-}
-document.getElementById("sendButton").onclick=sendMessage;
-document.getElementById("messageInput").onkeydown=e=>{if(e.key==="Enter")sendMessage()};
 
-function loadMessages(){
-  if(stopMessages)stopMessages();
-  const box=document.getElementById("messages");
-  stopMessages=onSnapshot(
-    query(collection(db,"messages"),orderBy("createdAt","asc")),
-    snap=>{
-      box.innerHTML="";
-      if(snap.empty){box.innerHTML='<div class="empty">لا توجد رسائل بعد</div>';return}
-      snap.forEach(s=>{
-        const d=s.data(),row=document.createElement("div");
-        row.className="message";
-        const avatar=document.createElement("img");
-        avatar.className="avatar";
-        avatar.src="https://ui-avatars.com/api/?name="+encodeURIComponent(d.name||"عضو")+"&background=1687ff&color=fff";
-        const content=document.createElement("div");content.className="messageContent";
-        const name=document.createElement("div");name.className="messageName";name.textContent=d.name||"عضو";
-        const text=document.createElement("div");text.className="messageText";text.textContent=d.text||"";
-        content.append(name,text);row.append(avatar,content);box.appendChild(row);
-      });
-      box.scrollTop=box.scrollHeight;
-    },
-    e=>{console.error(e);box.innerHTML='<div class="empty">❌ تعذر تحميل الرسائل</div>'}
-  );
-}
+  const input =
+    $("messageInput");
 
-function slotPeerRef(slotId,uid){return doc(db,"voiceCalls",slotId,"peers",uid)}
-const peerConnections=new Map(),peerUnsubs=new Map(),candidateQueues=new Map();
+  const text =
+    input.value.trim();
 
-function attachRemoteAudio(slotId,stream){
-  let audio=document.getElementById("remote-audio-"+slotId);
-  if(!audio){
-    audio=document.createElement("audio");audio.id="remote-audio-"+slotId;
-    audio.autoplay=true;audio.playsInline=true;audio.controls=false;
-    document.getElementById("audioContainer").appendChild(audio);
+  const user =
+    auth.currentUser;
+
+
+  if(
+    !text ||
+    sending ||
+    !user
+  ){
+
+    return;
+
   }
-  audio.srcObject=stream;
-  audio.play().catch(()=>document.getElementById("enableAudioButton").style.display="block");
+
+
+  sending = true;
+
+  input.disabled = true;
+
+  $("sendButton").disabled = true;
+
+
+  try{
+
+    const moderation =
+      await getModeration(
+        user.uid
+      );
+
+
+    if(moderation.banned){
+
+      throw new Error(
+        "banned"
+      );
+
+    }
+
+
+    const name =
+      user.isAnonymous
+
+      ? (
+          localStorage.getItem(
+            "visitorName"
+          ) ||
+          "زائر"
+        )
+
+      : (
+          user.displayName ||
+          "عضو"
+        );
+
+
+    await addDoc(
+      collection(
+        db,
+        "messages"
+      ),
+      {
+
+        uid:user.uid,
+
+        name:name,
+
+        text:text,
+
+        createdAt:
+          serverTimestamp()
+
+      }
+    );
+
+
+    input.value = "";
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    alert(
+      "تعذر إرسال الرسالة: " +
+      (
+        error.code ||
+        error.message
+      )
+    );
+
+  }
+
+  finally{
+
+    sending = false;
+
+    input.disabled = false;
+
+    $("sendButton").disabled = false;
+
+    input.focus();
+
+  }
+
 }
-document.getElementById("enableAudioButton").onclick=async()=>{
-  for(const a of document.querySelectorAll("#audioContainer audio"))try{await a.play()}catch{}
-  document.getElementById("enableAudioButton").style.display="none";
+
+
+$("sendButton").onclick =
+  sendMessage;
+
+
+$("messageInput").onkeydown =
+event => {
+
+  if(event.key === "Enter"){
+
+    event.preventDefault();
+
+    sendMessage();
+
+  }
+
 };
 
-async function toggleMic(index){
-  const u=auth.currentUser;
-  if(!u){alert("🎤 المايك يحتاج تسجيل دخول عضو");return}
-  const slot=slots[index],slotId="slot"+(index+1),ref=doc(db,"voiceSlots",slotId);
-  try{
-    const snap=await getDoc(ref);
-    if(snap.exists()&&snap.data().uid===u.uid){await leaveMic(slotId);return}
-    if(snap.exists()){slot.status.textContent="🔊 البث يعمل تلقائيًا";return}
-    if(mySlot){alert("⚠️ لديك مايك مفتوح بالفعل");return}
-    const mod=await getModeration(u.uid);
-    if(mod.banned){alert("🚫 حسابك محظور");return}
-    if(mod.micMuted){alert("🎤 تم منعك من استخدام المايك");return}
-    localStream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true},video:false});
-    mySlot=slotId;
-    await setDoc(ref,{uid:u.uid,name:u.displayName||"عضو",createdAt:serverTimestamp()});
-    slot.status.textContent="🎤 أنت تتحدث";slot.button.textContent="إيقاف المايك";
-  }catch(e){
-    if(localStream)localStream.getTracks().forEach(t=>t.stop());
-    localStream=null;mySlot=null;
-    alert("❌ تعذر تشغيل المايك:\n"+(e.code||e.message||e.name));
+
+/* LOAD MESSAGES */
+
+function loadMessages(){
+
+  if(stopMessages){
+
+    stopMessages();
+
   }
-}
-slots.forEach((s,i)=>s.button.onclick=()=>toggleMic(i));
 
-async function leaveMic(slotId){
-  try{await deleteDoc(doc(db,"voiceSlots",slotId))}catch(e){console.error(e)}
-  [...peerConnections.keys()].forEach(k=>{if(k.startsWith(slotId+"-"))closePeer(k)});
-  if(localStream)localStream.getTracks().forEach(t=>t.stop());
-  localStream=null;if(mySlot===slotId)mySlot=null;
+
+  const box =
+    $("messages");
+
+
+  const messagesQuery =
+    query(
+      collection(
+        db,
+        "messages"
+      ),
+      orderBy(
+        "createdAt",
+        "asc"
+      )
+    );
+
+
+  stopMessages =
+    onSnapshot(
+
+      messagesQuery,
+
+      snapshot => {
+
+        box.innerHTML = "";
+
+
+        if(snapshot.empty){
+
+          box.innerHTML =
+            '<div class="empty">لا توجد رسائل بعد</div>';
+
+          return;
+
+        }
+
+
+        const fragment =
+          document.createDocumentFragment();
+
+
+        snapshot.forEach(
+          message => {
+
+            const data =
+              message.data();
+
+
+            const row =
+              document.createElement(
+                "div"
+              );
+
+            row.className =
+              "message";
+
+
+            const avatar =
+              document.createElement(
+                "img"
+              );
+
+            avatar.className =
+              "avatar";
+
+
+            avatar.src =
+              "https://ui-avatars.com/api/?name=" +
+              encodeURIComponent(
+                data.name ||
+                "عضو"
+              ) +
+              "&background=1687ff&color=fff";
+
+
+            const content =
+              document.createElement(
+                "div"
+              );
+
+            content.className =
+              "messageContent";
+
+
+            const name =
+              document.createElement(
+                "div"
+              );
+
+            name.className =
+              "messageName";
+
+            name.textContent =
+              data.name ||
+              "عضو";
+
+
+            const text =
+              document.createElement(
+                "div"
+              );
+
+            text.className =
+              "messageText";
+
+            text.textContent =
+              data.text ||
+              "";
+
+
+            content.append(
+              name,
+              text
+            );
+
+
+            row.append(
+              avatar,
+              content
+            );
+
+
+            fragment.append(
+              row
+            );
+
+          }
+        );
+
+
+        box.append(
+          fragment
+        );
+
+
+        box.scrollTop =
+          box.scrollHeight;
+
+      },
+
+      error => {
+
+        console.error(error);
+
+        box.innerHTML =
+          '<div class="empty">❌ تعذر تحميل الرسائل</div>';
+
+      }
+
+    );
+
 }
 
-function closePeer(key){
-  const pc=peerConnections.get(key);if(pc)try{pc.close()}catch{}
-  peerConnections.delete(key);candidateQueues.delete(key);
-  for(const [k,u] of peerUnsubs){if(k.endsWith(key)){try{u()}catch{};peerUnsubs.delete(k)}}
+
+/* MICROPHONE */
+
+async function toggleMic(index){
+
+  const user =
+    auth.currentUser;
+
+
+  if(
+    !user ||
+    user.isAnonymous
+  ){
+
+    alert(
+      "🎤 المايك يحتاج حساب عضو"
+    );
+
+    return;
+
+  }
+
+
+  const slot =
+    slots[index];
+
+  const slotRef =
+    doc(
+      db,
+      "voiceSlots",
+      slot.id
+    );
+
+
+  try{
+
+    const snapshot =
+      await getDoc(
+        slotRef
+      );
+
+
+    if(
+      snapshot.exists() &&
+      snapshot.data().uid ===
+      user.uid
+    ){
+
+      await deleteDoc(
+        slotRef
+      );
+
+
+      if(localStream){
+
+        localStream
+        .getTracks()
+        .forEach(
+          track =>
+            track.stop()
+        );
+
+      }
+
+
+      localStream = null;
+
+      mySlot = null;
+
+      return;
+
+    }
+
+
+    if(snapshot.exists()){
+
+      alert(
+        "🔊 المايك مشغول حاليًا"
+      );
+
+      return;
+
+    }
+
+
+    if(mySlot){
+
+      alert(
+        "⚠️ لديك مايك مفتوح بالفعل"
+      );
+
+      return;
+
+    }
+
+
+    const moderation =
+      await getModeration(
+        user.uid
+      );
+
+
+    if(
+      moderation.banned ||
+      moderation.micMuted
+    ){
+
+      alert(
+        "🚫 لا يمكنك استخدام المايك"
+      );
+
+      return;
+
+    }
+
+
+    localStream =
+      await navigator
+      .mediaDevices
+      .getUserMedia({
+
+        audio:{
+          echoCancellation:true,
+          noiseSuppression:true,
+          autoGainControl:true
+        },
+
+        video:false
+
+      });
+
+
+    mySlot =
+      slot.id;
+
+
+    await setDoc(
+      slotRef,
+      {
+
+        uid:user.uid,
+
+        name:
+          user.displayName ||
+          "عضو",
+
+        createdAt:
+          serverTimestamp()
+
+      }
+    );
+
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    if(localStream){
+
+      localStream
+      .getTracks()
+      .forEach(
+        track =>
+          track.stop()
+      );
+
+    }
+
+
+    localStream = null;
+
+    mySlot = null;
+
+
+    alert(
+      "❌ تعذر تشغيل المايك: " +
+      (
+        error.code ||
+        error.message ||
+        error.name
+      )
+    );
+
+  }
+
 }
+
+
+slots.forEach(
+  (slot,index) => {
+
+    slot.button.onclick =
+      () => toggleMic(index);
+
+  }
+);
+
+
+/* WATCH VOICE SLOTS */
 
 function watchSlots(){
-  if(stopSlots)stopSlots();
-  stopSlots=onSnapshot(collection(db,"voiceSlots"),snap=>{
-    const data={};snap.forEach(x=>data[x.id]=x.data());
-    slots.forEach((slot)=>{
-      const d=data[slot.id],mine=d&&auth.currentUser&&d.uid===auth.currentUser.uid;
-      if(!d){
-        slot.el.classList.remove("active");slot.name.textContent="شاغر";
-        slot.status.textContent="اضغط للتحدث";slot.button.textContent="تشغيل المايك";slot.button.disabled=false;
-        const a=document.getElementById("remote-audio-"+slot.id);if(a){a.pause();a.remove()}
-        return;
+
+  if(stopSlots){
+
+    stopSlots();
+
+  }
+
+
+  stopSlots =
+    onSnapshot(
+
+      collection(
+        db,
+        "voiceSlots"
+      ),
+
+      snapshot => {
+
+        const data = {};
+
+
+        snapshot.forEach(
+          item => {
+
+            data[item.id] =
+              item.data();
+
+          }
+        );
+
+
+        slots.forEach(
+          slot => {
+
+            const voice =
+              data[slot.id];
+
+
+            const mine =
+              voice &&
+              auth.currentUser &&
+              voice.uid ===
+              auth.currentUser.uid;
+
+
+            if(!voice){
+
+              slot.el
+                .classList
+                .remove("active");
+
+              slot.name.textContent =
+                "شاغر";
+
+              slot.status.textContent =
+                "اضغط للتحدث";
+
+              slot.button.textContent =
+                "تشغيل المايك";
+
+              slot.button.disabled =
+                false;
+
+              return;
+
+            }
+
+
+            slot.el
+              .classList
+              .add("active");
+
+
+            slot.name.textContent =
+              voice.name ||
+              "عضو";
+
+
+            slot.status.textContent =
+              mine
+              ? "🎤 أنت تتحدث"
+              : "🔊 البث مباشر";
+
+
+            slot.button.textContent =
+              mine
+              ? "إيقاف المايك"
+              : "🔊 مباشر";
+
+
+            slot.button.disabled =
+              !mine;
+
+          }
+
+        );
+
+      },
+
+      error => {
+
+        console.error(
+          "voiceSlots",
+          error
+        );
+
       }
-      slot.el.classList.add("active");slot.name.textContent=d.name||"عضو";
-      if(mine){slot.status.textContent="🎤 أنت تتحدث";slot.button.textContent="إيقاف المايك";slot.button.disabled=false}
-      else{slot.status.textContent="🔊 البث مباشر";slot.button.textContent="🔊 مباشر";slot.button.disabled=true}
-    });
-  },e=>console.error("voiceSlots",e));
+
+    );
+
 }
 
-function cleanupVoice(){
-  if(mySlot)leaveMic(mySlot).catch(()=>{});
-  if(localStream)localStream.getTracks().forEach(t=>t.stop());
-  localStream=null;mySlot=null;
-  peerConnections.forEach(pc=>{try{pc.close()}catch{}});
-  peerConnections.clear();
-  peerUnsubs.forEach(u=>{try{u()}catch{}});
-  peerUnsubs.clear();candidateQueues.clear();
-  document.querySelectorAll("#audioContainer audio").forEach(a=>{a.pause();a.remove()});
-}
 </script>
+
 </body>
 </html>
