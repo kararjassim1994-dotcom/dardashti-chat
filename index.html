@@ -3,146 +3,416 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>طليان الشعلة 🔥</title>
+<title>🔥 طليان الشعلة</title>
 
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;width:100%;min-height:100%;font-family:Arial,Tahoma,sans-serif;background:#080b10;color:#fff}
+
+html,body{
+  margin:0;
+  width:100%;
+  min-height:100%;
+  font-family:Arial,Tahoma,sans-serif;
+  background:#080b10;
+  color:#fff
+}
+
 body{
   background:
     linear-gradient(#0009,#0009),
     url("./background.jpeg") center/cover fixed no-repeat;
 }
+
 button,input{font-family:inherit}
 button{cursor:pointer}
 .hidden{display:none!important}
 
 #loginPage{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px
 }
-.loginBox{
-  width:100%;max-width:430px;background:#101722ee;padding:25px;border-radius:20px;
-  border:1px solid #ffffff25;box-shadow:0 20px 60px #000b;backdrop-filter:blur(8px)
-}
-.logo{text-align:center;font-size:30px;font-weight:bold;margin-bottom:8px}
-.description{text-align:center;color:#c0cad6;margin-bottom:20px;line-height:1.7}
-.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:12px}
-.tab{border:1px solid #344255;background:#18222e;color:#cbd5e1;padding:11px 5px;border-radius:9px;font-weight:bold}
-.tab.active{background:#1687ff;color:#fff}
-.form{display:none}.form.active{display:block}
-.loginBox input,.composer input{
-  width:100%;padding:14px;margin:6px 0;border:1px solid #344255;
-  border-radius:10px;background:#0d131b;color:#fff;outline:none
-}
-.btn{width:100%;padding:14px;margin-top:8px;border:0;border-radius:10px;font-weight:bold;color:#fff}
-.primary{background:#1687ff}
-#authMessage{text-align:center;min-height:24px;margin-top:12px;color:#ffb6b6}
-.status{text-align:center;color:#8ee0b1;font-size:12px;margin-top:8px}
 
-#chatApp{height:100vh;display:flex;flex-direction:column}
-.header{
-  min-height:64px;background:#101722ee;border-bottom:1px solid #293646;
-  display:flex;align-items:center;justify-content:space-between;padding:0 12px;
+.loginBox{
+  width:100%;
+  max-width:430px;
+  background:#101722ee;
+  padding:25px;
+  border-radius:20px;
+  border:1px solid #ffffff25;
+  box-shadow:0 20px 60px #000b;
   backdrop-filter:blur(8px)
 }
-.title{font-size:20px;font-weight:bold}
-.username{font-size:12px;color:#6ee7a0;margin-top:3px}
-.headerButtons{display:flex;gap:5px}
-.gameOpenButton,.logout{
-  border:0;color:#fff;padding:9px 10px;border-radius:9px;font-weight:bold
-}
-.gameOpenButton{background:#1687ff}
-.logout{background:#a92d38}
 
-.voicePanel{background:#101720dd;border-bottom:1px solid #293646;padding:10px}
-.voiceTitle{text-align:center;font-weight:bold;margin-bottom:8px;color:#dce7f5}
-.voiceSlots{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.logo{
+  text-align:center;
+  font-size:30px;
+  font-weight:bold;
+  margin-bottom:8px
+}
+
+.description{
+  text-align:center;
+  color:#c0cad6;
+  margin-bottom:20px;
+  line-height:1.7
+}
+
+.tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:6px;
+  margin-bottom:12px
+}
+
+.tab{
+  border:1px solid #344255;
+  background:#18222e;
+  color:#cbd5e1;
+  padding:11px 5px;
+  border-radius:9px;
+  font-weight:bold
+}
+
+.tab.active{
+  background:#1687ff;
+  color:#fff
+}
+
+.form{display:none}
+.form.active{display:block}
+
+.loginBox input,
+.composer input{
+  width:100%;
+  padding:14px;
+  margin:6px 0;
+  border:1px solid #344255;
+  border-radius:10px;
+  background:#0d131b;
+  color:#fff;
+  outline:none
+}
+
+.btn{
+  width:100%;
+  padding:14px;
+  margin-top:8px;
+  border:0;
+  border-radius:10px;
+  font-weight:bold;
+  color:#fff
+}
+
+.primary{background:#1687ff}
+.secondary{background:#283444}
+
+#authMessage{
+  text-align:center;
+  min-height:24px;
+  margin-top:12px;
+  color:#ffb6b6;
+  word-break:break-word
+}
+
+.status{
+  text-align:center;
+  color:#8ee0b1;
+  font-size:12px;
+  margin-top:8px
+}
+
+#chatApp{
+  height:100vh;
+  display:flex;
+  flex-direction:column
+}
+
+.header{
+  min-height:64px;
+  background:#101722ee;
+  border-bottom:1px solid #293646;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 12px;
+  backdrop-filter:blur(8px)
+}
+
+.title{
+  font-size:20px;
+  font-weight:bold
+}
+
+.username{
+  font-size:12px;
+  color:#6ee7a0;
+  margin-top:3px
+}
+
+.logout{
+  border:0;
+  background:#a92d38;
+  color:#fff;
+  padding:9px 12px;
+  border-radius:9px
+}
+
+.voicePanel{
+  background:#101720dd;
+  border-bottom:1px solid #293646;
+  padding:10px
+}
+
+.voiceTitle{
+  text-align:center;
+  font-weight:bold;
+  margin-bottom:8px;
+  color:#dce7f5
+}
+
+.voiceSlots{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px
+}
+
 .voiceSlot{
-  min-height:90px;background:#18222ecc;border:1px solid #344255;border-radius:13px;
-  padding:9px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px
+  min-height:90px;
+  background:#18222ecc;
+  border:1px solid #344255;
+  border-radius:13px;
+  padding:9px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:5px
 }
-.voiceSlot.active{border-color:#24c77a}
-.voiceSlot button{border:0;border-radius:9px;padding:8px 12px;background:#1687ff;color:#fff;font-weight:bold}
-.voiceSlot.active button{background:#b52d39}
-.voiceName{font-size:13px;color:#aebaca;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.voiceStatus{font-size:11px;color:#7e8a99;text-align:center}
 
-.messages{flex:1;overflow-y:auto;padding:14px;background:#0004}
-.message{display:flex;gap:9px;margin-bottom:13px}
-.avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;background:#293646}
-.messageContent{background:#18222eea;border-radius:13px;padding:8px 11px;max-width:80%}
-.messageName{color:#61a8ff;font-size:12px;font-weight:bold;margin-bottom:3px}
-.messageText{line-height:1.5;word-break:break-word}
-.composer{display:flex;gap:7px;padding:9px;background:#151d28ee;border-top:1px solid #293646}
-.composer input{flex:1;min-width:0;margin:0}
-.send{width:50px;border:0;border-radius:10px;background:#1687ff;color:#fff;font-size:18px}
-.empty{text-align:center;color:#7e8a99;padding:35px 10px}
+.voiceSlot.active{
+  border-color:#24c77a
+}
 
-#audioContainer{position:fixed;width:1px;height:1px;left:-100px;top:-100px;overflow:hidden}
-#audioContainer audio{width:1px;height:1px}
+.voiceSlot button{
+  border:0;
+  border-radius:9px;
+  padding:8px 12px;
+  background:#1687ff;
+  color:#fff;
+  font-weight:bold
+}
+
+.voiceSlot.active button{
+  background:#b52d39
+}
+
+.voiceName{
+  font-size:13px;
+  color:#aebaca;
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap
+}
+
+.voiceStatus{
+  font-size:11px;
+  color:#7e8a99;
+  text-align:center
+}
+
+.messages{
+  flex:1;
+  overflow-y:auto;
+  padding:14px;
+  background:#0004
+}
+
+.message{
+  display:flex;
+  gap:9px;
+  margin-bottom:13px
+}
+
+.avatar{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  object-fit:cover;
+  background:#293646
+}
+
+.messageContent{
+  background:#18222eea;
+  border-radius:13px;
+  padding:8px 11px;
+  max-width:80%
+}
+
+.messageName{
+  color:#61a8ff;
+  font-size:12px;
+  font-weight:bold;
+  margin-bottom:3px
+}
+
+.messageText{
+  line-height:1.5;
+  word-break:break-word
+}
+
+.composer{
+  display:flex;
+  gap:7px;
+  padding:9px;
+  background:#151d28ee;
+  border-top:1px solid #293646
+}
+
+.composer input{
+  flex:1;
+  min-width:0;
+  margin:0
+}
+
+.send{
+  width:50px;
+  border:0;
+  border-radius:10px;
+  background:#1687ff;
+  color:#fff;
+  font-size:18px
+}
+
+.empty{
+  text-align:center;
+  color:#7e8a99;
+  padding:35px 10px
+}
+
+#audioContainer{
+  position:fixed;
+  width:1px;
+  height:1px;
+  left:-100px;
+  top:-100px;
+  overflow:hidden
+}
+
+#audioContainer audio{
+  width:1px;
+  height:1px
+}
+
 #enableAudioButton{
-  position:fixed;left:10px;right:10px;bottom:75px;z-index:99999;display:none;
-  border:0;border-radius:12px;padding:13px;background:#1687ff;color:#fff;font-weight:bold
+  position:fixed;
+  left:10px;
+  right:10px;
+  bottom:75px;
+  z-index:99999;
+  display:none;
+  border:0;
+  border-radius:12px;
+  padding:13px;
+  background:#1687ff;
+  color:#fff;
+  font-weight:bold;
+  box-shadow:0 8px 30px #0008
 }
 
-/* اللعبة */
-#gameOverlay{
-  position:fixed;inset:0;z-index:100000;background:#000d;backdrop-filter:blur(8px);
-  display:flex;align-items:center;justify-content:center;padding:14px
+#gameButton{
+  position:fixed;
+  left:10px;
+  bottom:10px;
+  z-index:9999;
+  border:0;
+  border-radius:10px;
+  padding:10px 14px;
+  background:#1687ff;
+  color:#fff;
+  font-weight:bold
 }
+
+#gamePanel{
+  position:fixed;
+  inset:0;
+  background:#000c;
+  z-index:100000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px
+}
+
 .gameBox{
-  width:100%;max-width:430px;background:#101722;border:1px solid #344255;
-  border-radius:22px;padding:18px;box-shadow:0 20px 70px #000
+  width:100%;
+  max-width:390px;
+  background:#101722;
+  border:1px solid #344255;
+  border-radius:20px;
+  padding:20px;
+  text-align:center
 }
-.gameHeader{display:flex;align-items:center;justify-content:space-between}
-.gameTitle{font-size:25px;font-weight:bold}
-.closeGame{border:0;background:#a92d38;color:#fff;width:40px;height:40px;border-radius:10px;font-size:22px}
-.gameSubtitle{text-align:center;color:#9eabbc;margin:8px 0 14px}
 
-.gameModes{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px}
-.modeBtn{
-  border:1px solid #344255;background:#18222e;color:#dce7f5;
-  padding:11px;border-radius:10px;font-weight:bold
+.gameTitle{
+  font-size:25px;
+  font-weight:bold;
+  margin-bottom:8px
 }
-.modeBtn.active{background:#1687ff;border-color:#1687ff}
 
-.difficulty{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px
+.gameInfo{
+  color:#aebaca;
+  margin-bottom:15px
 }
-.levelBtn{
-  border:1px solid #344255;background:#141e29;color:#cbd5e1;
-  padding:9px 4px;border-radius:9px;font-weight:bold;font-size:12px
-}
-.levelBtn.active{background:#283b52;border-color:#1687ff}
 
-.gameScore{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:12px}
-.gameScoreBox{
-  background:#111a25;border:1px solid #2d3b4d;border-radius:12px;padding:8px 4px;text-align:center
+.board{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  max-width:300px;
+  margin:0 auto 15px
 }
-.gameScoreTitle{font-size:11px;color:#aeb9c7}
-.gameScoreNumber{font-size:21px;font-weight:bold;margin-top:3px}
 
-.gameTurn{text-align:center;color:#72b7ff;font-weight:bold;margin-bottom:10px}
-.gameBoard{width:100%;aspect-ratio:1/1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.gameCell{
-  border:1px solid #344255;background:#101923;border-radius:15px;color:#fff;
-  font-size:48px;font-weight:bold;display:flex;align-items:center;justify-content:center;
-  user-select:none
+.cell{
+  aspect-ratio:1;
+  border:1px solid #344255;
+  background:#18222e;
+  border-radius:12px;
+  color:#fff;
+  font-size:40px;
+  font-weight:bold
 }
-.gameCell:active{transform:scale(.95)}
-.gameCell.x{color:#4da3ff}
-.gameCell.o{color:#ff6575}
-.gameCell.win{background:#173a2c;border-color:#36d58a}
 
-.gameMessage{text-align:center;min-height:24px;margin-top:10px;color:#c8d2df}
-.gameButtons{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
-.gameAction{border:0;border-radius:10px;padding:12px;color:#fff;font-weight:bold}
-.newGame{background:#1687ff}
-.resetGame{background:#293545}
+.gameActions{
+  display:flex;
+  gap:8px
+}
+
+.gameActions button{
+  flex:1;
+  border:0;
+  border-radius:10px;
+  padding:12px;
+  color:#fff;
+  font-weight:bold
+}
+
+.closeGame{
+  background:#a92d38
+}
+
+.restartGame{
+  background:#1687ff
+}
 
 @media(max-width:420px){
-  .gameCell{font-size:42px}
-  .gameOpenButton,.logout{padding:8px;font-size:11px}
+  .voiceSlot button{
+    padding:7px 9px;
+    font-size:12px
+  }
 }
 </style>
 </head>
@@ -150,173 +420,199 @@ button{cursor:pointer}
 <body>
 
 <div id="loginPage">
+
   <div class="loginBox">
+
     <div class="logo">🔥 طليان الشعلة</div>
-    <div class="description">أهلاً بك في الدردشة<br>اختر طريقة الدخول للمتابعة</div>
+
+    <div class="description">
+      أهلاً بك في الدردشة<br>
+      اختر طريقة الدخول للمتابعة
+    </div>
 
     <div class="tabs">
-      <button class="tab active" data-tab="visitor">دخول الزوار</button>
-      <button class="tab" data-tab="login">دخول الأعضاء</button>
-      <button class="tab" data-tab="signup">تسجيل عضوية</button>
+
+      <button class="tab active" data-tab="visitor">
+        دخول الزوار
+      </button>
+
+      <button class="tab" data-tab="login">
+        دخول الأعضاء
+      </button>
+
+      <button class="tab" data-tab="signup">
+        تسجيل عضوية
+      </button>
+
     </div>
 
     <div id="visitorForm" class="form active">
-      <input id="visitorName" type="text" placeholder="أكتب الاسم المستعار">
-      <button id="visitorButton" class="btn primary">دخول</button>
+
+      <input
+        id="visitorName"
+        type="text"
+        placeholder="أكتب الاسم المستعار"
+      >
+
+      <button id="visitorButton" class="btn primary">
+        دخول
+      </button>
+
     </div>
 
     <div id="loginForm" class="form">
-      <input id="emailInput" type="email" placeholder="البريد الإلكتروني">
-      <input id="passwordInput" type="password" placeholder="كلمة المرور">
-      <button id="loginButton" class="btn primary">دخول</button>
+
+      <input
+        id="emailInput"
+        type="email"
+        placeholder="البريد الإلكتروني"
+      >
+
+      <input
+        id="passwordInput"
+        type="password"
+        placeholder="كلمة المرور"
+      >
+
+      <button id="loginButton" class="btn primary">
+        دخول
+      </button>
+
     </div>
 
     <div id="signupForm" class="form">
-      <input id="nameInput" type="text" placeholder="اسم العضو">
-      <input id="signupEmail" type="email" placeholder="البريد الإلكتروني">
-      <input id="signupPassword" type="password" placeholder="كلمة المرور">
-      <button id="signupButton" class="btn primary">إنشاء حساب</button>
+
+      <input
+        id="nameInput"
+        type="text"
+        placeholder="اسم العضو"
+      >
+
+      <input
+        id="signupEmail"
+        type="email"
+        placeholder="البريد الإلكتروني"
+      >
+
+      <input
+        id="signupPassword"
+        type="password"
+        placeholder="كلمة المرور"
+      >
+
+      <button id="signupButton" class="btn primary">
+        إنشاء حساب
+      </button>
+
     </div>
 
     <div id="authMessage"></div>
-    <div class="status">● متصل</div>
+
+    <div class="status">
+      ● متصل
+    </div>
+
   </div>
+
 </div>
+
 
 <div id="chatApp" class="hidden">
 
   <div class="header">
+
     <div>
-      <div class="title">🔥 طليان الشعلة</div>
-      <div id="currentUsername" class="username">عضو</div>
+      <div class="title">
+        🔥 طليان الشعلة
+      </div>
+
+      <div id="currentUsername" class="username">
+        عضو
+      </div>
     </div>
 
-    <div class="headerButtons">
-      <button id="openGameButton" class="gameOpenButton">🎮 إكس أو</button>
-      <button id="logoutButton" class="logout">خروج</button>
-    </div>
+    <button id="logoutButton" class="logout">
+      خروج
+    </button>
+
   </div>
+
 
   <div class="voicePanel">
-    <div class="voiceTitle">🎤 المايكات العامة</div>
+
+    <div class="voiceTitle">
+      🎤 المايكات العامة
+    </div>
 
     <div class="voiceSlots">
+
       <div id="voiceSlot1" class="voiceSlot">
+
         <div>🎤 المايك 1</div>
-        <div id="voiceName1" class="voiceName">شاغر</div>
-        <div id="voiceStatus1" class="voiceStatus">اضغط للتحدث</div>
-        <button id="voiceButton1">تشغيل المايك</button>
+
+        <div id="voiceName1" class="voiceName">
+          شاغر
+        </div>
+
+        <div id="voiceStatus1" class="voiceStatus">
+          اضغط للتحدث
+        </div>
+
+        <button id="voiceButton1">
+          تشغيل المايك
+        </button>
+
       </div>
+
 
       <div id="voiceSlot2" class="voiceSlot">
+
         <div>🎤 المايك 2</div>
-        <div id="voiceName2" class="voiceName">شاغر</div>
-        <div id="voiceStatus2" class="voiceStatus">اضغط للتحدث</div>
-        <button id="voiceButton2">تشغيل المايك</button>
+
+        <div id="voiceName2" class="voiceName">
+          شاغر
+        </div>
+
+        <div id="voiceStatus2" class="voiceStatus">
+          اضغط للتحدث
+        </div>
+
+        <button id="voiceButton2">
+          تشغيل المايك
+        </button>
+
       </div>
+
     </div>
+
   </div>
+
 
   <div id="messages" class="messages">
-    <div class="empty">جاري تحميل الدردشة...</div>
+
+    <div class="empty">
+      جاري تحميل الدردشة...
+    </div>
+
   </div>
+
 
   <div class="composer">
-    <input id="messageInput" type="text" placeholder="اكتب رسالتك...">
-    <button id="sendButton" class="send">➤</button>
+
+    <input
+      id="messageInput"
+      type="text"
+      placeholder="اكتب رسالتك..."
+    >
+
+    <button id="sendButton" class="send">
+      ➤
+    </button>
+
   </div>
 
 </div>
 
-<!-- لعبة إكس أو -->
-<div id="gameOverlay" class="hidden">
-
-  <div class="gameBox">
-
-    <div class="gameHeader">
-      <div class="gameTitle">🎮 إكس أو</div>
-      <button id="closeGameButton" class="closeGame">×</button>
-    </div>
-
-    <div class="gameSubtitle">
-      اختر طريقة اللعب
-    </div>
-
-    <div class="gameModes">
-      <button id="twoPlayersBtn" class="modeBtn active">
-        👥 لاعبان
-      </button>
-
-      <button id="robotBtn" class="modeBtn">
-        🤖 ضد الروبوت
-      </button>
-    </div>
-
-    <div id="difficultyBox" class="difficulty hidden">
-
-      <button class="levelBtn active" data-level="easy">
-        🟢 سهل
-      </button>
-
-      <button class="levelBtn" data-level="medium">
-        🟡 متوسط
-      </button>
-
-      <button class="levelBtn" data-level="hard">
-        🔴 صعب
-      </button>
-
-    </div>
-
-    <div class="gameScore">
-
-      <div class="gameScoreBox">
-        <div class="gameScoreTitle">❌ أنت / X</div>
-        <div id="scoreX" class="gameScoreNumber">0</div>
-      </div>
-
-      <div class="gameScoreBox">
-        <div class="gameScoreTitle">تعادل</div>
-        <div id="scoreDraw" class="gameScoreNumber">0</div>
-      </div>
-
-      <div class="gameScoreBox">
-        <div class="gameScoreTitle">⭕ O</div>
-        <div id="scoreO" class="gameScoreNumber">0</div>
-      </div>
-
-    </div>
-
-    <div id="gameTurn" class="gameTurn">
-      الدور على اللاعب ❌
-    </div>
-
-    <div id="gameBoard" class="gameBoard">
-      <div class="gameCell" data-index="0"></div>
-      <div class="gameCell" data-index="1"></div>
-      <div class="gameCell" data-index="2"></div>
-      <div class="gameCell" data-index="3"></div>
-      <div class="gameCell" data-index="4"></div>
-      <div class="gameCell" data-index="5"></div>
-      <div class="gameCell" data-index="6"></div>
-      <div class="gameCell" data-index="7"></div>
-      <div class="gameCell" data-index="8"></div>
-    </div>
-
-    <div id="gameMessage" class="gameMessage"></div>
-
-    <div class="gameButtons">
-      <button id="newGameButton" class="gameAction newGame">
-        🔄 لعبة جديدة
-      </button>
-
-      <button id="resetGameButton" class="gameAction resetGame">
-        🗑️ تصفير النتائج
-      </button>
-    </div>
-
-  </div>
-</div>
 
 <div id="audioContainer"></div>
 
@@ -324,12 +620,48 @@ button{cursor:pointer}
   🔊 تفعيل الصوت
 </button>
 
+
+<button id="gameButton">
+  🎮 إكس أو
+</button>
+
+
+<div id="gamePanel">
+
+  <div class="gameBox">
+
+    <div class="gameTitle">
+      ❌⭕ إكس أو
+    </div>
+
+    <div id="gameInfo" class="gameInfo">
+      أنت ❌ والروبوت ⭕
+    </div>
+
+    <div id="board" class="board"></div>
+
+    <div class="gameActions">
+
+      <button class="restartGame" id="restartGame">
+        لعبة جديدة
+      </button>
+
+      <button class="closeGame" id="closeGame">
+        إغلاق
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
 <script type="module">
 
-/* ================= FIREBASE ================= */
-
-import {initializeApp}
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 
 import {
   getAuth,
@@ -339,8 +671,7 @@ import {
   updateProfile,
   onAuthStateChanged,
   signOut
-}
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
 import {
   getFirestore,
@@ -354,445 +685,71 @@ import {
   setDoc,
   deleteDoc,
   getDoc
-}
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
 
-const firebaseConfig={
-  apiKey:"AIzaSyAuFzXl_pmEm7weqkMQVGRME8VHeVs4fDU",
-  authDomain:"dardashti-chat.firebaseapp.com",
-  projectId:"dardashti-chat",
-  storageBucket:"dardashti-chat.firebasestorage.app",
-  messagingSenderId:"779042757468",
-  appId:"1:779042757468:web:7646d3cdadf46f315a3f99"
-};
+/*
+====================================================
+ضع إعدادات Firebase الحالية هنا
+====================================================
+من Firebase:
 
-const app=initializeApp(firebaseConfig);
-const auth=getAuth(app);
-const db=getFirestore(app);
+Project settings
+↓
+Your apps
+↓
+Web app
+↓
+SDK setup and configuration
+↓
+Config
 
-const loginPage=document.getElementById("loginPage");
-const chatApp=document.getElementById("chatApp");
-const authMessage=document.getElementById("authMessage");
+وانسخ القيم كما هي.
+*/
 
-let stopMessages=null;
-let stopSlots=null;
-let mySlot=null;
-let localStream=null;
+const firebaseConfig = {
 
+  apiKey: "ضع_API_KEY_الحالي_هنا",
 
-/* ================= LOGIN ================= */
+  authDomain: "dardashti-chat.firebaseapp.com",
 
-document.querySelectorAll(".tab").forEach(btn=>{
-  btn.onclick=()=>{
-    document.querySelectorAll(".tab")
-      .forEach(x=>x.classList.remove("active"));
+  projectId: "dardashti-chat",
 
-    document.querySelectorAll(".form")
-      .forEach(x=>x.classList.remove("active"));
+  storageBucket: "dardashti-chat.firebasestorage.app",
 
-    btn.classList.add("active");
+  messagingSenderId: "779042757468",
 
-    document
-      .getElementById(btn.dataset.tab+"Form")
-      .classList.add("active");
-
-    authMessage.textContent="";
-  };
-});
-
-
-async function enterVisitor(){
-
-  const name=
-    document.getElementById("visitorName")
-    .value.trim();
-
-  if(name.length<2){
-    authMessage.textContent="⚠️ اكتب اسمًا صحيحًا";
-    return;
-  }
-
-  authMessage.textContent="جاري الدخول كزائر...";
-  localStorage.setItem("visitorName",name);
-
-  try{
-
-    if(!auth.currentUser){
-      await signInAnonymously(auth);
-    }
-
-    showChat(name);
-
-  }catch(e){
-
-    console.error(e);
-    authMessage.textContent=
-      "❌ تعذر دخول الزائر: "+(e.code||e.message);
-
-  }
-}
-
-document.getElementById("visitorButton").onclick=enterVisitor;
-
-document.getElementById("visitorName").onkeydown=e=>{
-  if(e.key==="Enter")enterVisitor();
-};
-
-
-document.getElementById("signupButton").onclick=async()=>{
-
-  const name=
-    document.getElementById("nameInput").value.trim();
-
-  const email=
-    document.getElementById("signupEmail").value.trim();
-
-  const password=
-    document.getElementById("signupPassword").value;
-
-  if(name.length<2){
-    authMessage.textContent="⚠️ اكتب اسم العضو";
-    return;
-  }
-
-  if(!email){
-    authMessage.textContent="⚠️ اكتب البريد الإلكتروني";
-    return;
-  }
-
-  if(password.length<6){
-    authMessage.textContent="⚠️ كلمة المرور 6 أحرف على الأقل";
-    return;
-  }
-
-  authMessage.textContent="جاري إنشاء الحساب...";
-
-  try{
-
-    const r=
-      await createUserWithEmailAndPassword(
-        auth,email,password
-      );
-
-    await updateProfile(r.user,{
-      displayName:name
-    });
-
-    await setDoc(
-      doc(db,"users",r.user.uid),
-      {
-        uid:r.user.uid,
-        name,
-        email,
-        role:"user",
-        banned:false,
-        createdAt:serverTimestamp()
-      },
-      {merge:true}
-    );
-
-    await setDoc(
-      doc(db,"moderation",r.user.uid),
-      {
-        banned:false,
-        micMuted:false,
-        updatedAt:serverTimestamp()
-      },
-      {merge:true}
-    );
-
-    authMessage.textContent="✅ تم إنشاء الحساب";
-
-  }catch(e){
-
-    authMessage.textContent=
-      "❌ "+(e.code||e.message);
-
-  }
+  appId: "ضع_APP_ID_الحالي_هنا"
 
 };
 
 
-document.getElementById("loginButton").onclick=async()=>{
+const app = initializeApp(firebaseConfig);
 
-  const email=
-    document.getElementById("emailInput").value.trim();
+const auth = getAuth(app);
 
-  const password=
-    document.getElementById("passwordInput").value;
+const db = getFirestore(app);
 
-  if(!email||!password){
-    authMessage.textContent=
-      "⚠️ اكتب البريد وكلمة المرور";
-    return;
-  }
 
-  authMessage.textContent="جاري تسجيل الدخول...";
+const loginPage =
+  document.getElementById("loginPage");
 
-  try{
+const chatApp =
+  document.getElementById("chatApp");
 
-    await signInWithEmailAndPassword(
-      auth,email,password
-    );
+const authMessage =
+  document.getElementById("authMessage");
 
-  }catch(e){
 
-    authMessage.textContent=
-      "❌ "+(e.code||e.message);
+let stopMessages = null;
+let stopSlots = null;
 
-  }
-};
+let mySlot = null;
+let localStream = null;
 
 
-async function getModeration(uid){
+const slots = [
 
-  try{
-
-    const s=
-      await getDoc(
-        doc(db,"moderation",uid)
-      );
-
-    return s.exists()?s.data():{};
-
-  }catch{
-
-    return {};
-
-  }
-}
-
-
-function showChat(name){
-
-  loginPage.classList.add("hidden");
-  chatApp.classList.remove("hidden");
-
-  document.getElementById("currentUsername")
-    .textContent=name;
-
-  loadMessages();
-  watchSlots();
-}
-
-
-onAuthStateChanged(auth,async user=>{
-
-  if(user){
-
-    const mod=
-      await getModeration(user.uid);
-
-    if(mod.banned){
-
-      await signOut(auth);
-      authMessage.textContent="🚫 حسابك محظور";
-      return;
-    }
-
-    const visitorName=
-      localStorage.getItem("visitorName");
-
-    showChat(
-      user.isAnonymous
-      ?(visitorName||"زائر")
-      :(user.displayName||"عضو")
-    );
-
-  }else{
-
-    cleanupVoice();
-
-    loginPage.classList.remove("hidden");
-    chatApp.classList.add("hidden");
-
-    if(stopMessages){
-      stopMessages();
-      stopMessages=null;
-    }
-
-    if(stopSlots){
-      stopSlots();
-      stopSlots=null;
-    }
-  }
-});
-
-
-document.getElementById("logoutButton").onclick=async()=>{
-
-  try{
-
-    cleanupVoice();
-
-    localStorage.removeItem("visitorName");
-
-    if(auth.currentUser)
-      await signOut(auth);
-
-  }catch(e){
-
-    console.error(e);
-
-  }
-
-};
-
-
-/* ================= MESSAGES ================= */
-
-async function sendMessage(){
-
-  const input=
-    document.getElementById("messageInput");
-
-  const text=input.value.trim();
-
-  const u=auth.currentUser;
-
-  const visitor=
-    localStorage.getItem("visitorName");
-
-  if(!text)return;
-
-  try{
-
-    if(u){
-
-      const mod=
-        await getModeration(u.uid);
-
-      if(mod.banned){
-        alert("🚫 حسابك محظور");
-        return;
-      }
-
-      await addDoc(
-        collection(db,"messages"),
-        {
-          uid:u.uid,
-          name:u.displayName||"عضو",
-          text,
-          createdAt:serverTimestamp()
-        }
-      );
-
-    }else{
-
-      await addDoc(
-        collection(db,"messages"),
-        {
-          uid:"visitor",
-          name:visitor||"زائر",
-          text,
-          createdAt:serverTimestamp()
-        }
-      );
-
-    }
-
-    input.value="";
-
-  }catch(e){
-
-    alert(
-      "تعذر إرسال الرسالة: "+
-      (e.code||e.message)
-    );
-
-  }
-}
-
-document.getElementById("sendButton").onclick=sendMessage;
-
-document.getElementById("messageInput").onkeydown=e=>{
-  if(e.key==="Enter")sendMessage();
-};
-
-
-function loadMessages(){
-
-  if(stopMessages)stopMessages();
-
-  const box=
-    document.getElementById("messages");
-
-  stopMessages=
-    onSnapshot(
-      query(
-        collection(db,"messages"),
-        orderBy("createdAt","asc")
-      ),
-      snap=>{
-
-        box.innerHTML="";
-
-        if(snap.empty){
-
-          box.innerHTML=
-            '<div class="empty">لا توجد رسائل بعد</div>';
-
-          return;
-        }
-
-        snap.forEach(s=>{
-
-          const d=s.data();
-
-          const row=
-            document.createElement("div");
-
-          row.className="message";
-
-          const avatar=
-            document.createElement("img");
-
-          avatar.className="avatar";
-
-          avatar.src=
-            "https://ui-avatars.com/api/?name="+
-            encodeURIComponent(d.name||"عضو")+
-            "&background=1687ff&color=fff";
-
-          const content=
-            document.createElement("div");
-
-          content.className="messageContent";
-
-          const name=
-            document.createElement("div");
-
-          name.className="messageName";
-          name.textContent=d.name||"عضو";
-
-          const text=
-            document.createElement("div");
-
-          text.className="messageText";
-          text.textContent=d.text||"";
-
-          content.append(name,text);
-          row.append(avatar,content);
-          box.appendChild(row);
-
-        });
-
-        box.scrollTop=box.scrollHeight;
-
-      },
-      e=>{
-        console.error(e);
-        box.innerHTML=
-          '<div class="empty">❌ تعذر تحميل الرسائل</div>';
-      }
-    );
-}
-
-
-/* ================= VOICE ================= */
-
-const slots=[
   {
     id:"slot1",
     el:document.getElementById("voiceSlot1"),
@@ -800,6 +757,7 @@ const slots=[
     status:document.getElementById("voiceStatus1"),
     button:document.getElementById("voiceButton1")
   },
+
   {
     id:"slot2",
     el:document.getElementById("voiceSlot2"),
@@ -807,98 +765,775 @@ const slots=[
     status:document.getElementById("voiceStatus2"),
     button:document.getElementById("voiceButton2")
   }
+
 ];
 
 
-async function toggleMic(index){
+document.querySelectorAll(".tab").forEach(btn => {
 
-  const u=auth.currentUser;
+  btn.onclick = () => {
 
-  if(!u){
-    alert("🎤 المايك يحتاج تسجيل دخول");
+    document
+      .querySelectorAll(".tab")
+      .forEach(x => x.classList.remove("active"));
+
+    document
+      .querySelectorAll(".form")
+      .forEach(x => x.classList.remove("active"));
+
+    btn.classList.add("active");
+
+    document
+      .getElementById(btn.dataset.tab + "Form")
+      .classList.add("active");
+
+    authMessage.textContent = "";
+
+  };
+
+});
+
+
+async function enterVisitor(){
+
+  const name =
+    document
+      .getElementById("visitorName")
+      .value
+      .trim();
+
+  if(name.length < 2){
+
+    authMessage.textContent =
+      "⚠️ اكتب اسمًا صحيحًا";
+
     return;
   }
 
-  const slot=slots[index];
-  const slotId="slot"+(index+1);
+  authMessage.textContent =
+    "جاري الدخول كزائر...";
 
-  const ref=doc(db,"voiceSlots",slotId);
+  localStorage.setItem(
+    "visitorName",
+    name
+  );
 
   try{
 
-    const snap=await getDoc(ref);
+    if(!auth.currentUser){
+
+      await signInAnonymously(auth);
+
+    }
+
+  }catch(e){
+
+    console.error(e);
+
+    authMessage.textContent =
+      "❌ تعذر دخول الزائر: " +
+      (e.code || e.message);
+
+  }
+
+}
+
+
+document
+  .getElementById("visitorButton")
+  .onclick = enterVisitor;
+
+
+document
+  .getElementById("visitorName")
+  .onkeydown = e => {
+
+    if(e.key === "Enter"){
+      enterVisitor();
+    }
+
+  };
+
+
+document
+  .getElementById("signupButton")
+  .onclick = async () => {
+
+    const name =
+      document.getElementById("nameInput").value.trim();
+
+    const email =
+      document.getElementById("signupEmail").value.trim();
+
+    const password =
+      document.getElementById("signupPassword").value;
+
+
+    if(name.length < 2){
+
+      authMessage.textContent =
+        "⚠️ اكتب اسم العضو";
+
+      return;
+    }
+
+    if(!email){
+
+      authMessage.textContent =
+        "⚠️ اكتب البريد الإلكتروني";
+
+      return;
+    }
+
+    if(password.length < 6){
+
+      authMessage.textContent =
+        "⚠️ كلمة المرور 6 أحرف على الأقل";
+
+      return;
+    }
+
+
+    authMessage.textContent =
+      "جاري إنشاء الحساب...";
+
+
+    try{
+
+      const r =
+        await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+
+      await updateProfile(
+        r.user,
+        {
+          displayName:name
+        }
+      );
+
+
+      await setDoc(
+        doc(db,"users",r.user.uid),
+        {
+          uid:r.user.uid,
+          name,
+          email,
+          role:"user",
+          banned:false,
+          createdAt:serverTimestamp()
+        },
+        {merge:true}
+      );
+
+
+      await setDoc(
+        doc(db,"moderation",r.user.uid),
+        {
+          banned:false,
+          micMuted:false,
+          updatedAt:serverTimestamp()
+        },
+        {merge:true}
+      );
+
+
+      authMessage.textContent =
+        "✅ تم إنشاء الحساب";
+
+
+    }catch(e){
+
+      console.error(e);
+
+      authMessage.textContent =
+        "❌ " + (e.code || e.message);
+
+    }
+
+  };
+
+
+document
+  .getElementById("loginButton")
+  .onclick = async () => {
+
+    const email =
+      document
+        .getElementById("emailInput")
+        .value
+        .trim();
+
+    const password =
+      document
+        .getElementById("passwordInput")
+        .value;
+
+
+    if(!email || !password){
+
+      authMessage.textContent =
+        "⚠️ اكتب البريد وكلمة المرور";
+
+      return;
+    }
+
+
+    authMessage.textContent =
+      "جاري تسجيل الدخول...";
+
+
+    try{
+
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+    }catch(e){
+
+      console.error(e);
+
+      authMessage.textContent =
+        "❌ " + (e.code || e.message);
+
+    }
+
+  };
+
+
+async function getModeration(uid){
+
+  try{
+
+    const s =
+      await getDoc(
+        doc(db,"moderation",uid)
+      );
+
+    return s.exists()
+      ? s.data()
+      : {};
+
+  }catch{
+
+    return {};
+
+  }
+
+}
+
+
+function showChat(name){
+
+  loginPage.classList.add("hidden");
+
+  chatApp.classList.remove("hidden");
+
+  document
+    .getElementById("currentUsername")
+    .textContent = name;
+
+  loadMessages();
+
+  watchSlots();
+
+}
+
+
+onAuthStateChanged(
+  auth,
+  async user => {
+
+    if(user){
+
+      const mod =
+        await getModeration(user.uid);
+
+
+      if(mod.banned){
+
+        await signOut(auth);
+
+        authMessage.textContent =
+          "🚫 حسابك محظور";
+
+        return;
+
+      }
+
+
+      const visitorName =
+        localStorage.getItem("visitorName");
+
+
+      showChat(
+        user.isAnonymous
+          ? (visitorName || "زائر")
+          : (user.displayName || "عضو")
+      );
+
+
+    }else{
+
+      cleanupVoice();
+
+      loginPage.classList.remove("hidden");
+
+      chatApp.classList.add("hidden");
+
+
+      if(stopMessages){
+
+        stopMessages();
+
+        stopMessages = null;
+
+      }
+
+
+      if(stopSlots){
+
+        stopSlots();
+
+        stopSlots = null;
+
+      }
+
+    }
+
+  }
+);
+
+
+document
+  .getElementById("logoutButton")
+  .onclick = async () => {
+
+    try{
+
+      cleanupVoice();
+
+      localStorage.removeItem(
+        "visitorName"
+      );
+
+      if(auth.currentUser){
+
+        await signOut(auth);
+
+      }
+
+    }catch(e){
+
+      console.error(e);
+
+    }
+
+  };
+
+
+async function sendMessage(){
+
+  const input =
+    document.getElementById("messageInput");
+
+  const text =
+    input.value.trim();
+
+  const u =
+    auth.currentUser;
+
+  const visitor =
+    localStorage.getItem("visitorName");
+
+
+  if(!text) return;
+
+
+  try{
+
+    if(!u){
+
+      alert("يجب تسجيل الدخول");
+
+      return;
+
+    }
+
+
+    const mod =
+      await getModeration(u.uid);
+
+
+    if(mod.banned){
+
+      alert("🚫 حسابك محظور");
+
+      return;
+
+    }
+
+
+    await addDoc(
+      collection(db,"messages"),
+      {
+        uid:u.uid,
+        name:u.isAnonymous
+          ? (visitor || "زائر")
+          : (u.displayName || "عضو"),
+        text,
+        createdAt:serverTimestamp()
+      }
+    );
+
+
+    input.value = "";
+
+
+  }catch(e){
+
+    console.error(e);
+
+    alert(
+      "تعذر إرسال الرسالة: " +
+      (e.code || e.message)
+    );
+
+  }
+
+}
+
+
+document
+  .getElementById("sendButton")
+  .onclick = sendMessage;
+
+
+document
+  .getElementById("messageInput")
+  .onkeydown = e => {
+
+    if(e.key === "Enter"){
+
+      e.preventDefault();
+
+      sendMessage();
+
+    }
+
+  };
+
+
+function loadMessages(){
+
+  if(stopMessages){
+
+    stopMessages();
+
+  }
+
+
+  const box =
+    document.getElementById("messages");
+
+
+  stopMessages =
+    onSnapshot(
+
+      query(
+        collection(db,"messages"),
+        orderBy("createdAt","asc")
+      ),
+
+      snap => {
+
+        box.innerHTML = "";
+
+
+        if(snap.empty){
+
+          box.innerHTML =
+            '<div class="empty">لا توجد رسائل بعد</div>';
+
+          return;
+
+        }
+
+
+        snap.forEach(s => {
+
+          const d = s.data();
+
+
+          const row =
+            document.createElement("div");
+
+          row.className =
+            "message";
+
+
+          const avatar =
+            document.createElement("img");
+
+          avatar.className =
+            "avatar";
+
+
+          avatar.src =
+            "https://ui-avatars.com/api/?name=" +
+            encodeURIComponent(d.name || "عضو") +
+            "&background=1687ff&color=fff";
+
+
+          const content =
+            document.createElement("div");
+
+          content.className =
+            "messageContent";
+
+
+          const name =
+            document.createElement("div");
+
+          name.className =
+            "messageName";
+
+          name.textContent =
+            d.name || "عضو";
+
+
+          const text =
+            document.createElement("div");
+
+          text.className =
+            "messageText";
+
+          text.textContent =
+            d.text || "";
+
+
+          content.append(
+            name,
+            text
+          );
+
+
+          row.append(
+            avatar,
+            content
+          );
+
+
+          box.appendChild(row);
+
+        });
+
+
+        box.scrollTop =
+          box.scrollHeight;
+
+      },
+
+      e => {
+
+        console.error(e);
+
+        box.innerHTML =
+          '<div class="empty">❌ تعذر تحميل الرسائل</div>';
+
+      }
+
+    );
+
+}
+
+
+/* =========================
+   المايك
+========================= */
+
+async function toggleMic(index){
+
+  const u =
+    auth.currentUser;
+
+
+  if(!u){
+
+    alert(
+      "🎤 يجب تسجيل الدخول"
+    );
+
+    return;
+
+  }
+
+
+  if(u.isAnonymous){
+
+    alert(
+      "🎤 المايك للأعضاء فقط"
+    );
+
+    return;
+
+  }
+
+
+  const slot =
+    slots[index];
+
+
+  const slotId =
+    "slot" + (index + 1);
+
+
+  const ref =
+    doc(db,"voiceSlots",slotId);
+
+
+  try{
+
+    const snap =
+      await getDoc(ref);
+
 
     if(
       snap.exists() &&
-      snap.data().uid===u.uid
+      snap.data().uid === u.uid
     ){
 
       await leaveMic(slotId);
+
       return;
+
     }
+
 
     if(snap.exists()){
-      slot.status.textContent="🔊 البث يعمل";
+
+      slot.status.textContent =
+        "🔊 البث يعمل";
+
       return;
+
     }
+
 
     if(mySlot){
-      alert("⚠️ لديك مايك مفتوح بالفعل");
+
+      alert(
+        "⚠️ لديك مايك مفتوح بالفعل"
+      );
+
       return;
+
     }
 
-    const mod=await getModeration(u.uid);
+
+    const mod =
+      await getModeration(u.uid);
+
 
     if(mod.banned){
-      alert("🚫 حسابك محظور");
+
+      alert(
+        "🚫 حسابك محظور"
+      );
+
       return;
+
     }
+
 
     if(mod.micMuted){
-      alert("🎤 تم منعك من استخدام المايك");
+
+      alert(
+        "🎤 تم منعك من استخدام المايك"
+      );
+
       return;
+
     }
 
-    localStream=
+
+    localStream =
       await navigator.mediaDevices.getUserMedia({
+
         audio:{
           echoCancellation:true,
           noiseSuppression:true,
           autoGainControl:true
         },
+
         video:false
+
       });
 
-    mySlot=slotId;
 
-    await setDoc(ref,{
-      uid:u.uid,
-      name:u.displayName||"عضو",
-      createdAt:serverTimestamp()
-    });
+    mySlot =
+      slotId;
 
-    slot.status.textContent="🎤 أنت تتحدث";
-    slot.button.textContent="إيقاف المايك";
+
+    await setDoc(
+      ref,
+      {
+        uid:u.uid,
+        name:u.displayName || "عضو",
+        createdAt:serverTimestamp()
+      }
+    );
+
+
+    slot.status.textContent =
+      "🎤 أنت تتحدث";
+
+    slot.button.textContent =
+      "إيقاف المايك";
+
 
   }catch(e){
 
-    if(localStream)
-      localStream.getTracks().forEach(t=>t.stop());
+    console.error(e);
 
-    localStream=null;
-    mySlot=null;
+
+    if(localStream){
+
+      localStream
+        .getTracks()
+        .forEach(t => t.stop());
+
+    }
+
+
+    localStream = null;
+
+    mySlot = null;
+
 
     alert(
-      "❌ تعذر تشغيل المايك:\n"+
-      (e.code||e.message||e.name)
+      "❌ تعذر تشغيل المايك:\n" +
+      (e.code || e.message || e.name)
     );
+
   }
+
 }
 
 
-slots.forEach((s,i)=>{
-  s.button.onclick=()=>toggleMic(i);
-});
+slots.forEach(
+  (s,i) => {
+
+    s.button.onclick =
+      () => toggleMic(i);
+
+  }
+);
 
 
 async function leaveMic(slotId){
@@ -910,691 +1545,590 @@ async function leaveMic(slotId){
     );
 
   }catch(e){
+
     console.error(e);
+
   }
 
-  if(localStream)
-    localStream.getTracks().forEach(t=>t.stop());
 
-  localStream=null;
+  if(localStream){
 
-  if(mySlot===slotId)
-    mySlot=null;
+    localStream
+      .getTracks()
+      .forEach(t => t.stop());
+
+  }
+
+
+  localStream = null;
+
+  if(mySlot === slotId){
+
+    mySlot = null;
+
+  }
+
 }
 
 
 function watchSlots(){
 
-  if(stopSlots)stopSlots();
+  if(stopSlots){
 
-  stopSlots=
+    stopSlots();
+
+  }
+
+
+  stopSlots =
     onSnapshot(
+
       collection(db,"voiceSlots"),
-      snap=>{
 
-        const data={};
+      snap => {
 
-        snap.forEach(x=>{
-          data[x.id]=x.data();
-        });
+        const data = {};
 
-        slots.forEach(slot=>{
+        snap.forEach(
+          x => data[x.id] = x.data()
+        );
 
-          const d=data[slot.id];
 
-          const mine=
+        slots.forEach(slot => {
+
+          const d =
+            data[slot.id];
+
+
+          const mine =
             d &&
             auth.currentUser &&
-            d.uid===auth.currentUser.uid;
+            d.uid === auth.currentUser.uid;
+
 
           if(!d){
 
             slot.el.classList.remove("active");
-            slot.name.textContent="شاغر";
-            slot.status.textContent="اضغط للتحدث";
-            slot.button.textContent="تشغيل المايك";
-            slot.button.disabled=false;
+
+            slot.name.textContent =
+              "شاغر";
+
+            slot.status.textContent =
+              "اضغط للتحدث";
+
+            slot.button.textContent =
+              "تشغيل المايك";
+
+            slot.button.disabled =
+              false;
 
             return;
+
           }
 
+
           slot.el.classList.add("active");
-          slot.name.textContent=d.name||"عضو";
+
+          slot.name.textContent =
+            d.name || "عضو";
+
 
           if(mine){
 
-            slot.status.textContent="🎤 أنت تتحدث";
-            slot.button.textContent="إيقاف المايك";
-            slot.button.disabled=false;
+            slot.status.textContent =
+              "🎤 أنت تتحدث";
+
+            slot.button.textContent =
+              "إيقاف المايك";
+
+            slot.button.disabled =
+              false;
 
           }else{
 
-            slot.status.textContent="🔊 البث مباشر";
-            slot.button.textContent="🔊 مباشر";
-            slot.button.disabled=true;
+            slot.status.textContent =
+              "🔊 البث مباشر";
+
+            slot.button.textContent =
+              "🔊 مباشر";
+
+            slot.button.disabled =
+              true;
 
           }
 
         });
 
       },
-      e=>console.error("voiceSlots",e)
+
+      e => {
+
+        console.error(
+          "voiceSlots",
+          e
+        );
+
+      }
+
     );
+
 }
 
 
 function cleanupVoice(){
 
-  if(mySlot)
-    leaveMic(mySlot).catch(()=>{});
+  if(mySlot){
 
-  if(localStream)
-    localStream.getTracks().forEach(t=>t.stop());
+    leaveMic(mySlot)
+      .catch(() => {});
 
-  localStream=null;
-  mySlot=null;
+  }
+
+
+  if(localStream){
+
+    localStream
+      .getTracks()
+      .forEach(t => t.stop());
+
+  }
+
+
+  localStream = null;
+
+  mySlot = null;
+
 }
 
 
-/* =====================================================
-   لعبة إكس أو + ROBOT
-===================================================== */
+/* =========================
+   تفعيل الصوت
+========================= */
 
-const gameOverlay=
-  document.getElementById("gameOverlay");
+document
+  .getElementById("enableAudioButton")
+  .onclick = async () => {
 
-const gameCells=
-  document.querySelectorAll(".gameCell");
+    for(
+      const a of
+      document.querySelectorAll(
+        "#audioContainer audio"
+      )
+    ){
 
-const gameTurn=
-  document.getElementById("gameTurn");
+      try{
 
-const gameMessage=
-  document.getElementById("gameMessage");
+        await a.play();
 
-const scoreXElement=
-  document.getElementById("scoreX");
+      }catch{}
 
-const scoreOElement=
-  document.getElementById("scoreO");
+    }
 
-const scoreDrawElement=
-  document.getElementById("scoreDraw");
-
-const twoPlayersBtn=
-  document.getElementById("twoPlayersBtn");
-
-const robotBtn=
-  document.getElementById("robotBtn");
-
-const difficultyBox=
-  document.getElementById("difficultyBox");
-
-
-let gameBoard=[
-  "","","",
-  "","","",
-  "","",""
-];
-
-let gamePlayer="X";
-
-let gameFinished=false;
-
-let gameMode="two";
-
-let difficulty="easy";
-
-let gameScoreX=0;
-let gameScoreO=0;
-let gameScoreDraw=0;
-
-const gameWins=[
-
-  [0,1,2],
-  [3,4,5],
-  [6,7,8],
-
-  [0,3,6],
-  [1,4,7],
-  [2,5,8],
-
-  [0,4,8],
-  [2,4,6]
-
-];
-
-
-document.getElementById("openGameButton").onclick=()=>{
-  gameOverlay.classList.remove("hidden");
-};
-
-
-document.getElementById("closeGameButton").onclick=()=>{
-  gameOverlay.classList.add("hidden");
-};
-
-
-twoPlayersBtn.onclick=()=>{
-
-  gameMode="two";
-
-  twoPlayersBtn.classList.add("active");
-  robotBtn.classList.remove("active");
-
-  difficultyBox.classList.add("hidden");
-
-  newGame();
-
-};
-
-
-robotBtn.onclick=()=>{
-
-  gameMode="robot";
-
-  robotBtn.classList.add("active");
-  twoPlayersBtn.classList.remove("active");
-
-  difficultyBox.classList.remove("hidden");
-
-  newGame();
-
-};
-
-
-document.querySelectorAll(".levelBtn").forEach(btn=>{
-
-  btn.onclick=()=>{
 
     document
-      .querySelectorAll(".levelBtn")
-      .forEach(x=>x.classList.remove("active"));
-
-    btn.classList.add("active");
-
-    difficulty=btn.dataset.level;
-
-    newGame();
+      .getElementById(
+        "enableAudioButton"
+      )
+      .style.display = "none";
 
   };
 
-});
+
+/* =========================
+   لعبة إكس أو ضد الروبوت
+========================= */
+
+const gameButton =
+  document.getElementById("gameButton");
+
+const gamePanel =
+  document.getElementById("gamePanel");
+
+const closeGame =
+  document.getElementById("closeGame");
+
+const restartGame =
+  document.getElementById("restartGame");
+
+const board =
+  document.getElementById("board");
+
+const gameInfo =
+  document.getElementById("gameInfo");
 
 
-function gameWinner(board=gameBoard){
+let gameBoard =
+  ["","","","","","","","",""];
 
-  for(const pattern of gameWins){
-
-    const [a,b,c]=pattern;
-
-    if(
-      board[a] &&
-      board[a]===board[b] &&
-      board[a]===board[c]
-    ){
-
-      return pattern;
-
-    }
-
-  }
-
-  return null;
-}
+let gameOver = false;
 
 
-function gameDraw(board=gameBoard){
+gameButton.onclick = () => {
 
-  return board.every(x=>x!=="");
+  gamePanel.style.display =
+    "flex";
 
-}
+  startGame();
 
-
-function updateGameTurn(){
-
-  if(gameFinished)return;
-
-  if(gameMode==="robot"){
-
-    if(gamePlayer==="X")
-      gameTurn.textContent="دورك ❌";
-
-    else
-      gameTurn.textContent="🤖 الروبوت يفكر...";
-
-  }else{
-
-    gameTurn.textContent=
-      gamePlayer==="X"
-      ?"الدور على اللاعب ❌"
-      :"الدور على اللاعب ⭕";
-
-  }
-
-}
+};
 
 
-function playHuman(index){
+closeGame.onclick = () => {
 
-  if(gameFinished)return;
+  gamePanel.style.display =
+    "none";
 
-  if(gameBoard[index]!=="")return;
+};
 
-  if(
-    gameMode==="robot" &&
-    gamePlayer!=="X"
-  )return;
 
-  makeMove(index,gamePlayer);
+restartGame.onclick =
+  startGame;
+
+
+function startGame(){
+
+  gameBoard =
+    ["","","","","","","","",""];
+
+  gameOver = false;
+
+  gameInfo.textContent =
+    "أنت ❌ والروبوت ⭕";
+
+  drawBoard();
 
 }
 
 
-function makeMove(index,player){
+function drawBoard(){
 
-  if(gameFinished)return;
+  board.innerHTML = "";
 
-  if(gameBoard[index]!=="")return;
 
-  gameBoard[index]=player;
+  gameBoard.forEach(
+    (value,index) => {
 
-  gameCells[index].textContent=
-    player==="X"?"❌":"⭕";
+      const cell =
+        document.createElement("button");
 
-  gameCells[index]
-    .classList
-    .add(player==="X"?"x":"o");
+      cell.className =
+        "cell";
 
+      cell.textContent =
+        value;
 
-  const winner=gameWinner();
 
-  if(winner){
+      cell.onclick = () => {
 
-    winner.forEach(i=>{
-      gameCells[i].classList.add("win");
-    });
+        if(
+          gameOver ||
+          gameBoard[index]
+        ){
 
-    gameFinished=true;
+          return;
 
-    if(player==="X"){
+        }
 
-      gameScoreX++;
-      scoreXElement.textContent=gameScoreX;
 
-      gameMessage.textContent=
-        gameMode==="robot"
-        ?"🎉 فزت على الروبوت!"
-        :"🎉 اللاعب ❌ فاز!";
+        gameBoard[index] =
+          "X";
 
-    }else{
 
-      gameScoreO++;
-      scoreOElement.textContent=gameScoreO;
+        drawBoard();
 
-      gameMessage.textContent=
-        gameMode==="robot"
-        ?"🤖 الروبوت فاز!"
-        :"🎉 اللاعب ⭕ فاز!";
 
-    }
+        if(checkWinner("X")){
 
-    gameTurn.textContent="انتهت الجولة";
+          gameInfo.textContent =
+            "🎉 فزت!";
 
-    return;
+          gameOver = true;
 
-  }
+          return;
 
+        }
 
-  if(gameDraw()){
 
-    gameFinished=true;
+        if(isDraw()){
 
-    gameScoreDraw++;
+          gameInfo.textContent =
+            "🤝 تعادل";
 
-    scoreDrawElement.textContent=
-      gameScoreDraw;
+          gameOver = true;
 
-    gameMessage.textContent="🤝 تعادل!";
+          return;
 
-    gameTurn.textContent="انتهت الجولة";
+        }
 
-    return;
 
-  }
+        gameInfo.textContent =
+          "🤖 الروبوت يفكر...";
 
 
-  gamePlayer=
-    player==="X"?"O":"X";
-
-  updateGameTurn();
-
-
-  if(
-    gameMode==="robot" &&
-    gamePlayer==="O"
-  ){
-
-    setTimeout(robotMove,350);
-
-  }
-
-}
-
-
-/* ================= ROBOT ================= */
-
-function availableMoves(board=gameBoard){
-
-  const moves=[];
-
-  board.forEach((value,index)=>{
-
-    if(value==="")
-      moves.push(index);
-
-  });
-
-  return moves;
-
-}
-
-
-function randomMove(){
-
-  const moves=
-    availableMoves();
-
-  if(!moves.length)return null;
-
-  return moves[
-    Math.floor(
-      Math.random()*moves.length
-    )
-  ];
-
-}
-
-
-function winningMove(player){
-
-  const moves=
-    availableMoves();
-
-  for(const index of moves){
-
-    const test=
-      [...gameBoard];
-
-    test[index]=player;
-
-    if(gameWinner(test))
-      return index;
-
-  }
-
-  return null;
-
-}
-
-
-function mediumRobot(){
-
-  /* حاول الفوز */
-  const win=
-    winningMove("O");
-
-  if(win!==null)
-    return win;
-
-  /* امنع اللاعب */
-  const block=
-    winningMove("X");
-
-  if(block!==null)
-    return block;
-
-  /* الوسط */
-  if(gameBoard[4]==="")
-    return 4;
-
-  /* زاوية */
-  const corners=[
-    0,2,6,8
-  ].filter(i=>gameBoard[i]==="");
-
-  if(corners.length){
-
-    return corners[
-      Math.floor(
-        Math.random()*corners.length
-      )
-    ];
-
-  }
-
-  return randomMove();
-
-}
-
-
-function minimax(board,isMaximizing){
-
-  const winner=gameWinner(board);
-
-  if(winner){
-
-    const player=
-      board[winner[0]];
-
-    if(player==="O")
-      return 10;
-
-    if(player==="X")
-      return -10;
-
-  }
-
-  if(gameDraw(board))
-    return 0;
-
-
-  if(isMaximizing){
-
-    let best=-Infinity;
-
-    for(const index of availableMoves(board)){
-
-      board[index]="O";
-
-      const score=
-        minimax(board,false);
-
-      board[index]="";
-
-      best=
-        Math.max(
-          best,
-          score
+        setTimeout(
+          robotMove,
+          350
         );
 
-    }
+      };
 
-    return best;
 
-  }else{
-
-    let best=Infinity;
-
-    for(const index of availableMoves(board)){
-
-      board[index]="X";
-
-      const score=
-        minimax(board,true);
-
-      board[index]="";
-
-      best=
-        Math.min(
-          best,
-          score
-        );
+      board.appendChild(cell);
 
     }
+  );
 
-    return best;
-
-  }
-
-}
-
-
-function hardRobot(){
-
-  let bestScore=-Infinity;
-
-  let bestMove=null;
-
-  for(const index of availableMoves()){
-
-    gameBoard[index]="O";
-
-    const score=
-      minimax(
-        gameBoard,
-        false
-      );
-
-    gameBoard[index]="";
-
-    if(score>bestScore){
-
-      bestScore=score;
-      bestMove=index;
-
-    }
-
-  }
-
-  return bestMove;
 }
 
 
 function robotMove(){
 
-  if(
-    gameFinished ||
-    gameMode!=="robot" ||
-    gamePlayer!=="O"
-  )return;
+  if(gameOver) return;
 
 
-  let move=null;
+  const move =
+    bestMove();
 
 
-  if(difficulty==="easy"){
+  if(move !== -1){
 
-    move=randomMove();
+    gameBoard[move] =
+      "O";
 
-  }else if(difficulty==="medium"){
+  }
 
-    move=mediumRobot();
+
+  drawBoard();
+
+
+  if(checkWinner("O")){
+
+    gameInfo.textContent =
+      "🤖 فاز الروبوت";
+
+    gameOver = true;
+
+    return;
+
+  }
+
+
+  if(isDraw()){
+
+    gameInfo.textContent =
+      "🤝 تعادل";
+
+    gameOver = true;
+
+    return;
+
+  }
+
+
+  gameInfo.textContent =
+    "دورك ❌";
+
+}
+
+
+function bestMove(){
+
+  let bestScore =
+    -Infinity;
+
+  let move = -1;
+
+
+  for(
+    let i=0;
+    i<9;
+    i++
+  ){
+
+    if(gameBoard[i] === ""){
+
+      gameBoard[i] = "O";
+
+
+      const score =
+        minimax(
+          gameBoard,
+          false
+        );
+
+
+      gameBoard[i] = "";
+
+
+      if(score > bestScore){
+
+        bestScore = score;
+
+        move = i;
+
+      }
+
+    }
+
+  }
+
+
+  return move;
+
+}
+
+
+function minimax(boardState,isMax){
+
+  if(checkWinnerOn(
+    boardState,
+    "O"
+  )){
+
+    return 10;
+
+  }
+
+
+  if(checkWinnerOn(
+    boardState,
+    "X"
+  )){
+
+    return -10;
+
+  }
+
+
+  if(boardState.every(x => x !== "")){
+
+    return 0;
+
+  }
+
+
+  if(isMax){
+
+    let best =
+      -Infinity;
+
+
+    for(
+      let i=0;
+      i<9;
+      i++
+    ){
+
+      if(boardState[i] === ""){
+
+        boardState[i] = "O";
+
+        best =
+          Math.max(
+            best,
+            minimax(
+              boardState,
+              false
+            )
+          );
+
+        boardState[i] = "";
+
+      }
+
+    }
+
+
+    return best;
 
   }else{
 
-    move=hardRobot();
+    let best =
+      Infinity;
 
-  }
+
+    for(
+      let i=0;
+      i<9;
+      i++
+    ){
+
+      if(boardState[i] === ""){
+
+        boardState[i] = "X";
+
+        best =
+          Math.min(
+            best,
+            minimax(
+              boardState,
+              true
+            )
+          );
+
+        boardState[i] = "";
+
+      }
+
+    }
 
 
-  if(move!==null){
-
-    makeMove(
-      move,
-      "O"
-    );
+    return best;
 
   }
 
 }
 
 
-gameCells.forEach(cell=>{
+function checkWinner(player){
 
-  cell.onclick=()=>{
+  return checkWinnerOn(
+    gameBoard,
+    player
+  );
 
-    playHuman(
-      Number(
-        cell.dataset.index
-      )
-    );
-
-  };
-
-});
+}
 
 
-function newGame(){
+function checkWinnerOn(
+  b,
+  player
+){
 
-  gameBoard=[
-    "","","",
-    "","","",
-    "","",""
+  const wins = [
+
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+
+    [0,4,8],
+    [2,4,6]
+
   ];
 
-  gamePlayer="X";
 
-  gameFinished=false;
-
-  gameCells.forEach(cell=>{
-
-    cell.textContent="";
-
-    cell.classList.remove(
-      "x",
-      "o",
-      "win"
-    );
-
-  });
-
-  gameMessage.textContent="";
-
-  updateGameTurn();
+  return wins.some(
+    line =>
+      line.every(
+        i => b[i] === player
+      )
+  );
 
 }
 
 
-function resetGameScores(){
+function isDraw(){
 
-  gameScoreX=0;
-  gameScoreO=0;
-  gameScoreDraw=0;
-
-  scoreXElement.textContent="0";
-  scoreOElement.textContent="0";
-  scoreDrawElement.textContent="0";
-
-  newGame();
-
-  gameMessage.textContent=
-    "✅ تم تصفير النتائج";
+  return gameBoard.every(
+    x => x !== ""
+  );
 
 }
 
-
-document
-  .getElementById("newGameButton")
-  .onclick=newGame;
-
-
-document
-  .getElementById("resetGameButton")
-  .onclick=resetGameScores;
-
-
-newGame();
 
 </script>
 
