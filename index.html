@@ -3,10 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
 <title>🔥 طليان الشعلة</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 html,body{
   margin:0;
@@ -14,25 +17,37 @@ html,body{
   min-height:100%;
   font-family:Arial,Tahoma,sans-serif;
   background:#080b10;
-  color:#fff
+  color:#fff;
 }
 
 body{
   background:
-    linear-gradient(#0009,#0009),
+    linear-gradient(#000b,#000b),
     url("./background.jpeg") center/cover fixed no-repeat;
 }
 
-button,input{font-family:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
+button,input{
+  font-family:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* =========================
+   LOGIN
+========================= */
 
 #loginPage{
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:20px
+  padding:20px;
 }
 
 .loginBox{
@@ -43,28 +58,28 @@ button{cursor:pointer}
   border-radius:20px;
   border:1px solid #ffffff25;
   box-shadow:0 20px 60px #000b;
-  backdrop-filter:blur(8px)
+  backdrop-filter:blur(8px);
 }
 
 .logo{
   text-align:center;
   font-size:30px;
   font-weight:bold;
-  margin-bottom:8px
+  margin-bottom:8px;
 }
 
 .description{
   text-align:center;
   color:#c0cad6;
   margin-bottom:20px;
-  line-height:1.7
+  line-height:1.7;
 }
 
 .tabs{
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
   gap:6px;
-  margin-bottom:12px
+  margin-bottom:12px;
 }
 
 .tab{
@@ -73,16 +88,21 @@ button{cursor:pointer}
   color:#cbd5e1;
   padding:11px 5px;
   border-radius:9px;
-  font-weight:bold
+  font-weight:bold;
 }
 
 .tab.active{
   background:#1687ff;
-  color:#fff
+  color:#fff;
 }
 
-.form{display:none}
-.form.active{display:block}
+.form{
+  display:none;
+}
+
+.form.active{
+  display:block;
+}
 
 .loginBox input,
 .composer input{
@@ -93,7 +113,12 @@ button{cursor:pointer}
   border-radius:10px;
   background:#0d131b;
   color:#fff;
-  outline:none
+  outline:none;
+}
+
+.loginBox input:focus,
+.composer input:focus{
+  border-color:#1687ff;
 }
 
 .btn{
@@ -103,31 +128,40 @@ button{cursor:pointer}
   border:0;
   border-radius:10px;
   font-weight:bold;
-  color:#fff
+  color:#fff;
 }
 
-.primary{background:#1687ff}
-.secondary{background:#283444}
+.primary{
+  background:#1687ff;
+}
+
+.secondary{
+  background:#283444;
+}
 
 #authMessage{
   text-align:center;
   min-height:24px;
   margin-top:12px;
   color:#ffb6b6;
-  word-break:break-word
+  word-break:break-word;
 }
 
 .status{
   text-align:center;
   color:#8ee0b1;
   font-size:12px;
-  margin-top:8px
+  margin-top:8px;
 }
+
+/* =========================
+   CHAT
+========================= */
 
 #chatApp{
   height:100vh;
   display:flex;
-  flex-direction:column
+  flex-direction:column;
 }
 
 .header{
@@ -138,18 +172,18 @@ button{cursor:pointer}
   align-items:center;
   justify-content:space-between;
   padding:0 12px;
-  backdrop-filter:blur(8px)
+  backdrop-filter:blur(8px);
 }
 
 .title{
   font-size:20px;
-  font-weight:bold
+  font-weight:bold;
 }
 
 .username{
   font-size:12px;
   color:#6ee7a0;
-  margin-top:3px
+  margin-top:3px;
 }
 
 .logout{
@@ -157,26 +191,242 @@ button{cursor:pointer}
   background:#a92d38;
   color:#fff;
   padding:9px 12px;
-  border-radius:9px
+  border-radius:9px;
 }
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.mainNav{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  padding:8px;
+  background:#101720;
+  border-bottom:1px solid #293646;
+}
+
+.navBtn{
+  border:1px solid #344255;
+  background:#18222e;
+  color:#dce7f5;
+  padding:10px;
+  border-radius:9px;
+  font-weight:bold;
+}
+
+.navBtn.active{
+  background:#1687ff;
+  border-color:#1687ff;
+}
+
+/* =========================
+   CHAT AREA
+========================= */
+
+.chatSection{
+  flex:1;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+}
+
+.messages{
+  flex:1;
+  overflow-y:auto;
+  padding:14px;
+  background:#0004;
+  -webkit-overflow-scrolling:touch;
+}
+
+.message{
+  display:flex;
+  gap:9px;
+  margin-bottom:13px;
+  align-items:flex-start;
+}
+
+.avatar{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  object-fit:cover;
+  background:#293646;
+  flex:none;
+}
+
+.messageContent{
+  background:#18222eea;
+  border-radius:13px;
+  padding:8px 11px;
+  max-width:80%;
+}
+
+.messageName{
+  color:#61a8ff;
+  font-size:12px;
+  font-weight:bold;
+  margin-bottom:3px;
+}
+
+.messageText{
+  line-height:1.5;
+  word-break:break-word;
+}
+
+.composer{
+  display:flex;
+  gap:7px;
+  padding:9px;
+  background:#151d28ee;
+  border-top:1px solid #293646;
+}
+
+.composer input{
+  flex:1;
+  min-width:0;
+  margin:0;
+}
+
+.send{
+  width:50px;
+  border:0;
+  border-radius:10px;
+  background:#1687ff;
+  color:#fff;
+  font-size:18px;
+}
+
+.send:disabled{
+  opacity:.5;
+}
+
+.empty{
+  text-align:center;
+  color:#7e8a99;
+  padding:35px 10px;
+}
+
+/* =========================
+   GAME
+========================= */
+
+.gameSection{
+  flex:1;
+  overflow-y:auto;
+  padding:18px;
+  background:#0005;
+}
+
+.gameBox{
+  max-width:450px;
+  margin:0 auto;
+  background:#101722ee;
+  border:1px solid #293646;
+  border-radius:18px;
+  padding:18px;
+  text-align:center;
+}
+
+.gameTitle{
+  font-size:25px;
+  font-weight:bold;
+  margin-bottom:5px;
+}
+
+.gameSub{
+  color:#aebaca;
+  font-size:13px;
+  margin-bottom:15px;
+}
+
+.gameStatus{
+  background:#18222e;
+  border:1px solid #344255;
+  border-radius:10px;
+  padding:10px;
+  margin-bottom:15px;
+}
+
+.board{
+  width:min(90vw,330px);
+  aspect-ratio:1/1;
+  margin:0 auto 15px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+}
+
+.cell{
+  border:1px solid #344255;
+  background:#18222e;
+  border-radius:13px;
+  color:#fff;
+  font-size:45px;
+  font-weight:bold;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+}
+
+.cell:disabled{
+  cursor:not-allowed;
+  opacity:.9;
+}
+
+.cell.x{
+  color:#1687ff;
+}
+
+.cell.o{
+  color:#ff6070;
+}
+
+.gameButtons{
+  display:flex;
+  gap:8px;
+}
+
+.gameButtons button{
+  flex:1;
+  border:0;
+  border-radius:10px;
+  padding:12px;
+  color:#fff;
+  font-weight:bold;
+}
+
+.newGame{
+  background:#1687ff;
+}
+
+.easy{
+  background:#283444;
+}
+
+/* =========================
+   VOICE
+========================= */
 
 .voicePanel{
   background:#101720dd;
   border-bottom:1px solid #293646;
-  padding:10px
+  padding:10px;
 }
 
 .voiceTitle{
   text-align:center;
   font-weight:bold;
   margin-bottom:8px;
-  color:#dce7f5
+  color:#dce7f5;
 }
 
 .voiceSlots{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:8px
+  gap:8px;
 }
 
 .voiceSlot{
@@ -189,11 +439,11 @@ button{cursor:pointer}
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  gap:5px
+  gap:5px;
 }
 
 .voiceSlot.active{
-  border-color:#24c77a
+  border-color:#24c77a;
 }
 
 .voiceSlot button{
@@ -202,11 +452,11 @@ button{cursor:pointer}
   padding:8px 12px;
   background:#1687ff;
   color:#fff;
-  font-weight:bold
+  font-weight:bold;
 }
 
 .voiceSlot.active button{
-  background:#b52d39
+  background:#b52d39;
 }
 
 .voiceName{
@@ -215,83 +465,18 @@ button{cursor:pointer}
   max-width:100%;
   overflow:hidden;
   text-overflow:ellipsis;
-  white-space:nowrap
+  white-space:nowrap;
 }
 
 .voiceStatus{
   font-size:11px;
   color:#7e8a99;
-  text-align:center
-}
-
-.messages{
-  flex:1;
-  overflow-y:auto;
-  padding:14px;
-  background:#0004
-}
-
-.message{
-  display:flex;
-  gap:9px;
-  margin-bottom:13px
-}
-
-.avatar{
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  object-fit:cover;
-  background:#293646
-}
-
-.messageContent{
-  background:#18222eea;
-  border-radius:13px;
-  padding:8px 11px;
-  max-width:80%
-}
-
-.messageName{
-  color:#61a8ff;
-  font-size:12px;
-  font-weight:bold;
-  margin-bottom:3px
-}
-
-.messageText{
-  line-height:1.5;
-  word-break:break-word
-}
-
-.composer{
-  display:flex;
-  gap:7px;
-  padding:9px;
-  background:#151d28ee;
-  border-top:1px solid #293646
-}
-
-.composer input{
-  flex:1;
-  min-width:0;
-  margin:0
-}
-
-.send{
-  width:50px;
-  border:0;
-  border-radius:10px;
-  background:#1687ff;
-  color:#fff;
-  font-size:18px
-}
-
-.empty{
   text-align:center;
-  color:#7e8a99;
-  padding:35px 10px
 }
+
+/* =========================
+   AUDIO
+========================= */
 
 #audioContainer{
   position:fixed;
@@ -299,12 +484,12 @@ button{cursor:pointer}
   height:1px;
   left:-100px;
   top:-100px;
-  overflow:hidden
+  overflow:hidden;
 }
 
 #audioContainer audio{
   width:1px;
-  height:1px
+  height:1px;
 }
 
 #enableAudioButton{
@@ -320,98 +505,22 @@ button{cursor:pointer}
   background:#1687ff;
   color:#fff;
   font-weight:bold;
-  box-shadow:0 8px 30px #0008
-}
-
-#gameButton{
-  position:fixed;
-  left:10px;
-  bottom:10px;
-  z-index:9999;
-  border:0;
-  border-radius:10px;
-  padding:10px 14px;
-  background:#1687ff;
-  color:#fff;
-  font-weight:bold
-}
-
-#gamePanel{
-  position:fixed;
-  inset:0;
-  background:#000c;
-  z-index:100000;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px
-}
-
-.gameBox{
-  width:100%;
-  max-width:390px;
-  background:#101722;
-  border:1px solid #344255;
-  border-radius:20px;
-  padding:20px;
-  text-align:center
-}
-
-.gameTitle{
-  font-size:25px;
-  font-weight:bold;
-  margin-bottom:8px
-}
-
-.gameInfo{
-  color:#aebaca;
-  margin-bottom:15px
-}
-
-.board{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  max-width:300px;
-  margin:0 auto 15px
-}
-
-.cell{
-  aspect-ratio:1;
-  border:1px solid #344255;
-  background:#18222e;
-  border-radius:12px;
-  color:#fff;
-  font-size:40px;
-  font-weight:bold
-}
-
-.gameActions{
-  display:flex;
-  gap:8px
-}
-
-.gameActions button{
-  flex:1;
-  border:0;
-  border-radius:10px;
-  padding:12px;
-  color:#fff;
-  font-weight:bold
-}
-
-.closeGame{
-  background:#a92d38
-}
-
-.restartGame{
-  background:#1687ff
+  box-shadow:0 8px 30px #0008;
 }
 
 @media(max-width:420px){
+
   .voiceSlot button{
     padding:7px 9px;
-    font-size:12px
+    font-size:12px;
+  }
+
+  .messageContent{
+    max-width:82%;
+  }
+
+  .cell{
+    font-size:38px;
   }
 }
 </style>
@@ -419,11 +528,17 @@ button{cursor:pointer}
 
 <body>
 
+<!-- =========================
+     LOGIN
+========================= -->
+
 <div id="loginPage">
 
   <div class="loginBox">
 
-    <div class="logo">🔥 طليان الشعلة</div>
+    <div class="logo">
+      🔥 طليان الشعلة
+    </div>
 
     <div class="description">
       أهلاً بك في الدردشة<br>
@@ -446,13 +561,15 @@ button{cursor:pointer}
 
     </div>
 
+    <!-- VISITOR -->
+
     <div id="visitorForm" class="form active">
 
       <input
         id="visitorName"
         type="text"
-        placeholder="أكتب الاسم المستعار"
-      >
+        maxlength="30"
+        placeholder="أكتب الاسم المستعار">
 
       <button id="visitorButton" class="btn primary">
         دخول
@@ -460,19 +577,19 @@ button{cursor:pointer}
 
     </div>
 
+    <!-- LOGIN -->
+
     <div id="loginForm" class="form">
 
       <input
         id="emailInput"
         type="email"
-        placeholder="البريد الإلكتروني"
-      >
+        placeholder="البريد الإلكتروني">
 
       <input
         id="passwordInput"
         type="password"
-        placeholder="كلمة المرور"
-      >
+        placeholder="كلمة المرور">
 
       <button id="loginButton" class="btn primary">
         دخول
@@ -480,25 +597,25 @@ button{cursor:pointer}
 
     </div>
 
+    <!-- SIGNUP -->
+
     <div id="signupForm" class="form">
 
       <input
         id="nameInput"
         type="text"
-        placeholder="اسم العضو"
-      >
+        maxlength="30"
+        placeholder="اسم العضو">
 
       <input
         id="signupEmail"
         type="email"
-        placeholder="البريد الإلكتروني"
-      >
+        placeholder="البريد الإلكتروني">
 
       <input
         id="signupPassword"
         type="password"
-        placeholder="كلمة المرور"
-      >
+        placeholder="كلمة المرور">
 
       <button id="signupButton" class="btn primary">
         إنشاء حساب
@@ -517,11 +634,16 @@ button{cursor:pointer}
 </div>
 
 
+<!-- =========================
+     CHAT APP
+========================= -->
+
 <div id="chatApp" class="hidden">
 
   <div class="header">
 
     <div>
+
       <div class="title">
         🔥 طليان الشعلة
       </div>
@@ -529,6 +651,7 @@ button{cursor:pointer}
       <div id="currentUsername" class="username">
         عضو
       </div>
+
     </div>
 
     <button id="logoutButton" class="logout">
@@ -538,76 +661,149 @@ button{cursor:pointer}
   </div>
 
 
-  <div class="voicePanel">
+  <!-- NAV -->
 
-    <div class="voiceTitle">
-      🎤 المايكات العامة
-    </div>
+  <div class="mainNav">
 
-    <div class="voiceSlots">
-
-      <div id="voiceSlot1" class="voiceSlot">
-
-        <div>🎤 المايك 1</div>
-
-        <div id="voiceName1" class="voiceName">
-          شاغر
-        </div>
-
-        <div id="voiceStatus1" class="voiceStatus">
-          اضغط للتحدث
-        </div>
-
-        <button id="voiceButton1">
-          تشغيل المايك
-        </button>
-
-      </div>
-
-
-      <div id="voiceSlot2" class="voiceSlot">
-
-        <div>🎤 المايك 2</div>
-
-        <div id="voiceName2" class="voiceName">
-          شاغر
-        </div>
-
-        <div id="voiceStatus2" class="voiceStatus">
-          اضغط للتحدث
-        </div>
-
-        <button id="voiceButton2">
-          تشغيل المايك
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div id="messages" class="messages">
-
-    <div class="empty">
-      جاري تحميل الدردشة...
-    </div>
-
-  </div>
-
-
-  <div class="composer">
-
-    <input
-      id="messageInput"
-      type="text"
-      placeholder="اكتب رسالتك..."
-    >
-
-    <button id="sendButton" class="send">
-      ➤
+    <button id="chatNav" class="navBtn active">
+      💬 الدردشة
     </button>
+
+    <button id="gameNav" class="navBtn">
+      🎮 لعبة XO
+    </button>
+
+  </div>
+
+
+  <!-- CHAT SECTION -->
+
+  <div id="chatSection" class="chatSection">
+
+    <div class="voicePanel">
+
+      <div class="voiceTitle">
+        🎤 المايكات العامة
+      </div>
+
+      <div class="voiceSlots">
+
+        <div id="voiceSlot1" class="voiceSlot">
+
+          <div>🎤 المايك 1</div>
+
+          <div id="voiceName1" class="voiceName">
+            شاغر
+          </div>
+
+          <div id="voiceStatus1" class="voiceStatus">
+            اضغط للتحدث
+          </div>
+
+          <button id="voiceButton1">
+            تشغيل المايك
+          </button>
+
+        </div>
+
+
+        <div id="voiceSlot2" class="voiceSlot">
+
+          <div>🎤 المايك 2</div>
+
+          <div id="voiceName2" class="voiceName">
+            شاغر
+          </div>
+
+          <div id="voiceStatus2" class="voiceStatus">
+            اضغط للتحدث
+          </div>
+
+          <button id="voiceButton2">
+            تشغيل المايك
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div id="messages" class="messages">
+
+      <div class="empty">
+        جاري تحميل الدردشة...
+      </div>
+
+    </div>
+
+
+    <div class="composer">
+
+      <input
+        id="messageInput"
+        type="text"
+        maxlength="500"
+        autocomplete="off"
+        placeholder="اكتب رسالتك...">
+
+      <button id="sendButton" class="send">
+        ➤
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- GAME -->
+
+  <div id="gameSection" class="gameSection hidden">
+
+    <div class="gameBox">
+
+      <div class="gameTitle">
+        🎮 لعبة XO
+      </div>
+
+      <div class="gameSub">
+        العب ضد الروبوت
+      </div>
+
+      <div id="gameStatus" class="gameStatus">
+        دورك أنت — ❌
+      </div>
+
+      <div id="board" class="board">
+
+        <button class="cell" data-index="0"></button>
+        <button class="cell" data-index="1"></button>
+        <button class="cell" data-index="2"></button>
+
+        <button class="cell" data-index="3"></button>
+        <button class="cell" data-index="4"></button>
+        <button class="cell" data-index="5"></button>
+
+        <button class="cell" data-index="6"></button>
+        <button class="cell" data-index="7"></button>
+        <button class="cell" data-index="8"></button>
+
+      </div>
+
+      <div class="gameButtons">
+
+        <button id="newGameButton" class="newGame">
+          لعبة جديدة
+        </button>
+
+        <button id="easyButton" class="easy">
+          مستوى عادي
+        </button>
+
+      </div>
+
+    </div>
 
   </div>
 
@@ -621,47 +817,16 @@ button{cursor:pointer}
 </button>
 
 
-<button id="gameButton">
-  🎮 إكس أو
-</button>
-
-
-<div id="gamePanel">
-
-  <div class="gameBox">
-
-    <div class="gameTitle">
-      ❌⭕ إكس أو
-    </div>
-
-    <div id="gameInfo" class="gameInfo">
-      أنت ❌ والروبوت ⭕
-    </div>
-
-    <div id="board" class="board"></div>
-
-    <div class="gameActions">
-
-      <button class="restartGame" id="restartGame">
-        لعبة جديدة
-      </button>
-
-      <button class="closeGame" id="closeGame">
-        إغلاق
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
 <script type="module">
+
+/* =========================================================
+   FIREBASE
+========================================================= */
 
 import {
   initializeApp
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
 
 import {
   getAuth,
@@ -672,6 +837,7 @@ import {
   onAuthStateChanged,
   signOut
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
 
 import {
   getFirestore,
@@ -688,41 +854,36 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
 
-/*
-====================================================
-ضع إعدادات Firebase الحالية هنا
-====================================================
-من Firebase:
-
-Project settings
-↓
-Your apps
-↓
-Web app
-↓
-SDK setup and configuration
-↓
-Config
-
-وانسخ القيم كما هي.
-*/
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
 
 const firebaseConfig = {
 
-  apiKey: "ضع_API_KEY_الحالي_هنا",
+  apiKey:
+    "AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
 
-  authDomain: "dardashti-chat.firebaseapp.com",
+  authDomain:
+    "dardashti-chat.firebaseapp.com",
 
-  projectId: "dardashti-chat",
+  projectId:
+    "dardashti-chat",
 
-  storageBucket: "dardashti-chat.firebasestorage.app",
+  storageBucket:
+    "dardashti-chat.firebasestorage.app",
 
-  messagingSenderId: "779042757468",
+  messagingSenderId:
+    "779042757468",
 
-  appId: "ضع_APP_ID_الحالي_هنا"
+  appId:
+    "1:779042757468:web:7646d3cdadf46f315a3f99"
 
 };
 
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
 
 const app = initializeApp(firebaseConfig);
 
@@ -730,6 +891,10 @@ const auth = getAuth(app);
 
 const db = getFirestore(app);
 
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
 
 const loginPage =
   document.getElementById("loginPage");
@@ -740,34 +905,36 @@ const chatApp =
 const authMessage =
   document.getElementById("authMessage");
 
+const messagesBox =
+  document.getElementById("messages");
+
+const messageInput =
+  document.getElementById("messageInput");
+
+const sendButton =
+  document.getElementById("sendButton");
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
 
 let stopMessages = null;
+
 let stopSlots = null;
 
 let mySlot = null;
+
 let localStream = null;
 
+let moderationCache = {};
 
-const slots = [
+let sendingMessage = false;
 
-  {
-    id:"slot1",
-    el:document.getElementById("voiceSlot1"),
-    name:document.getElementById("voiceName1"),
-    status:document.getElementById("voiceStatus1"),
-    button:document.getElementById("voiceButton1")
-  },
 
-  {
-    id:"slot2",
-    el:document.getElementById("voiceSlot2"),
-    name:document.getElementById("voiceName2"),
-    status:document.getElementById("voiceStatus2"),
-    button:document.getElementById("voiceButton2")
-  }
-
-];
-
+/* =========================================================
+   TABS
+========================================================= */
 
 document.querySelectorAll(".tab").forEach(btn => {
 
@@ -775,16 +942,22 @@ document.querySelectorAll(".tab").forEach(btn => {
 
     document
       .querySelectorAll(".tab")
-      .forEach(x => x.classList.remove("active"));
+      .forEach(x =>
+        x.classList.remove("active")
+      );
 
     document
       .querySelectorAll(".form")
-      .forEach(x => x.classList.remove("active"));
+      .forEach(x =>
+        x.classList.remove("active")
+      );
 
     btn.classList.add("active");
 
     document
-      .getElementById(btn.dataset.tab + "Form")
+      .getElementById(
+        btn.dataset.tab + "Form"
+      )
       .classList.add("active");
 
     authMessage.textContent = "";
@@ -793,6 +966,10 @@ document.querySelectorAll(".tab").forEach(btn => {
 
 });
 
+
+/* =========================================================
+   VISITOR LOGIN
+========================================================= */
 
 async function enterVisitor(){
 
@@ -848,25 +1025,36 @@ document
   .getElementById("visitorName")
   .onkeydown = e => {
 
-    if(e.key === "Enter"){
+    if(e.key === "Enter")
       enterVisitor();
-    }
 
   };
 
+
+/* =========================================================
+   SIGN UP
+========================================================= */
 
 document
   .getElementById("signupButton")
   .onclick = async () => {
 
     const name =
-      document.getElementById("nameInput").value.trim();
+      document
+        .getElementById("nameInput")
+        .value
+        .trim();
 
     const email =
-      document.getElementById("signupEmail").value.trim();
+      document
+        .getElementById("signupEmail")
+        .value
+        .trim();
 
     const password =
-      document.getElementById("signupPassword").value;
+      document
+        .getElementById("signupPassword")
+        .value;
 
 
     if(name.length < 2){
@@ -875,7 +1063,9 @@ document
         "⚠️ اكتب اسم العضو";
 
       return;
+
     }
+
 
     if(!email){
 
@@ -883,7 +1073,9 @@ document
         "⚠️ اكتب البريد الإلكتروني";
 
       return;
+
     }
+
 
     if(password.length < 6){
 
@@ -891,6 +1083,7 @@ document
         "⚠️ كلمة المرور 6 أحرف على الأقل";
 
       return;
+
     }
 
 
@@ -917,7 +1110,11 @@ document
 
 
       await setDoc(
-        doc(db,"users",r.user.uid),
+        doc(
+          db,
+          "users",
+          r.user.uid
+        ),
         {
           uid:r.user.uid,
           name,
@@ -926,19 +1123,34 @@ document
           banned:false,
           createdAt:serverTimestamp()
         },
-        {merge:true}
+        {
+          merge:true
+        }
       );
 
 
       await setDoc(
-        doc(db,"moderation",r.user.uid),
+        doc(
+          db,
+          "moderation",
+          r.user.uid
+        ),
         {
           banned:false,
           micMuted:false,
           updatedAt:serverTimestamp()
         },
-        {merge:true}
+        {
+          merge:true
+        }
       );
+
+
+      moderationCache =
+        {
+          banned:false,
+          micMuted:false
+        };
 
 
       authMessage.textContent =
@@ -950,12 +1162,17 @@ document
       console.error(e);
 
       authMessage.textContent =
-        "❌ " + (e.code || e.message);
+        "❌ " +
+        (e.code || e.message);
 
     }
 
   };
 
+
+/* =========================================================
+   LOGIN
+========================================================= */
 
 document
   .getElementById("loginButton")
@@ -979,6 +1196,7 @@ document
         "⚠️ اكتب البريد وكلمة المرور";
 
       return;
+
     }
 
 
@@ -999,27 +1217,49 @@ document
       console.error(e);
 
       authMessage.textContent =
-        "❌ " + (e.code || e.message);
+        "❌ " +
+        (e.code || e.message);
 
     }
 
   };
 
 
+/* =========================================================
+   MODERATION
+========================================================= */
+
 async function getModeration(uid){
+
+  if(moderationCache[uid]){
+    return moderationCache[uid];
+  }
 
   try{
 
     const s =
       await getDoc(
-        doc(db,"moderation",uid)
+        doc(
+          db,
+          "moderation",
+          uid
+        )
       );
 
-    return s.exists()
-      ? s.data()
-      : {};
 
-  }catch{
+    const data =
+      s.exists()
+        ? s.data()
+        : {};
+
+
+    moderationCache[uid] = data;
+
+    return data;
+
+  }catch(e){
+
+    console.error(e);
 
     return {};
 
@@ -1027,6 +1267,10 @@ async function getModeration(uid){
 
 }
 
+
+/* =========================================================
+   SHOW CHAT
+========================================================= */
 
 function showChat(name){
 
@@ -1045,6 +1289,10 @@ function showChat(name){
 }
 
 
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
 onAuthStateChanged(
   auth,
   async user => {
@@ -1052,7 +1300,9 @@ onAuthStateChanged(
     if(user){
 
       const mod =
-        await getModeration(user.uid);
+        await getModeration(
+          user.uid
+        );
 
 
       if(mod.banned){
@@ -1068,7 +1318,9 @@ onAuthStateChanged(
 
 
       const visitorName =
-        localStorage.getItem("visitorName");
+        localStorage.getItem(
+          "visitorName"
+        );
 
 
       showChat(
@@ -1082,9 +1334,13 @@ onAuthStateChanged(
 
       cleanupVoice();
 
-      loginPage.classList.remove("hidden");
+      loginPage.classList.remove(
+        "hidden"
+      );
 
-      chatApp.classList.add("hidden");
+      chatApp.classList.add(
+        "hidden"
+      );
 
 
       if(stopMessages){
@@ -1110,6 +1366,10 @@ onAuthStateChanged(
 );
 
 
+/* =========================================================
+   LOGOUT
+========================================================= */
+
 document
   .getElementById("logoutButton")
   .onclick = async () => {
@@ -1121,6 +1381,8 @@ document
       localStorage.removeItem(
         "visitorName"
       );
+
+      moderationCache = {};
 
       if(auth.currentUser){
 
@@ -1137,37 +1399,50 @@ document
   };
 
 
+/* =========================================================
+   SEND MESSAGE
+   تحسين السرعة:
+   لا يتم استدعاء Firestore moderation
+   مع كل رسالة.
+========================================================= */
+
 async function sendMessage(){
 
-  const input =
-    document.getElementById("messageInput");
+  if(sendingMessage)
+    return;
+
 
   const text =
-    input.value.trim();
+    messageInput.value.trim();
+
+
+  if(!text)
+    return;
+
 
   const u =
     auth.currentUser;
 
+
+  if(!u)
+    return;
+
+
   const visitor =
-    localStorage.getItem("visitorName");
+    localStorage.getItem(
+      "visitorName"
+    );
 
 
-  if(!text) return;
+  sendingMessage = true;
+
+  sendButton.disabled = true;
 
 
   try{
 
-    if(!u){
-
-      alert("يجب تسجيل الدخول");
-
-      return;
-
-    }
-
-
     const mod =
-      await getModeration(u.uid);
+      moderationCache[u.uid] || {};
 
 
     if(mod.banned){
@@ -1180,19 +1455,28 @@ async function sendMessage(){
 
 
     await addDoc(
-      collection(db,"messages"),
+      collection(
+        db,
+        "messages"
+      ),
       {
         uid:u.uid,
-        name:u.isAnonymous
-          ? (visitor || "زائر")
-          : (u.displayName || "عضو"),
-        text,
-        createdAt:serverTimestamp()
+
+        name:
+          u.isAnonymous
+            ? (visitor || "زائر")
+            : (u.displayName || "عضو"),
+
+        text:text,
+
+        createdAt:
+          serverTimestamp()
+
       }
     );
 
 
-    input.value = "";
+    messageInput.value = "";
 
 
   }catch(e){
@@ -1200,23 +1484,30 @@ async function sendMessage(){
     console.error(e);
 
     alert(
-      "تعذر إرسال الرسالة: " +
+      "❌ تعذر إرسال الرسالة:\n" +
       (e.code || e.message)
     );
+
+
+  }finally{
+
+    sendingMessage = false;
+
+    sendButton.disabled = false;
+
+    messageInput.focus();
 
   }
 
 }
 
 
-document
-  .getElementById("sendButton")
-  .onclick = sendMessage;
+sendButton.onclick =
+  sendMessage;
 
 
-document
-  .getElementById("messageInput")
-  .onkeydown = e => {
+messageInput.onkeydown =
+  e => {
 
     if(e.key === "Enter"){
 
@@ -1229,6 +1520,10 @@ document
   };
 
 
+/* =========================================================
+   LOAD MESSAGES
+========================================================= */
+
 function loadMessages(){
 
   if(stopMessages){
@@ -1238,26 +1533,29 @@ function loadMessages(){
   }
 
 
-  const box =
-    document.getElementById("messages");
-
-
   stopMessages =
     onSnapshot(
 
       query(
-        collection(db,"messages"),
-        orderBy("createdAt","asc")
+        collection(
+          db,
+          "messages"
+        ),
+        orderBy(
+          "createdAt",
+          "asc"
+        )
       ),
 
       snap => {
 
-        box.innerHTML = "";
+        const fragment =
+          document.createDocumentFragment();
 
 
         if(snap.empty){
 
-          box.innerHTML =
+          messagesBox.innerHTML =
             '<div class="empty">لا توجد رسائل بعد</div>';
 
           return;
@@ -1267,18 +1565,23 @@ function loadMessages(){
 
         snap.forEach(s => {
 
-          const d = s.data();
+          const d =
+            s.data();
 
 
           const row =
-            document.createElement("div");
+            document.createElement(
+              "div"
+            );
 
           row.className =
             "message";
 
 
           const avatar =
-            document.createElement("img");
+            document.createElement(
+              "img"
+            );
 
           avatar.className =
             "avatar";
@@ -1286,19 +1589,29 @@ function loadMessages(){
 
           avatar.src =
             "https://ui-avatars.com/api/?name=" +
-            encodeURIComponent(d.name || "عضو") +
+            encodeURIComponent(
+              d.name || "عضو"
+            ) +
             "&background=1687ff&color=fff";
 
 
+          avatar.loading =
+            "lazy";
+
+
           const content =
-            document.createElement("div");
+            document.createElement(
+              "div"
+            );
 
           content.className =
             "messageContent";
 
 
           const name =
-            document.createElement("div");
+            document.createElement(
+              "div"
+            );
 
           name.className =
             "messageName";
@@ -1308,7 +1621,9 @@ function loadMessages(){
 
 
           const text =
-            document.createElement("div");
+            document.createElement(
+              "div"
+            );
 
           text.className =
             "messageText";
@@ -1329,13 +1644,23 @@ function loadMessages(){
           );
 
 
-          box.appendChild(row);
+          fragment.appendChild(
+            row
+          );
 
         });
 
 
-        box.scrollTop =
-          box.scrollHeight;
+        messagesBox.innerHTML =
+          "";
+
+        messagesBox.appendChild(
+          fragment
+        );
+
+
+        messagesBox.scrollTop =
+          messagesBox.scrollHeight;
 
       },
 
@@ -1343,7 +1668,7 @@ function loadMessages(){
 
         console.error(e);
 
-        box.innerHTML =
+        messagesBox.innerHTML =
           '<div class="empty">❌ تعذر تحميل الرسائل</div>';
 
       }
@@ -1353,9 +1678,46 @@ function loadMessages(){
 }
 
 
-/* =========================
-   المايك
-========================= */
+/* =========================================================
+   VOICE
+========================================================= */
+
+const slots = [
+
+  {
+    id:"slot1",
+    el:document.getElementById(
+      "voiceSlot1"
+    ),
+    name:document.getElementById(
+      "voiceName1"
+    ),
+    status:document.getElementById(
+      "voiceStatus1"
+    ),
+    button:document.getElementById(
+      "voiceButton1"
+    )
+  },
+
+  {
+    id:"slot2",
+    el:document.getElementById(
+      "voiceSlot2"
+    ),
+    name:document.getElementById(
+      "voiceName2"
+    ),
+    status:document.getElementById(
+      "voiceStatus2"
+    ),
+    button:document.getElementById(
+      "voiceButton2"
+    )
+  }
+
+];
+
 
 async function toggleMic(index){
 
@@ -1377,7 +1739,7 @@ async function toggleMic(index){
   if(u.isAnonymous){
 
     alert(
-      "🎤 المايك للأعضاء فقط"
+      "🎤 المايك متاح للأعضاء فقط"
     );
 
     return;
@@ -1394,7 +1756,11 @@ async function toggleMic(index){
 
 
   const ref =
-    doc(db,"voiceSlots",slotId);
+    doc(
+      db,
+      "voiceSlots",
+      slotId
+    );
 
 
   try{
@@ -1408,7 +1774,9 @@ async function toggleMic(index){
       snap.data().uid === u.uid
     ){
 
-      await leaveMic(slotId);
+      await leaveMic(
+        slotId
+      );
 
       return;
 
@@ -1417,8 +1785,9 @@ async function toggleMic(index){
 
     if(snap.exists()){
 
-      slot.status.textContent =
-        "🔊 البث يعمل";
+      alert(
+        "🎤 هذا المايك مستخدم حاليًا"
+      );
 
       return;
 
@@ -1437,7 +1806,9 @@ async function toggleMic(index){
 
 
     const mod =
-      await getModeration(u.uid);
+      await getModeration(
+        u.uid
+      );
 
 
     if(mod.banned){
@@ -1463,17 +1834,18 @@ async function toggleMic(index){
 
 
     localStream =
-      await navigator.mediaDevices.getUserMedia({
+      await navigator.mediaDevices
+        .getUserMedia({
 
-        audio:{
-          echoCancellation:true,
-          noiseSuppression:true,
-          autoGainControl:true
-        },
+          audio:{
+            echoCancellation:true,
+            noiseSuppression:true,
+            autoGainControl:true
+          },
 
-        video:false
+          video:false
 
-      });
+        });
 
 
     mySlot =
@@ -1484,14 +1856,17 @@ async function toggleMic(index){
       ref,
       {
         uid:u.uid,
-        name:u.displayName || "عضو",
-        createdAt:serverTimestamp()
+        name:
+          u.displayName || "عضو",
+        createdAt:
+          serverTimestamp()
       }
     );
 
 
     slot.status.textContent =
       "🎤 أنت تتحدث";
+
 
     slot.button.textContent =
       "إيقاف المايك";
@@ -1506,7 +1881,9 @@ async function toggleMic(index){
 
       localStream
         .getTracks()
-        .forEach(t => t.stop());
+        .forEach(
+          t => t.stop()
+        );
 
     }
 
@@ -1518,7 +1895,9 @@ async function toggleMic(index){
 
     alert(
       "❌ تعذر تشغيل المايك:\n" +
-      (e.code || e.message || e.name)
+      (e.code ||
+       e.message ||
+       e.name)
     );
 
   }
@@ -1541,7 +1920,11 @@ async function leaveMic(slotId){
   try{
 
     await deleteDoc(
-      doc(db,"voiceSlots",slotId)
+      doc(
+        db,
+        "voiceSlots",
+        slotId
+      )
     );
 
   }catch(e){
@@ -1555,18 +1938,17 @@ async function leaveMic(slotId){
 
     localStream
       .getTracks()
-      .forEach(t => t.stop());
+      .forEach(
+        t => t.stop()
+      );
 
   }
 
 
   localStream = null;
 
-  if(mySlot === slotId){
-
+  if(mySlot === slotId)
     mySlot = null;
-
-  }
 
 }
 
@@ -1583,81 +1965,110 @@ function watchSlots(){
   stopSlots =
     onSnapshot(
 
-      collection(db,"voiceSlots"),
+      collection(
+        db,
+        "voiceSlots"
+      ),
 
       snap => {
 
         const data = {};
 
+
         snap.forEach(
-          x => data[x.id] = x.data()
+          x => {
+            data[x.id] =
+              x.data();
+          }
         );
 
 
-        slots.forEach(slot => {
+        slots.forEach(
+          slot => {
 
-          const d =
-            data[slot.id];
-
-
-          const mine =
-            d &&
-            auth.currentUser &&
-            d.uid === auth.currentUser.uid;
+            const d =
+              data[slot.id];
 
 
-          if(!d){
+            const mine =
+              d &&
+              auth.currentUser &&
+              d.uid ===
+              auth.currentUser.uid;
 
-            slot.el.classList.remove("active");
+
+            if(!d){
+
+              slot.el
+                .classList
+                .remove(
+                  "active"
+                );
+
+
+              slot.name.textContent =
+                "شاغر";
+
+
+              slot.status.textContent =
+                "اضغط للتحدث";
+
+
+              slot.button.textContent =
+                "تشغيل المايك";
+
+
+              slot.button.disabled =
+                false;
+
+
+              return;
+
+            }
+
+
+            slot.el
+              .classList
+              .add(
+                "active"
+              );
+
 
             slot.name.textContent =
-              "شاغر";
-
-            slot.status.textContent =
-              "اضغط للتحدث";
-
-            slot.button.textContent =
-              "تشغيل المايك";
-
-            slot.button.disabled =
-              false;
-
-            return;
-
-          }
+              d.name || "عضو";
 
 
-          slot.el.classList.add("active");
+            if(mine){
 
-          slot.name.textContent =
-            d.name || "عضو";
+              slot.status.textContent =
+                "🎤 أنت تتحدث";
 
 
-          if(mine){
+              slot.button.textContent =
+                "إيقاف المايك";
 
-            slot.status.textContent =
-              "🎤 أنت تتحدث";
 
-            slot.button.textContent =
-              "إيقاف المايك";
+              slot.button.disabled =
+                false;
 
-            slot.button.disabled =
-              false;
+            }else{
 
-          }else{
+              slot.status.textContent =
+                "🔊 البث مباشر";
 
-            slot.status.textContent =
-              "🔊 البث مباشر";
 
-            slot.button.textContent =
-              "🔊 مباشر";
+              slot.button.textContent =
+                "🔊 مباشر";
 
-            slot.button.disabled =
-              true;
+
+              slot.button.disabled =
+                true;
+
+            }
 
           }
 
-        });
+        );
 
       },
 
@@ -1679,8 +2090,11 @@ function cleanupVoice(){
 
   if(mySlot){
 
-    leaveMic(mySlot)
-      .catch(() => {});
+    leaveMic(
+      mySlot
+    ).catch(
+      () => {}
+    );
 
   }
 
@@ -1689,7 +2103,9 @@ function cleanupVoice(){
 
     localStream
       .getTracks()
-      .forEach(t => t.stop());
+      .forEach(
+        t => t.stop()
+      );
 
   }
 
@@ -1701,179 +2117,106 @@ function cleanupVoice(){
 }
 
 
-/* =========================
-   تفعيل الصوت
-========================= */
+/* =========================================================
+   GAME XO
+========================================================= */
 
-document
-  .getElementById("enableAudioButton")
-  .onclick = async () => {
+const cells =
+  [...document.querySelectorAll(".cell")];
 
-    for(
-      const a of
-      document.querySelectorAll(
-        "#audioContainer audio"
-      )
+const gameStatus =
+  document.getElementById(
+    "gameStatus"
+  );
+
+let board =
+  ["","","","","","","","",""];
+
+let gameOver =
+  false;
+
+let difficulty =
+  "normal";
+
+
+const wins = [
+
+  [0,1,2],
+  [3,4,5],
+  [6,7,8],
+
+  [0,3,6],
+  [1,4,7],
+  [2,5,8],
+
+  [0,4,8],
+  [2,4,6]
+
+];
+
+
+function checkWinner(b){
+
+  for(
+    const [a,c,d]
+    of wins
+  ){
+
+    if(
+      b[a] &&
+      b[a] === b[c] &&
+      b[a] === b[d]
     ){
 
-      try{
-
-        await a.play();
-
-      }catch{}
+      return b[a];
 
     }
 
-
-    document
-      .getElementById(
-        "enableAudioButton"
-      )
-      .style.display = "none";
-
-  };
+  }
 
 
-/* =========================
-   لعبة إكس أو ضد الروبوت
-========================= */
+  if(
+    b.every(
+      x => x !== ""
+    )
+  ){
 
-const gameButton =
-  document.getElementById("gameButton");
+    return "draw";
 
-const gamePanel =
-  document.getElementById("gamePanel");
-
-const closeGame =
-  document.getElementById("closeGame");
-
-const restartGame =
-  document.getElementById("restartGame");
-
-const board =
-  document.getElementById("board");
-
-const gameInfo =
-  document.getElementById("gameInfo");
+  }
 
 
-let gameBoard =
-  ["","","","","","","","",""];
-
-let gameOver = false;
-
-
-gameButton.onclick = () => {
-
-  gamePanel.style.display =
-    "flex";
-
-  startGame();
-
-};
-
-
-closeGame.onclick = () => {
-
-  gamePanel.style.display =
-    "none";
-
-};
-
-
-restartGame.onclick =
-  startGame;
-
-
-function startGame(){
-
-  gameBoard =
-    ["","","","","","","","",""];
-
-  gameOver = false;
-
-  gameInfo.textContent =
-    "أنت ❌ والروبوت ⭕";
-
-  drawBoard();
+  return null;
 
 }
 
 
-function drawBoard(){
+function renderGame(){
 
-  board.innerHTML = "";
-
-
-  gameBoard.forEach(
-    (value,index) => {
-
-      const cell =
-        document.createElement("button");
-
-      cell.className =
-        "cell";
+  cells.forEach(
+    (cell,i) => {
 
       cell.textContent =
-        value;
+        board[i];
 
 
-      cell.onclick = () => {
-
-        if(
-          gameOver ||
-          gameBoard[index]
-        ){
-
-          return;
-
-        }
+      cell.classList.remove(
+        "x",
+        "o"
+      );
 
 
-        gameBoard[index] =
-          "X";
+      if(board[i] === "X")
+        cell.classList.add("x");
 
 
-        drawBoard();
+      if(board[i] === "O")
+        cell.classList.add("o");
 
 
-        if(checkWinner("X")){
-
-          gameInfo.textContent =
-            "🎉 فزت!";
-
-          gameOver = true;
-
-          return;
-
-        }
-
-
-        if(isDraw()){
-
-          gameInfo.textContent =
-            "🤝 تعادل";
-
-          gameOver = true;
-
-          return;
-
-        }
-
-
-        gameInfo.textContent =
-          "🤖 الروبوت يفكر...";
-
-
-        setTimeout(
-          robotMove,
-          350
-        );
-
-      };
-
-
-      board.appendChild(cell);
+      cell.disabled =
+        !!board[i] ||
+        gameOver;
 
     }
   );
@@ -1881,52 +2224,161 @@ function drawBoard(){
 }
 
 
-function robotMove(){
+function finishGame(){
 
-  if(gameOver) return;
-
-
-  const move =
-    bestMove();
+  const result =
+    checkWinner(board);
 
 
-  if(move !== -1){
+  if(result === "X"){
 
-    gameBoard[move] =
+    gameOver = true;
+
+    gameStatus.textContent =
+      "🎉 فزت أنت!";
+
+    renderGame();
+
+    return true;
+
+  }
+
+
+  if(result === "O"){
+
+    gameOver = true;
+
+    gameStatus.textContent =
+      "🤖 الروبوت فاز";
+
+    renderGame();
+
+    return true;
+
+  }
+
+
+  if(result === "draw"){
+
+    gameOver = true;
+
+    gameStatus.textContent =
+      "🤝 تعادل";
+
+    renderGame();
+
+    return true;
+
+  }
+
+
+  return false;
+
+}
+
+
+function playerMove(index){
+
+  if(
+    gameOver ||
+    board[index]
+  )
+    return;
+
+
+  board[index] =
+    "X";
+
+
+  renderGame();
+
+
+  if(finishGame())
+    return;
+
+
+  gameStatus.textContent =
+    "🤖 الروبوت يفكر...";
+
+
+  setTimeout(
+    botMove,
+    450
+  );
+
+}
+
+
+function botMove(){
+
+  if(gameOver)
+    return;
+
+
+  let index;
+
+
+  if(
+    difficulty === "easy"
+  ){
+
+    index =
+      randomMove();
+
+  }else{
+
+    index =
+      bestMove();
+
+  }
+
+
+  if(index !== -1){
+
+    board[index] =
       "O";
 
   }
 
 
-  drawBoard();
+  renderGame();
 
 
-  if(checkWinner("O")){
+  if(!finishGame()){
 
-    gameInfo.textContent =
-      "🤖 فاز الروبوت";
-
-    gameOver = true;
-
-    return;
+    gameStatus.textContent =
+      "دورك أنت — ❌";
 
   }
 
-
-  if(isDraw()){
-
-    gameInfo.textContent =
-      "🤝 تعادل";
-
-    gameOver = true;
-
-    return;
-
-  }
+}
 
 
-  gameInfo.textContent =
-    "دورك ❌";
+function randomMove(){
+
+  const empty =
+    board
+      .map(
+        (v,i) =>
+          v === ""
+            ? i
+            : -1
+      )
+      .filter(
+        i => i !== -1
+      );
+
+
+  if(!empty.length)
+    return -1;
+
+
+  return empty[
+    Math.floor(
+      Math.random() *
+      empty.length
+    )
+  ];
 
 }
 
@@ -1936,7 +2388,8 @@ function bestMove(){
   let bestScore =
     -Infinity;
 
-  let move = -1;
+  let move =
+    -1;
 
 
   for(
@@ -1945,28 +2398,32 @@ function bestMove(){
     i++
   ){
 
-    if(gameBoard[i] === ""){
-
-      gameBoard[i] = "O";
-
-
-      const score =
-        minimax(
-          gameBoard,
-          false
-        );
+    if(board[i] !== "")
+      continue;
 
 
-      gameBoard[i] = "";
+    board[i] =
+      "O";
 
 
-      if(score > bestScore){
+    const score =
+      minimax(
+        board,
+        false
+      );
 
-        bestScore = score;
 
-        move = i;
+    board[i] =
+      "";
 
-      }
+
+    if(score > bestScore){
+
+      bestScore =
+        score;
+
+      move =
+        i;
 
     }
 
@@ -1978,33 +2435,25 @@ function bestMove(){
 }
 
 
-function minimax(boardState,isMax){
+function minimax(
+  b,
+  isMax
+){
 
-  if(checkWinnerOn(
-    boardState,
-    "O"
-  )){
+  const result =
+    checkWinner(b);
 
+
+  if(result === "O")
     return 10;
 
-  }
 
-
-  if(checkWinnerOn(
-    boardState,
-    "X"
-  )){
-
+  if(result === "X")
     return -10;
 
-  }
 
-
-  if(boardState.every(x => x !== "")){
-
+  if(result === "draw")
     return 0;
-
-  }
 
 
   if(isMax){
@@ -2019,22 +2468,26 @@ function minimax(boardState,isMax){
       i++
     ){
 
-      if(boardState[i] === ""){
+      if(b[i] !== "")
+        continue;
 
-        boardState[i] = "O";
 
-        best =
-          Math.max(
-            best,
-            minimax(
-              boardState,
-              false
-            )
-          );
+      b[i] =
+        "O";
 
-        boardState[i] = "";
 
-      }
+      best =
+        Math.max(
+          best,
+          minimax(
+            b,
+            false
+          )
+        );
+
+
+      b[i] =
+        "";
 
     }
 
@@ -2053,22 +2506,26 @@ function minimax(boardState,isMax){
       i++
     ){
 
-      if(boardState[i] === ""){
+      if(b[i] !== "")
+        continue;
 
-        boardState[i] = "X";
 
-        best =
-          Math.min(
-            best,
-            minimax(
-              boardState,
-              true
-            )
-          );
+      b[i] =
+        "X";
 
-        boardState[i] = "";
 
-      }
+      best =
+        Math.min(
+          best,
+          minimax(
+            b,
+            true
+          )
+        );
+
+
+      b[i] =
+        "";
 
     }
 
@@ -2080,55 +2537,156 @@ function minimax(boardState,isMax){
 }
 
 
-function checkWinner(player){
+function newGame(){
 
-  return checkWinnerOn(
-    gameBoard,
-    player
-  );
+  board =
+    ["","","","","","","","",""];
 
-}
+  gameOver =
+    false;
 
+  gameStatus.textContent =
+    "دورك أنت — ❌";
 
-function checkWinnerOn(
-  b,
-  player
-){
-
-  const wins = [
-
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-
-    [0,4,8],
-    [2,4,6]
-
-  ];
-
-
-  return wins.some(
-    line =>
-      line.every(
-        i => b[i] === player
-      )
-  );
+  renderGame();
 
 }
 
 
-function isDraw(){
+cells.forEach(
+  cell => {
 
-  return gameBoard.every(
-    x => x !== ""
+    cell.onclick =
+      () => {
+
+        playerMove(
+          Number(
+            cell.dataset.index
+          )
+        );
+
+      };
+
+  }
+);
+
+
+document
+  .getElementById(
+    "newGameButton"
+  )
+  .onclick =
+  newGame;
+
+
+document
+  .getElementById(
+    "easyButton"
+  )
+  .onclick =
+  () => {
+
+    if(
+      difficulty === "normal"
+    ){
+
+      difficulty = "easy";
+
+      document
+        .getElementById(
+          "easyButton"
+        )
+        .textContent =
+        "مستوى سهل";
+
+    }else{
+
+      difficulty = "normal";
+
+      document
+        .getElementById(
+          "easyButton"
+        )
+        .textContent =
+        "مستوى عادي";
+
+    }
+
+    newGame();
+
+  };
+
+
+renderGame();
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+const chatNav =
+  document.getElementById(
+    "chatNav"
   );
 
-}
+const gameNav =
+  document.getElementById(
+    "gameNav"
+  );
 
+const chatSection =
+  document.getElementById(
+    "chatSection"
+  );
+
+const gameSection =
+  document.getElementById(
+    "gameSection"
+  );
+
+
+chatNav.onclick =
+  () => {
+
+    chatNav.classList.add(
+      "active"
+    );
+
+    gameNav.classList.remove(
+      "active"
+    );
+
+    chatSection.classList.remove(
+      "hidden"
+    );
+
+    gameSection.classList.add(
+      "hidden"
+    );
+
+  };
+
+
+gameNav.onclick =
+  () => {
+
+    gameNav.classList.add(
+      "active"
+    );
+
+    chatNav.classList.remove(
+      "active"
+    );
+
+    gameSection.classList.remove(
+      "hidden"
+    );
+
+    chatSection.classList.add(
+      "hidden"
+    );
+
+  };
 
 </script>
 
