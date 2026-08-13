@@ -1,151 +1,322 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>دردشتي Chat</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دردشتي Chat</title>
 
-<style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-body {
-  font-family: Arial, sans-serif;
-  background: #111;
-  color: white;
-  height: 100vh;
-}
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      min-height: 100vh;
+    }
 
-.app {
-  max-width: 600px;
-  height: 100vh;
-  margin: auto;
-  background: #181818;
-  display: flex;
-  flex-direction: column;
-}
+    .app {
+      max-width: 600px;
+      height: 100vh;
+      margin: auto;
+      background: #181818;
+      display: flex;
+      flex-direction: column;
+    }
 
-header {
-  background: #242424;
-  padding: 18px;
-  text-align: center;
-  font-size: 22px;
-  font-weight: bold;
-}
+    .header {
+      background: #242424;
+      padding: 16px;
+      text-align: center;
+      border-bottom: 1px solid #333;
+    }
 
-#messages {
-  flex: 1;
-  padding: 15px;
-  overflow-y: auto;
-}
+    .header h1 {
+      font-size: 22px;
+    }
 
-.message {
-  background: #292929;
-  padding: 10px 14px;
-  margin-bottom: 10px;
-  border-radius: 12px;
-  width: fit-content;
-  max-width: 85%;
-}
+    .header small {
+      display: block;
+      margin-top: 6px;
+      color: #aaa;
+    }
 
-.name {
-  color: #4da6ff;
-  font-size: 13px;
-  margin-bottom: 4px;
-}
+    .auth {
+      padding: 25px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: auto;
+      width: 100%;
+    }
 
-.bottom {
-  display: flex;
-  gap: 8px;
-  padding: 10px;
-  background: #242424;
-}
+    .auth h2 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
 
-input {
-  flex: 1;
-  padding: 13px;
-  border: none;
-  border-radius: 10px;
-  background: #333;
-  color: white;
-  outline: none;
-}
+    input {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: #333;
+      color: white;
+      outline: none;
+      font-size: 15px;
+    }
 
-button {
-  padding: 13px 18px;
-  border: none;
-  border-radius: 10px;
-  background: #1877f2;
-  color: white;
-  font-weight: bold;
-  border-radius: 10px;
-}
-</style>
+    button {
+      padding: 13px;
+      border: none;
+      border-radius: 10px;
+      background: #1877f2;
+      color: white;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      background: #333;
+    }
+
+    button:active {
+      transform: scale(.98);
+    }
+
+    #error {
+      color: #ff7777;
+      text-align: center;
+      min-height: 20px;
+    }
+
+    #chat {
+      display: none;
+      height: 100%;
+      flex-direction: column;
+    }
+
+    .chat-top {
+      padding: 10px;
+      background: #242424;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .user-name {
+      color: #4da6ff;
+      font-weight: bold;
+    }
+
+    #messages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+    }
+
+    .message {
+      background: #292929;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      border-radius: 12px;
+      width: fit-content;
+      max-width: 85%;
+    }
+
+    .message .name {
+      color: #4da6ff;
+      font-size: 13px;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .message .text {
+      word-wrap: break-word;
+    }
+
+    .message .time {
+      color: #888;
+      font-size: 10px;
+      margin-top: 5px;
+    }
+
+    .bottom {
+      display: flex;
+      gap: 8px;
+      padding: 10px;
+      background: #242424;
+    }
+
+    .bottom input {
+      flex: 1;
+    }
+
+    .bottom button {
+      width: 80px;
+    }
+  </style>
 </head>
 
 <body>
 
 <div class="app">
 
-<header>
-💬 دردشتي
-</header>
+  <div class="header">
+    <h1>💬 دردشتي</h1>
+    <small>دردشة كتابية</small>
+  </div>
 
-<div id="messages"></div>
+  <!-- تسجيل الدخول -->
+  <div id="auth" class="auth">
 
-<div class="bottom">
-<input id="messageInput" type="text" placeholder="اكتب رسالتك...">
-<button onclick="sendMessage()">إرسال</button>
+    <h2>تسجيل الدخول</h2>
+
+    <input id="nameInput"
+           type="text"
+           placeholder="اسمك"
+           autocomplete="name">
+
+    <input id="emailInput"
+           type="email"
+           placeholder="البريد الإلكتروني"
+           autocomplete="email">
+
+    <input id="passwordInput"
+           type="password"
+           placeholder="كلمة المرور"
+           autocomplete="current-password">
+
+    <button id="loginBtn">دخول</button>
+
+    <button id="signupBtn" class="secondary">
+      إنشاء حساب جديد
+    </button>
+
+    <div id="error"></div>
+
+  </div>
+
+  <!-- الدردشة -->
+  <div id="chat">
+
+    <div class="chat-top">
+      <div>
+        المستخدم:
+        <span id="currentUser" class="user-name"></span>
+      </div>
+
+      <button id="logoutBtn">خروج</button>
+    </div>
+
+    <div id="messages"></div>
+
+    <div class="bottom">
+      <input id="messageInput"
+             type="text"
+             placeholder="اكتب رسالتك..."
+             autocomplete="off">
+
+      <button id="sendBtn">إرسال</button>
+    </div>
+
+  </div>
+
 </div>
 
-</div>
 
-<script>
-const input = document.getElementById("messageInput");
-const messages = document.getElementById("messages");
+<script type="module">
 
-function sendMessage() {
+  import {
+    initializeApp
+  } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 
-  const text = input.value.trim();
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    updateProfile,
+    onAuthStateChanged,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
-  if (text === "") return;
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    onSnapshot,
+    query,
+    orderBy,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
-  const message = document.createElement("div");
 
-  message.className = "message";
+  const firebaseConfig = {
+    apiKey: "AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
+    authDomain: "dardashti-chat.firebaseapp.com",
+    projectId: "dardashti-chat",
+    storageBucket: "dardashti-chat.firebasestorage.app",
+    messagingSenderId: "779042757468",
+    appId: "1:779042757468:web:7646d3cdadf46f315a3f99",
+    measurementId: "G-PFW6X6P2TR"
+  };
 
-  message.innerHTML = `
-    <div class="name">أنت</div>
-    <div>${escapeHTML(text)}</div>
-  `;
 
-  messages.appendChild(message);
+  const app = initializeApp(firebaseConfig);
 
-  input.value = "";
+  const auth = getAuth(app);
 
-  messages.scrollTop = messages.scrollHeight;
-}
+  const db = getFirestore(app);
 
-function escapeHTML(text) {
 
-  const div = document.createElement("div");
+  const authBox = document.getElementById("auth");
+  const chatBox = document.getElementById("chat");
 
-  div.textContent = text;
+  const nameInput = document.getElementById("nameInput");
+  const emailInput = document.getElementById("emailInput");
+  const passwordInput = document.getElementById("passwordInput");
 
-  return div.innerHTML;
-}
+  const loginBtn = document.getElementById("loginBtn");
+  const signupBtn = document.getElementById("signupBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
 
-input.addEventListener("keydown", function(event) {
+  const errorBox = document.getElementById("error");
 
-  if (event.key === "Enter") {
-    sendMessage();
+  const currentUser = document.getElementById("currentUser");
+
+  const messagesBox = document.getElementById("messages");
+
+  const messageInput = document.getElementById("messageInput");
+  const sendBtn = document.getElementById("sendBtn");
+
+
+  function showError(message) {
+    errorBox.textContent = message;
   }
 
-});
-</script>
 
-</body>
-</html>
+  function clearError() {
+    errorBox.textContent = "";
+  }
+
+
+  signupBtn.addEventListener("click", async () => {
+
+    clearError();
+
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    if (!name) {
+      showError("اكتب اسمك أولاً");
+      return;
+    }
+
+   
