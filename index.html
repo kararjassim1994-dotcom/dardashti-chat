@@ -56,7 +56,6 @@ display:flex;align-items:center;justify-content:space-between;padding:8px 10px;g
 .header button{
 border:0;color:#fff;border-radius:8px;padding:8px 9px;font-weight:bold
 }
-.gameOpen{background:#1687ff}
 .adminOpen{background:#8b5cf6}
 .logout{background:#a92d38}
 
@@ -128,52 +127,8 @@ border:0;border-radius:7px;padding:7px 9px;color:#fff;font-weight:bold
 .mute{background:#b47716}
 .unmute{background:#1687ff}
 .delete{background:#6d3340}
-
-/* GAMES */
-.gamesGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
-.gameCard{
-border:1px solid #344255;background:#18222e;border-radius:12px;
-padding:15px 8px;text-align:center;font-size:15px
-}
-.gameCard button{
-width:100%;border:0;border-radius:8px;background:#1687ff;color:#fff;padding:9px;margin-top:7px
-}
-
-/* XO */
-.xoBoard{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-width:330px;margin:auto}
-.xoCell{
-aspect-ratio:1;border:1px solid #344255;border-radius:10px;
-background:#18222e;color:#fff;font-size:45px;font-weight:bold
-}
-.gameMessage{text-align:center;min-height:30px;padding:10px;color:#80e3ad;font-weight:bold}
-.restart{width:100%;border:0;border-radius:9px;padding:11px;background:#293646;color:#fff}
-
-/* MEMORY */
-.memory{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
-.memoryCard{
-aspect-ratio:1;border:0;border-radius:10px;background:#293646;color:#fff;font-size:25px
-}
-
-/* NUMBER */
-.numberBox{text-align:center}
-.bigNumber{font-size:55px;font-weight:bold;margin:15px}
-
-/* CLICK */
-.clickBox{text-align:center}
-.clickButton{
-width:170px;height:170px;border-radius:50%;border:0;background:#1687ff;color:#fff;
-font-size:22px;font-weight:bold
-}
-
-/* RPS */
-.rps{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
-.rps button{border:0;border-radius:10px;background:#293646;color:#fff;padding:20px 5px;font-size:28px}
-
-/* YOUTUBE */
-.youtubeInput{display:flex;gap:6px}
-.youtubeInput input{flex:1}
-.youtubeInput button{border:0;background:#1687ff;color:#fff;border-radius:9px;padding:10px}
-#youtubeFrame{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;margin-top:10px;background:#000}
+.kick{background:#b91c1c}
+.voiceKick{background:#7c3aed}
 
 @media(max-width:430px){
 .title{font-size:15px}
@@ -236,8 +191,6 @@ font-size:22px;font-weight:bold
 </div>
 
 <div class="headerRight">
-<button id="gamesOpen" class="gameOpen">🎮 ألعاب</button>
-<button id="youtubeOpen" class="gameOpen">▶️ YouTube</button>
 <button id="adminOpen" class="adminOpen hidden">👮 إشراف</button>
 <button id="logoutButton" class="logout">خروج</button>
 </div>
@@ -275,135 +228,6 @@ font-size:22px;font-weight:bold
 <button id="sendButton" class="send">➤</button>
 </div>
 
-</div>
-
-<!-- GAMES MODAL -->
-<div id="gamesModal" class="modal">
-<div class="box">
-
-<div class="modalHead">
-<div class="modalTitle">🎮 الألعاب</div>
-<button class="close" id="gamesClose">×</button>
-</div>
-
-<div class="gamesGrid">
-
-<div class="gameCard">❌⭕ XO
-<button onclick="openXO()">تشغيل</button>
-</div>
-
-<div class="gameCard">🧠 ذاكرة
-<button onclick="openMemory()">تشغيل</button>
-</div>
-
-<div class="gameCard">🔢 تخمين الرقم
-<button onclick="openNumber()">تشغيل</button>
-</div>
-
-<div class="gameCard">👆 سرعة الضغط
-<button onclick="openClick()">تشغيل</button>
-</div>
-
-<div class="gameCard">✊📄✂️ حجر ورق مقص
-<button onclick="openRPS()">تشغيل</button>
-</div>
-
-<div class="gameCard">🎯 هدف عشوائي
-<button onclick="openTarget()">تشغيل</button>
-</div>
-
-<div class="gameCard">➕ حساب سريع
-<button onclick="openMath()">تشغيل</button>
-</div>
-
-<div class="gameCard">🔤 كلمة مخفية
-<button onclick="openWord()">تشغيل</button>
-</div>
-
-<div class="gameCard">🎲 نرد
-<button onclick="openDice()">تشغيل</button>
-</div>
-
-<div class="gameCard">🪙 عملة
-<button onclick="openCoin()">تشغيل</button>
-</div>
-
-<div class="gameCard">🚦 إشارة
-<button onclick="openTraffic()">تشغيل</button>
-</div>
-
-<div class="gameCard">🎨 لون
-<button onclick="openColor()">تشغيل</button>
-</div>
-
-<div class="gameCard">🔐 رمز سري
-<button onclick="openCode()">تشغيل</button>
-</div>
-
-<div class="gameCard">⚡ رد فعل
-<button onclick="openReaction()">تشغيل</button>
-</div>
-
-<div class="gameCard">🏆 حجر الحظ
-<button onclick="openLuck()">تشغيل</button>
-</div>
-
-<div class="gameCard">🎰 ماكينة الحظ
-<button onclick="openSlots()">تشغيل</button>
-</div>
-
-<div class="gameCard">🔮 كرة التوقع
-<button onclick="openMagic()">تشغيل</button>
-</div>
-
-<div class="gameCard">🧩 زوج متطابق
-<button onclick="openPairs()">تشغيل</button>
-</div>
-
-<div class="gameCard">⭕ أكبر رقم
-<button onclick="openHigh()">تشغيل</button>
-</div>
-
-<div class="gameCard">🎯 رمية حظ
-<button onclick="openThrow()">تشغيل</button>
-</div>
-
-</div>
-</div>
-</div>
-
-<!-- GAME WINDOW -->
-<div id="gameModal" class="modal">
-<div class="box">
-<div class="modalHead">
-<div id="gameTitle" class="modalTitle">🎮 لعبة</div>
-<button class="close" onclick="closeGame()">×</button>
-</div>
-<div id="gameContent"></div>
-</div>
-</div>
-
-<!-- YOUTUBE -->
-<div id="youtubeModal" class="modal">
-<div class="box">
-
-<div class="modalHead">
-<div class="modalTitle">▶️ تشغيل YouTube</div>
-<button class="close" id="youtubeClose">×</button>
-</div>
-
-<div class="youtubeInput">
-<input id="youtubeUrl" placeholder="ضع رابط فيديو YouTube">
-<button id="youtubePlay">تشغيل</button>
-</div>
-
-<iframe
-id="youtubeFrame"
-allow="autoplay; encrypted-media; picture-in-picture"
-allowfullscreen>
-</iframe>
-
-</div>
 </div>
 
 <!-- ADMIN -->
@@ -492,9 +316,7 @@ const db=getFirestore(app);
    ضع UID حسابك هنا
 ================================================= */
 
-const ADMIN_UIDS=[
-"N6KoWvu1IxbgWtVE46fmCsydZbF3"
-];
+const ADMIN_UIDS=["N6KoWvu1IxbgWtVE46fmCsydZbF3"];
 
 
 /* =========================
@@ -512,6 +334,7 @@ let myVoiceSlot=null;
 let currentModeration={};
 let stopAdminMessages=null;
 let stopAdminVoice=null;
+let stopMyModeration=null;
 
 
 /* =========================
@@ -545,6 +368,7 @@ document.getElementById("adminOpen").classList.add("hidden");
 
 loadMessages();
 watchVoice();
+watchMyModeration();
 }
 
 
@@ -687,6 +511,7 @@ if(!user){
 
 if(stopMessages)stopMessages();
 if(stopVoice)stopVoice();
+if(stopMyModeration)stopMyModeration();
 
 cleanupMic();
 
@@ -713,6 +538,25 @@ showChat(name);
 
 });
 
+
+/* =========================
+   مراقبة الحظر والطرد لحظيًا
+========================= */
+function watchMyModeration(){
+  if(stopMyModeration) stopMyModeration();
+  const u=auth.currentUser;
+  if(!u || u.isAnonymous) return;
+  stopMyModeration=onSnapshot(doc(db,"moderation",u.uid),async snap=>{
+    const d=snap.exists()?snap.data():{};
+    currentModeration=d;
+    if(d.banned){
+      alert("🚫 تم طردك/حظرك من الدردشة بواسطة المشرف");
+      cleanupMic();
+      if(myVoiceSlot){ try{await deleteDoc(doc(db,"voiceSlots",myVoiceSlot));}catch{} myVoiceSlot=null; }
+      await signOut(auth);
+    }
+  });
+}
 
 /* =========================
    LOGOUT
@@ -1069,180 +913,319 @@ return s.charAt(0).toUpperCase()+s.slice(1);
 /* MEMBERS */
 
 async function loadMembers(){
+  const box=document.getElementById("membersList");
+  box.innerHTML="جاري التحميل...";
+  if(!isAdmin()){ box.innerHTML="❌ غير مصرح"; return; }
 
-const box=document.getElementById("membersList");
-box.innerHTML="جاري التحميل...";
+  try{
+    const snap=await getDocs(collection(db,"users"));
+    box.innerHTML="";
 
-try{
+    if(snap.empty){
+      box.innerHTML='<div class="empty">لا توجد سجلات أعضاء داخل users</div>';
+      return;
+    }
 
-const snap=await getDocs(collection(db,"users"));
+    snap.forEach(s=>{
+      const d=s.data();
+      const uid=d.uid||s.id;
 
-box.innerHTML="";
+      const item=document.createElement("div");
+      item.className="member";
 
-if(snap.empty){
-box.innerHTML='<div class="empty">لا يوجد أعضاء</div>';
-return;
+      const top=document.createElement("div");
+      top.className="memberTop";
+
+      const name=document.createElement("div");
+      name.className="memberName";
+      name.textContent=d.name||"بدون اسم";
+
+      const buttons=document.createElement("div");
+      buttons.className="adminBtns";
+
+      const ban=document.createElement("button");
+      ban.className=d.banned?"unban":"ban";
+      ban.textContent=d.banned?"فك الحظر":"حظر";
+      ban.onclick=()=>setBan(uid,!d.banned);
+
+      const mute=document.createElement("button");
+      mute.className=d.micBanned||d.micMuted?"unmute":"mute";
+      mute.textContent=d.micBanned||d.micMuted?"السماح بالمايك":"منع المايك";
+      mute.onclick=()=>setMute(uid,!(d.micBanned||d.micMuted));
+
+      const kick=document.createElement("button");
+      kick.className="kick";
+      kick.textContent="🚫 طرد";
+      kick.onclick=()=>kickMember(uid);
+
+      const voiceKick=document.createElement("button");
+      voiceKick.className="voiceKick";
+      voiceKick.textContent="🎤 طرد من البث";
+      voiceKick.onclick=()=>kickFromVoice(uid);
+
+      buttons.append(ban,mute,kick,voiceKick);
+      top.append(name,buttons);
+
+      const uidEl=document.createElement("div");
+      uidEl.className="memberUid";
+      uidEl.textContent="UID: "+uid;
+
+      item.append(top,uidEl);
+      box.appendChild(item);
+    });
+  }catch(e){
+    console.error(e);
+    box.innerHTML="❌ تعذر تحميل الأعضاء: "+(e.code||e.message);
+  }
 }
-
-snap.forEach(s=>{
-
-const d=s.data();
-
-const item=document.createElement("div");
-item.className="member";
-
-const top=document.createElement("div");
-top.className="memberTop";
-
-const name=document.createElement("div");
-name.className="memberName";
-name.textContent=d.name||"بدون اسم";
-
-const buttons=document.createElement("div");
-buttons.className="adminBtns";
-
-const ban=document.createElement("button");
-ban.className=d.banned?"unban":"ban";
-ban.textContent=d.banned?"فك الحظر":"حظر";
-ban.onclick=()=>setBan(d.uid,!d.banned);
-
-const mute=document.createElement("button");
-mute.className=d.micMuted?"unmute":"mute";
-mute.textContent=d.micMuted?"السماح بالمايك":"منع المايك";
-mute.onclick=()=>setMute(d.uid,!d.micMuted);
-
-buttons.append(ban,mute);
-top.append(name,buttons);
-
-const uid=document.createElement("div");
-uid.className="memberUid";
-uid.textContent="UID: "+d.uid;
-
-item.append(top,uid);
-
-box.appendChild(item);
-
-});
-
-}catch(e){
-
-box.innerHTML="❌ "+(e.code||e.message);
-
-}
-
-}
-
 
 async function setBan(uid,value){
+  if(!isAdmin() || !uid) return;
+  if(uid===auth.currentUser?.uid){
+    alert("لا يمكنك حظر نفسك");
+    return;
+  }
 
-if(!isAdmin())return;
+  try{
+    await setDoc(doc(db,"moderation",uid),{
+      banned:value,
+      updatedAt:serverTimestamp()
+    },{merge:true});
 
-await setDoc(
-doc(db,"moderation",uid),
-{
-banned:value,
-updatedAt:serverTimestamp()
-},
-{merge:true}
-);
+    await setDoc(doc(db,"users",uid),{
+      banned:value
+    },{merge:true});
 
-await setDoc(
-doc(db,"users",uid),
-{banned:value},
-{merge:true}
-);
+    if(value){
+      await removeUserFromVoice(uid);
+    }
 
-alert(value?"🚫 تم حظر العضو":"✅ تم فك الحظر");
-
-loadMembers();
-
+    alert(value?"🚫 تم طرد/حظر العضو":"✅ تم فك الحظر");
+    loadMembers();
+    loadAdminVoice();
+  }catch(e){
+    console.error(e);
+    alert("❌ فشل الحظر/فك الحظر: "+(e.code||e.message));
+  }
 }
 
+async function kickMember(uid){
+  if(!isAdmin() || !uid) return;
+  if(uid===auth.currentUser?.uid){
+    alert("لا يمكنك طرد نفسك");
+    return;
+  }
+
+  if(!confirm("طرد هذا العضو؟")) return;
+
+  try{
+    // الطرد هنا يطبق حظرًا فورياً ويزيله من المايك.
+    await setDoc(doc(db,"moderation",uid),{
+      banned:true,
+      updatedAt:serverTimestamp()
+    },{merge:true});
+
+    await setDoc(doc(db,"users",uid),{
+      banned:true
+    },{merge:true});
+
+    await removeUserFromVoice(uid);
+
+    alert("🚫 تم طرد العضو");
+    loadMembers();
+    loadAdminVoice();
+  }catch(e){
+    console.error(e);
+    alert("❌ تعذر طرد العضو: "+(e.code||e.message));
+  }
+}
 
 async function setMute(uid,value){
+  if(!isAdmin() || !uid) return;
 
-if(!isAdmin())return;
+  try{
+    await setDoc(doc(db,"moderation",uid),{
+      micMuted:value,
+      updatedAt:serverTimestamp()
+    },{merge:true});
 
-await setDoc(
-doc(db,"moderation",uid),
-{
-micMuted:value,
-updatedAt:serverTimestamp()
-},
-{merge:true}
-);
+    await setDoc(doc(db,"users",uid),{
+      micBanned:value
+    },{merge:true});
 
-await setDoc(
-doc(db,"users",uid),
-{micMuted:value},
-{merge:true}
-);
+    if(value){
+      await removeUserFromVoice(uid);
+    }
 
-alert(value?"🎤 تم منع المايك":"🎤 تم السماح بالمايك");
-
-loadMembers();
-
+    alert(value?"🎤 تم منع المايك":"🎤 تم السماح بالمايك");
+    loadMembers();
+    loadAdminVoice();
+  }catch(e){
+    console.error(e);
+    alert("❌ تعذر تغيير حالة المايك: "+(e.code||e.message));
+  }
 }
 
+async function removeUserFromVoice(uid){
+  for(const slotId of ["slot1","slot2"]){
+    try{
+      const ref=doc(db,"voiceSlots",slotId);
+      const s=await getDoc(ref);
+      if(s.exists() && s.data().uid===uid){
+        await deleteDoc(ref);
+      }
+    }catch(e){
+      console.error("removeUserFromVoice",e);
+    }
+  }
+}
+
+async function kickFromVoice(uid){
+  if(!isAdmin() || !uid) return;
+
+  try{
+    await removeUserFromVoice(uid);
+    alert("🎤 تم إخراج العضو من البث الصوتي");
+    loadAdminVoice();
+  }catch(e){
+    console.error(e);
+    alert("❌ تعذر إخراج العضو: "+(e.code||e.message));
+  }
+}
 
 /* ADMIN MESSAGES */
 
 function loadAdminMessages(){
+  if(stopAdminMessages)stopAdminMessages();
 
-if(stopAdminMessages)stopAdminMessages();
+  const box=document.getElementById("adminMessagesList");
 
-const box=document.getElementById("adminMessagesList");
+  if(!isAdmin()){
+    box.innerHTML="❌ غير مصرح";
+    return;
+  }
 
-stopAdminMessages=onSnapshot(
-query(collection(db,"messages"),orderBy("createdAt","desc")),
-snap=>{
+  stopAdminMessages=onSnapshot(
+    query(collection(db,"messages"),orderBy("createdAt","desc")),
+    snap=>{
+      box.innerHTML="";
 
-box.innerHTML="";
+      if(snap.empty){
+        box.innerHTML='<div class="empty">لا توجد رسائل</div>';
+        return;
+      }
 
-snap.forEach(s=>{
+      snap.forEach(s=>{
+        const d=s.data();
 
-const d=s.data();
+        const item=document.createElement("div");
+        item.className="member";
 
-const item=document.createElement("div");
-item.className="member";
+        const text=document.createElement("div");
+        text.innerHTML=
+          "<b>"+escapeHtml(d.name||"عضو")+"</b><br>"+
+          escapeHtml(d.text||"");
 
-const text=document.createElement("div");
-text.innerHTML=
-"<b>"+escapeHtml(d.name||"عضو")+"</b><br>"+
-escapeHtml(d.text||"");
+        const btn=document.createElement("button");
+        btn.className="delete";
+        btn.textContent="🗑️ حذف الرسالة";
+        btn.style.marginTop="7px";
 
-const btn=document.createElement("button");
-btn.className="delete";
-btn.textContent="🗑️ حذف الرسالة";
-btn.style.marginTop="7px";
+        btn.onclick=async()=>{
+          if(!isAdmin()) return;
+          if(!confirm("حذف هذه الرسالة نهائيًا؟")) return;
 
-btn.onclick=async()=>{
+          try{
+            await deleteDoc(doc(db,"messages",s.id));
+            item.remove();
+          }catch(e){
+            console.error(e);
+            alert(
+              "❌ فشل حذف الرسالة.\n"+
+              "غالبًا تحتاج تعديل Firestore Rules للسماح للمشرف.\n"+
+              (e.code||e.message)
+            );
+          }
+        };
 
-if(!isAdmin())return;
-
-await deleteDoc(doc(db,"messages",s.id));
-
-};
-
-item.append(text,btn);
-box.appendChild(item);
-
-});
-
+        item.append(text,btn);
+        box.appendChild(item);
+      });
+    },
+    e=>{
+      console.error(e);
+      box.innerHTML="❌ تعذر تحميل الرسائل: "+(e.code||e.message);
+    }
+  );
 }
-);
-
-}
-
 
 function escapeHtml(text){
-
-const d=document.createElement("div");
-d.textContent=text;
-return d.innerHTML;
-
+  const d=document.createElement("div");
+  d.textContent=text;
+  return d.innerHTML;
 }
 
+/* ADMIN VOICE */
+
+function loadAdminVoice(){
+  if(stopAdminVoice)stopAdminVoice();
+
+  const box=document.getElementById("adminVoiceList");
+
+  if(!isAdmin()){
+    box.innerHTML="❌ غير مصرح";
+    return;
+  }
+
+  stopAdminVoice=onSnapshot(
+    collection(db,"voiceSlots"),
+    snap=>{
+      box.innerHTML="";
+
+      if(snap.empty){
+        box.innerHTML='<div class="empty">جميع المايكات شاغرة</div>';
+        return;
+      }
+
+      snap.forEach(s=>{
+        const d=s.data();
+
+        const item=document.createElement("div");
+        item.className="member";
+
+        const title=document.createElement("div");
+        title.innerHTML=
+          "<b>🎤 "+escapeHtml(d.name||"عضو")+"</b><br>"+
+          "<small>"+escapeHtml(d.uid||"")+"</small>";
+
+        const btn=document.createElement("button");
+        btn.className="delete";
+        btn.textContent="🎤 إخلاء المايك";
+        btn.style.marginTop="7px";
+
+        btn.onclick=async()=>{
+          if(!isAdmin()) return;
+
+          try{
+            await deleteDoc(doc(db,"voiceSlots",s.id));
+            item.remove();
+            alert("🎤 تم إخلاء المايك");
+          }catch(e){
+            console.error(e);
+            alert("❌ تعذر إخلاء المايك: "+(e.code||e.message));
+          }
+        };
+
+        item.append(title,btn);
+        box.appendChild(item);
+      });
+    },
+    e=>{
+      console.error(e);
+      box.innerHTML="❌ تعذر تحميل المايكات: "+(e.code||e.message);
+    }
+  );
+}
 
 /* ADMIN VOICE */
 
@@ -1280,7 +1263,9 @@ btn.textContent="إخلاء المايك";
 btn.style.marginTop="7px";
 
 btn.onclick=async()=>{
-await deleteDoc(doc(db,"voiceSlots",s.id));
+  if(!isAdmin()) return;
+  try{ await deleteDoc(doc(db,"voiceSlots",s.id)); alert("🎤 تم إخلاء المايك"); }
+  catch(e){ alert("❌ تعذر إخلاء المايك: "+(e.code||e.message)); }
 };
 
 item.appendChild(btn);
@@ -1294,538 +1279,7 @@ box.appendChild(item);
 }
 
 
-/* =====================================================
-   GAMES
-===================================================== */
-
-const gamesModal=document.getElementById("gamesModal");
-const gameModal=document.getElementById("gameModal");
-const gameTitle=document.getElementById("gameTitle");
-const gameContent=document.getElementById("gameContent");
-
-document.getElementById("gamesOpen").onclick=()=>{
-gamesModal.classList.add("show");
-};
-
-document.getElementById("gamesClose").onclick=()=>{
-gamesModal.classList.remove("show");
-};
-
-function openGame(title,html){
-
-gameTitle.textContent=title;
-gameContent.innerHTML=html;
-gamesModal.classList.remove("show");
-gameModal.classList.add("show");
-
-}
-
-function closeGame(){
-gameModal.classList.remove("show");
-}
-
-
-/* XO */
-
-function openXO(){
-
-openGame("❌⭕ XO ضد الروبوت",`
-<div class="xoBoard" id="xoBoard"></div>
-<div class="gameMessage" id="xoMsg">دورك ❌</div>
-<button class="restart" id="xoReset">🔄 لعبة جديدة</button>
-`);
-
-let board=Array(9).fill("");
-let over=false;
-const el=document.getElementById("xoBoard");
-const msg=document.getElementById("xoMsg");
-
-function draw(){
-
-el.innerHTML="";
-
-board.forEach((v,i)=>{
-
-const b=document.createElement("button");
-b.className="xoCell";
-b.textContent=v;
-b.onclick=()=>player(i);
-b.disabled=!!v||over;
-el.appendChild(b);
-
-});
-
-}
-
-function win(p){
-
-return [
-[0,1,2],[3,4,5],[6,7,8],
-[0,3,6],[1,4,7],[2,5,8],
-[0,4,8],[2,4,6]
-].some(a=>a.every(i=>board[i]===p));
-
-}
-
-function player(i){
-
-if(over||board[i])return;
-
-board[i]="❌";
-draw();
-
-if(win("❌")){
-msg.textContent="🎉 فزت!";
-over=true;
-draw();
-return;
-}
-
-if(board.every(Boolean)){
-msg.textContent="🤝 تعادل";
-over=true;
-return;
-}
-
-msg.textContent="🤖 الروبوت يفكر...";
-
-setTimeout(()=>{
-
-let free=board.map((x,i)=>x?null:i).filter(x=>x!==null);
-
-let move=free[Math.floor(Math.random()*free.length)];
-
-board[move]="⭕";
-draw();
-
-if(win("⭕")){
-msg.textContent="🤖 الروبوت فاز";
-over=true;
-draw();
-}else if(board.every(Boolean)){
-msg.textContent="🤝 تعادل";
-over=true;
-}else{
-msg.textContent="دورك ❌";
-}
-
-},400);
-
-}
-
-document.getElementById("xoReset").onclick=()=>{
-board=Array(9).fill("");
-over=false;
-msg.textContent="دورك ❌";
-draw();
-};
-
-draw();
-
-}
-
-
-/* MEMORY */
-
-function openMemory(){
-
-openGame("🧠 لعبة الذاكرة",`
-<div class="memory" id="memoryBoard"></div>
-<div class="gameMessage" id="memoryMsg">ابحث عن الأزواج</div>
-<button class="restart" id="memoryReset">🔄 إعادة</button>
-`);
-
-let symbols=["🍎","🍎","🍌","🍌","🍇","🍇","🍉","🍉"];
-symbols.sort(()=>Math.random()-.5);
-
-let first=null;
-let lock=false;
-let found=0;
-
-const board=document.getElementById("memoryBoard");
-const msg=document.getElementById("memoryMsg");
-
-function draw(){
-
-board.innerHTML="";
-
-symbols.forEach((s,i)=>{
-
-const b=document.createElement("button");
-b.className="memoryCard";
-b.textContent="❓";
-
-b.onclick=()=>{
-
-if(lock||b.dataset.open)return;
-
-b.textContent=s;
-b.dataset.open="1";
-
-if(first===null){
-first={b,i};
-return;
-}
-
-if(symbols[first.i]===s){
-
-found++;
-first=null;
-
-if(found===symbols.length/2)
-msg.textContent="🎉 أكملت اللعبة!";
-
-}else{
-
-lock=true;
-
-setTimeout(()=>{
-
-b.textContent="❓";
-b.dataset.open="";
-first.b.textContent="❓";
-first.b.dataset.open="";
-
-first=null;
-lock=false;
-
-},650);
-
-}
-
-};
-
-board.appendChild(b);
-
-});
-
-}
-
-document.getElementById("memoryReset").onclick=()=>{
-symbols.sort(()=>Math.random()-.5);
-first=null;
-lock=false;
-found=0;
-draw();
-};
-
-draw();
-
-}
-
-
-/* NUMBER */
-
-function openNumber(){
-
-openGame("🔢 تخمين الرقم",`
-<div class="numberBox">
-<p>الروبوت اختار رقمًا من 1 إلى 20</p>
-<input id="guessInput" type="number" min="1" max="20">
-<button class="btn primary" id="guessBtn">تخمين</button>
-<div class="gameMessage" id="guessMsg"></div>
-</div>
-`);
-
-const number=Math.floor(Math.random()*20)+1;
-let tries=0;
-
-document.getElementById("guessBtn").onclick=()=>{
-
-const n=Number(document.getElementById("guessInput").value);
-const msg=document.getElementById("guessMsg");
-
-if(!n)return;
-
-tries++;
-
-if(n===number)
-msg.textContent="🎉 صحيح! المحاولات: "+tries;
-else if(n<number)
-msg.textContent="⬆️ الرقم أكبر";
-else
-msg.textContent="⬇️ الرقم أصغر";
-
-};
-
-}
-
-
-/* CLICK */
-
-function openClick(){
-
-openGame("👆 سرعة الضغط",`
-<div class="clickBox">
-<p id="clickMsg">اضغط الزر بأسرع ما تستطيع!</p>
-<button class="clickButton" id="clickBtn">اضغط</button>
-<div class="gameMessage" id="clickResult"></div>
-</div>
-`);
-
-let count=0;
-let start=Date.now();
-
-const btn=document.getElementById("clickBtn");
-
-btn.onclick=()=>{
-
-count++;
-
-if(Date.now()-start>10000){
-
-btn.disabled=true;
-document.getElementById("clickResult").textContent=
-"🏆 النتيجة: "+count+" ضغطة خلال 10 ثوانٍ";
-
-}
-
-};
-
-}
-
-
-/* RPS */
-
-function openRPS(){
-
-openGame("✊📄✂️ حجر ورق مقص",`
-<div class="rps">
-<button data-r="✊">✊</button>
-<button data-r="📄">📄</button>
-<button data-r="✂️">✂️</button>
-</div>
-<div class="gameMessage" id="rpsMsg">اختر</div>
-`);
-
-const choices=["✊","📄","✂️"];
-
-document.querySelectorAll(".rps button").forEach(b=>{
-
-b.onclick=()=>{
-
-const player=b.dataset.r;
-const bot=choices[Math.floor(Math.random()*3)];
-
-let result="🤝 تعادل";
-
-if(
-(player==="✊"&&bot==="✂️")||
-(player==="📄"&&bot==="✊")||
-(player==="✂️"&&bot==="📄")
-)result="🎉 فزت";
-
-else if(player!==bot)
-result="🤖 الروبوت فاز";
-
-document.getElementById("rpsMsg").textContent=
-player+" ضد "+bot+" — "+result;
-
-};
-
-});
-
-}
-
-
-/* باقي الألعاب العامة */
-
-function simpleGame(title,emoji,fn){
-
-openGame(title,`
-<div style="text-align:center">
-<div style="font-size:65px;margin:20px">${emoji}</div>
-<button class="btn primary" id="simpleBtn">تشغيل</button>
-<div class="gameMessage" id="simpleMsg"></div>
-</div>
-`);
-
-document.getElementById("simpleBtn").onclick=()=>{
-document.getElementById("simpleMsg").textContent=fn();
-};
-
-}
-
-window.openTarget=()=>{
-simpleGame("🎯 هدف عشوائي","🎯",()=>{
-return "🎯 حصلت على "+(Math.floor(Math.random()*100)+1)+" نقطة";
-});
-};
-
-window.openMath=()=>{
-
-const a=Math.floor(Math.random()*20)+1;
-const b=Math.floor(Math.random()*20)+1;
-
-openGame("➕ حساب سريع",`
-<div class="numberBox">
-<h2>${a} + ${b} = ؟</h2>
-<input id="mathInput" type="number">
-<button class="btn primary" id="mathBtn">تحقق</button>
-<div class="gameMessage" id="mathMsg"></div>
-</div>
-`);
-
-document.getElementById("mathBtn").onclick=()=>{
-document.getElementById("mathMsg").textContent=
-Number(document.getElementById("mathInput").value)==a+b
-?"🎉 إجابة صحيحة!"
-:"❌ حاول مرة أخرى";
-};
-
-};
-
-window.openWord=()=>{
-
-const words=["شمس","قمر","كتاب","سيارة","نهر","بيت"];
-
-const word=words[Math.floor(Math.random()*words.length)];
-
-simpleGame("🔤 كلمة مخفية","🔤",()=>{
-return "الكلمة هي: "+word;
-});
-
-};
-
-window.openDice=()=>{
-simpleGame("🎲 النرد","🎲",()=>{
-return "🎲 النتيجة: "+(Math.floor(Math.random()*6)+1);
-});
-};
-
-window.openCoin=()=>{
-simpleGame("🪙 العملة","🪙",()=>{
-return Math.random()<.5?"🪙 صورة":"🪙 كتابة";
-});
-};
-
-window.openTraffic=()=>{
-simpleGame("🚦 الإشارة","🚦",()=>{
-return ["🔴 توقف","🟡 انتظر","🟢 انطلق"][Math.floor(Math.random()*3)];
-});
-};
-
-window.openColor=()=>{
-simpleGame("🎨 اللون","🎨",()=>{
-return ["🔴 أحمر","🔵 أزرق","🟢 أخضر","🟡 أصفر"][Math.floor(Math.random()*4)];
-});
-};
-
-window.openCode=()=>{
-simpleGame("🔐 الرمز السري","🔐",()=>{
-return "رمزك: "+Math.floor(1000+Math.random()*9000);
-});
-};
-
-window.openReaction=()=>{
-simpleGame("⚡ رد الفعل","⚡",()=>{
-return "زمنك العشوائي: "+(Math.floor(100+Math.random()*900))+" ms";
-});
-};
-
-window.openLuck=()=>{
-simpleGame("🏆 حجر الحظ","🏆",()=>{
-return ["حظ ممتاز 🍀","حظ جيد 🙂","حظ متوسط 😐"][Math.floor(Math.random()*3)];
-});
-};
-
-window.openSlots=()=>{
-simpleGame("🎰 ماكينة الحظ","🎰",()=>{
-const x=["🍒","🍋","7️⃣","⭐"];
-return x[Math.floor(Math.random()*4)]+" "+
-x[Math.floor(Math.random()*4)]+" "+
-x[Math.floor(Math.random()*4)];
-});
-};
-
-window.openMagic=()=>{
-simpleGame("🔮 كرة التوقع","🔮",()=>{
-return ["نعم ✅","لا ❌","ربما 🤔","بالتأكيد ⭐"][Math.floor(Math.random()*4)];
-});
-};
-
-window.openPairs=()=>{
-simpleGame("🧩 زوج متطابق","🧩",()=>{
-return Math.random()<.5?"🎉 وجدت الزوج!":"❌ لم تجد الزوج";
-});
-};
-
-window.openHigh=()=>{
-simpleGame("⭕ أكبر رقم","⭕",()=>{
-return "رقمك: "+Math.floor(Math.random()*100);
-});
-};
-
-window.openThrow=()=>{
-simpleGame("🎯 رمية حظ","🎯",()=>{
-return "رميتك: "+Math.floor(Math.random()*101)+" نقطة";
-});
-};
-
-
-/* =====================================================
-   YOUTUBE
-===================================================== */
-
-document.getElementById("youtubeOpen").onclick=()=>{
-document.getElementById("youtubeModal").classList.add("show");
-};
-
-document.getElementById("youtubeClose").onclick=()=>{
-document.getElementById("youtubeModal").classList.remove("show");
-};
-
-document.getElementById("youtubePlay").onclick=()=>{
-
-let url=document.getElementById("youtubeUrl").value.trim();
-
-if(!url)return;
-
-let id="";
-
-try{
-
-const u=new URL(url);
-
-if(u.hostname.includes("youtu.be")){
-id=u.pathname.substring(1);
-}
-
-if(u.hostname.includes("youtube.com")){
-id=u.searchParams.get("v")||"";
-}
-
-}catch{}
-
-if(!id){
-
-alert("❌ رابط YouTube غير صحيح");
-return;
-
-}
-
-document.getElementById("youtubeFrame").src=
-"https://www.youtube.com/embed/"+id+"?autoplay=1";
-
-};
-
-
-/* =====================================================
-   إغلاق النوافذ
-===================================================== */
-
-document.querySelectorAll(".modal").forEach(modal=>{
-
-modal.addEventListener("click",e=>{
-
-if(e.target===modal)
-modal.classList.remove("show");
-
-});
-
-});
 
 </script>
-
 </body>
 </html>
