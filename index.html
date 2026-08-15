@@ -311,7 +311,7 @@ $("saveProfile").onclick=async()=>{
    photo=await getDownloadURL(r);
   }
   const name=$("profileName").value.trim();if(name.length<2)throw Error("الاسم قصير");
-  await updateDoc(doc(db,"users",currentUser.uid),{name,photo});
+  await setDoc(doc(db,"users",currentUser.uid),{name,photo,uid:currentUser.uid},{merge:true});
   currentProfile={...currentProfile,name,photo};await updateProfile(currentUser,{displayName:name});
   showApp();$("profileModal").classList.remove("show");$("profileStatus").textContent="تم الحفظ";
  }catch(e){$("profileStatus").textContent="❌ "+e.message}
@@ -339,7 +339,19 @@ function loadDM(){
  unsubscribeDM=onSnapshot(q,s=>{const box=$("dmMessages");box.innerHTML="";s.forEach(x=>{const d=x.data(),z=document.createElement("div");z.className="dmMsg"+(d.uid===currentUser.uid?" mine":"");z.textContent=d.text||"";box.appendChild(z)});box.scrollTop=box.scrollHeight});
 }
 $("dmSend").onclick=sendDM;$("dmInput").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();sendDM()}};
-async function sendDM(){const text=$("dmInput").value.trim();if(!text||!selectedDM)return;const id=dmId(currentUser.uid,selectedDM.uid);await addDoc(collection(db,"privateChats",id,"messages"),{uid:currentUser.uid,name:currentProfile.name,text,createdAt:serverTimestamp()});$("dmInput").value=""}
+async function sendDM(){
+ const text=$("dmInput").value.trim();
+ if(!text||!selectedDM||!currentUser)return;
+ try{
+  const id=dmId(currentUser.uid,selectedDM.uid);
+  await addDoc(collection(db,"privateChats",id,"messages"),{
+   uid:currentUser.uid,name:currentProfile.name,text,createdAt:serverTimestamp()
+  });
+  $("dmInput").value="";
+ }catch(e){
+  alert("❌ تعذر إرسال الخاص: "+e.message);
+ }
+}
 
 /* admin */
 $("adminBtn").onclick=async()=>{if(!isAdmin())return;$("adminModal").classList.add("show");loadAdmin()};
@@ -364,40 +376,326 @@ $("deleteAllBtn").onclick=async()=>{
 
 /* 5 microphones - WebRTC */
 const voiceIds=["voice1","voice2","voice3","voice4","voice5"];
+let voiceUnsubscribe=null;
+const peerConnections=new Map();
+const candidateUnsubscribers=new Map();
+const remoteAudioEls=new Map();
+
 function renderVoice(){
- $("voiceSlots").innerHTML="";
- voiceIds.forEach((id,i)=>{
-  const d=document.createElement("div");d.className="voiceSlot";d.id=id;
-  d.innerHTML=`<div class="micIcon">🎙️</div><div class="voiceName" id="${id}Name">شاغر</div><div class="voiceStatus" id="${id}Status">اضغط للتحدث</div><button id="${id}Btn">تشغيل</button>`;
-  d.querySelector("button").onclick=()=>toggleMic(id);$("voiceSlots").appendChild(d);
- });
- watchVoice();
-}
-function watchVoice(){
- onSnapshot(collection(db,"voiceSlots"),snap=>{
-  const map={};snap.forEach(x=>map[x.id]=x.data());
-  voiceIds.forEach(id=>{
-   const d=map[id],el=$(id);if(!el)return;const b=$(id+"Btn"),n=$(id+"Name"),st=$(id+"Status");
-   if(!d){el.classList.remove("active");n.textContent="شاغر";st.textContent="اضغط للتحدث";b.textContent="تشغيل";b.disabled=false}
-   else{el.classList.add("active");n.textContent=d.name||"عضو";const mine=d.uid===currentUser?.uid;st.textContent=mine?"🎙️ أنت تتحدث":"🔊 مباشر";b.textContent=mine?"إيقاف":"استماع";b.disabled=!mine}
+  $("voiceSlots").innerHTML="";
+  voiceIds.forEach((id)=>{
+    const d=document.createElement("div");
+    d.className="voiceSlot";
+    d.id=id;
+    d.innerHTML=`<div class="micIcon">🎙️</div>
+      <div class="voiceName" id="${id}Name">شاغر</div>
+      <div class="voiceStatus" id="${id}Status">اضغط للتحدث</div>
+      <button id="${id}Btn">تشغيل</button>`;
+    d.querySelector("button").onclick=()=>toggleMic(id);
+    $("voiceSlots").appendChild(d);
   });
- });
+  watchVoice();
 }
+
+function voicePeerCollection(slotId){
+  return collection(db,"voiceCalls",slotId,"peers");
+}
+
+function cleanupPeer(peerKey){
+  const pc=peerConnections.get(peerKey);
+  if(pc){
+    try{pc.onicecandidate=null;pc.ontrack=null;pc.close()}catch(e){}
+    peerConnections.delete(peerKey);
+  }
+  const unsubs=candidateUnsubscribers.get(peerKey)||[];
+  unsubs.forEach(fn=>{try{fn()}catch(e){}});
+  candidateUnsubscribers.delete(peerKey);
+}
+
+async function addRemoteCandidate(pc,candidate){
+  try{
+    if(candidate) await pc.addIceCandidate(candidate);
+  }catch(e){console.warn("ICE candidate",e)}
+}
+
+function makePeerConnection(slotId,peerUid,role){
+  const key=slotId+"_"+peerUid+"_"+role;
+  const pc=new RTCPeerConnection({
+    iceServers:[
+      {urls:"stun:stun.l.google.com:19302"},
+      {urls:"stun:stun1.l.google.com:19302"}
+    ]
+  });
+  peerConnections.set(key,pc);
+  return {pc,key};
+}
+
+async function publishToListeners(slotId){
+  if(!currentStream)return;
+
+  const peersSnap=await getDocs(voicePeerCollection(slotId));
+  for(const peerDoc of peersSnap.docs){
+    const peerUid=peerDoc.id;
+    if(peerUid===currentUser.uid)continue;
+
+    const {pc,key}=makePeerConnection(slotId,peerUid,"caller");
+    currentStream.getTracks().forEach(track=>pc.addTrack(track,currentStream));
+
+    const callerCandidates=collection(db,"voiceCalls",slotId,"peers",peerUid,"callerCandidates");
+    const calleeCandidates=collection(db,"voiceCalls",slotId,"peers",peerUid,"calleeCandidates");
+
+    pc.onicecandidate=async e=>{
+      if(e.candidate){
+        await addDoc(callerCandidates,{
+          candidate:e.candidate.toJSON(),
+          from:currentUser.uid,
+          createdAt:serverTimestamp()
+        });
+      }
+    };
+
+    const unsubCallee=onSnapshot(calleeCandidates,snap=>{
+      snap.docChanges().forEach(ch=>{
+        if(ch.type==="added") addRemoteCandidate(pc,ch.doc.data().candidate);
+      });
+    });
+    candidateUnsubscribers.set(key,[unsubCallee]);
+
+    const offer=await pc.createOffer();
+    await pc.setLocalDescription(offer);
+
+    await setDoc(
+      doc(db,"voiceCalls",slotId,"peers",peerUid),
+      {offer:{type:offer.type,sdp:offer.sdp},caller:currentUser.uid,updatedAt:serverTimestamp()},
+      {merge:true}
+    );
+  }
+}
+
+async function listenToSpeaker(slotId,speakerUid,offerData){
+  const peerKey=slotId+"_"+speakerUid+"_"+currentUser.uid;
+  if(peerConnections.has(peerKey))return;
+
+  const {pc,key}=makePeerConnection(slotId,currentUser.uid,"callee");
+
+  pc.ontrack=e=>{
+    const stream=e.streams?.[0];
+    if(!stream)return;
+    let audio=remoteAudioEls.get(peerKey);
+    if(!audio){
+      audio=document.createElement("audio");
+      audio.autoplay=true;
+      audio.playsInline=true;
+      audio.controls=false;
+      audio.volume=1;
+      audio.style.display="none";
+      document.body.appendChild(audio);
+      remoteAudioEls.set(peerKey,audio);
+    }
+    audio.srcObject=stream;
+    audio.play().catch(()=>{});
+  };
+
+  const callerCandidates=collection(db,"voiceCalls",slotId,"peers",currentUser.uid,"callerCandidates");
+  const calleeCandidates=collection(db,"voiceCalls",slotId,"peers",currentUser.uid,"calleeCandidates");
+
+  pc.onicecandidate=async e=>{
+    if(e.candidate){
+      await addDoc(calleeCandidates,{
+        candidate:e.candidate.toJSON(),
+        from:currentUser.uid,
+        createdAt:serverTimestamp()
+      });
+    }
+  };
+
+  const unsubCaller=onSnapshot(callerCandidates,snap=>{
+    snap.docChanges().forEach(ch=>{
+      if(ch.type==="added") addRemoteCandidate(pc,ch.doc.data().candidate);
+    });
+  });
+  candidateUnsubscribers.set(key,[unsubCaller]);
+
+  await pc.setRemoteDescription(new RTCSessionDescription(offerData));
+  const answer=await pc.createAnswer();
+  await pc.setLocalDescription(answer);
+
+  await setDoc(
+    doc(db,"voiceCalls",slotId,"peers",currentUser.uid),
+    {answer:{type:answer.type,sdp:answer.sdp},callee:currentUser.uid,updatedAt:serverTimestamp()},
+    {merge:true}
+  );
+}
+
+function stopAllListeningForSlot(slotId){
+  for(const [key,pc] of peerConnections.entries()){
+    if(key.startsWith(slotId+"_")){
+      cleanupPeer(key);
+      const audio=remoteAudioEls.get(key);
+      if(audio){
+        try{audio.pause();audio.srcObject=null;audio.remove()}catch(e){}
+        remoteAudioEls.delete(key);
+      }
+    }
+  }
+}
+
+function watchVoice(){
+  if(voiceUnsubscribe)voiceUnsubscribe();
+
+  voiceUnsubscribe=onSnapshot(collection(db,"voiceSlots"),snap=>{
+    const map={};
+    snap.forEach(x=>map[x.id]=x.data());
+
+    voiceIds.forEach(id=>{
+      const d=map[id],el=$(id);
+      if(!el)return;
+      const b=$(id+"Btn"),n=$(id+"Name"),st=$(id+"Status");
+
+      if(!d){
+        el.classList.remove("active");
+        n.textContent="شاغر";
+        st.textContent="اضغط للتحدث";
+        b.textContent="تشغيل";
+        b.disabled=false;
+        stopAllListeningForSlot(id);
+        return;
+      }
+
+      el.classList.add("active");
+      n.textContent=d.name||"عضو";
+      const mine=d.uid===currentUser?.uid;
+
+      if(mine){
+        st.textContent="🎙️ أنت تتحدث";
+        b.textContent="إيقاف";
+        b.disabled=false;
+        publishToListeners(id).catch(e=>console.error("publish",e));
+      }else{
+        st.textContent="🔊 مباشر";
+        b.textContent="استماع";
+        b.disabled=false;
+
+        // Clicking "استماع" is handled by the button below.
+        b.onclick=()=>startListening(id,d.uid);
+      }
+    });
+  },e=>{
+    console.error("voiceSlots",e);
+    voiceIds.forEach(id=>{
+      const st=$(id+"Status");
+      if(st)st.textContent="❌ "+e.message;
+    });
+  });
+}
+
+async function startListening(slotId,speakerUid){
+  if(!currentUser)return;
+  if(speakerUid===currentUser.uid)return;
+
+  try{
+    const peerRef=doc(db,"voiceCalls",slotId,"peers",currentUser.uid);
+    const peerSnap=await getDoc(peerRef);
+
+    if(!peerSnap.exists() || !peerSnap.data().offer){
+      alert("البث لم يجهز بعد، حاول مرة أخرى.");
+      return;
+    }
+
+    await listenToSpeaker(slotId,speakerUid,peerSnap.data().offer);
+
+    const st=$(slotId+"Status");
+    if(st)st.textContent="🔊 جاري الاستماع";
+  }catch(e){
+    console.error("listen",e);
+    alert("❌ تعذر تشغيل الاستماع: "+e.message);
+  }
+}
+
 async function toggleMic(slotId){
- if(!currentUser||currentUser.isAnonymous){alert("سجل دخول بعضوية لاستخدام المايك");return}
- if(mySlot===slotId){await leaveCurrentMic();return}
- if(mySlot){alert("أوقف المايك الحالي أولًا");return}
- const mod=await getDoc(doc(db,"moderation",currentUser.uid));if(mod.exists()&&(mod.data().banned||mod.data().micMuted)){alert("🚫 لا يمكنك استخدام المايك");return}
- try{
-  currentStream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true},video:false});
-  mySlot=slotId;
-  await setDoc(doc(db,"voiceSlots",slotId),{uid:currentUser.uid,name:currentProfile.name,createdAt:serverTimestamp()});
- }catch(e){currentStream?.getTracks().forEach(t=>t.stop());currentStream=null;mySlot=null;alert("❌ تعذر تشغيل المايك: "+e.message)}
+  if(!currentUser||currentUser.isAnonymous){
+    alert("سجل دخول بعضوية لاستخدام المايك");
+    return;
+  }
+
+  if(mySlot===slotId){
+    await leaveCurrentMic();
+    return;
+  }
+
+  if(mySlot){
+    alert("أوقف المايك الحالي أولًا");
+    return;
+  }
+
+  try{
+    const mod=await getDoc(doc(db,"moderation",currentUser.uid));
+    if(mod.exists() && (mod.data().banned===true || mod.data().micMuted===true)){
+      alert(mod.data().banned===true?"🚫 الحساب محظور":"🎤 تم منعك من استخدام المايك");
+      return;
+    }
+
+    if(!navigator.mediaDevices?.getUserMedia){
+      throw new Error("المتصفح لا يدعم الميكروفون أو الصفحة ليست HTTPS");
+    }
+
+    const slotSnap=await getDoc(doc(db,"voiceSlots",slotId));
+    if(slotSnap.exists()){
+      alert("المايك مشغول");
+      return;
+    }
+
+    currentStream=await navigator.mediaDevices.getUserMedia({
+      audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true},
+      video:false
+    });
+
+    mySlot=slotId;
+
+    await setDoc(doc(db,"voiceSlots",slotId),{
+      uid:currentUser.uid,
+      name:currentProfile.name,
+      createdAt:serverTimestamp()
+    });
+
+    // Create a peer placeholder for listeners to read/write signaling.
+    await setDoc(
+      doc(db,"voiceCalls",slotId,"peers",currentUser.uid),
+      {speaker:currentUser.uid,createdAt:serverTimestamp()},
+      {merge:true}
+    );
+
+  }catch(e){
+    currentStream?.getTracks().forEach(t=>t.stop());
+    currentStream=null;
+    mySlot=null;
+    console.error("toggleMic",e);
+    alert("❌ تعذر تشغيل المايك: "+e.message);
+  }
 }
+
 async function leaveCurrentMic(){
- if(!mySlot)return;
- try{await deleteDoc(doc(db,"voiceSlots",mySlot))}catch(e){}
- currentStream?.getTracks().forEach(t=>t.stop());currentStream=null;mySlot=null;
+  if(!mySlot)return;
+  const slot=mySlot;
+
+  try{
+    await deleteDoc(doc(db,"voiceSlots",slot));
+  }catch(e){
+    console.warn("delete voice slot",e);
+  }
+
+  try{
+    await deleteDoc(doc(db,"voiceCalls",slot,"peers",currentUser.uid));
+  }catch(e){}
+
+  stopAllListeningForSlot(slot);
+  for(const [key] of peerConnections.entries()){
+    if(key.startsWith(slot+"_"))cleanupPeer(key);
+  }
+
+  currentStream?.getTracks().forEach(t=>t.stop());
+  currentStream=null;
+  mySlot=null;
 }
 
 /* close modals */
