@@ -493,7 +493,7 @@ const db=getFirestore(app);
 ================================================= */
 
 const ADMIN_UIDS=[
-"ضع_UID_حسابك_هنا"
+"N6KoWvu1IxbgWtVE46fmCsydZbF3"
 ];
 
 
@@ -509,6 +509,9 @@ let stopMessages=null;
 let stopVoice=null;
 let currentStream=null;
 let myVoiceSlot=null;
+let currentModeration={};
+let stopAdminMessages=null;
+let stopAdminVoice=null;
 
 
 /* =========================
@@ -693,6 +696,7 @@ return;
 }
 
 const mod=await moderation(user.uid);
+currentModeration=mod;
 
 if(mod.banned){
 
@@ -745,16 +749,16 @@ const u=auth.currentUser;
 
 if(!u||!text)return;
 
-const mod=await moderation(u.uid);
-
-if(mod.banned){
+if(currentModeration.banned){
 alert("🚫 حسابك محظور");
 return;
 }
 
-try{
+input.value="";
+input.focus();
 
-await addDoc(
+// لا ننتظر الشبكة هنا؛ هذا يجعل إرسال عدة رسائل متتالية سريعًا.
+addDoc(
 collection(db,"messages"),
 {
 uid:u.uid,
@@ -762,13 +766,10 @@ name:u.displayName||localStorage.getItem("visitorName")||"زائر",
 text,
 createdAt:serverTimestamp()
 }
-);
-
-input.value="";
-
-}catch(e){
+).catch(e=>{
+console.error("sendMessage",e);
 alert("❌ تعذر إرسال الرسالة: "+(e.code||e.message));
-}
+});
 
 }
 
@@ -788,30 +789,31 @@ if(stopMessages)stopMessages();
 
 const box=document.getElementById("messages");
 
+let renderTimer=null;
 stopMessages=onSnapshot(
 query(collection(db,"messages"),orderBy("createdAt","asc")),
 snap=>{
 
-box.innerHTML="";
+if(renderTimer)clearTimeout(renderTimer);
+renderTimer=setTimeout(()=>{
 
-if(snap.empty){
+const docs=snap.docs.slice(-200);
+const frag=document.createDocumentFragment();
+
+if(!docs.length){
 box.innerHTML='<div class="empty">لا توجد رسائل بعد</div>';
 return;
 }
 
-snap.forEach(s=>{
-
+for(const s of docs){
 const d=s.data();
-
 const row=document.createElement("div");
 row.className="message";
 
 const avatar=document.createElement("img");
 avatar.className="avatar";
-avatar.src=
-"https://ui-avatars.com/api/?name="+
-encodeURIComponent(d.name||"عضو")+
-"&background=1687ff&color=fff";
+avatar.loading="lazy";
+avatar.src="https://ui-avatars.com/api/?name="+encodeURIComponent(d.name||"عضو")+"&background=1687ff&color=fff";
 
 const content=document.createElement("div");
 content.className="messageContent";
@@ -826,11 +828,13 @@ text.textContent=d.text||"";
 
 content.append(name,text);
 row.append(avatar,content);
-box.appendChild(row);
+frag.appendChild(row);
+}
 
-});
-
+box.innerHTML="";
+box.appendChild(frag);
 box.scrollTop=box.scrollHeight;
+},60);
 
 },
 e=>{
@@ -1185,9 +1189,11 @@ loadMembers();
 
 function loadAdminMessages(){
 
+if(stopAdminMessages)stopAdminMessages();
+
 const box=document.getElementById("adminMessagesList");
 
-onSnapshot(
+stopAdminMessages=onSnapshot(
 query(collection(db,"messages"),orderBy("createdAt","desc")),
 snap=>{
 
@@ -1242,9 +1248,11 @@ return d.innerHTML;
 
 function loadAdminVoice(){
 
+if(stopAdminVoice)stopAdminVoice();
+
 const box=document.getElementById("adminVoiceList");
 
-onSnapshot(
+stopAdminVoice=onSnapshot(
 collection(db,"voiceSlots"),
 snap=>{
 
