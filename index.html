@@ -575,8 +575,7 @@ function watchMyModeration(){
     currentModeration=d;
     if(d.banned){
       alert("🚫 تم طردك/حظرك من الدردشة بواسطة المشرف");
-      cleanupMic();
-      if(myVoiceSlot){ try{await deleteDoc(doc(db,"voiceSlots",myVoiceSlot));}catch{} myVoiceSlot=null; }
+      await stopMic();
       await signOut(auth);
     }
   });
@@ -588,15 +587,7 @@ function watchMyModeration(){
 
 document.getElementById("logoutButton").onclick=async()=>{
 
-cleanupMic();
-
-if(myVoiceSlot){
-try{
-await deleteDoc(doc(db,"voiceSlots",myVoiceSlot));
-}catch{}
-}
-
-myVoiceSlot=null;
+await stopMic();
 
 localStorage.removeItem("visitorName");
 
@@ -715,172 +706,252 @@ box.innerHTML='<div class="empty">❌ تعذر تحميل الرسائل</div>';
 
 
 /* =========================
-   VOICE
-========================= */
+   VOICE — WebRTC
+   ========================= */
 
 const voiceSlots=[
-{
-id:"slot1",
-box:document.getElementById("voiceSlot1"),
-name:document.getElementById("voiceName1"),
-status:document.getElementById("voiceStatus1"),
-button:document.getElementById("voiceButton1")
-},
-{
-id:"slot2",
-box:document.getElementById("voiceSlot2"),
-name:document.getElementById("voiceName2"),
-status:document.getElementById("voiceStatus2"),
-button:document.getElementById("voiceButton2")
-}
+ {id:"slot1",box:document.getElementById("voiceSlot1"),name:document.getElementById("voiceName1"),status:document.getElementById("voiceStatus1"),button:document.getElementById("voiceButton1")},
+ {id:"slot2",box:document.getElementById("voiceSlot2"),name:document.getElementById("voiceName2"),status:document.getElementById("voiceStatus2"),button:document.getElementById("voiceButton2")}
 ];
 
+const rtcConfig={
+ iceServers:[
+  {urls:"stun:stun.l.google.com:19302"},
+  {urls:"stun:stun1.l.google.com:19302"}
+ ]
+};
 
-async function toggleVoice(index){
+let currentStream=null;
+let myVoiceSlot=null;
+let stopVoice=null;
+const voicePeers=new Map();
+const voiceUnsubs=new Map();
+const remoteAudios=new Map();
 
-const u=auth.currentUser;
-
-if(!u){
-alert("يجب تسجيل الدخول");
-return;
+function closePeer(uid){
+ const pc=voicePeers.get(uid);
+ if(pc){try{pc.close()}catch{} voicePeers.delete(uid)}
+ const u=voiceUnsubs.get(uid);
+ if(u){try{u()}catch{} voiceUnsubs.delete(uid)}
+ const a=remoteAudios.get(uid);
+ if(a){try{a.pause()}catch{} a.srcObject=null; a.remove(); remoteAudios.delete(uid)}
 }
 
-const slot=voiceSlots[index];
-const ref=doc(db,"voiceSlots",slot.id);
-const snap=await getDoc(ref);
-
-if(snap.exists()&&snap.data().uid===u.uid){
-
-await deleteDoc(ref);
-cleanupMic();
-myVoiceSlot=null;
-return;
+function closeAllPeers(){
+ [...voicePeers.keys()].forEach(closePeer);
 }
 
-if(snap.exists()){
-alert("⚠️ هذا المايك مشغول");
-return;
+function playRemote(uid,stream){
+ let a=remoteAudios.get(uid);
+ if(!a){
+  a=document.createElement("audio");
+  a.autoplay=true;
+  a.playsInline=true;
+  a.setAttribute("playsinline","");
+  a.style.display="none";
+  document.body.appendChild(a);
+  remoteAudios.set(uid,a);
+ }
+ a.srcObject=stream;
+ a.play().catch(()=>{});
 }
 
-if(myVoiceSlot){
-alert("⚠️ لديك مايك مفتوح بالفعل");
-return;
+async function startMic(index){
+ const u=auth.currentUser;
+ if(!u){alert("يجب تسجيل الدخول");return}
+ if(location.protocol!=="https:" && location.hostname!=="localhost"){
+  alert("❌ المايك يحتاج HTTPS. استخدم رابط Firebase Hosting أو GitHub Pages.");
+  return;
+ }
+ const slot=voiceSlots[index];
+ const ref=doc(db,"voiceSlots",slot.id);
+ try{
+  const old=await getDoc(ref);
+  if(old.exists()){
+   if(old.data().uid===u.uid){await stopMic();return}
+   // الدخول كمستمع يتم من زر المايك المشغول
+   await connectListener(slot.id,old.data().uid);
+   return;
+  }
+  if(myVoiceSlot){alert("⚠️ لديك مايك مفتوح بالفعل");return}
+  const mod=await moderation(u.uid);
+  if(mod.banned){alert("🚫 حسابك محظور");return}
+  if(mod.micMuted){alert("🎤 تم منعك من استخدام المايك");return}
+
+  currentStream=await navigator.mediaDevices.getUserMedia({
+   audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true},
+   video:false
+  });
+
+  await setDoc(ref,{
+   uid:u.uid,
+   name:u.displayName||localStorage.getItem("visitorName")||"عضو",
+   createdAt:serverTimestamp()
+  });
+  myVoiceSlot=slot.id;
+  slot.status.textContent="🎤 أنت تتحدث";
+  slot.button.textContent="إيقاف المايك";
+ }catch(e){
+  console.error(e); cleanupMic();
+  alert("❌ تعذر تشغيل المايك:\n"+(e.name||e.code||e.message));
+ }
 }
 
-const mod=await moderation(u.uid);
-
-if(mod.banned){
-alert("🚫 حسابك محظور");
-return;
+async function stopMic(){
+ if(myVoiceSlot){
+  try{
+   const ref=doc(db,"voiceSlots",myVoiceSlot);
+   const s=await getDoc(ref);
+   if(s.exists() && s.data().uid===auth.currentUser?.uid) await deleteDoc(ref);
+  }catch(e){console.error(e)}
+ }
+ cleanupMic(); closeAllPeers(); myVoiceSlot=null;
 }
-
-if(mod.micMuted){
-alert("🎤 تم منعك من استخدام المايك");
-return;
-}
-
-if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
-alert("❌ المتصفح لا يدعم المايك");
-return;
-}
-
-try{
-
-currentStream=await navigator.mediaDevices.getUserMedia({
-audio:{
-echoCancellation:true,
-noiseSuppression:true,
-autoGainControl:true
-},
-video:false
-});
-
-await setDoc(ref,{
-uid:u.uid,
-name:u.displayName||"عضو",
-createdAt:serverTimestamp()
-});
-
-myVoiceSlot=slot.id;
-
-}catch(e){
-
-cleanupMic();
-
-alert(
-"❌ تعذر تشغيل المايك:\n"+
-(e.name||e.code||e.message)
-);
-
-}
-
-}
-
-
-voiceSlots.forEach((s,i)=>{
-s.button.onclick=()=>toggleVoice(i);
-});
-
 
 function cleanupMic(){
-
-if(currentStream){
-
-currentStream.getTracks().forEach(t=>t.stop());
-
+ if(currentStream) currentStream.getTracks().forEach(t=>{try{t.stop()}catch{}});
+ currentStream=null;
 }
 
-currentStream=null;
+async function connectListener(slotId,speakerUid){
+ const u=auth.currentUser;
+ if(!u || u.uid===speakerUid)return;
+ const peerId=u.uid;
+ closePeer(peerId);
 
+ try{
+  const pc=new RTCPeerConnection(rtcConfig);
+  voicePeers.set(peerId,pc);
+
+  pc.ontrack=e=>{if(e.streams[0])playRemote(peerId,e.streams[0])};
+
+  pc.onconnectionstatechange=()=>{
+   if(pc.connectionState==="connected"){
+    const s=voiceSlots.find(x=>x.id===slotId);
+    if(s) s.status.textContent="🔊 تستمع للبث";
+   }
+   if(["failed","closed"].includes(pc.connectionState)) closePeer(peerId);
+  };
+
+  const peerRef=doc(db,"voiceCalls",slotId,"peers",peerId);
+  const offerCandidates=collection(db,"voiceCalls",slotId,"peers",peerId,"offerCandidates");
+  const answerCandidates=collection(db,"voiceCalls",slotId,"peers",peerId,"answerCandidates");
+
+  pc.onicecandidate=async e=>{
+   if(e.candidate) try{await addDoc(offerCandidates,e.candidate.toJSON())}catch(err){console.error(err)}
+  };
+
+  const offer=await pc.createOffer({offerToReceiveAudio:true});
+  await pc.setLocalDescription(offer);
+
+  await setDoc(peerRef,{
+   listenerUid:peerId,
+   speakerUid,
+   offer:{type:offer.type,sdp:offer.sdp},
+   createdAt:serverTimestamp()
+  },{merge:true});
+
+  const un1=onSnapshot(peerRef,async s=>{
+   const d=s.data();
+   if(!d?.answer || pc.currentRemoteDescription)return;
+   try{await pc.setRemoteDescription(new RTCSessionDescription(d.answer))}catch(e){console.error(e)}
+  });
+
+  const un2=onSnapshot(answerCandidates,s=>{
+   s.docChanges().forEach(async ch=>{
+    if(ch.type==="added")try{await pc.addIceCandidate(new RTCIceCandidate(ch.doc.data()))}catch(e){console.error(e)}
+   });
+  });
+
+  voiceUnsubs.set(peerId,()=>{
+   try{un1()}catch{} try{un2()}catch{}
+  });
+
+  const slot=voiceSlots.find(x=>x.id===slotId);
+  if(slot)slot.status.textContent="🔊 جاري الاتصال...";
+ }catch(e){
+  console.error(e);
+  closePeer(peerId);
+  alert("❌ تعذر الاتصال بالبث الصوتي: "+(e.code||e.message));
+ }
 }
 
+function watchSpeaker(slotId,speakerUid){
+ const peers=collection(db,"voiceCalls",slotId,"peers");
+ const key="speaker:"+slotId;
+ const old=voiceUnsubs.get(key);
+ if(old)old();
+
+ const unsub=onSnapshot(peers,snap=>{
+  snap.docChanges().forEach(async ch=>{
+   if(ch.type==="removed"){closePeer(ch.doc.id);return}
+   const d=ch.doc.data(), peerId=ch.doc.id;
+   if(!d.offer || peerId===speakerUid || voicePeers.has(peerId))return;
+
+   try{
+    const pc=new RTCPeerConnection(rtcConfig);
+    voicePeers.set(peerId,pc);
+    currentStream?.getTracks().forEach(t=>pc.addTrack(t,currentStream));
+
+    const peerRef=doc(db,"voiceCalls",slotId,"peers",peerId);
+    const offers=collection(db,"voiceCalls",slotId,"peers",peerId,"offerCandidates");
+    const answers=collection(db,"voiceCalls",slotId,"peers",peerId,"answerCandidates");
+
+    pc.onicecandidate=async e=>{
+     if(e.candidate)try{await addDoc(answers,e.candidate.toJSON())}catch(err){console.error(err)}
+    };
+
+    pc.onconnectionstatechange=()=>{
+     if(["failed","closed"].includes(pc.connectionState))closePeer(peerId);
+    };
+
+    const un=onSnapshot(offers,s=>{
+     s.docChanges().forEach(async ch=>{
+      if(ch.type==="added")try{await pc.addIceCandidate(new RTCIceCandidate(ch.doc.data()))}catch(e){console.error(e)}
+     });
+    });
+
+    voiceUnsubs.set(peerId,un);
+    await pc.setRemoteDescription(new RTCSessionDescription(d.offer));
+    const answer=await pc.createAnswer();
+    await pc.setLocalDescription(answer);
+    await setDoc(peerRef,{answer:{type:answer.type,sdp:answer.sdp}},{merge:true});
+   }catch(e){console.error("speaker peer",e)}
+  });
+ });
+ voiceUnsubs.set(key,unsub);
+}
+
+voiceSlots.forEach((s,i)=>s.button.onclick=()=>startMic(i));
 
 function watchVoice(){
+ if(stopVoice)stopVoice();
+ stopVoice=onSnapshot(collection(db,"voiceSlots"),snap=>{
+  const data={}; snap.forEach(s=>data[s.id]=s.data());
 
-if(stopVoice)stopVoice();
+  voiceSlots.forEach(s=>{
+   const d=data[s.id];
+   if(!d){
+    s.box.classList.remove("active");
+    s.name.textContent="شاغر";
+    s.status.textContent="جاهز";
+    s.button.textContent="تشغيل المايك";
+    return;
+   }
 
-stopVoice=onSnapshot(
-collection(db,"voiceSlots"),
-snap=>{
+   s.box.classList.add("active");
+   s.name.textContent=d.name||"عضو";
 
-const data={};
-
-snap.forEach(s=>data[s.id]=s.data());
-
-voiceSlots.forEach(s=>{
-
-const d=data[s.id];
-
-if(!d){
-
-s.box.classList.remove("active");
-s.name.textContent="شاغر";
-s.status.textContent="جاهز";
-s.button.textContent="تشغيل المايك";
-return;
-
-}
-
-s.box.classList.add("active");
-s.name.textContent=d.name||"عضو";
-
-if(auth.currentUser&&d.uid===auth.currentUser.uid){
-
-s.status.textContent="🎤 أنت تستخدم المايك";
-s.button.textContent="إيقاف المايك";
-
-}else{
-
-s.status.textContent="🔊 المايك مشغول";
-s.button.textContent="مشغول";
-
-}
-
-});
-
-}
-);
-
+   if(auth.currentUser?.uid===d.uid){
+    s.status.textContent="🎤 أنت تتحدث";
+    s.button.textContent="إيقاف المايك";
+    if(currentStream)watchSpeaker(s.id,d.uid);
+   }else{
+    s.status.textContent="🔊 اضغط للاستماع";
+    s.button.textContent="🔊 استماع";
+   }
+  });
+ });
 }
 
 
