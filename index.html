@@ -99,7 +99,6 @@ button{cursor:pointer}
       <div><div class="title">كرار جاسم</div><div id="currentUsername" class="username">عضو</div></div>
     </div>
     <div class="headerActions">
-      <button id="newPostBtn" class="iconBtn">➕ نشر</button>
       <button id="profileBtn" class="iconBtn">👤 حسابي</button>
       <button id="dmBtn" class="iconBtn">💬 خاص</button>
       <button id="adminBtn" class="iconBtn adminBtn hidden">🛡️ إشراف</button>
@@ -115,7 +114,7 @@ button{cursor:pointer}
   <nav id="roomsBar" class="roomsBar"></nav>
 
   <main class="content">
-    <section id="feed" class="feed"><div class="empty">جاري تحميل المنشورات...</div></section>
+    <section id="feed" class="feed"><div class="empty">جاري تحميل المحادثة...</div></section>
     <aside class="side">
       <div class="sideTitle">👥 الموجودون الآن</div>
       <div id="onlineCount" class="onlineCount">0 متصل</div>
@@ -126,21 +125,9 @@ button{cursor:pointer}
   <div id="replyBar" class="replyBar"><span id="replyText"></span><button class="cancelReply" id="cancelReply">إلغاء الرد ×</button></div>
   <div class="composer">
     <input id="messageInput" placeholder="اكتب رسالة في الغرفة..." maxlength="2000">
-    <button id="attachBtn" class="attach">📎</button>
-    <input id="mediaInput" type="file" accept="image/*,video/*" class="hidden">
     <button id="sendButton" class="send">➤</button>
   </div>
 </div>
-
-<!-- post modal -->
-<div id="postModal" class="modal"><div class="box">
-  <div class="boxHead"><div class="boxTitle">➕ نشر في الغرفة</div><button class="close" data-close="postModal">×</button></div>
-  <div class="roomIntro">الغرفة الحالية: <b id="postRoomName"></b></div>
-  <textarea id="postText" style="width:100%;height:110px;padding:12px;border:1px solid var(--line);border-radius:10px;background:#0b121c;color:#fff;resize:vertical" placeholder="اكتب ما تريد نشره..." maxlength="5000"></textarea>
-  <input id="postMedia" type="file" accept="image/*,video/*" style="margin:10px 0;width:100%">
-  <button id="publishPost" class="btn primary">نشر</button>
-  <div id="uploadStatus" style="text-align:center;color:#9fb0c2;margin-top:8px"></div>
-</div></div>
 
 <!-- profile -->
 <div id="profileModal" class="modal"><div class="box profileBox">
@@ -269,83 +256,34 @@ $("logoutButton").onclick=async()=>{await leaveCurrentMic();localStorage.removeI
 
 function loadPosts(){
  if(unsubscribePosts)unsubscribePosts();
- const q=query(collection(db,"posts"),where("room","==",currentRoom),orderBy("createdAt","desc"),limit(80));
+ const q=query(collection(db,"messages"),where("room","==",currentRoom),orderBy("createdAt","asc"),limit(200));
  unsubscribePosts=onSnapshot(q,snap=>{
-  $("feed").innerHTML="";
-  if(snap.empty){$("feed").innerHTML='<div class="empty">لا توجد منشورات في هذه الغرفة بعد.</div>';return}
-  snap.forEach(d=>renderPost(d.id,d.data()));
- },e=>{$("feed").innerHTML='<div class="empty">❌ تعذر تحميل المنشورات. تأكد من Firestore Rules والفهارس.</div>';console.error(e)});
+  const feed=$("feed"); feed.innerHTML="";
+  if(snap.empty){feed.innerHTML='<div class="empty">لا توجد رسائل في هذه الغرفة بعد.</div>';return}
+  snap.forEach(d=>renderChatMessage(d.id,d.data()));
+  feed.scrollTop=feed.scrollHeight;
+ },e=>{$("feed").innerHTML='<div class="empty">❌ تعذر تحميل المحادثة: '+escapeHtml(e.message)+'</div>';console.error(e)});
 }
-function renderPost(id,p){
+function renderChatMessage(id,p){
  const el=document.createElement("article");el.className="post";
  const date=p.createdAt?.toDate?p.createdAt.toDate().toLocaleString("ar-IQ"):"الآن";
- let media="";
- if(p.mediaUrl){media=p.mediaType?.startsWith("video")?`<video class="postMedia" controls src="${p.mediaUrl}"></video>`:`<img class="postMedia" src="${p.mediaUrl}" alt="صورة المنشور">`}
- el.innerHTML=`
- <div class="postHead"><img src="${avatarFor(p.name,p.photo)}"><div class="postMeta"><div class="postName">${escapeHtml(p.name||"عضو")}</div><div class="postRoom">📍 ${escapeHtml(p.room||currentRoom)} · ${date}</div></div></div>
- <div class="postText">${escapeHtml(p.text||"")}</div>${media}
- <div class="postActions">
- <button data-like>👍 <span>${p.likesCount||0}</span></button>
- <button data-comment>💬 تعليق <span>${p.commentsCount||0}</span></button>
- <button data-reply>↩️ رد</button>
- ${isAdmin()?'<button data-delete class="danger">🗑️ حذف</button>':""}
- </div>
- <div class="comments" data-comments></div>
- <div class="commentInput"><input placeholder="اكتب تعليقًا..."><button>إرسال</button></div>`;
- el.querySelector("[data-like]").onclick=async()=>{
-  const likeRef=doc(db,"posts",id,"likes",currentUser.uid),s=await getDoc(likeRef);
-  try{
-   if(s.exists()){await deleteDoc(likeRef);await updateDoc(doc(db,"posts",id),{likesCount:Math.max(0,(p.likesCount||0)-1)})}
-   else{await setDoc(likeRef,{uid:currentUser.uid,createdAt:serverTimestamp()});await updateDoc(doc(db,"posts",id),{likesCount:(p.likesCount||0)+1})}
-  }catch(e){console.error(e)}
- };
- el.querySelector("[data-delete]")?.addEventListener("click",async()=>{if(confirm("حذف المنشور؟"))await deleteDoc(doc(db,"posts",id))});
- el.querySelector("[data-reply]").onclick=()=>{replyTo={id,name:p.name};$("replyBar").classList.add("show");$("replyText").textContent="الرد على: "+p.name;$("messageInput").focus()};
- el.querySelector(".commentInput button").onclick=async()=>{
-  const input=el.querySelector(".commentInput input"),text=input.value.trim();if(!text)return;
-  await addDoc(collection(db,"posts",id,"comments"),{uid:currentUser.uid,name:currentProfile.name,text,createdAt:serverTimestamp()});
-  await updateDoc(doc(db,"posts",id),{commentsCount:(p.commentsCount||0)+1});input.value="";
- };
- const cq=query(collection(db,"posts",id,"comments"),orderBy("createdAt","asc"),limit(30));
- onSnapshot(cq,s=>{const c=el.querySelector("[data-comments]");c.innerHTML="";s.forEach(x=>{const d=x.data();const z=document.createElement("div");z.className="comment";z.innerHTML=`<b>${escapeHtml(d.name||"عضو")}:</b> ${escapeHtml(d.text||"")}`;c.appendChild(z)})});
+ el.innerHTML=`<div class="postHead"><img src="${avatarFor(p.name,p.photo)}"><div class="postMeta"><div class="postName">${escapeHtml(p.name||"عضو")}</div><div class="postRoom">📍 ${escapeHtml(p.room||currentRoom)} · ${date}</div></div></div><div class="postText">${escapeHtml(p.text||"")}</div>${p.replyTo?`<div class="roomIntro" style="margin:5px 0">↩️ رد على: <b>${escapeHtml(p.replyTo)}</b></div>`:""}<div class="postActions">${isAdmin()?'<button data-delete class="danger">🗑️ حذف</button>':""}</div>`;
+ el.querySelector("[data-delete]")?.addEventListener("click",async()=>{if(confirm("حذف الرسالة؟")){try{await deleteDoc(doc(db,"messages",id))}catch(e){alert("تعذر حذف الرسالة: "+e.message)}}});
  $("feed").appendChild(el);
 }
-function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
-
+function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]))}
 $("sendButton").onclick=sendChat;
 $("messageInput").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();sendChat()}};
 $("cancelReply").onclick=()=>{replyTo=null;$("replyBar").classList.remove("show")};
 async function sendChat(){
- const text=$("messageInput").value.trim();if(!text)return;
+ const text=$("messageInput").value.trim();if(!text||!currentUser)return;
  try{
-  await addDoc(collection(db,"posts"),{room:currentRoom,name:currentProfile.name,photo:currentProfile.photo,text,uid:currentUser.uid,replyTo:replyTo?replyTo.name:"",likesCount:0,commentsCount:0,createdAt:serverTimestamp()});
+  const mod=await getDoc(doc(db,"moderation",currentUser.uid));
+  if(mod.exists()&&mod.data().banned){alert("🚫 الحساب محظور");return}
+  await addDoc(collection(db,"messages"),{room:currentRoom,name:currentProfile.name,photo:currentProfile.photo,text,uid:currentUser.uid,replyTo:replyTo?replyTo.name:"",createdAt:serverTimestamp()});
   $("messageInput").value="";replyTo=null;$("replyBar").classList.remove("show");
  }catch(e){alert("تعذر الإرسال: "+e.message)}
 }
-
-$("attachBtn").onclick=()=>$("mediaInput").click();
-$("mediaInput").onchange=async()=>{
- const f=$("mediaInput").files[0];if(!f)return;
- if(f.size>40*1024*1024){alert("الملف أكبر من 40MB");return}
- try{
-  const r=ref(storage,`posts/${currentUser.uid}/${Date.now()}_${f.name.replace(/[^a-zA-Z0-9._-]/g,"_")}`);
-  await uploadBytes(r,f);const url=await getDownloadURL(r);
-  await addDoc(collection(db,"posts"),{room:currentRoom,name:currentProfile.name,photo:currentProfile.photo,text:"",uid:currentUser.uid,mediaUrl:url,mediaType:f.type,likesCount:0,commentsCount:0,createdAt:serverTimestamp()});
-  $("mediaInput").value="";
- }catch(e){alert("فشل رفع الوسائط: "+e.message)}
-};
-
-$("newPostBtn").onclick=()=>{$("postRoomName").textContent=currentRoom;$("postModal").classList.add("show")};
-$("publishPost").onclick=async()=>{
- const text=$("postText").value.trim(),f=$("postMedia").files[0];$("uploadStatus").textContent="جاري النشر...";
- try{
-  let mediaUrl="",mediaType="";
-  if(f){if(f.size>40*1024*1024)throw Error("حجم الملف أكبر من 40MB");const r=ref(storage,`posts/${currentUser.uid}/${Date.now()}_${f.name.replace(/[^a-zA-Z0-9._-]/g,"_")}`);await uploadBytes(r,f);mediaUrl=await getDownloadURL(r);mediaType=f.type}
-  if(!text&&!mediaUrl)throw Error("اكتب نصًا أو اختر صورة/فيديو");
-  await addDoc(collection(db,"posts"),{room:currentRoom,name:currentProfile.name,photo:currentProfile.photo,text,uid:currentUser.uid,mediaUrl,mediaType,likesCount:0,commentsCount:0,createdAt:serverTimestamp()});
-  $("postText").value="";$("postMedia").value="";$("uploadStatus").textContent="تم النشر";setTimeout(()=>$("postModal").classList.remove("show"),300);
- }catch(e){$("uploadStatus").textContent="❌ "+e.message}
-};
 
 async function loadMembers(){
  if(unsubscribeMembers)unsubscribeMembers();
@@ -364,7 +302,14 @@ $("saveProfile").onclick=async()=>{
  try{
   let photo=currentProfile.photo||"";
   const f=$("profilePhoto").files[0];
-  if(f){if(f.size>5*1024*1024)throw Error("الصورة أكبر من 5MB");const r=ref(storage,`profiles/${currentUser.uid}/avatar`);await uploadBytes(r,f);photo=await getDownloadURL(r)}
+  if(f){
+   if(!f.type.startsWith("image/"))throw Error("اختر صورة فقط");
+   if(f.size>5*1024*1024)throw Error("الصورة أكبر من 5MB");
+   const safeName=(f.name||"avatar.jpg").replace(/[^a-zA-Z0-9._-]/g,"_");
+   const r=ref(storage,`profiles/${currentUser.uid}/${Date.now()}_${safeName}`);
+   await uploadBytes(r,f,{contentType:f.type});
+   photo=await getDownloadURL(r);
+  }
   const name=$("profileName").value.trim();if(name.length<2)throw Error("الاسم قصير");
   await updateDoc(doc(db,"users",currentUser.uid),{name,photo});
   currentProfile={...currentProfile,name,photo};await updateProfile(currentUser,{displayName:name});
@@ -407,14 +352,14 @@ async function loadAdmin(){
 async function toggleMute(uid){if(uid===ADMIN_UID)return;const r=doc(db,"moderation",uid),s=await getDoc(r);await setDoc(r,{micMuted:!(s.exists()&&s.data().micMuted),updatedAt:serverTimestamp()},{merge:true});loadAdmin()}
 async function toggleBan(uid){if(uid===ADMIN_UID)return;const r=doc(db,"moderation",uid),s=await getDoc(r);await setDoc(r,{banned:!(s.exists()&&s.data().banned),updatedAt:serverTimestamp()},{merge:true});loadAdmin()}
 $("deleteAllBtn").onclick=async()=>{
- if(!isAdmin()||!confirm("سيتم حذف جميع المنشورات. هل أنت متأكد؟"))return;
+ if(!isAdmin()||!confirm("سيتم حذف جميع رسائل الدردشة. هل أنت متأكد؟"))return;
  $("adminStatus").textContent="جاري الحذف...";
  let total=0;
  while(true){
-  const s=await getDocs(query(collection(db,"posts"),limit(400)));if(s.empty)break;
+  const s=await getDocs(query(collection(db,"messages"),limit(400)));if(s.empty)break;
   const b=writeBatch(db);s.forEach(x=>b.delete(x.ref));await b.commit();total+=s.size;if(s.size<400)break;
  }
- $("adminStatus").textContent=`تم حذف ${total} منشورًا`;
+ $("adminStatus").textContent=`تم حذف ${total} رسالة`;
 };
 
 /* 5 microphones - WebRTC */
