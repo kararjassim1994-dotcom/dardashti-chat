@@ -3,1406 +3,461 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>🔥 طليان الشعلة</title>
-
+<title>كرار جاسم</title>
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:Arial,Tahoma,sans-serif;background:#070b10;color:#fff}
+html,body{margin:0;width:100%;min-height:100%;font-family:Arial,Tahoma,sans-serif;background:#070b12;color:#fff}
 body{
-background:
-linear-gradient(#0009,#0009),
-url("./background.jpeg") center/cover fixed no-repeat;
+  background:
+    linear-gradient(135deg,#06101dcc,#101827dd),
+    url("https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1800&q=80") center/cover fixed no-repeat;
 }
-button,input{font-family:inherit}
+button,input,textarea{font-family:inherit}
 button{cursor:pointer}
 .hidden{display:none!important}
-
-#loginPage{
-min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px
-}
-.loginBox{
-width:100%;max-width:430px;background:#101722ee;padding:24px;
-border-radius:20px;border:1px solid #ffffff20;box-shadow:0 20px 60px #000b
-}
-.logo{text-align:center;font-size:29px;font-weight:bold;margin-bottom:8px}
-.description{text-align:center;color:#b9c5d4;line-height:1.7;margin-bottom:18px}
-
+:root{--panel:#101925ed;--panel2:#182333ee;--line:#314156;--blue:#1687ff;--green:#27c47b;--red:#c83b4a;--muted:#9aa9bb}
+#loginPage{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px}
+.loginBox{width:100%;max-width:440px;background:var(--panel);padding:24px;border-radius:22px;border:1px solid #ffffff20;box-shadow:0 20px 70px #000b;backdrop-filter:blur(12px)}
+.logo{text-align:center;font-size:32px;font-weight:900;margin-bottom:6px}
+.description{text-align:center;color:#c5d0dc;line-height:1.7;margin-bottom:18px}
 .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px}
-.tab{border:1px solid #344255;background:#18222e;color:#ddd;padding:10px 4px;border-radius:9px}
-.tab.active{background:#1687ff;color:#fff}
+.tab,.btn{border:0;border-radius:10px;padding:12px;font-weight:bold}
+.tab{background:#1a2635;color:#ccd7e4;border:1px solid var(--line)}
+.tab.active,.primary{background:var(--blue);color:#fff}
+.form{display:none}.form.active{display:block}
+.loginBox input,.composer input,.composer textarea,.profileBox input{width:100%;padding:13px;margin:5px 0;border:1px solid var(--line);border-radius:10px;background:#0b121c;color:#fff;outline:none}
+.btn{width:100%;margin-top:7px;color:#fff}.secondary{background:#293648}.status{text-align:center;color:#79e2aa;font-size:12px;margin-top:10px}
+#authMessage{text-align:center;min-height:24px;color:#ffb4b4;margin-top:10px}
 
-.form{display:none}
-.form.active{display:block}
-
-input{
-width:100%;padding:13px;margin:5px 0;border:1px solid #344255;
-border-radius:10px;background:#0c131b;color:#fff;outline:none
-}
-.btn{width:100%;padding:13px;margin-top:7px;border:0;border-radius:10px;color:#fff;font-weight:bold}
-.primary{background:#1687ff}
-.secondary{background:#293646}
-#authMessage{text-align:center;min-height:24px;margin-top:10px;color:#ffb5b5}
-.status{text-align:center;color:#70e0a1;font-size:12px;margin-top:8px}
-
-/* APP */
 #chatApp{height:100vh;display:flex;flex-direction:column}
-.header{
-min-height:64px;background:#101722ee;border-bottom:1px solid #293646;
-display:flex;align-items:center;justify-content:space-between;padding:8px 10px;gap:6px
-}
-.headerRight{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
-.title{font-size:19px;font-weight:bold}
-.username{font-size:12px;color:#70e0a1;margin-top:3px}
-.header button{
-border:0;color:#fff;border-radius:8px;padding:8px 9px;font-weight:bold
-}
-.adminOpen{background:#8b5cf6}
-.logout{background:#a92d38}
+.header{min-height:64px;background:#0e1723ed;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 10px;gap:8px;backdrop-filter:blur(10px)}
+.headerUser{display:flex;align-items:center;gap:9px;min-width:0}.headerAvatar{width:42px;height:42px;border-radius:50%;object-fit:cover;background:#26364a}
+.title{font-size:20px;font-weight:900}.username{font-size:12px;color:#72e3a4;margin-top:2px}
+.headerActions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.iconBtn{border:0;background:#223044;color:#fff;padding:9px 10px;border-radius:9px}.logout{background:#a82f3c}.adminBtn{background:#8a5cf6}
+.voicePanel{background:#0d1622e8;border-bottom:1px solid var(--line);padding:9px}
+.voiceTitle{text-align:center;font-weight:bold;color:#dbe6f2;margin-bottom:7px}
+.voiceSlots{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+.voiceSlot{min-height:82px;background:#172233;border:1px solid var(--line);border-radius:12px;padding:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.voiceSlot.active{border-color:var(--green);box-shadow:0 0 0 1px #27c47b33}
+.micIcon{font-size:25px}.voiceName{font-size:11px;color:#c0cad6;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.voiceStatus{font-size:10px;color:#8797aa}.voiceSlot button{border:0;border-radius:8px;padding:6px 8px;background:var(--blue);color:#fff;font-size:11px;font-weight:bold}
+.voiceSlot.active button{background:var(--red)}
+.roomsBar{display:flex;gap:7px;overflow-x:auto;padding:8px;background:#0c1420e8;border-bottom:1px solid var(--line);scrollbar-width:none}
+.roomsBar::-webkit-scrollbar{display:none}.roomBtn{white-space:nowrap;border:1px solid var(--line);background:#182333;color:#dce7f4;border-radius:9px;padding:8px 11px}.roomBtn.active{background:#1687ff;border-color:#1687ff}
+.content{flex:1;display:flex;min-height:0;overflow:hidden}
+.feed{flex:1;overflow-y:auto;padding:12px;background:#0005}
+.side{width:250px;background:#0e1724e8;border-right:1px solid var(--line);overflow-y:auto;padding:10px}
+.sideTitle{font-weight:bold;margin:5px 0 10px}.onlineCount{color:#74e2a5;font-size:12px;margin-bottom:8px}
+.member{display:flex;align-items:center;gap:8px;padding:7px;border-radius:9px;background:#162131;margin-bottom:6px;cursor:pointer}.member:hover{background:#213047}.member img{width:34px;height:34px;border-radius:50%;object-fit:cover}.memberName{font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.dot{width:8px;height:8px;border-radius:50%;background:#35d47f;margin-right:auto}
+.composer{display:flex;gap:7px;padding:8px;background:#111a26ee;border-top:1px solid var(--line);align-items:center}.composer input{margin:0;flex:1}.send{width:48px;height:46px;border:0;border-radius:10px;background:var(--blue);color:#fff;font-size:18px}.attach{width:45px;height:46px;border:0;border-radius:10px;background:#293648;color:#fff}.replyBar{background:#1c2a3c;border-top:1px solid #3a4d64;padding:7px 10px;font-size:12px;display:none}.replyBar.show{display:flex;justify-content:space-between;align-items:center}.cancelReply{border:0;background:transparent;color:#ff9ca6}
+.post{background:#101a27ed;border:1px solid #ffffff12;border-radius:14px;padding:10px;margin-bottom:10px;box-shadow:0 7px 25px #0003}.postHead{display:flex;gap:8px;align-items:center}.postHead img{width:40px;height:40px;border-radius:50%;object-fit:cover}.postMeta{min-width:0}.postName{font-weight:bold;color:#75b7ff}.postRoom{font-size:10px;color:#7f90a5}.postText{white-space:pre-wrap;word-break:break-word;line-height:1.55;margin:9px 0}.postMedia{width:100%;max-height:420px;object-fit:contain;background:#080c12;border-radius:10px}.postActions{display:flex;gap:6px;border-top:1px solid #ffffff10;padding-top:7px;margin-top:7px}.postActions button{border:0;border-radius:8px;background:#1d2a3b;color:#dce7f4;padding:7px 10px}.postActions button.liked{background:#224c79;color:#fff}.comments{margin-top:7px;border-top:1px solid #ffffff0e;padding-top:7px}.comment{font-size:12px;padding:5px 7px;background:#172333;border-radius:8px;margin-top:5px}.comment b{color:#77b8ff}.commentInput{display:flex;gap:5px;margin-top:6px}.commentInput input{flex:1;padding:9px;border:1px solid var(--line);border-radius:8px;background:#0b121b;color:#fff}.commentInput button{border:0;border-radius:8px;background:var(--blue);color:#fff;padding:8px 12px}
+.empty{text-align:center;color:#7f8da0;padding:35px 10px}
 
-/* VOICE */
-.voicePanel{background:#101720dd;border-bottom:1px solid #293646;padding:9px}
-.voiceTitle{text-align:center;font-weight:bold;margin-bottom:7px}
-.voiceSlots{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.voiceSlot{
-background:#18222ecc;border:1px solid #344255;border-radius:12px;
-padding:8px;text-align:center
-}
-.voiceSlot.active{border-color:#22c77a}
-.voiceName{font-size:12px;color:#c4cfdd;margin:4px 0}
-.voiceStatus{font-size:11px;color:#8995a5;margin-bottom:5px}
-.voiceSlot button{
-border:0;border-radius:8px;padding:7px 10px;background:#1687ff;color:#fff;font-weight:bold
-}
+.modal{position:fixed;inset:0;z-index:10000;background:#000c;display:none;align-items:center;justify-content:center;padding:12px;backdrop-filter:blur(7px)}.modal.show{display:flex}.box{width:100%;max-width:620px;max-height:94vh;overflow:auto;background:#0f1825;border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 25px 80px #000}.boxHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.boxTitle{font-size:20px;font-weight:bold}.close{border:0;background:var(--red);color:#fff;border-radius:9px;width:38px;height:38px;font-size:22px}
+.profileBox{text-align:center}.profilePreview{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #315273;margin:5px auto 10px;display:block}.profileBox label{display:block;text-align:right;font-size:12px;color:#aebbc9;margin-top:8px}
+.adminList{max-height:360px;overflow:auto}.adminRow{display:flex;align-items:center;gap:6px;background:#172333;padding:8px;border-radius:10px;margin-bottom:7px}.adminRow .grow{flex:1;min-width:0}.adminRow button{border:0;border-radius:8px;padding:7px;font-size:11px;color:#fff}.danger{background:var(--red)}.ok{background:#218c60}.neutral{background:#334258}
+.roomIntro{background:#162333;padding:10px;border-radius:10px;color:#c8d3df;margin-bottom:9px;line-height:1.6}
 
-/* MESSAGES */
-.messages{flex:1;overflow-y:auto;padding:12px;background:#0004}
-.message{display:flex;gap:8px;margin-bottom:12px}
-.avatar{width:40px;height:40px;border-radius:50%;background:#293646}
-.messageContent{background:#18222eea;border-radius:12px;padding:8px 10px;max-width:82%}
-.messageName{color:#62aaff;font-size:12px;font-weight:bold;margin-bottom:3px}
-.messageText{line-height:1.5;word-break:break-word}
-.empty{text-align:center;color:#7e8a99;padding:30px}
-
-.composer{
-display:flex;gap:6px;padding:8px;background:#151d28ee;border-top:1px solid #293646
-}
-.composer input{flex:1;margin:0}
-.send{width:50px;border:0;border-radius:10px;background:#1687ff;color:#fff;font-size:18px}
-
-/* MODAL */
-.modal{
-position:fixed;inset:0;background:#000d;z-index:5000;display:none;
-align-items:center;justify-content:center;padding:10px
-}
-.modal.show{display:flex}
-.box{
-width:100%;max-width:650px;max-height:94vh;overflow:auto;
-background:#101722;border:1px solid #344255;border-radius:18px;padding:14px;
-box-shadow:0 20px 70px #000
-}
-.modalHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.modalTitle{font-size:20px;font-weight:bold}
-.close{
-width:38px;height:38px;border:0;border-radius:9px;background:#a92d38;color:#fff;font-size:22px
-}
-
-/* ADMIN */
-.adminTabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:10px}
-.adminTab{border:0;border-radius:8px;padding:9px;background:#293646;color:#fff}
-.adminTab.active{background:#1687ff}
-.adminSection{display:none}
-.adminSection.active{display:block}
-.member{
-border:1px solid #344255;background:#18222e;border-radius:11px;padding:10px;margin:7px 0
-}
-.memberTop{display:flex;justify-content:space-between;gap:8px}
-.memberName{font-weight:bold}
-.memberUid{font-size:10px;color:#8290a1;word-break:break-all;margin:4px 0}
-.adminBtns{display:flex;gap:5px;flex-wrap:wrap}
-.adminBtns button{
-border:0;border-radius:7px;padding:7px 9px;color:#fff;font-weight:bold
-}
-.ban{background:#a92d38}
-.unban{background:#168b59}
-.mute{background:#b47716}
-.unmute{background:#1687ff}
-.delete{background:#6d3340}
-.kick{background:#b91c1c}
-.voiceKick{background:#7c3aed}
-
-@media(max-width:430px){
-.title{font-size:15px}
-.header button{padding:7px;font-size:11px}
-.gamesGrid{grid-template-columns:1fr 1fr}
-.voiceSlot button{font-size:11px}
-}
+.dmLayout{display:grid;grid-template-columns:180px 1fr;gap:8px;min-height:430px}.dmList{background:#121d2a;border-radius:10px;padding:7px;overflow:auto}.dmUser{padding:8px;border-radius:8px;background:#1b2939;margin-bottom:5px;cursor:pointer}.dmUser.active{background:#1687ff}.dmChat{display:flex;flex-direction:column;background:#0b131e;border-radius:10px;min-width:0}.dmMessages{flex:1;overflow:auto;padding:8px}.dmMsg{background:#182537;border-radius:9px;padding:7px;margin-bottom:6px;max-width:82%;font-size:13px}.dmMsg.mine{margin-right:auto;background:#174a77}.dmComposer{display:flex;gap:5px;padding:7px}.dmComposer input{flex:1;padding:10px;border:1px solid var(--line);border-radius:8px;background:#101a27;color:#fff}.dmComposer button{border:0;border-radius:8px;background:var(--blue);color:#fff;padding:0 14px}
+@media(max-width:760px){.side{display:none}.voiceSlots{grid-template-columns:repeat(5,90px);overflow-x:auto}.header .title{font-size:17px}.headerActions .iconBtn{padding:7px}.dmLayout{grid-template-columns:1fr}.dmList{max-height:120px;display:flex;overflow-x:auto;gap:5px}.dmUser{min-width:110px}.roomsBar{padding:6px}}
 </style>
 </head>
-
 <body>
 
-<!-- LOGIN -->
 <div id="loginPage">
-<div class="loginBox">
-
-<div class="logo">🔥 طليان الشعلة</div>
-<div class="description">
-أهلاً بك في الدردشة<br>
-سجّل دخولك أو ادخل كزائر
+  <div class="loginBox">
+    <div class="logo">كرار جاسم</div>
+    <div class="description">دردشة عراقية متعددة الغرف والمجتمع<br>تواصل، نشر، صور، فيديو، ورسائل خاصة</div>
+    <div class="tabs">
+      <button class="tab active" data-tab="visitor">زائر</button>
+      <button class="tab" data-tab="login">دخول</button>
+      <button class="tab" data-tab="signup">عضوية</button>
+    </div>
+    <div id="visitorForm" class="form active">
+      <input id="visitorName" placeholder="اسم الزائر" maxlength="30">
+      <button id="visitorButton" class="btn primary">دخول كزائر</button>
+    </div>
+    <div id="loginForm" class="form">
+      <input id="emailInput" type="email" placeholder="البريد الإلكتروني">
+      <input id="passwordInput" type="password" placeholder="كلمة المرور">
+      <button id="loginButton" class="btn primary">تسجيل الدخول</button>
+    </div>
+    <div id="signupForm" class="form">
+      <input id="nameInput" placeholder="اسم العضو" maxlength="30">
+      <input id="signupEmail" type="email" placeholder="البريد الإلكتروني">
+      <input id="signupPassword" type="password" placeholder="كلمة المرور - 6 أحرف على الأقل">
+      <button id="signupButton" class="btn primary">إنشاء العضوية</button>
+    </div>
+    <div id="authMessage"></div>
+    <div class="status">● Firebase متصل</div>
+  </div>
 </div>
 
-<div class="tabs">
-<button class="tab active" data-tab="visitor">زائر</button>
-<button class="tab" data-tab="login">دخول</button>
-<button class="tab" data-tab="signup">تسجيل</button>
-</div>
-
-<div id="visitorForm" class="form active">
-<input id="visitorName" placeholder="الاسم المستعار">
-<button id="visitorButton" class="btn primary">دخول كزائر</button>
-</div>
-
-<div id="loginForm" class="form">
-<input id="emailInput" type="email" placeholder="البريد الإلكتروني">
-<input id="passwordInput" type="password" placeholder="كلمة المرور">
-<button id="loginButton" class="btn primary">تسجيل الدخول</button>
-</div>
-
-<div id="signupForm" class="form">
-<input id="nameInput" placeholder="اسم العضو">
-<input id="signupEmail" type="email" placeholder="البريد الإلكتروني">
-<input id="signupPassword" type="password" placeholder="كلمة المرور">
-<button id="signupButton" class="btn primary">إنشاء الحساب</button>
-</div>
-
-<div id="authMessage"></div>
-<div class="status" id="firebaseStatus">● Firebase متصل</div>
-
-</div>
-</div>
-
-<!-- APP -->
 <div id="chatApp" class="hidden">
+  <header class="header">
+    <div class="headerUser">
+      <img id="headerAvatar" class="headerAvatar" src="https://ui-avatars.com/api/?name=K&background=1687ff&color=fff">
+      <div><div class="title">كرار جاسم</div><div id="currentUsername" class="username">عضو</div></div>
+    </div>
+    <div class="headerActions">
+      <button id="newPostBtn" class="iconBtn">➕ نشر</button>
+      <button id="profileBtn" class="iconBtn">👤 حسابي</button>
+      <button id="dmBtn" class="iconBtn">💬 خاص</button>
+      <button id="adminBtn" class="iconBtn adminBtn hidden">🛡️ إشراف</button>
+      <button id="logoutButton" class="iconBtn logout">خروج</button>
+    </div>
+  </header>
 
-<div class="header">
-<div>
-<div class="title">🔥 طليان الشعلة</div>
-<div id="currentUsername" class="username"></div>
+  <section class="voicePanel">
+    <div class="voiceTitle">🎙️ البث الصوتي — 5 مايكات</div>
+    <div id="voiceSlots" class="voiceSlots"></div>
+  </section>
+
+  <nav id="roomsBar" class="roomsBar"></nav>
+
+  <main class="content">
+    <section id="feed" class="feed"><div class="empty">جاري تحميل المنشورات...</div></section>
+    <aside class="side">
+      <div class="sideTitle">👥 الموجودون الآن</div>
+      <div id="onlineCount" class="onlineCount">0 متصل</div>
+      <div id="membersList"></div>
+    </aside>
+  </main>
+
+  <div id="replyBar" class="replyBar"><span id="replyText"></span><button class="cancelReply" id="cancelReply">إلغاء الرد ×</button></div>
+  <div class="composer">
+    <input id="messageInput" placeholder="اكتب رسالة في الغرفة..." maxlength="2000">
+    <button id="attachBtn" class="attach">📎</button>
+    <input id="mediaInput" type="file" accept="image/*,video/*" class="hidden">
+    <button id="sendButton" class="send">➤</button>
+  </div>
 </div>
 
-<div class="headerRight">
-<button id="adminOpen" class="adminOpen hidden">👮 إشراف</button>
-<button id="logoutButton" class="logout">خروج</button>
-</div>
-</div>
+<!-- post modal -->
+<div id="postModal" class="modal"><div class="box">
+  <div class="boxHead"><div class="boxTitle">➕ نشر في الغرفة</div><button class="close" data-close="postModal">×</button></div>
+  <div class="roomIntro">الغرفة الحالية: <b id="postRoomName"></b></div>
+  <textarea id="postText" style="width:100%;height:110px;padding:12px;border:1px solid var(--line);border-radius:10px;background:#0b121c;color:#fff;resize:vertical" placeholder="اكتب ما تريد نشره..." maxlength="5000"></textarea>
+  <input id="postMedia" type="file" accept="image/*,video/*" style="margin:10px 0;width:100%">
+  <button id="publishPost" class="btn primary">نشر</button>
+  <div id="uploadStatus" style="text-align:center;color:#9fb0c2;margin-top:8px"></div>
+</div></div>
 
-<!-- VOICE -->
-<div class="voicePanel">
-<div class="voiceTitle">🎤 المايكات العامة</div>
+<!-- profile -->
+<div id="profileModal" class="modal"><div class="box profileBox">
+  <div class="boxHead"><div class="boxTitle">👤 حسابي</div><button class="close" data-close="profileModal">×</button></div>
+  <img id="profilePreview" class="profilePreview">
+  <label>الاسم</label><input id="profileName" maxlength="30">
+  <label>الصورة</label><input id="profilePhoto" type="file" accept="image/*">
+  <button id="saveProfile" class="btn primary">حفظ التغييرات</button>
+  <div id="profileStatus"></div>
+</div></div>
 
-<div class="voiceSlots">
+<!-- DM -->
+<div id="dmModal" class="modal"><div class="box">
+  <div class="boxHead"><div class="boxTitle">💬 المحادثة الخاصة</div><button class="close" data-close="dmModal">×</button></div>
+  <div class="dmLayout">
+    <div id="dmList" class="dmList"><div class="empty">اختر عضوًا</div></div>
+    <div class="dmChat">
+      <div id="dmMessages" class="dmMessages"><div class="empty">اختر عضوًا لبدء المحادثة</div></div>
+      <div class="dmComposer"><input id="dmInput" placeholder="رسالة خاصة..."><button id="dmSend">إرسال</button></div>
+    </div>
+  </div>
+</div></div>
 
-<div id="voiceSlot1" class="voiceSlot">
-<div>🎤 المايك 1</div>
-<div id="voiceName1" class="voiceName">شاغر</div>
-<div id="voiceStatus1" class="voiceStatus">جاهز</div>
-<button id="voiceButton1">تشغيل المايك</button>
-</div>
-
-<div id="voiceSlot2" class="voiceSlot">
-<div>🎤 المايك 2</div>
-<div id="voiceName2" class="voiceName">شاغر</div>
-<div id="voiceStatus2" class="voiceStatus">جاهز</div>
-<button id="voiceButton2">تشغيل المايك</button>
-</div>
-
-</div>
-</div>
-
-<div id="messages" class="messages">
-<div class="empty">جاري تحميل الدردشة...</div>
-</div>
-
-<div class="composer">
-<input id="messageInput" placeholder="اكتب رسالتك...">
-<button id="sendButton" class="send">➤</button>
-</div>
-
-</div>
-
-<!-- ADMIN -->
-<div id="adminModal" class="modal">
-<div class="box">
-
-<div class="modalHead">
-<div class="modalTitle">👮 لوحة الإشراف</div>
-<button class="close" id="adminClose">×</button>
-</div>
-
-<div class="adminTabs">
-<button class="adminTab active" data-admin="members">الأعضاء</button>
-<button class="adminTab" data-admin="messages">الرسائل</button>
-<button class="adminTab" data-admin="voice">المايكات</button>
-</div>
-
-<div id="adminMembers" class="adminSection active">
-<div id="membersList">جاري التحميل...</div>
-</div>
-
-<div id="adminMessages" class="adminSection">
-<div style="display:flex;gap:7px;align-items:center;justify-content:space-between;margin-bottom:9px">
-  <b>إدارة الرسائل</b>
-  <button id="deleteAllMessagesButton" class="delete" style="border:0;border-radius:8px;padding:9px 11px;color:#fff;font-weight:bold">🗑️ حذف جميع الرسائل</button>
-</div>
-<div id="adminMessagesList">جاري التحميل...</div>
-</div>
-
-<div id="adminVoice" class="adminSection">
-<div id="adminVoiceList">جاري التحميل...</div>
-</div>
-
-</div>
-</div>
-
-
-<script>
-(function(){
-  function initLoginTabs(){
-    document.querySelectorAll(".tab").forEach(function(b){
-      b.addEventListener("click",function(){
-        document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active");});
-        document.querySelectorAll(".form").forEach(function(x){x.classList.remove("active");});
-        b.classList.add("active");
-        var target=document.getElementById(b.dataset.tab+"Form");
-        if(target) target.classList.add("active");
-        var msg=document.getElementById("authMessage");
-        if(msg) msg.textContent="";
-      });
-    });
-  }
-  if(document.readyState==="loading"){
-    document.addEventListener("DOMContentLoaded",initLoginTabs);
-  }else{
-    initLoginTabs();
-  }
-})();
-</script>
+<!-- admin -->
+<div id="adminModal" class="modal"><div class="box">
+  <div class="boxHead"><div class="boxTitle">🛡️ لوحة الإشراف</div><button class="close" data-close="adminModal">×</button></div>
+  <button id="deleteAllBtn" class="btn danger">🗑️ حذف جميع الرسائل والمنشورات</button>
+  <div id="adminStatus" style="text-align:center;color:#9fb0c2;margin:8px"></div>
+  <div class="adminList" id="adminList"></div>
+</div></div>
 
 <script type="module">
-
-import {initializeApp}
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
-
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 import {
-getAuth,
-createUserWithEmailAndPassword,
-signInWithEmailAndPassword,
-signInAnonymously,
-updateProfile,
-onAuthStateChanged,
-signOut
-}
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
-
+  getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,
+  signInAnonymously,updateProfile,onAuthStateChanged,signOut
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 import {
-getFirestore,
-collection,
-doc,
-getDoc,
-getDocs,
-setDoc,
-deleteDoc,
-addDoc,
-updateDoc,
-writeBatch,
-query,
-orderBy,
-onSnapshot,
-serverTimestamp
-}
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
-
-
-/* =========================
-   FIREBASE
-========================= */
+  getFirestore,collection,addDoc,query,orderBy,onSnapshot,serverTimestamp,
+  doc,setDoc,getDoc,deleteDoc,updateDoc,where,limit,getDocs,writeBatch
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+import {
+  getStorage,ref,uploadBytes,getDownloadURL
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js";
 
 const firebaseConfig={
-apiKey:"AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
-authDomain:"dardashti-chat.firebaseapp.com",
-projectId:"dardashti-chat",
-storageBucket:"dardashti-chat.firebasestorage.app",
-messagingSenderId:"779042757468",
-appId:"1:779042757468:web:7646d3cdadf46f315a3f99"
+ apiKey:"AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
+ authDomain:"dardashti-chat.firebaseapp.com",
+ projectId:"dardashti-chat",
+ storageBucket:"dardashti-chat.firebasestorage.app",
+ messagingSenderId:"779042757468",
+ appId:"1:779042757468:web:7646d3cdadf46f315a3f99"
 };
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),storage=getStorage(app);
+const ADMIN_UID="N6KoWvu1IxbgWtVE46fmCsydZbF3";
+const rooms=["بغداد","البصرة","نينوى","الأنبار","ديالى","كركوك","صلاح الدين","واسط","بابل","كربلاء","النجف","القادسية","المثنى","ذي قار","ميسان","أربيل","السليمانية","دهوك"];
 
-// Firebase Web SDK v12 — متوافق مع Firebase Authentication وCloud Firestore
-const app=initializeApp(firebaseConfig);
-const auth=getAuth(app);
-const db=getFirestore(app);
+let currentRoom=rooms[0],unsubscribePosts=null,unsubscribeMembers=null,unsubscribeDM=null;
+let currentUser=null,currentProfile={name:"عضو",photo:""},replyTo=null,selectedDM=null;
+const peerConnections=new Map(),remoteAudio=new Map();
+let currentStream=null,mySlot=null;
 
+const $=id=>document.getElementById(id);
+const avatarFor=(name,photo)=>photo||`https://ui-avatars.com/api/?name=${encodeURIComponent(name||"عضو")}&background=1687ff&color=fff`;
 
-/* =================================================
-   ضع UID حسابك هنا
-================================================= */
+function msg(t){$("authMessage").textContent=t}
+function isAdmin(){return currentUser?.uid===ADMIN_UID}
 
-const ADMIN_UIDS=["N6KoWvu1IxbgWtVE46fmCsydZbF3"];
-
-
-/* =========================
-   عناصر
-========================= */
-
-const loginPage=document.getElementById("loginPage");
-const chatApp=document.getElementById("chatApp");
-const authMessage=document.getElementById("authMessage");
-
-let stopMessages=null;
-let stopVoice=null;
-let currentStream=null;
-let myVoiceSlot=null;
-let currentModeration={};
-let stopAdminMessages=null;
-let stopAdminVoice=null;
-let stopMyModeration=null;
-
-
-/* =========================
-   الأدوات
-========================= */
-
-function isAdmin(){
-const u=auth.currentUser;
-return !!u && ADMIN_UIDS.includes(u.uid);
-}
-
-async function moderation(uid){
-try{
-const s=await getDoc(doc(db,"moderation",uid));
-return s.exists()?s.data():{};
-}catch{
-return {};
-}
-}
-
-function showChat(name){
-loginPage.classList.add("hidden");
-chatApp.classList.remove("hidden");
-
-document.getElementById("currentUsername").textContent=name;
-
-if(isAdmin())
-document.getElementById("adminOpen").classList.remove("hidden");
-else
-document.getElementById("adminOpen").classList.add("hidden");
-
-loadMessages();
-watchVoice();
-watchMyModeration();
-}
-
-
-/* =========================
-   TABS
-========================= */
-
-document.querySelectorAll(".tab").forEach(b=>{
-b.onclick=()=>{
-document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
-document.querySelectorAll(".form").forEach(x=>x.classList.remove("active"));
-
-b.classList.add("active");
-document.getElementById(b.dataset.tab+"Form").classList.add("active");
-authMessage.textContent="";
-};
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+ document.querySelectorAll(".form").forEach(x=>x.classList.remove("active"));
+ b.classList.add("active"); $(b.dataset.tab+"Form").classList.add("active"); msg("");
 });
 
-
-/* =========================
-   VISITOR
-========================= */
-
-async function visitorLogin(){
-
-const name=document.getElementById("visitorName").value.trim();
-
-if(name.length<2){
-authMessage.textContent="⚠️ اكتب اسمًا صحيحًا";
-return;
-}
-
-try{
-
-localStorage.setItem("visitorName",name);
-
-if(!auth.currentUser){
-  await signInAnonymously(auth);
-}
-
-}catch(e){
-authMessage.textContent="❌ "+(e.code||e.message);
-}
-
-}
-
-document.getElementById("visitorButton").onclick=visitorLogin;
-
-
-/* =========================
-   SIGNUP
-========================= */
-
-document.getElementById("signupButton").onclick=async()=>{
-
-const name=document.getElementById("nameInput").value.trim();
-const email=document.getElementById("signupEmail").value.trim();
-const password=document.getElementById("signupPassword").value;
-
-if(name.length<2){
-authMessage.textContent="⚠️ اكتب اسم العضو";
-return;
-}
-
-if(password.length<6){
-authMessage.textContent="⚠️ كلمة المرور يجب أن تكون 6 أحرف على الأقل";
-return;
-}
-
-try{
-
-const r=await createUserWithEmailAndPassword(
-auth,email,password
-);
-
-await updateProfile(r.user,{displayName:name});
-
-await setDoc(
-doc(db,"users",r.user.uid),
-{
-uid:r.user.uid,
-name,
-email,
-role:"user",
-banned:false,
-micBanned:false,
-createdAt:serverTimestamp()
-},
-{merge:true}
-);
-
-await setDoc(
-doc(db,"moderation",r.user.uid),
-{
-banned:false,
-micMuted:false,
-updatedAt:serverTimestamp()
-},
-{merge:true}
-);
-
-authMessage.textContent="✅ تم إنشاء الحساب";
-
-}catch(e){
-authMessage.textContent="❌ "+(e.code||e.message);
-}
-
-};
-
-
-/* =========================
-   LOGIN
-========================= */
-
-document.getElementById("loginButton").onclick=async()=>{
-
-const email=document.getElementById("emailInput").value.trim();
-const password=document.getElementById("passwordInput").value;
-
-if(!email||!password){
-authMessage.textContent="⚠️ اكتب البيانات";
-return;
-}
-
-try{
-await signInWithEmailAndPassword(auth,email,password);
-}catch(e){
-authMessage.textContent="❌ "+(e.code||e.message);
-}
-
-};
-
-
-/* =========================
-   AUTH
-========================= */
-
-onAuthStateChanged(auth,async user=>{
-
-if(!user){
-
-if(stopMessages)stopMessages();
-if(stopVoice)stopVoice();
-if(stopMyModeration)stopMyModeration();
-
-cleanupMic();
-
-loginPage.classList.remove("hidden");
-chatApp.classList.add("hidden");
-return;
-}
-
-const mod=await moderation(user.uid);
-currentModeration=mod;
-
-if(mod.banned){
-
-await signOut(auth);
-authMessage.textContent="🚫 حسابك محظور";
-return;
-}
-
-const name=user.isAnonymous
-?(localStorage.getItem("visitorName")||"زائر")
-:(user.displayName||"عضو");
-
-showChat(name);
-
-});
-
-
-/* =========================
-   مراقبة الحظر والطرد لحظيًا
-========================= */
-function watchMyModeration(){
-  if(stopMyModeration) stopMyModeration();
-  const u=auth.currentUser;
-  if(!u || u.isAnonymous) return;
-  stopMyModeration=onSnapshot(doc(db,"moderation",u.uid),async snap=>{
-    const d=snap.exists()?snap.data():{};
-    currentModeration=d;
-    if(d.banned){
-      alert("🚫 تم طردك/حظرك من الدردشة بواسطة المشرف");
-      await stopMic();
-      await signOut(auth);
-    }
-  });
-}
-
-/* =========================
-   LOGOUT
-========================= */
-
-document.getElementById("logoutButton").onclick=async()=>{
-
-await stopMic();
-
-localStorage.removeItem("visitorName");
-
-await signOut(auth);
-
-};
-
-
-/* =========================
-   CHAT
-========================= */
-
-async function sendMessage(){
-
-const input=document.getElementById("messageInput");
-const text=input.value.trim();
-const u=auth.currentUser;
-
-if(!u||!text)return;
-
-if(currentModeration.banned){
-alert("🚫 حسابك محظور");
-return;
-}
-
-const originalText=text;
-input.value="";
-input.focus();
-
-// لا ننتظر الشبكة هنا؛ هذا يجعل إرسال عدة رسائل متتالية سريعًا.
-addDoc(
-collection(db,"messages"),
-{
-uid:u.uid,
-name:u.displayName||localStorage.getItem("visitorName")||"زائر",
-text,
-createdAt:serverTimestamp()
-}
-).catch(e=>{
-console.error("sendMessage",e);
-input.value=originalText;
-alert("❌ تعذر إرسال الرسالة: "+(e.code||e.message));
-});
-
-}
-
-document.getElementById("sendButton").onclick=sendMessage;
-
-document.getElementById("messageInput").onkeydown=e=>{
-if(e.key==="Enter"){
-e.preventDefault();
-sendMessage();
-}
-};
-
-
-function loadMessages(){
-
-if(stopMessages)stopMessages();
-
-const box=document.getElementById("messages");
-
-let renderTimer=null;
-stopMessages=onSnapshot(
-query(collection(db,"messages"),orderBy("createdAt","asc")),
-snap=>{
-
-if(renderTimer)clearTimeout(renderTimer);
-renderTimer=setTimeout(()=>{
-
-const docs=snap.docs.slice(-200);
-const frag=document.createDocumentFragment();
-
-if(!docs.length){
-box.innerHTML='<div class="empty">لا توجد رسائل بعد</div>';
-return;
-}
-
-for(const s of docs){
-const d=s.data();
-const row=document.createElement("div");
-row.className="message";
-
-const avatar=document.createElement("img");
-avatar.className="avatar";
-avatar.loading="lazy";
-avatar.src="https://ui-avatars.com/api/?name="+encodeURIComponent(d.name||"عضو")+"&background=1687ff&color=fff";
-
-const content=document.createElement("div");
-content.className="messageContent";
-
-const name=document.createElement("div");
-name.className="messageName";
-name.textContent=d.name||"عضو";
-
-const text=document.createElement("div");
-text.className="messageText";
-text.textContent=d.text||"";
-
-content.append(name,text);
-row.append(avatar,content);
-frag.appendChild(row);
-}
-
-box.innerHTML="";
-box.appendChild(frag);
-box.scrollTop=box.scrollHeight;
-},60);
-
-},
-e=>{
-console.error(e);
-box.innerHTML='<div class="empty">❌ تعذر تحميل الرسائل</div>';
-}
-);
-
-}
-
-
-/* =========================
-   VOICE — WebRTC
-   ========================= */
-
-const voiceSlots=[
- {id:"slot1",box:document.getElementById("voiceSlot1"),name:document.getElementById("voiceName1"),status:document.getElementById("voiceStatus1"),button:document.getElementById("voiceButton1")},
- {id:"slot2",box:document.getElementById("voiceSlot2"),name:document.getElementById("voiceName2"),status:document.getElementById("voiceStatus2"),button:document.getElementById("voiceButton2")}
-];
-
-const rtcConfig={
- iceServers:[
-  {urls:"stun:stun.l.google.com:19302"},
-  {urls:"stun:stun1.l.google.com:19302"}
- ]
-};
-
-const voicePeers=new Map();
-const voiceUnsubs=new Map();
-const remoteAudios=new Map();
-
-function closePeer(uid){
- const pc=voicePeers.get(uid);
- if(pc){try{pc.close()}catch{} voicePeers.delete(uid)}
- const u=voiceUnsubs.get(uid);
- if(u){try{u()}catch{} voiceUnsubs.delete(uid)}
- const a=remoteAudios.get(uid);
- if(a){try{a.pause()}catch{} a.srcObject=null; a.remove(); remoteAudios.delete(uid)}
-}
-
-function closeAllPeers(){
- [...voicePeers.keys()].forEach(closePeer);
-}
-
-function playRemote(uid,stream){
- let a=remoteAudios.get(uid);
- if(!a){
-  a=document.createElement("audio");
-  a.autoplay=true;
-  a.playsInline=true;
-  a.setAttribute("playsinline","");
-  a.style.display="none";
-  document.body.appendChild(a);
-  remoteAudios.set(uid,a);
+async function ensureProfile(u,nameFallback){
+ const r=doc(db,"users",u.uid),s=await getDoc(r);
+ if(!s.exists()){
+   await setDoc(r,{uid:u.uid,name:nameFallback||u.displayName||"عضو",email:u.email||"",photo:"",role:"user",banned:false,createdAt:serverTimestamp()},{merge:true});
  }
- a.srcObject=stream;
- a.play().catch(()=>{});
+ const s2=await getDoc(r); currentProfile=s2.exists()?s2.data():{name:nameFallback||"عضو",photo:""};
 }
 
-async function startMic(index){
- const u=auth.currentUser;
- if(!u){alert("يجب تسجيل الدخول");return}
- if(location.protocol!=="https:" && location.hostname!=="localhost"){
-  alert("❌ المايك يحتاج HTTPS. استخدم رابط Firebase Hosting أو GitHub Pages.");
-  return;
- }
- const slot=voiceSlots[index];
- const ref=doc(db,"voiceSlots",slot.id);
+$("visitorButton").onclick=async()=>{
+ const n=$("visitorName").value.trim(); if(n.length<2)return msg("اكتب اسمًا من حرفين على الأقل");
+ try{await signInAnonymously(auth);localStorage.setItem("visitorName",n)}catch(e){msg("❌ "+e.message)}
+};
+$("loginButton").onclick=async()=>{
+ try{await signInWithEmailAndPassword(auth,$("emailInput").value.trim(),$("passwordInput").value)}catch(e){msg("❌ "+e.message)}
+};
+$("signupButton").onclick=async()=>{
+ const n=$("nameInput").value.trim(),em=$("signupEmail").value.trim(),pw=$("signupPassword").value;
+ if(n.length<2||!em||pw.length<6)return msg("تأكد من الاسم والبريد وكلمة المرور");
  try{
-  const old=await getDoc(ref);
-  if(old.exists()){
-   if(old.data().uid===u.uid){await stopMic();return}
-   // الدخول كمستمع يتم من زر المايك المشغول
-   await connectListener(slot.id,old.data().uid);
-   return;
-  }
-  if(myVoiceSlot){alert("⚠️ لديك مايك مفتوح بالفعل");return}
-  const mod=await moderation(u.uid);
-  if(mod.banned){alert("🚫 حسابك محظور");return}
-  if(mod.micMuted){alert("🎤 تم منعك من استخدام المايك");return}
+  const r=await createUserWithEmailAndPassword(auth,em,pw);
+  await updateProfile(r.user,{displayName:n});
+  await setDoc(doc(db,"users",r.user.uid),{uid:r.user.uid,name:n,email:em,photo:"",role:"user",banned:false,createdAt:serverTimestamp()},{merge:true});
+  await setDoc(doc(db,"moderation",r.user.uid),{banned:false,micMuted:false,updatedAt:serverTimestamp()},{merge:true});
+ }catch(e){msg("❌ "+e.message)}
+};
 
-  currentStream=await navigator.mediaDevices.getUserMedia({
-   audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true},
-   video:false
-  });
-
-  await setDoc(ref,{
-   uid:u.uid,
-   name:u.displayName||localStorage.getItem("visitorName")||"عضو",
-   createdAt:serverTimestamp()
-  });
-  myVoiceSlot=slot.id;
-  slot.status.textContent="🎤 أنت تتحدث";
-  slot.button.textContent="إيقاف المايك";
- }catch(e){
-  console.error(e); cleanupMic();
-  alert("❌ تعذر تشغيل المايك:\n"+(e.name||e.code||e.message));
- }
+function renderRooms(){
+ $("roomsBar").innerHTML="";
+ rooms.forEach(r=>{const b=document.createElement("button");b.className="roomBtn"+(r===currentRoom?" active":"");b.textContent="📍 "+r;b.onclick=()=>{currentRoom=r;renderRooms();loadPosts()};$("roomsBar").appendChild(b)});
 }
 
-async function stopMic(){
- if(myVoiceSlot){
+function showApp(){
+ $("loginPage").classList.add("hidden");$("chatApp").classList.remove("hidden");
+ $("currentUsername").textContent=currentProfile.name+(currentUser?.isAnonymous?" (زائر)":"");
+ $("headerAvatar").src=avatarFor(currentProfile.name,currentProfile.photo);
+ $("adminBtn").classList.toggle("hidden",!isAdmin());
+ renderRooms();renderVoice();loadPosts();loadMembers();
+}
+
+onAuthStateChanged(auth,async u=>{
+ if(!u){$("loginPage").classList.remove("hidden");$("chatApp").classList.add("hidden");return}
+ currentUser=u;
+ const visitor=localStorage.getItem("visitorName")||"زائر";
+ try{
+  await ensureProfile(u,u.isAnonymous?visitor:u.displayName||"عضو");
+  const m=await getDoc(doc(db,"moderation",u.uid));
+  if(m.exists()&&m.data().banned){await signOut(auth);msg("🚫 الحساب محظور");return}
+  showApp();
+ }catch(e){msg("❌ تعذر تحميل الحساب: "+e.message)}
+});
+$("logoutButton").onclick=async()=>{await leaveCurrentMic();localStorage.removeItem("visitorName");await signOut(auth)};
+
+function loadPosts(){
+ if(unsubscribePosts)unsubscribePosts();
+ const q=query(collection(db,"posts"),where("room","==",currentRoom),orderBy("createdAt","desc"),limit(80));
+ unsubscribePosts=onSnapshot(q,snap=>{
+  $("feed").innerHTML="";
+  if(snap.empty){$("feed").innerHTML='<div class="empty">لا توجد منشورات في هذه الغرفة بعد.</div>';return}
+  snap.forEach(d=>renderPost(d.id,d.data()));
+ },e=>{$("feed").innerHTML='<div class="empty">❌ تعذر تحميل المنشورات. تأكد من Firestore Rules والفهارس.</div>';console.error(e)});
+}
+function renderPost(id,p){
+ const el=document.createElement("article");el.className="post";
+ const date=p.createdAt?.toDate?p.createdAt.toDate().toLocaleString("ar-IQ"):"الآن";
+ let media="";
+ if(p.mediaUrl){media=p.mediaType?.startsWith("video")?`<video class="postMedia" controls src="${p.mediaUrl}"></video>`:`<img class="postMedia" src="${p.mediaUrl}" alt="صورة المنشور">`}
+ el.innerHTML=`
+ <div class="postHead"><img src="${avatarFor(p.name,p.photo)}"><div class="postMeta"><div class="postName">${escapeHtml(p.name||"عضو")}</div><div class="postRoom">📍 ${escapeHtml(p.room||currentRoom)} · ${date}</div></div></div>
+ <div class="postText">${escapeHtml(p.text||"")}</div>${media}
+ <div class="postActions">
+ <button data-like>👍 <span>${p.likesCount||0}</span></button>
+ <button data-comment>💬 تعليق <span>${p.commentsCount||0}</span></button>
+ <button data-reply>↩️ رد</button>
+ ${isAdmin()?'<button data-delete class="danger">🗑️ حذف</button>':""}
+ </div>
+ <div class="comments" data-comments></div>
+ <div class="commentInput"><input placeholder="اكتب تعليقًا..."><button>إرسال</button></div>`;
+ el.querySelector("[data-like]").onclick=async()=>{
+  const likeRef=doc(db,"posts",id,"likes",currentUser.uid),s=await getDoc(likeRef);
   try{
-   const ref=doc(db,"voiceSlots",myVoiceSlot);
-   const s=await getDoc(ref);
-   if(s.exists() && s.data().uid===auth.currentUser?.uid) await deleteDoc(ref);
+   if(s.exists()){await deleteDoc(likeRef);await updateDoc(doc(db,"posts",id),{likesCount:Math.max(0,(p.likesCount||0)-1)})}
+   else{await setDoc(likeRef,{uid:currentUser.uid,createdAt:serverTimestamp()});await updateDoc(doc(db,"posts",id),{likesCount:(p.likesCount||0)+1})}
   }catch(e){console.error(e)}
- }
- cleanupMic(); closeAllPeers(); myVoiceSlot=null;
+ };
+ el.querySelector("[data-delete]")?.addEventListener("click",async()=>{if(confirm("حذف المنشور؟"))await deleteDoc(doc(db,"posts",id))});
+ el.querySelector("[data-reply]").onclick=()=>{replyTo={id,name:p.name};$("replyBar").classList.add("show");$("replyText").textContent="الرد على: "+p.name;$("messageInput").focus()};
+ el.querySelector(".commentInput button").onclick=async()=>{
+  const input=el.querySelector(".commentInput input"),text=input.value.trim();if(!text)return;
+  await addDoc(collection(db,"posts",id,"comments"),{uid:currentUser.uid,name:currentProfile.name,text,createdAt:serverTimestamp()});
+  await updateDoc(doc(db,"posts",id),{commentsCount:(p.commentsCount||0)+1});input.value="";
+ };
+ const cq=query(collection(db,"posts",id,"comments"),orderBy("createdAt","asc"),limit(30));
+ onSnapshot(cq,s=>{const c=el.querySelector("[data-comments]");c.innerHTML="";s.forEach(x=>{const d=x.data();const z=document.createElement("div");z.className="comment";z.innerHTML=`<b>${escapeHtml(d.name||"عضو")}:</b> ${escapeHtml(d.text||"")}`;c.appendChild(z)})});
+ $("feed").appendChild(el);
 }
+function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
 
-function cleanupMic(){
- if(currentStream) currentStream.getTracks().forEach(t=>{try{t.stop()}catch{}});
- currentStream=null;
-}
-
-async function connectListener(slotId,speakerUid){
- const u=auth.currentUser;
- if(!u || u.uid===speakerUid)return;
- const peerId=u.uid;
- closePeer(peerId);
-
+$("sendButton").onclick=sendChat;
+$("messageInput").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();sendChat()}};
+$("cancelReply").onclick=()=>{replyTo=null;$("replyBar").classList.remove("show")};
+async function sendChat(){
+ const text=$("messageInput").value.trim();if(!text)return;
  try{
-  const pc=new RTCPeerConnection(rtcConfig);
-  voicePeers.set(peerId,pc);
-
-  pc.ontrack=e=>{if(e.streams[0])playRemote(peerId,e.streams[0])};
-
-  pc.onconnectionstatechange=()=>{
-   if(pc.connectionState==="connected"){
-    const s=voiceSlots.find(x=>x.id===slotId);
-    if(s) s.status.textContent="🔊 تستمع للبث";
-   }
-   if(["failed","closed"].includes(pc.connectionState)) closePeer(peerId);
-  };
-
-  const peerRef=doc(db,"voiceCalls",slotId,"peers",peerId);
-  const offerCandidates=collection(db,"voiceCalls",slotId,"peers",peerId,"offerCandidates");
-  const answerCandidates=collection(db,"voiceCalls",slotId,"peers",peerId,"answerCandidates");
-
-  pc.onicecandidate=async e=>{
-   if(e.candidate) try{await addDoc(offerCandidates,e.candidate.toJSON())}catch(err){console.error(err)}
-  };
-
-  const offer=await pc.createOffer({offerToReceiveAudio:true});
-  await pc.setLocalDescription(offer);
-
-  await setDoc(peerRef,{
-   listenerUid:peerId,
-   speakerUid,
-   offer:{type:offer.type,sdp:offer.sdp},
-   createdAt:serverTimestamp()
-  },{merge:true});
-
-  const un1=onSnapshot(peerRef,async s=>{
-   const d=s.data();
-   if(!d?.answer || pc.currentRemoteDescription)return;
-   try{await pc.setRemoteDescription(new RTCSessionDescription(d.answer))}catch(e){console.error(e)}
-  });
-
-  const un2=onSnapshot(answerCandidates,s=>{
-   s.docChanges().forEach(async ch=>{
-    if(ch.type==="added")try{await pc.addIceCandidate(new RTCIceCandidate(ch.doc.data()))}catch(e){console.error(e)}
-   });
-  });
-
-  voiceUnsubs.set(peerId,()=>{
-   try{un1()}catch{} try{un2()}catch{}
-  });
-
-  const slot=voiceSlots.find(x=>x.id===slotId);
-  if(slot)slot.status.textContent="🔊 جاري الاتصال...";
- }catch(e){
-  console.error(e);
-  closePeer(peerId);
-  alert("❌ تعذر الاتصال بالبث الصوتي: "+(e.code||e.message));
- }
+  await addDoc(collection(db,"posts"),{room:currentRoom,name:currentProfile.name,photo:currentProfile.photo,text,uid:currentUser.uid,replyTo:replyTo?replyTo.name:"",likesCount:0,commentsCount:0,createdAt:serverTimestamp()});
+  $("messageInput").value="";replyTo=null;$("replyBar").classList.remove("show");
+ }catch(e){alert("تعذر الإرسال: "+e.message)}
 }
 
-function watchSpeaker(slotId,speakerUid){
- const peers=collection(db,"voiceCalls",slotId,"peers");
- const key="speaker:"+slotId;
- const old=voiceUnsubs.get(key);
- if(old)old();
-
- const unsub=onSnapshot(peers,snap=>{
-  snap.docChanges().forEach(async ch=>{
-   if(ch.type==="removed"){closePeer(ch.doc.id);return}
-   const d=ch.doc.data(), peerId=ch.doc.id;
-   if(!d.offer || peerId===speakerUid || voicePeers.has(peerId))return;
-
-   try{
-    const pc=new RTCPeerConnection(rtcConfig);
-    voicePeers.set(peerId,pc);
-    currentStream?.getTracks().forEach(t=>pc.addTrack(t,currentStream));
-
-    const peerRef=doc(db,"voiceCalls",slotId,"peers",peerId);
-    const offers=collection(db,"voiceCalls",slotId,"peers",peerId,"offerCandidates");
-    const answers=collection(db,"voiceCalls",slotId,"peers",peerId,"answerCandidates");
-
-    pc.onicecandidate=async e=>{
-     if(e.candidate)try{await addDoc(answers,e.candidate.toJSON())}catch(err){console.error(err)}
-    };
-
-    pc.onconnectionstatechange=()=>{
-     if(["failed","closed"].includes(pc.connectionState))closePeer(peerId);
-    };
-
-    const un=onSnapshot(offers,s=>{
-     s.docChanges().forEach(async ch=>{
-      if(ch.type==="added")try{await pc.addIceCandidate(new RTCIceCandidate(ch.doc.data()))}catch(e){console.error(e)}
-     });
-    });
-
-    voiceUnsubs.set(peerId,un);
-    await pc.setRemoteDescription(new RTCSessionDescription(d.offer));
-    const answer=await pc.createAnswer();
-    await pc.setLocalDescription(answer);
-    await setDoc(peerRef,{answer:{type:answer.type,sdp:answer.sdp}},{merge:true});
-   }catch(e){console.error("speaker peer",e)}
-  });
- });
- voiceUnsubs.set(key,unsub);
-}
-
-voiceSlots.forEach((s,i)=>s.button.onclick=()=>startMic(i));
-
-function watchVoice(){
- if(stopVoice)stopVoice();
- stopVoice=onSnapshot(collection(db,"voiceSlots"),snap=>{
-  const data={}; snap.forEach(s=>data[s.id]=s.data());
-
-  voiceSlots.forEach(s=>{
-   const d=data[s.id];
-   if(!d){
-    s.box.classList.remove("active");
-    s.name.textContent="شاغر";
-    s.status.textContent="جاهز";
-    s.button.textContent="تشغيل المايك";
-    return;
-   }
-
-   s.box.classList.add("active");
-   s.name.textContent=d.name||"عضو";
-
-   if(auth.currentUser?.uid===d.uid){
-    s.status.textContent="🎤 أنت تتحدث";
-    s.button.textContent="إيقاف المايك";
-    if(currentStream)watchSpeaker(s.id,d.uid);
-   }else{
-    s.status.textContent="🔊 اضغط للاستماع";
-    s.button.textContent="🔊 استماع";
-   }
-  });
- });
-}
-
-
-/* =====================================================
-   ADMIN
-===================================================== */
-
-document.getElementById("adminOpen").onclick=()=>{
-
-if(!isAdmin()){
-alert("غير مصرح");
-return;
-}
-
-document.getElementById("adminModal").classList.add("show");
-loadMembers();
-loadAdminMessages();
-loadAdminVoice();
-
+$("attachBtn").onclick=()=>$("mediaInput").click();
+$("mediaInput").onchange=async()=>{
+ const f=$("mediaInput").files[0];if(!f)return;
+ if(f.size>40*1024*1024){alert("الملف أكبر من 40MB");return}
+ try{
+  const r=ref(storage,`posts/${currentUser.uid}/${Date.now()}_${f.name.replace(/[^a-zA-Z0-9._-]/g,"_")}`);
+  await uploadBytes(r,f);const url=await getDownloadURL(r);
+  await addDoc(collection(db,"posts"),{room:currentRoom,name:currentProfile.name,photo:currentProfile.photo,text:"",uid:currentUser.uid,mediaUrl:url,mediaType:f.type,likesCount:0,commentsCount:0,createdAt:serverTimestamp()});
+  $("mediaInput").value="";
+ }catch(e){alert("فشل رفع الوسائط: "+e.message)}
 };
 
-
-document.getElementById("adminClose").onclick=()=>{
-document.getElementById("adminModal").classList.remove("show");
+$("newPostBtn").onclick=()=>{$("postRoomName").textContent=currentRoom;$("postModal").classList.add("show")};
+$("publishPost").onclick=async()=>{
+ const text=$("postText").value.trim(),f=$("postMedia").files[0];$("uploadStatus").textContent="جاري النشر...";
+ try{
+  let mediaUrl="",mediaType="";
+  if(f){if(f.size>40*1024*1024)throw Error("حجم الملف أكبر من 40MB");const r=ref(storage,`posts/${currentUser.uid}/${Date.now()}_${f.name.replace(/[^a-zA-Z0-9._-]/g,"_")}`);await uploadBytes(r,f);mediaUrl=await getDownloadURL(r);mediaType=f.type}
+  if(!text&&!mediaUrl)throw Error("اكتب نصًا أو اختر صورة/فيديو");
+  await addDoc(collection(db,"posts"),{room:currentRoom,name:currentProfile.name,photo:currentProfile.photo,text,uid:currentUser.uid,mediaUrl,mediaType,likesCount:0,commentsCount:0,createdAt:serverTimestamp()});
+  $("postText").value="";$("postMedia").value="";$("uploadStatus").textContent="تم النشر";setTimeout(()=>$("postModal").classList.remove("show"),300);
+ }catch(e){$("uploadStatus").textContent="❌ "+e.message}
 };
-
-
-document.querySelectorAll(".adminTab").forEach(b=>{
-
-b.onclick=()=>{
-
-document.querySelectorAll(".adminTab")
-.forEach(x=>x.classList.remove("active"));
-
-document.querySelectorAll(".adminSection")
-.forEach(x=>x.classList.remove("active"));
-
-b.classList.add("active");
-
-document
-.getElementById("admin"+capitalize(b.dataset.admin))
-.classList.add("active");
-
-};
-
-});
-
-
-function capitalize(s){
-return s.charAt(0).toUpperCase()+s.slice(1);
-}
-
-
-/* MEMBERS */
 
 async function loadMembers(){
-  const box=document.getElementById("membersList");
-  box.innerHTML="جاري التحميل...";
-  if(!isAdmin()){ box.innerHTML="❌ غير مصرح"; return; }
-
-  try{
-    const snap=await getDocs(collection(db,"users"));
-    box.innerHTML="";
-
-    if(snap.empty){
-      box.innerHTML='<div class="empty">لا توجد سجلات أعضاء داخل users</div>';
-      return;
-    }
-
-    snap.forEach(s=>{
-      const d=s.data();
-      const uid=d.uid||s.id;
-
-      const item=document.createElement("div");
-      item.className="member";
-
-      const top=document.createElement("div");
-      top.className="memberTop";
-
-      const name=document.createElement("div");
-      name.className="memberName";
-      name.textContent=d.name||"بدون اسم";
-
-      const buttons=document.createElement("div");
-      buttons.className="adminBtns";
-
-      const ban=document.createElement("button");
-      ban.className=d.banned?"unban":"ban";
-      ban.textContent=d.banned?"فك الحظر":"حظر";
-      ban.onclick=()=>setBan(uid,!d.banned);
-
-      const mute=document.createElement("button");
-      mute.className=d.micBanned||d.micMuted?"unmute":"mute";
-      mute.textContent=d.micBanned||d.micMuted?"السماح بالمايك":"منع المايك";
-      mute.onclick=()=>setMute(uid,!(d.micBanned||d.micMuted));
-
-      const kick=document.createElement("button");
-      kick.className="kick";
-      kick.textContent="🚫 طرد";
-      kick.onclick=()=>kickMember(uid);
-
-      const voiceKick=document.createElement("button");
-      voiceKick.className="voiceKick";
-      voiceKick.textContent="🎤 طرد من البث";
-      voiceKick.onclick=()=>kickFromVoice(uid);
-
-      buttons.append(ban,mute,kick,voiceKick);
-      top.append(name,buttons);
-
-      const uidEl=document.createElement("div");
-      uidEl.className="memberUid";
-      uidEl.textContent="UID: "+uid;
-
-      item.append(top,uidEl);
-      box.appendChild(item);
-    });
-  }catch(e){
-    console.error(e);
-    box.innerHTML="❌ تعذر تحميل الأعضاء: "+(e.code||e.message);
-  }
+ if(unsubscribeMembers)unsubscribeMembers();
+ const q=query(collection(db,"users"),limit(100));
+ unsubscribeMembers=onSnapshot(q,s=>{
+  $("onlineCount").textContent=s.size+" عضو";
+  $("membersList").innerHTML="";
+  s.forEach(x=>{const d=x.data(),m=document.createElement("div");m.className="member";m.innerHTML=`<img src="${avatarFor(d.name,d.photo)}"><span class="memberName">${escapeHtml(d.name||"عضو")}</span><span class="dot"></span>`;m.onclick=()=>openDMWith(d);$("membersList").appendChild(m)})
+ });
 }
 
-async function setBan(uid,value){
-  if(!isAdmin() || !uid) return;
-  if(uid===auth.currentUser?.uid){
-    alert("لا يمكنك حظر نفسك");
-    return;
-  }
+/* profile */
+$("profileBtn").onclick=()=>{$("profileName").value=currentProfile.name||"";$("profilePreview").src=avatarFor(currentProfile.name,currentProfile.photo);$("profileModal").classList.add("show")};
+$("profilePhoto").onchange=()=>{const f=$("profilePhoto").files[0];if(f)$("profilePreview").src=URL.createObjectURL(f)};
+$("saveProfile").onclick=async()=>{
+ try{
+  let photo=currentProfile.photo||"";
+  const f=$("profilePhoto").files[0];
+  if(f){if(f.size>5*1024*1024)throw Error("الصورة أكبر من 5MB");const r=ref(storage,`profiles/${currentUser.uid}/avatar`);await uploadBytes(r,f);photo=await getDownloadURL(r)}
+  const name=$("profileName").value.trim();if(name.length<2)throw Error("الاسم قصير");
+  await updateDoc(doc(db,"users",currentUser.uid),{name,photo});
+  currentProfile={...currentProfile,name,photo};await updateProfile(currentUser,{displayName:name});
+  showApp();$("profileModal").classList.remove("show");$("profileStatus").textContent="تم الحفظ";
+ }catch(e){$("profileStatus").textContent="❌ "+e.message}
+};
 
-  try{
-    await setDoc(doc(db,"moderation",uid),{
-      banned:value,
-      updatedAt:serverTimestamp()
-    },{merge:true});
+/* DMs */
+async function openDMWith(d){
+ if(d.uid===currentUser.uid)return;
+ selectedDM=d;
+ $("dmModal").classList.add("show");$("dmList").innerHTML="";
+ const all=await getDocs(query(collection(db,"users"),limit(100)));
+ all.forEach(x=>{const u=x.data();if(u.uid!==currentUser.uid){const z=document.createElement("div");z.className="dmUser"+(u.uid===d.uid?" active":"");z.textContent=u.name||"عضو";z.onclick=()=>openDMWith(u);$("dmList").appendChild(z)}});
+ loadDM();
+}
+$("dmBtn").onclick=async()=>{
+ $("dmModal").classList.add("show");
+ const all=await getDocs(query(collection(db,"users"),limit(100)));$("dmList").innerHTML="";
+ all.forEach(x=>{const u=x.data();if(u.uid!==currentUser.uid){const z=document.createElement("div");z.className="dmUser";z.textContent=u.name||"عضو";z.onclick=()=>openDMWith(u);$("dmList").appendChild(z)}});
+};
+function dmId(a,b){return [a,b].sort().join("_")}
+function loadDM(){
+ if(unsubscribeDM)unsubscribeDM();if(!selectedDM)return;
+ const id=dmId(currentUser.uid,selectedDM.uid);
+ const q=query(collection(db,"privateChats",id,"messages"),orderBy("createdAt","asc"),limit(100));
+ unsubscribeDM=onSnapshot(q,s=>{const box=$("dmMessages");box.innerHTML="";s.forEach(x=>{const d=x.data(),z=document.createElement("div");z.className="dmMsg"+(d.uid===currentUser.uid?" mine":"");z.textContent=d.text||"";box.appendChild(z)});box.scrollTop=box.scrollHeight});
+}
+$("dmSend").onclick=sendDM;$("dmInput").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();sendDM()}};
+async function sendDM(){const text=$("dmInput").value.trim();if(!text||!selectedDM)return;const id=dmId(currentUser.uid,selectedDM.uid);await addDoc(collection(db,"privateChats",id,"messages"),{uid:currentUser.uid,name:currentProfile.name,text,createdAt:serverTimestamp()});$("dmInput").value=""}
 
-    await setDoc(doc(db,"users",uid),{
-      banned:value
-    },{merge:true});
+/* admin */
+$("adminBtn").onclick=async()=>{if(!isAdmin())return;$("adminModal").classList.add("show");loadAdmin()};
+async function loadAdmin(){
+ const s=await getDocs(query(collection(db,"users"),limit(100)));$("adminList").innerHTML="";
+ s.forEach(x=>{const d=x.data();const row=document.createElement("div");row.className="adminRow";row.innerHTML=`<div class="grow"><b>${escapeHtml(d.name||"عضو")}</b><div style="font-size:10px;color:#8494a8">${d.uid}</div></div><button class="neutral">مايك</button><button class="danger">حظر</button>`;
+  row.children[1].onclick=()=>toggleMute(d.uid);row.children[2].onclick=()=>toggleBan(d.uid);$("adminList").appendChild(row)
+ });
+}
+async function toggleMute(uid){if(uid===ADMIN_UID)return;const r=doc(db,"moderation",uid),s=await getDoc(r);await setDoc(r,{micMuted:!(s.exists()&&s.data().micMuted),updatedAt:serverTimestamp()},{merge:true});loadAdmin()}
+async function toggleBan(uid){if(uid===ADMIN_UID)return;const r=doc(db,"moderation",uid),s=await getDoc(r);await setDoc(r,{banned:!(s.exists()&&s.data().banned),updatedAt:serverTimestamp()},{merge:true});loadAdmin()}
+$("deleteAllBtn").onclick=async()=>{
+ if(!isAdmin()||!confirm("سيتم حذف جميع المنشورات. هل أنت متأكد؟"))return;
+ $("adminStatus").textContent="جاري الحذف...";
+ let total=0;
+ while(true){
+  const s=await getDocs(query(collection(db,"posts"),limit(400)));if(s.empty)break;
+  const b=writeBatch(db);s.forEach(x=>b.delete(x.ref));await b.commit();total+=s.size;if(s.size<400)break;
+ }
+ $("adminStatus").textContent=`تم حذف ${total} منشورًا`;
+};
 
-    if(value){
-      await removeUserFromVoice(uid);
-    }
-
-    alert(value?"🚫 تم طرد/حظر العضو":"✅ تم فك الحظر");
-    loadMembers();
-    loadAdminVoice();
-  }catch(e){
-    console.error(e);
-    alert("❌ فشل الحظر/فك الحظر: "+(e.code||e.message));
-  }
+/* 5 microphones - WebRTC */
+const voiceIds=["voice1","voice2","voice3","voice4","voice5"];
+function renderVoice(){
+ $("voiceSlots").innerHTML="";
+ voiceIds.forEach((id,i)=>{
+  const d=document.createElement("div");d.className="voiceSlot";d.id=id;
+  d.innerHTML=`<div class="micIcon">🎙️</div><div class="voiceName" id="${id}Name">شاغر</div><div class="voiceStatus" id="${id}Status">اضغط للتحدث</div><button id="${id}Btn">تشغيل</button>`;
+  d.querySelector("button").onclick=()=>toggleMic(id);$("voiceSlots").appendChild(d);
+ });
+ watchVoice();
+}
+function watchVoice(){
+ onSnapshot(collection(db,"voiceSlots"),snap=>{
+  const map={};snap.forEach(x=>map[x.id]=x.data());
+  voiceIds.forEach(id=>{
+   const d=map[id],el=$(id);if(!el)return;const b=$(id+"Btn"),n=$(id+"Name"),st=$(id+"Status");
+   if(!d){el.classList.remove("active");n.textContent="شاغر";st.textContent="اضغط للتحدث";b.textContent="تشغيل";b.disabled=false}
+   else{el.classList.add("active");n.textContent=d.name||"عضو";const mine=d.uid===currentUser?.uid;st.textContent=mine?"🎙️ أنت تتحدث":"🔊 مباشر";b.textContent=mine?"إيقاف":"استماع";b.disabled=!mine}
+  });
+ });
+}
+async function toggleMic(slotId){
+ if(!currentUser||currentUser.isAnonymous){alert("سجل دخول بعضوية لاستخدام المايك");return}
+ if(mySlot===slotId){await leaveCurrentMic();return}
+ if(mySlot){alert("أوقف المايك الحالي أولًا");return}
+ const mod=await getDoc(doc(db,"moderation",currentUser.uid));if(mod.exists()&&(mod.data().banned||mod.data().micMuted)){alert("🚫 لا يمكنك استخدام المايك");return}
+ try{
+  currentStream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true},video:false});
+  mySlot=slotId;
+  await setDoc(doc(db,"voiceSlots",slotId),{uid:currentUser.uid,name:currentProfile.name,createdAt:serverTimestamp()});
+ }catch(e){currentStream?.getTracks().forEach(t=>t.stop());currentStream=null;mySlot=null;alert("❌ تعذر تشغيل المايك: "+e.message)}
+}
+async function leaveCurrentMic(){
+ if(!mySlot)return;
+ try{await deleteDoc(doc(db,"voiceSlots",mySlot))}catch(e){}
+ currentStream?.getTracks().forEach(t=>t.stop());currentStream=null;mySlot=null;
 }
 
-async function kickMember(uid){
-  if(!isAdmin() || !uid) return;
-  if(uid===auth.currentUser?.uid){
-    alert("لا يمكنك طرد نفسك");
-    return;
-  }
-
-  if(!confirm("طرد هذا العضو؟")) return;
-
-  try{
-    // الطرد هنا يطبق حظرًا فورياً ويزيله من المايك.
-    await setDoc(doc(db,"moderation",uid),{
-      banned:true,
-      updatedAt:serverTimestamp()
-    },{merge:true});
-
-    await setDoc(doc(db,"users",uid),{
-      banned:true
-    },{merge:true});
-
-    await removeUserFromVoice(uid);
-
-    alert("🚫 تم طرد العضو");
-    loadMembers();
-    loadAdminVoice();
-  }catch(e){
-    console.error(e);
-    alert("❌ تعذر طرد العضو: "+(e.code||e.message));
-  }
-}
-
-async function setMute(uid,value){
-  if(!isAdmin() || !uid) return;
-
-  try{
-    await setDoc(doc(db,"moderation",uid),{
-      micMuted:value,
-      updatedAt:serverTimestamp()
-    },{merge:true});
-
-    await setDoc(doc(db,"users",uid),{
-      micBanned:value
-    },{merge:true});
-
-    if(value){
-      await removeUserFromVoice(uid);
-    }
-
-    alert(value?"🎤 تم منع المايك":"🎤 تم السماح بالمايك");
-    loadMembers();
-    loadAdminVoice();
-  }catch(e){
-    console.error(e);
-    alert("❌ تعذر تغيير حالة المايك: "+(e.code||e.message));
-  }
-}
-
-async function removeUserFromVoice(uid){
-  for(const slotId of ["slot1","slot2"]){
-    try{
-      const ref=doc(db,"voiceSlots",slotId);
-      const s=await getDoc(ref);
-      if(s.exists() && s.data().uid===uid){
-        await deleteDoc(ref);
-      }
-    }catch(e){
-      console.error("removeUserFromVoice",e);
-    }
-  }
-}
-
-async function kickFromVoice(uid){
-  if(!isAdmin() || !uid) return;
-
-  try{
-    await removeUserFromVoice(uid);
-    alert("🎤 تم إخراج العضو من البث الصوتي");
-    loadAdminVoice();
-  }catch(e){
-    console.error(e);
-    alert("❌ تعذر إخراج العضو: "+(e.code||e.message));
-  }
-}
-
-/* ADMIN MESSAGES */
-
-async function deleteAllMessages(){
-  if(!isAdmin()){
-    alert("❌ غير مصرح");
-    return;
-  }
-
-  const firstConfirm=confirm("⚠️ سيتم حذف جميع رسائل الدردشة نهائيًا. هل تريد المتابعة؟");
-  if(!firstConfirm) return;
-
-  const secondConfirm=confirm("تأكيد أخير: حذف جميع الرسائل الآن؟");
-  if(!secondConfirm) return;
-
-  const btn=document.getElementById("deleteAllMessagesButton");
-  const box=document.getElementById("adminMessagesList");
-  if(btn){
-    btn.disabled=true;
-    btn.textContent="⏳ جارٍ الحذف...";
-  }
-
-  try{
-    const snap=await getDocs(collection(db,"messages"));
-
-    if(snap.empty){
-      alert("ℹ️ لا توجد رسائل للحذف");
-      return;
-    }
-
-    // Firestore يسمح بحد أقصى 500 عملية في كل batch.
-    const docs=snap.docs;
-    for(let i=0;i<docs.length;i+=500){
-      const batch=writeBatch(db);
-      docs.slice(i,i+500).forEach(item=>{
-        batch.delete(doc(db,"messages",item.id));
-      });
-      await batch.commit();
-    }
-
-    if(box) box.innerHTML='<div class="empty">✅ تم حذف جميع الرسائل</div>';
-    alert("✅ تم حذف جميع الرسائل بنجاح");
-  }catch(e){
-    console.error("deleteAllMessages",e);
-    alert(
-      "❌ تعذر حذف جميع الرسائل.\n"+
-      "تأكد أن Firestore Rules تسمح للمشرف بحذف مستندات messages.\n"+
-      (e.code||e.message)
-    );
-  }finally{
-    if(btn){
-      btn.disabled=false;
-      btn.textContent="🗑️ حذف جميع الرسائل";
-    }
-  }
-}
-
-const deleteAllMessagesButton=document.getElementById("deleteAllMessagesButton");
-if(deleteAllMessagesButton){
-  deleteAllMessagesButton.onclick=deleteAllMessages;
-}
-
-function loadAdminMessages(){
-  if(stopAdminMessages)stopAdminMessages();
-
-  const box=document.getElementById("adminMessagesList");
-
-  if(!isAdmin()){
-    box.innerHTML="❌ غير مصرح";
-    return;
-  }
-
-  stopAdminMessages=onSnapshot(
-    query(collection(db,"messages"),orderBy("createdAt","desc")),
-    snap=>{
-      box.innerHTML="";
-
-      if(snap.empty){
-        box.innerHTML='<div class="empty">لا توجد رسائل</div>';
-        return;
-      }
-
-      snap.forEach(s=>{
-        const d=s.data();
-
-        const item=document.createElement("div");
-        item.className="member";
-
-        const text=document.createElement("div");
-        text.innerHTML=
-          "<b>"+escapeHtml(d.name||"عضو")+"</b><br>"+
-          escapeHtml(d.text||"");
-
-        const btn=document.createElement("button");
-        btn.className="delete";
-        btn.textContent="🗑️ حذف الرسالة";
-        btn.style.marginTop="7px";
-
-        btn.onclick=async()=>{
-          if(!isAdmin()) return;
-          if(!confirm("حذف هذه الرسالة نهائيًا؟")) return;
-
-          try{
-            await deleteDoc(doc(db,"messages",s.id));
-            item.remove();
-          }catch(e){
-            console.error(e);
-            alert(
-              "❌ فشل حذف الرسالة.\n"+
-              "غالبًا تحتاج تعديل Firestore Rules للسماح للمشرف.\n"+
-              (e.code||e.message)
-            );
-          }
-        };
-
-        item.append(text,btn);
-        box.appendChild(item);
-      });
-    },
-    e=>{
-      console.error(e);
-      box.innerHTML="❌ تعذر تحميل الرسائل: "+(e.code||e.message);
-    }
-  );
-}
-
-function escapeHtml(text){
-  const d=document.createElement("div");
-  d.textContent=text;
-  return d.innerHTML;
-}
-
-/* ADMIN VOICE */
-
-function loadAdminVoice(){
-  if(stopAdminVoice)stopAdminVoice();
-
-  const box=document.getElementById("adminVoiceList");
-
-  if(!isAdmin()){
-    box.innerHTML="❌ غير مصرح";
-    return;
-  }
-
-  stopAdminVoice=onSnapshot(
-    collection(db,"voiceSlots"),
-    snap=>{
-      box.innerHTML="";
-
-      if(snap.empty){
-        box.innerHTML='<div class="empty">جميع المايكات شاغرة</div>';
-        return;
-      }
-
-      snap.forEach(s=>{
-        const d=s.data();
-
-        const item=document.createElement("div");
-        item.className="member";
-
-        const title=document.createElement("div");
-        title.innerHTML=
-          "<b>🎤 "+escapeHtml(d.name||"عضو")+"</b><br>"+
-          "<small>"+escapeHtml(d.uid||"")+"</small>";
-
-        const btn=document.createElement("button");
-        btn.className="delete";
-        btn.textContent="🎤 إخلاء المايك";
-        btn.style.marginTop="7px";
-
-        btn.onclick=async()=>{
-          if(!isAdmin()) return;
-
-          try{
-            await deleteDoc(doc(db,"voiceSlots",s.id));
-            item.remove();
-            alert("🎤 تم إخلاء المايك");
-          }catch(e){
-            console.error(e);
-            alert("❌ تعذر إخلاء المايك: "+(e.code||e.message));
-          }
-        };
-
-        item.append(title,btn);
-        box.appendChild(item);
-      });
-    },
-    e=>{
-      console.error(e);
-      box.innerHTML="❌ تعذر تحميل المايكات: "+(e.code||e.message);
-    }
-  );
-}
-
-
-</script>
-<script>
-window.addEventListener("error",function(e){
-  var msg=document.getElementById("authMessage");
-  if(msg && e && e.message && !msg.textContent){
-    msg.textContent="❌ حدث خطأ في تشغيل النسخة: "+e.message;
-  }
-});
-window.addEventListener("unhandledrejection",function(e){
-  var msg=document.getElementById("authMessage");
-  var r=e && e.reason;
-  if(msg && r && !msg.textContent){
-    msg.textContent="❌ تعذر تشغيل Firebase: "+(r.code||r.message||r);
-  }
-});
+/* close modals */
+document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>$(b.dataset.close).classList.remove("show"));
+document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("show")}));
 </script>
 </body>
 </html>
