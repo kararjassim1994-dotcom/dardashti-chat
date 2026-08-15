@@ -260,6 +260,30 @@ border:0;border-radius:7px;padding:7px 9px;color:#fff;font-weight:bold
 </div>
 </div>
 
+
+<script>
+(function(){
+  function initLoginTabs(){
+    document.querySelectorAll(".tab").forEach(function(b){
+      b.addEventListener("click",function(){
+        document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active");});
+        document.querySelectorAll(".form").forEach(function(x){x.classList.remove("active");});
+        b.classList.add("active");
+        var target=document.getElementById(b.dataset.tab+"Form");
+        if(target) target.classList.add("active");
+        var msg=document.getElementById("authMessage");
+        if(msg) msg.textContent="";
+      });
+    });
+  }
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",initLoginTabs);
+  }else{
+    initLoginTabs();
+  }
+})();
+</script>
+
 <script type="module">
 
 import {initializeApp}
@@ -1227,59 +1251,22 @@ function loadAdminVoice(){
   );
 }
 
-/* ADMIN VOICE */
 
-function loadAdminVoice(){
-
-if(stopAdminVoice)stopAdminVoice();
-
-const box=document.getElementById("adminVoiceList");
-
-stopAdminVoice=onSnapshot(
-collection(db,"voiceSlots"),
-snap=>{
-
-box.innerHTML="";
-
-if(snap.empty){
-box.innerHTML='<div class="empty">جميع المايكات شاغرة</div>';
-return;
-}
-
-snap.forEach(s=>{
-
-const d=s.data();
-
-const item=document.createElement("div");
-item.className="member";
-
-item.innerHTML=
-"<b>🎤 "+escapeHtml(d.name||"عضو")+"</b><br>"+
-"<small>"+escapeHtml(d.uid||"")+"</small>";
-
-const btn=document.createElement("button");
-btn.className="delete";
-btn.textContent="إخلاء المايك";
-btn.style.marginTop="7px";
-
-btn.onclick=async()=>{
-  if(!isAdmin()) return;
-  try{ await deleteDoc(doc(db,"voiceSlots",s.id)); alert("🎤 تم إخلاء المايك"); }
-  catch(e){ alert("❌ تعذر إخلاء المايك: "+(e.code||e.message)); }
-};
-
-item.appendChild(btn);
-box.appendChild(item);
-
+</script>
+<script>
+window.addEventListener("error",function(e){
+  var msg=document.getElementById("authMessage");
+  if(msg && e && e.message && !msg.textContent){
+    msg.textContent="❌ حدث خطأ في تشغيل النسخة: "+e.message;
+  }
 });
-
-}
-);
-
-}
-
-
-
+window.addEventListener("unhandledrejection",function(e){
+  var msg=document.getElementById("authMessage");
+  var r=e && e.reason;
+  if(msg && r && !msg.textContent){
+    msg.textContent="❌ تعذر تشغيل Firebase: "+(r.code||r.message||r);
+  }
+});
 </script>
 </body>
 </html>
