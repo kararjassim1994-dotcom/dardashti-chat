@@ -176,7 +176,7 @@ border:0;border-radius:7px;padding:7px 9px;color:#fff;font-weight:bold
 </div>
 
 <div id="authMessage"></div>
-<div class="status">● النظام متصل</div>
+<div class="status" id="firebaseStatus">● Firebase متصل</div>
 
 </div>
 </div>
@@ -250,6 +250,10 @@ border:0;border-radius:7px;padding:7px 9px;color:#fff;font-weight:bold
 </div>
 
 <div id="adminMessages" class="adminSection">
+<div style="display:flex;gap:7px;align-items:center;justify-content:space-between;margin-bottom:9px">
+  <b>إدارة الرسائل</b>
+  <button id="deleteAllMessagesButton" class="delete" style="border:0;border-radius:8px;padding:9px 11px;color:#fff;font-weight:bold">🗑️ حذف جميع الرسائل</button>
+</div>
 <div id="adminMessagesList">جاري التحميل...</div>
 </div>
 
@@ -310,6 +314,7 @@ setDoc,
 deleteDoc,
 addDoc,
 updateDoc,
+writeBatch,
 query,
 orderBy,
 onSnapshot,
@@ -331,6 +336,7 @@ messagingSenderId:"779042757468",
 appId:"1:779042757468:web:7646d3cdadf46f315a3f99"
 };
 
+// Firebase Web SDK v12 — متوافق مع Firebase Authentication وCloud Firestore
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getFirestore(app);
@@ -429,8 +435,9 @@ try{
 
 localStorage.setItem("visitorName",name);
 
-if(!auth.currentUser)
-await signInAnonymously(auth);
+if(!auth.currentUser){
+  await signInAnonymously(auth);
+}
 
 }catch(e){
 authMessage.textContent="❌ "+(e.code||e.message);
@@ -613,6 +620,7 @@ alert("🚫 حسابك محظور");
 return;
 }
 
+const originalText=text;
 input.value="";
 input.focus();
 
@@ -627,6 +635,7 @@ createdAt:serverTimestamp()
 }
 ).catch(e=>{
 console.error("sendMessage",e);
+input.value=originalText;
 alert("❌ تعذر إرسال الرسالة: "+(e.code||e.message));
 });
 
@@ -1186,6 +1195,65 @@ async function kickFromVoice(uid){
 }
 
 /* ADMIN MESSAGES */
+
+async function deleteAllMessages(){
+  if(!isAdmin()){
+    alert("❌ غير مصرح");
+    return;
+  }
+
+  const firstConfirm=confirm("⚠️ سيتم حذف جميع رسائل الدردشة نهائيًا. هل تريد المتابعة؟");
+  if(!firstConfirm) return;
+
+  const secondConfirm=confirm("تأكيد أخير: حذف جميع الرسائل الآن؟");
+  if(!secondConfirm) return;
+
+  const btn=document.getElementById("deleteAllMessagesButton");
+  const box=document.getElementById("adminMessagesList");
+  if(btn){
+    btn.disabled=true;
+    btn.textContent="⏳ جارٍ الحذف...";
+  }
+
+  try{
+    const snap=await getDocs(collection(db,"messages"));
+
+    if(snap.empty){
+      alert("ℹ️ لا توجد رسائل للحذف");
+      return;
+    }
+
+    // Firestore يسمح بحد أقصى 500 عملية في كل batch.
+    const docs=snap.docs;
+    for(let i=0;i<docs.length;i+=500){
+      const batch=writeBatch(db);
+      docs.slice(i,i+500).forEach(item=>{
+        batch.delete(doc(db,"messages",item.id));
+      });
+      await batch.commit();
+    }
+
+    if(box) box.innerHTML='<div class="empty">✅ تم حذف جميع الرسائل</div>';
+    alert("✅ تم حذف جميع الرسائل بنجاح");
+  }catch(e){
+    console.error("deleteAllMessages",e);
+    alert(
+      "❌ تعذر حذف جميع الرسائل.\n"+
+      "تأكد أن Firestore Rules تسمح للمشرف بحذف مستندات messages.\n"+
+      (e.code||e.message)
+    );
+  }finally{
+    if(btn){
+      btn.disabled=false;
+      btn.textContent="🗑️ حذف جميع الرسائل";
+    }
+  }
+}
+
+const deleteAllMessagesButton=document.getElementById("deleteAllMessagesButton");
+if(deleteAllMessagesButton){
+  deleteAllMessagesButton.onclick=deleteAllMessages;
+}
 
 function loadAdminMessages(){
   if(stopAdminMessages)stopAdminMessages();
