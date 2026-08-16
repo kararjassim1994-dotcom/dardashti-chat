@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -93,8 +95,7 @@ button{cursor:pointer}
   border:1px solid var(--line);
 }
 
-.tab.active,
-.primary{
+.tab.active,.primary{
   background:var(--blue);
   color:#fff;
 }
@@ -232,9 +233,7 @@ input{
   gap:4px;
 }
 
-.voiceSlot.active{
-  border-color:var(--green);
-}
+.voiceSlot.active{border-color:var(--green)}
 
 .micIcon{font-size:25px}
 
@@ -331,7 +330,6 @@ input{
   border-radius:9px;
   background:#162131;
   margin-bottom:6px;
-  cursor:pointer;
 }
 
 .member img{
@@ -531,8 +529,22 @@ input{
   color:#fff;
 }
 
-@media(max-width:760px){
+.adminActions{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
 
+.adminActions button{
+  min-width:58px;
+}
+
+.good{background:#218b5b!important}
+
+.warn{background:#8b6a20!important}
+
+@media(max-width:760px){
   .side{display:none}
 
   .voiceSlots{
@@ -540,9 +552,7 @@ input{
     overflow-x:auto;
   }
 
-  .header .title{
-    font-size:17px;
-  }
+  .header .title{font-size:17px}
 }
 </style>
 </head>
@@ -551,7 +561,6 @@ input{
 
 <div id="loginPage">
   <div class="loginBox">
-
     <div class="logo">كرار جاسم</div>
 
     <div class="description">
@@ -571,42 +580,35 @@ input{
     </div>
 
     <div id="loginForm" class="form">
-      <input id="emailInput" type="email" placeholder="البريد الإلكتروني">
-      <input id="passwordInput" type="password" placeholder="كلمة المرور">
+      <input id="emailInput" type="email" placeholder="البريد الإلكتروني" autocomplete="username">
+      <input id="passwordInput" type="password" placeholder="كلمة المرور" autocomplete="current-password">
       <button id="loginButton" class="btn primary">تسجيل الدخول</button>
     </div>
 
     <div id="signupForm" class="form">
       <input id="nameInput" placeholder="اسم العضو" maxlength="30">
-      <input id="signupEmail" type="email" placeholder="البريد الإلكتروني">
-      <input id="signupPassword" type="password" placeholder="كلمة المرور - 6 أحرف على الأقل">
+      <input id="signupEmail" type="email" placeholder="البريد الإلكتروني" autocomplete="email">
+      <input id="signupPassword" type="password" placeholder="كلمة المرور - 6 أحرف على الأقل" autocomplete="new-password">
       <button id="signupButton" class="btn primary">إنشاء العضوية</button>
     </div>
 
     <div id="authMessage"></div>
-
     <div class="status">● Firebase متصل</div>
   </div>
 </div>
 
-
 <div id="chatApp" class="hidden">
 
   <header class="header">
-
     <div class="headerUser">
-
       <img id="headerAvatar" class="headerAvatar" alt="الصورة الشخصية">
-
       <div>
         <div class="title">كرار جاسم</div>
         <div id="currentUsername" class="username">عضو</div>
       </div>
-
     </div>
 
     <div class="headerActions">
-
       <button id="profileBtn" class="iconBtn">👤 حسابي</button>
 
       <button id="adminBtn" class="iconBtn adminBtn hidden">
@@ -616,125 +618,73 @@ input{
       <button id="logoutButton" class="iconBtn logout">
         خروج
       </button>
-
     </div>
-
   </header>
 
-
   <section class="voicePanel">
-
-    <div class="voiceTitle">
-      🎙️ البث الصوتي — 5 مايكات
-    </div>
-
+    <div class="voiceTitle">🎙️ البث الصوتي — 5 مايكات</div>
     <div id="voiceSlots" class="voiceSlots"></div>
-
   </section>
-
 
   <nav id="roomsBar" class="roomsBar"></nav>
 
-
   <main class="content">
-
     <section id="feed" class="feed">
       <div class="empty">جاري تحميل المحادثة...</div>
     </section>
 
     <aside class="side">
-
       <div class="sideTitle">👥 الأعضاء</div>
-
-      <div id="onlineCount" class="onlineCount">
-        0 عضو
-      </div>
-
+      <div id="onlineCount" class="onlineCount">0 عضو</div>
       <div id="membersList"></div>
-
     </aside>
-
   </main>
 
-
   <div class="composer">
-
-    <input
-      id="messageInput"
-      placeholder="اكتب رسالة في الغرفة..."
-      maxlength="2000"
-    >
-
+    <input id="messageInput" placeholder="اكتب رسالة في الغرفة..." maxlength="2000">
     <button id="sendButton" class="send">➤</button>
-
   </div>
-
 </div>
-
 
 <!-- PROFILE -->
 
 <div id="profileModal" class="modal">
-
   <div class="box profileBox">
-
     <div class="boxHead">
-
       <div class="boxTitle">👤 حسابي</div>
-
       <button class="close" data-close="profileModal">×</button>
-
     </div>
 
     <img id="profilePreview" class="profilePreview" alt="الصورة">
 
     <label>الاسم</label>
-
     <input id="profileName" maxlength="30">
 
     <label>الصورة الشخصية</label>
-
     <input id="profilePhoto" type="file" accept="image/*">
 
-    <button id="saveProfile" class="btn primary">
-      حفظ التغييرات
-    </button>
-
+    <button id="saveProfile" class="btn primary">حفظ التغييرات</button>
     <div id="profileStatus"></div>
-
   </div>
-
 </div>
-
 
 <!-- ADMIN -->
 
 <div id="adminModal" class="modal">
-
   <div class="box">
-
     <div class="boxHead">
-
       <div class="boxTitle">🛡️ لوحة الإشراف</div>
-
       <button class="close" data-close="adminModal">×</button>
-
     </div>
 
     <button id="deleteAllBtn" class="btn danger">
       🗑️ حذف جميع الرسائل
     </button>
 
-    <div id="adminStatus"
-         style="text-align:center;color:#9fb0c2;margin:8px">
-    </div>
-
+    <div id="adminStatus" style="text-align:center;color:#9fb0c2;margin:8px"></div>
     <div id="adminList"></div>
-
   </div>
-
 </div>
-
 
 <script type="module">
 
@@ -777,6 +727,10 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js";
 
 
+/* =========================
+   FIREBASE
+   ========================= */
+
 const firebaseConfig = {
   apiKey:"AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
   authDomain:"dardashti-chat.firebaseapp.com",
@@ -786,18 +740,17 @@ const firebaseConfig = {
   appId:"1:779042757468:web:7646d3cdadf46f315a3f99"
 };
 
-
 const app = initializeApp(firebaseConfig);
-
 const auth = getAuth(app);
-
 const db = getFirestore(app);
-
 const storage = getStorage(app);
 
 
-const ADMIN_UID =
-  "N6KoWvu1IxbgWtVE46fmCsydZbF3";
+/* =========================
+   ADMIN
+   ========================= */
+
+const ADMIN_UID = "N6KoWvu1IxbgWtVE46fmCsydZbF3";
 
 
 const rooms = [
@@ -812,7 +765,8 @@ let currentUser = null;
 
 let currentProfile = {
   name:"عضو",
-  photo:""
+  photo:"",
+  role:"user"
 };
 
 let currentRoom = rooms[0];
@@ -838,8 +792,11 @@ function $(id){
 }
 
 
-function escapeHtml(value){
+/* =========================
+   SECURITY HELPERS
+   ========================= */
 
+function escapeHtml(value){
   return String(value ?? "")
     .replace(/[&<>"']/g,char => ({
       "&":"&amp;",
@@ -848,12 +805,10 @@ function escapeHtml(value){
       '"':"&quot;",
       "'":"&#039;"
     }[char]));
-
 }
 
 
 function avatarFor(name,photo){
-
   if(photo){
     return photo;
   }
@@ -861,22 +816,17 @@ function avatarFor(name,photo){
   return "https://ui-avatars.com/api/?name=" +
     encodeURIComponent(name || "عضو") +
     "&background=1687ff&color=fff";
-
 }
 
 
 function isAdmin(){
-
   return !!currentUser &&
     currentUser.uid === ADMIN_UID;
-
 }
 
 
 function message(text){
-
   $("authMessage").textContent = text || "";
-
 }
 
 
@@ -889,6 +839,9 @@ function friendlyError(error){
     "auth/invalid-credential":
       "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
 
+    "auth/invalid-login-credentials":
+      "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+
     "auth/email-already-in-use":
       "البريد الإلكتروني مستخدم مسبقًا.",
 
@@ -897,6 +850,12 @@ function friendlyError(error){
 
     "auth/weak-password":
       "كلمة المرور ضعيفة.",
+
+    "auth/operation-not-allowed":
+      "هذه الطريقة غير مفعلة في Firebase.",
+
+    "auth/network-request-failed":
+      "تعذر الاتصال بالشبكة.",
 
     "permission-denied":
       "ليس لديك صلاحية لتنفيذ هذه العملية.",
@@ -915,147 +874,178 @@ function friendlyError(error){
   return errors[code] ||
     error?.message ||
     "حدث خطأ غير معروف.";
-
 }
 
 
-/* TABS */
+async function getMyModeration(){
+
+  if(!currentUser){
+    return null;
+  }
+
+  try{
+
+    const snap = await getDoc(
+      doc(db,"moderation",currentUser.uid)
+    );
+
+    return snap.exists()
+      ? snap.data()
+      : null;
+
+  }catch(error){
+
+    console.error("Moderation read:",error);
+    return null;
+
+  }
+}
+
+
+async function isCurrentUserBlocked(){
+
+  if(!currentUser){
+    return true;
+  }
+
+  if(isAdmin()){
+    return false;
+  }
+
+  const moderation = await getMyModeration();
+
+  return moderation?.banned === true;
+}
+
+
+async function enforceCurrentUser(){
+
+  if(!currentUser){
+    return false;
+  }
+
+  if(isAdmin()){
+    return true;
+  }
+
+  const moderation = await getMyModeration();
+
+  if(moderation?.banned === true){
+
+    try{
+      await signOut(auth);
+    }catch(_){}
+
+    message("🚫 هذا الحساب محظور.");
+    return false;
+  }
+
+  return true;
+}
+
+
+/* =========================
+   TABS
+   ========================= */
 
 document.querySelectorAll(".tab").forEach(tab => {
 
-  tab.addEventListener("click",() => {
+  tab.addEventListener("click",()=>{
 
     document
       .querySelectorAll(".tab")
-      .forEach(x => x.classList.remove("active"));
+      .forEach(x=>x.classList.remove("active"));
 
     document
       .querySelectorAll(".form")
-      .forEach(x => x.classList.remove("active"));
+      .forEach(x=>x.classList.remove("active"));
 
     tab.classList.add("active");
 
-    const form =
-      $(tab.dataset.tab + "Form");
+    const form = $(tab.dataset.tab + "Form");
 
     if(form){
       form.classList.add("active");
     }
 
     message("");
-
   });
 
 });
 
 
-/* VISITOR */
+/* =========================
+   VISITOR
+   ========================= */
 
 $("visitorButton").addEventListener("click",async()=>{
 
-  const name =
-    $("visitorName").value.trim();
+  const name = $("visitorName").value.trim();
 
   if(name.length < 2){
-
     message("اكتب اسمًا من حرفين على الأقل.");
-
     return;
-
   }
 
-  localStorage.setItem(
-    "visitorName",
-    name
-  );
+  localStorage.setItem("visitorName",name);
 
   try{
-
     await signInAnonymously(auth);
-
   }catch(error){
-
     console.error(error);
-
     message("❌ " + friendlyError(error));
-
   }
 
 });
 
 
-/* LOGIN */
+/* =========================
+   LOGIN
+   ========================= */
 
 $("loginButton").addEventListener("click",async()=>{
 
-  const email =
-    $("emailInput").value.trim();
-
-  const password =
-    $("passwordInput").value;
+  const email = $("emailInput").value.trim();
+  const password = $("passwordInput").value;
 
   if(!email || !password){
-
     message("أدخل البريد الإلكتروني وكلمة المرور.");
-
     return;
-
   }
 
   try{
-
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
+    await signInWithEmailAndPassword(auth,email,password);
   }catch(error){
-
     console.error(error);
-
     message("❌ " + friendlyError(error));
-
   }
 
 });
 
 
-/* SIGNUP */
+/* =========================
+   SIGNUP
+   ========================= */
 
 $("signupButton").addEventListener("click",async()=>{
 
-  const name =
-    $("nameInput").value.trim();
-
-  const email =
-    $("signupEmail").value.trim();
-
-  const password =
-    $("signupPassword").value;
+  const name = $("nameInput").value.trim();
+  const email = $("signupEmail").value.trim();
+  const password = $("signupPassword").value;
 
   if(name.length < 2){
-
     message("الاسم يجب أن يكون حرفين على الأقل.");
-
     return;
-
   }
 
   if(!email){
-
     message("أدخل البريد الإلكتروني.");
-
     return;
-
   }
 
   if(password.length < 6){
-
     message("كلمة المرور يجب أن تكون 6 أحرف على الأقل.");
-
     return;
-
   }
 
   try{
@@ -1067,12 +1057,9 @@ $("signupButton").addEventListener("click",async()=>{
         password
       );
 
-    await updateProfile(
-      result.user,
-      {
-        displayName:name
-      }
-    );
+    await updateProfile(result.user,{
+      displayName:name
+    });
 
     await setDoc(
       doc(db,"users",result.user.uid),
@@ -1101,7 +1088,6 @@ $("signupButton").addEventListener("click",async()=>{
   }catch(error){
 
     console.error(error);
-
     message("❌ " + friendlyError(error));
 
   }
@@ -1109,25 +1095,27 @@ $("signupButton").addEventListener("click",async()=>{
 });
 
 
-/* PROFILE */
+/* =========================
+   PROFILE
+   ========================= */
 
 async function loadProfile(user){
 
-  const userRef =
-    doc(db,"users",user.uid);
-
-  const snap =
-    await getDoc(userRef);
+  const userRef = doc(db,"users",user.uid);
+  const snap = await getDoc(userRef);
 
   if(!snap.exists()){
+
+    const name =
+      user.isAnonymous
+        ? localStorage.getItem("visitorName") || "زائر"
+        : user.displayName || "عضو";
 
     await setDoc(
       userRef,
       {
         uid:user.uid,
-        name:user.isAnonymous
-          ? localStorage.getItem("visitorName") || "زائر"
-          : user.displayName || "عضو",
+        name:name,
         email:user.email || "",
         photo:"",
         role:"user",
@@ -1139,21 +1127,22 @@ async function loadProfile(user){
 
   }
 
-  const finalSnap =
-    await getDoc(userRef);
+  const finalSnap = await getDoc(userRef);
 
   currentProfile =
     finalSnap.exists()
       ? finalSnap.data()
       : {
           name:"عضو",
-          photo:""
+          photo:"",
+          role:"user"
         };
-
 }
 
 
-/* AUTH */
+/* =========================
+   AUTH
+   ========================= */
 
 onAuthStateChanged(auth,async user=>{
 
@@ -1162,11 +1151,10 @@ onAuthStateChanged(auth,async user=>{
     currentUser = null;
 
     $("loginPage").classList.remove("hidden");
-
     $("chatApp").classList.add("hidden");
+    $("adminBtn").classList.add("hidden");
 
     return;
-
   }
 
   currentUser = user;
@@ -1175,26 +1163,13 @@ onAuthStateChanged(auth,async user=>{
 
     await loadProfile(user);
 
-    const moderation =
-      await getDoc(
-        doc(db,"moderation",user.uid)
-      );
+    const allowed = await enforceCurrentUser();
 
-    if(
-      moderation.exists() &&
-      moderation.data().banned === true
-    ){
-
-      await signOut(auth);
-
-      message("🚫 هذا الحساب محظور.");
-
+    if(!allowed){
       return;
-
     }
 
     $("loginPage").classList.add("hidden");
-
     $("chatApp").classList.remove("hidden");
 
     $("currentUsername").textContent =
@@ -1213,17 +1188,13 @@ onAuthStateChanged(auth,async user=>{
     );
 
     renderRooms();
-
     renderVoice();
-
     loadPosts();
-
     loadMembers();
 
   }catch(error){
 
     console.error(error);
-
     message("❌ " + friendlyError(error));
 
   }
@@ -1231,33 +1202,33 @@ onAuthStateChanged(auth,async user=>{
 });
 
 
-/* ROOMS */
+/* =========================
+   ROOMS
+   ========================= */
 
 function renderRooms(){
 
-  const bar =
-    $("roomsBar");
-
+  const bar = $("roomsBar");
   bar.innerHTML = "";
 
   rooms.forEach(room=>{
 
-    const button =
-      document.createElement("button");
+    const button = document.createElement("button");
 
     button.className =
       "roomBtn" +
       (room === currentRoom ? " active" : "");
 
-    button.textContent =
-      "📍 " + room;
+    button.textContent = "📍 " + room;
 
-    button.onclick = ()=>{
+    button.onclick = async()=>{
+
+      if(await isCurrentUserBlocked()){
+        return;
+      }
 
       currentRoom = room;
-
       renderRooms();
-
       loadPosts();
 
     };
@@ -1269,7 +1240,9 @@ function renderRooms(){
 }
 
 
-/* POSTS */
+/* =========================
+   POSTS
+   ========================= */
 
 function loadPosts(){
 
@@ -1277,162 +1250,157 @@ function loadPosts(){
     unsubscribePosts();
   }
 
-  const q =
-    query(
-      collection(db,"messages"),
-      where("room","==",currentRoom),
-      limit(200)
-    );
+  const q = query(
+    collection(db,"messages"),
+    where("room","==",currentRoom),
+    limit(200)
+  );
 
-  unsubscribePosts =
-    onSnapshot(
-      q,
-      snapshot=>{
+  unsubscribePosts = onSnapshot(
+    q,
+    snapshot=>{
 
-        const posts = [];
+      const posts = [];
 
-        snapshot.forEach(item=>{
+      snapshot.forEach(item=>{
 
-          posts.push({
-            id:item.id,
-            data:item.data()
-          });
-
+        posts.push({
+          id:item.id,
+          data:item.data()
         });
 
-        posts.sort((a,b)=>{
+      });
 
-          const ta =
-            a.data.createdAt?.toMillis?.() || 0;
+      posts.sort((a,b)=>{
 
-          const tb =
-            b.data.createdAt?.toMillis?.() || 0;
+        const ta =
+          a.data.createdAt?.toMillis?.() || 0;
 
-          return ta - tb;
+        const tb =
+          b.data.createdAt?.toMillis?.() || 0;
 
-        });
+        return ta - tb;
 
-        const feed =
-          $("feed");
+      });
 
-        feed.innerHTML = "";
+      const feed = $("feed");
+      feed.innerHTML = "";
 
-        if(!posts.length){
+      if(!posts.length){
 
-          feed.innerHTML =
-            '<div class="empty">لا توجد رسائل بعد.</div>';
+        feed.innerHTML =
+          '<div class="empty">لا توجد رسائل بعد.</div>';
 
-          return;
+        return;
+      }
 
-        }
+      posts.forEach(item=>{
 
-        posts.forEach(item=>{
+        const post = document.createElement("article");
+        post.className = "post";
 
-          const post =
-            document.createElement("article");
+        const data = item.data;
 
-          post.className = "post";
+        post.innerHTML = `
 
-          const data =
-            item.data;
+          <div class="postHead">
 
-          post.innerHTML = `
+            <img
+              src="${escapeHtml(avatarFor(data.name,data.photo))}"
+              alt=""
+            >
 
-            <div class="postHead">
+            <div>
 
-              <img src="${avatarFor(data.name,data.photo)}">
+              <div class="postName">
+                ${escapeHtml(data.name || "عضو")}
+              </div>
 
-              <div>
-
-                <div class="postName">
-                  ${escapeHtml(data.name || "عضو")}
-                </div>
-
-                <div class="postRoom">
-                  📍 ${escapeHtml(data.room || "")}
-                </div>
-
+              <div class="postRoom">
+                📍 ${escapeHtml(data.room || "")}
               </div>
 
             </div>
 
-            <div class="postText">
-              ${escapeHtml(data.text || "")}
-            </div>
+          </div>
 
-            <div class="postActions">
+          <div class="postText">
+            ${escapeHtml(data.text || "")}
+          </div>
 
-              ${
-                isAdmin()
-                ?
-                '<button class="danger" data-delete>🗑️ حذف</button>'
-                :
-                ''
-              }
+          <div class="postActions">
 
-            </div>
+            ${
+              isAdmin()
+              ?
+              '<button class="danger" data-delete>🗑️ حذف</button>'
+              :
+              ''
+            }
 
-          `;
+          </div>
+        `;
 
-          const del =
-            post.querySelector("[data-delete]");
+        const del =
+          post.querySelector("[data-delete]");
 
-          if(del){
+        if(del){
 
-            del.onclick = async()=>{
+          del.onclick = async()=>{
 
-              if(!confirm("حذف الرسالة؟")){
-                return;
-              }
+            if(!isAdmin()){
+              return;
+            }
 
-              try{
+            if(!confirm("حذف الرسالة؟")){
+              return;
+            }
 
-                await deleteDoc(
-                  doc(db,"messages",item.id)
-                );
+            try{
 
-              }catch(error){
+              await deleteDoc(
+                doc(db,"messages",item.id)
+              );
 
-                alert(friendlyError(error));
+            }catch(error){
 
-              }
+              alert(friendlyError(error));
 
-            };
+            }
 
-          }
+          };
 
-          feed.appendChild(post);
+        }
 
-        });
+        feed.appendChild(post);
 
-        feed.scrollTop =
-          feed.scrollHeight;
+      });
 
-      },
-      error=>{
+      feed.scrollTop = feed.scrollHeight;
 
-        console.error(error);
+    },
+    error=>{
 
-        $("feed").innerHTML =
-          '<div class="empty">❌ ' +
-          escapeHtml(friendlyError(error)) +
-          '</div>';
+      console.error(error);
 
-      }
-    );
+      $("feed").innerHTML =
+        '<div class="empty">❌ ' +
+        escapeHtml(friendlyError(error)) +
+        '</div>';
 
+    }
+  );
 }
 
 
-/* SEND */
+/* =========================
+   SEND
+   ========================= */
 
 async function sendMessage(){
 
-  const input =
-    $("messageInput");
-
-  const text =
-    input.value.trim();
+  const input = $("messageInput");
+  const text = input.value.trim();
 
   if(!text || !currentUser){
     return;
@@ -1440,28 +1408,33 @@ async function sendMessage(){
 
   try{
 
-    const moderation =
-      await getDoc(
-        doc(db,"moderation",currentUser.uid)
-      );
-
-    if(
-      moderation.exists() &&
-      moderation.data().banned === true
-    ){
+    if(await isCurrentUserBlocked()){
 
       alert("🚫 الحساب محظور.");
-
       return;
 
     }
+
+    const profileSnap =
+      await getDoc(
+        doc(db,"users",currentUser.uid)
+      );
+
+    if(!profileSnap.exists()){
+
+      alert("تعذر تحميل ملف الحساب.");
+      return;
+
+    }
+
+    const profile = profileSnap.data();
 
     await addDoc(
       collection(db,"messages"),
       {
         uid:currentUser.uid,
-        name:currentProfile.name || "عضو",
-        photo:currentProfile.photo || "",
+        name:profile.name || "عضو",
+        photo:profile.photo || "",
         room:currentRoom,
         text:text,
         createdAt:serverTimestamp()
@@ -1484,8 +1457,7 @@ async function sendMessage(){
 }
 
 
-$("sendButton").onclick =
-  sendMessage;
+$("sendButton").onclick = sendMessage;
 
 $("messageInput").addEventListener(
   "keydown",
@@ -1494,7 +1466,6 @@ $("messageInput").addEventListener(
     if(event.key === "Enter"){
 
       event.preventDefault();
-
       sendMessage();
 
     }
@@ -1503,7 +1474,9 @@ $("messageInput").addEventListener(
 );
 
 
-/* MEMBERS */
+/* =========================
+   MEMBERS
+   ========================= */
 
 function loadMembers(){
 
@@ -1525,8 +1498,7 @@ function loadMembers(){
 
         snapshot.forEach(item=>{
 
-          const data =
-            item.data();
+          const data = item.data();
 
           if(data.banned === true){
             return;
@@ -1541,7 +1513,10 @@ function loadMembers(){
 
           div.innerHTML = `
 
-            <img src="${avatarFor(data.name,data.photo)}">
+            <img
+              src="${escapeHtml(avatarFor(data.name,data.photo))}"
+              alt=""
+            >
 
             <span class="memberName">
               ${escapeHtml(data.name || "عضو")}
@@ -1551,8 +1526,7 @@ function loadMembers(){
 
           `;
 
-          $("membersList")
-            .appendChild(div);
+          $("membersList").appendChild(div);
 
         });
 
@@ -1561,16 +1535,16 @@ function loadMembers(){
 
       },
       error=>{
-
         console.error(error);
-
       }
     );
 
 }
 
 
-/* PROFILE MODAL */
+/* =========================
+   PROFILE MODAL
+   ========================= */
 
 $("profileBtn").onclick = ()=>{
 
@@ -1584,22 +1558,21 @@ $("profileBtn").onclick = ()=>{
     );
 
   $("profilePhoto").value = "";
-
   $("profileStatus").textContent = "";
-
   $("profileModal").classList.add("show");
 
 };
 
 
-/* IMAGE PREVIEW */
+/* =========================
+   IMAGE PREVIEW
+   ========================= */
 
 $("profilePhoto").addEventListener(
   "change",
   ()=>{
 
-    const file =
-      $("profilePhoto").files[0];
+    const file = $("profilePhoto").files[0];
 
     if(!file){
       return;
@@ -1611,7 +1584,6 @@ $("profilePhoto").addEventListener(
         "❌ اختر صورة فقط.";
 
       $("profilePhoto").value = "";
-
       return;
 
     }
@@ -1622,7 +1594,6 @@ $("profilePhoto").addEventListener(
         "❌ الحد الأقصى للصورة 5MB.";
 
       $("profilePhoto").value = "";
-
       return;
 
     }
@@ -1634,186 +1605,161 @@ $("profilePhoto").addEventListener(
 );
 
 
-/* SAVE PROFILE + STORAGE */
+/* =========================
+   SAVE PROFILE
+   ========================= */
 
-$("saveProfile").onclick =
-  async()=>{
+$("saveProfile").onclick = async()=>{
 
-    if(!currentUser){
-      return;
+  if(!currentUser){
+    return;
+  }
+
+  const status = $("profileStatus");
+
+  try{
+
+    status.textContent = "جاري الحفظ...";
+
+    const name =
+      $("profileName").value.trim();
+
+    if(name.length < 2){
+      throw new Error(
+        "الاسم يجب أن يكون حرفين على الأقل."
+      );
     }
 
-    const status =
-      $("profileStatus");
+    let photo =
+      currentProfile.photo || "";
+
+    const file =
+      $("profilePhoto").files[0];
+
+    if(file){
+
+      if(!file.type.startsWith("image/")){
+        throw new Error("الملف المختار ليس صورة.");
+      }
+
+      if(file.size > 5 * 1024 * 1024){
+        throw new Error("حجم الصورة أكبر من 5MB.");
+      }
+
+      const safeType =
+        file.type === "image/png"
+          ? "png"
+          : file.type === "image/webp"
+            ? "webp"
+            : "jpg";
+
+      const path =
+        "profiles/" +
+        currentUser.uid +
+        "/avatar_" +
+        Date.now() +
+        "." +
+        safeType;
+
+      const storageRef = ref(storage,path);
+
+      await uploadBytes(
+        storageRef,
+        file,
+        {
+          contentType:file.type
+        }
+      );
+
+      photo =
+        await getDownloadURL(storageRef);
+
+    }
+
+    /*
+     * قواعد Firestore تمنع المستخدم من تعديل
+     * أي حقول حساسة مثل role و banned.
+     */
+    await setDoc(
+      doc(db,"users",currentUser.uid),
+      {
+        uid:currentUser.uid,
+        name:name,
+        photo:photo
+      },
+      {merge:true}
+    );
 
     try{
 
-      status.textContent =
-        "جاري الحفظ...";
-
-      const name =
-        $("profileName")
-          .value
-          .trim();
-
-      if(name.length < 2){
-
-        throw new Error(
-          "الاسم يجب أن يكون حرفين على الأقل."
-        );
-
-      }
-
-      let photo =
-        currentProfile.photo || "";
-
-      const file =
-        $("profilePhoto").files[0];
-
-      if(file){
-
-        if(!file.type.startsWith("image/")){
-
-          throw new Error(
-            "الملف المختار ليس صورة."
-          );
-
-        }
-
-        if(file.size > 5 * 1024 * 1024){
-
-          throw new Error(
-            "حجم الصورة أكبر من 5MB."
-          );
-
-        }
-
-        /*
-          مهم:
-          كل مستخدم يرفع داخل مجلده فقط.
-        */
-
-        const safeType =
-          file.type === "image/png"
-            ? "png"
-            : file.type === "image/webp"
-              ? "webp"
-              : "jpg";
-
-        const path =
-          "profiles/" +
-          currentUser.uid +
-          "/avatar_" +
-          Date.now() +
-          "." +
-          safeType;
-
-        const storageRef =
-          ref(storage,path);
-
-        await uploadBytes(
-          storageRef,
-          file,
-          {
-            contentType:file.type
-          }
-        );
-
-        photo =
-          await getDownloadURL(
-            storageRef
-          );
-
-      }
-
-      await setDoc(
-        doc(
-          db,
-          "users",
-          currentUser.uid
-        ),
+      await updateProfile(
+        currentUser,
         {
-          uid:currentUser.uid,
-          name:name,
-          photo:photo
-        },
-        {merge:true}
+          displayName:name,
+          photoURL:photo || null
+        }
       );
-
-      try{
-
-        await updateProfile(
-          currentUser,
-          {
-            displayName:name,
-            photoURL:photo || null
-          }
-        );
-
-      }catch(error){
-
-        console.warn(
-          "Auth update:",
-          error
-        );
-
-      }
-
-      currentProfile = {
-        ...currentProfile,
-        name:name,
-        photo:photo
-      };
-
-      $("profilePreview").src =
-        avatarFor(name,photo);
-
-      $("headerAvatar").src =
-        avatarFor(name,photo);
-
-      $("currentUsername").textContent =
-        name +
-        (currentUser.isAnonymous
-          ? " (زائر)"
-          : "");
-
-      status.textContent =
-        "✅ تم حفظ الحساب والصورة.";
 
     }catch(error){
 
-      console.error(
-        "PROFILE IMAGE ERROR:",
-        error
-      );
-
-      status.textContent =
-        "❌ " +
-        friendlyError(error);
+      console.warn("Auth update:",error);
 
     }
 
-  };
+    currentProfile = {
+      ...currentProfile,
+      name:name,
+      photo:photo
+    };
+
+    $("profilePreview").src =
+      avatarFor(name,photo);
+
+    $("headerAvatar").src =
+      avatarFor(name,photo);
+
+    $("currentUsername").textContent =
+      name +
+      (currentUser.isAnonymous ? " (زائر)" : "");
+
+    status.textContent =
+      "✅ تم حفظ الحساب والصورة.";
+
+  }catch(error){
+
+    console.error("PROFILE ERROR:",error);
+
+    status.textContent =
+      "❌ " + friendlyError(error);
+
+  }
+
+};
 
 
-/* ADMIN */
+/* =========================
+   ADMIN PANEL
+   ========================= */
 
-$("adminBtn").onclick =
-  async()=>{
+$("adminBtn").onclick = async()=>{
 
-    if(!isAdmin()){
-      return;
-    }
+  if(!isAdmin()){
+    return;
+  }
 
-    $("adminModal")
-      .classList.add("show");
+  $("adminModal").classList.add("show");
+  $("adminStatus").textContent = "";
 
-    await loadAdmin();
+  await loadAdmin();
 
-  };
+};
 
 
 async function loadAdmin(){
+
+  if(!isAdmin()){
+    return;
+  }
 
   $("adminList").innerHTML =
     '<div class="empty">جاري التحميل...</div>';
@@ -1832,67 +1778,136 @@ async function loadAdmin(){
 
     snapshot.forEach(item=>{
 
-      const data =
-        item.data();
+      const data = item.data();
 
       const row =
         document.createElement("div");
 
-      row.className =
-        "adminRow";
+      row.className = "adminRow";
 
-      row.innerHTML = `
+      const isProtected =
+        data.uid === ADMIN_UID;
 
-        <div class="grow">
+      const moderationPromise =
+        getDoc(
+          doc(db,"moderation",data.uid)
+        );
 
-          <b>
-            ${escapeHtml(data.name || "عضو")}
-          </b>
+      moderationPromise.then(modSnap=>{
 
-          <div style="font-size:10px;color:#8494a8;word-break:break-all">
-            ${escapeHtml(data.uid || "")}
+        const moderation =
+          modSnap.exists()
+            ? modSnap.data()
+            : {};
+
+        const banned =
+          moderation.banned === true;
+
+        const micMuted =
+          moderation.micMuted === true;
+
+        row.innerHTML = `
+
+          <div class="grow">
+
+            <b>
+              ${escapeHtml(data.name || "عضو")}
+            </b>
+
+            <div style="font-size:10px;color:#8494a8;word-break:break-all">
+              ${escapeHtml(data.uid || "")}
+            </div>
+
+            <div style="font-size:11px;margin-top:4px">
+              ${banned ? "🚫 محظور" : "🟢 غير محظور"}
+              -
+              ${micMuted ? "🔇 المايك ممنوع" : "🎙️ المايك مسموح"}
+            </div>
+
           </div>
 
-        </div>
+          <div class="adminActions">
 
-        <button class="danger">
-          حظر
-        </button>
+            ${
+              isProtected
+              ? '<button class="warn">المدير</button>'
+              :
+              `
+              <button data-ban class="${banned ? "good" : "danger"}">
+                ${banned ? "فك الحظر" : "حظر"}
+              </button>
 
-      `;
+              <button data-mic class="${micMuted ? "good" : "warn"}">
+                ${micMuted ? "سماح المايك" : "منع المايك"}
+              </button>
+              `
+            }
 
-      row.querySelector("button")
-        .onclick = async()=>{
+          </div>
+        `;
 
-          if(data.uid === ADMIN_UID){
-            return;
-          }
+        if(!isProtected){
 
-          try{
+          const banBtn =
+            row.querySelector("[data-ban]");
 
-            await setDoc(
-              doc(db,"moderation",data.uid),
-              {
-                banned:true,
-                updatedAt:serverTimestamp()
-              },
-              {merge:true}
-            );
+          const micBtn =
+            row.querySelector("[data-mic]");
 
-            await loadAdmin();
+          banBtn.onclick = async()=>{
 
-          }catch(error){
+            try{
 
-            alert(
-              friendlyError(error)
-            );
+              await setDoc(
+                doc(db,"moderation",data.uid),
+                {
+                  banned:!banned,
+                  micMuted:micMuted,
+                  updatedAt:serverTimestamp()
+                },
+                {merge:true}
+              );
 
-          }
+              await loadAdmin();
 
-        };
+            }catch(error){
 
-      $("adminList")
-        .appendChild(row);
+              alert(friendlyError(error));
+
+            }
+
+          };
+
+
+          micBtn.onclick = async()=>{
+
+            try{
+
+              await setDoc(
+                doc(db,"moderation",data.uid),
+                {
+                  banned:banned,
+                  micMuted:!micMuted,
+                  updatedAt:serverTimestamp()
+                },
+                {merge:true}
+              );
+
+              await loadAdmin();
+
+            }catch(error){
+
+              alert(friendlyError(error));
+
+            }
+
+          };
+
+        }
+
+        $("adminList").appendChild(row);
+
+      });
 
     });
 
@@ -1910,95 +1925,88 @@ async function loadAdmin(){
 }
 
 
-/* DELETE ALL */
+/* =========================
+   DELETE ALL
+   ========================= */
 
-$("deleteAllBtn").onclick =
-  async()=>{
+$("deleteAllBtn").onclick = async()=>{
 
-    if(!isAdmin()){
-      return;
-    }
+  if(!isAdmin()){
+    return;
+  }
 
-    if(!confirm(
-      "حذف جميع الرسائل؟"
-    )){
-      return;
-    }
+  if(!confirm("حذف جميع الرسائل؟")){
+    return;
+  }
 
-    try{
+  try{
 
-      while(true){
+    while(true){
 
-        const snapshot =
-          await getDocs(
-            query(
-              collection(db,"messages"),
-              limit(400)
-            )
-          );
+      const snapshot =
+        await getDocs(
+          query(
+            collection(db,"messages"),
+            limit(400)
+          )
+        );
 
-        if(snapshot.empty){
-          break;
-        }
-
-        const batch =
-          writeBatch(db);
-
-        snapshot.forEach(item=>{
-          batch.delete(item.ref);
-        });
-
-        await batch.commit();
-
-        if(snapshot.size < 400){
-          break;
-        }
-
+      if(snapshot.empty){
+        break;
       }
 
-      $("adminStatus").textContent =
-        "✅ تم حذف الرسائل.";
+      const batch = writeBatch(db);
 
-    }catch(error){
+      snapshot.forEach(item=>{
+        batch.delete(item.ref);
+      });
 
-      $("adminStatus").textContent =
-        "❌ " + friendlyError(error);
+      await batch.commit();
+
+      if(snapshot.size < 400){
+        break;
+      }
 
     }
 
-  };
+    $("adminStatus").textContent =
+      "✅ تم حذف الرسائل.";
+
+  }catch(error){
+
+    $("adminStatus").textContent =
+      "❌ " + friendlyError(error);
+
+  }
+
+};
 
 
-/* VOICE UI */
+/* =========================
+   VOICE UI
+   ========================= */
 
 function renderVoice(){
 
-  const container =
-    $("voiceSlots");
-
+  const container = $("voiceSlots");
   container.innerHTML = "";
 
   voiceIds.forEach(id=>{
 
-    const div =
-      document.createElement("div");
+    const div = document.createElement("div");
 
-    div.className =
-      "voiceSlot";
-
+    div.className = "voiceSlot";
     div.id = id;
 
     div.innerHTML = `
 
       <div class="micIcon">🎙️</div>
 
-      <div class="voiceName"
-           id="${id}Name">
+      <div class="voiceName" id="${id}Name">
         شاغر
       </div>
 
-      <div class="voiceStatus"
-           id="${id}Status">
+      <div class="voiceStatus" id="${id}Status">
         اضغط للتحدث
       </div>
 
@@ -2020,7 +2028,9 @@ function renderVoice(){
 }
 
 
-/* VOICE */
+/* =========================
+   VOICE WATCH
+   ========================= */
 
 function watchVoice(){
 
@@ -2041,36 +2051,22 @@ function watchVoice(){
 
         voiceIds.forEach(id=>{
 
-          const slot =
-            $(id);
+          const slot = $(id);
+          const name = $(id+"Name");
+          const status = $(id+"Status");
+          const button = $(id+"Btn");
 
-          const name =
-            $(id+"Name");
-
-          const status =
-            $(id+"Status");
-
-          const button =
-            $(id+"Btn");
-
-          const data =
-            slots[id];
+          const data = slots[id];
 
           if(!data){
 
             slot.classList.remove("active");
 
-            name.textContent =
-              "شاغر";
-
-            status.textContent =
-              "اضغط للتحدث";
-
-            button.textContent =
-              "تشغيل";
+            name.textContent = "شاغر";
+            status.textContent = "اضغط للتحدث";
+            button.textContent = "تشغيل";
 
             return;
-
           }
 
           slot.classList.add("active");
@@ -2083,16 +2079,14 @@ function watchVoice(){
             status.textContent =
               "🎙️ أنت تتحدث";
 
-            button.textContent =
-              "إيقاف";
+            button.textContent = "إيقاف";
 
           }else{
 
             status.textContent =
               "🔊 مباشر";
 
-            button.textContent =
-              "استماع";
+            button.textContent = "استماع";
 
           }
 
@@ -2100,89 +2094,53 @@ function watchVoice(){
 
       },
       error=>{
-
-        console.error(
-          "VOICE:",
-          error
-        );
-
+        console.error("VOICE:",error);
       }
     );
 
 }
 
 
+/* =========================
+   VOICE
+   ========================= */
+
 async function toggleMic(slotId){
 
   if(!currentUser){
-
     alert("سجل الدخول أولًا.");
-
     return;
-
   }
 
   if(currentUser.isAnonymous){
-
-    alert(
-      "استخدام المايك يحتاج عضوية."
-    );
-
+    alert("استخدام المايك يحتاج عضوية.");
     return;
-
   }
 
   if(mySlot === slotId){
-
     await leaveMic();
-
     return;
-
   }
 
   if(mySlot){
-
-    alert(
-      "لديك مايك يعمل بالفعل."
-    );
-
+    alert("لديك مايك يعمل بالفعل.");
     return;
-
   }
 
   try{
 
+    if(await isCurrentUserBlocked()){
+      alert("🚫 الحساب محظور.");
+      return;
+    }
+
     const moderation =
-      await getDoc(
-        doc(
-          db,
-          "moderation",
-          currentUser.uid
-        )
-      );
+      await getMyModeration();
 
-    if(moderation.exists()){
+    if(moderation?.micMuted === true){
 
-      const data =
-        moderation.data();
-
-      if(data.banned === true){
-
-        alert("🚫 الحساب محظور.");
-
-        return;
-
-      }
-
-      if(data.micMuted === true){
-
-        alert(
-          "🎤 تم منعك من استخدام المايك."
-        );
-
-        return;
-
-      }
+      alert("🎤 تم منعك من استخدام المايك.");
+      return;
 
     }
 
@@ -2192,7 +2150,7 @@ async function toggleMic(slotId){
     ){
 
       throw new Error(
-        "الميكروفون يحتاج HTTPS."
+        "الميكروفون يحتاج HTTPS ودعم المتصفح."
       );
 
     }
@@ -2203,11 +2161,8 @@ async function toggleMic(slotId){
       );
 
     if(slot.exists()){
-
       alert("هذا المايك مشغول.");
-
       return;
-
     }
 
     currentStream =
@@ -2238,7 +2193,6 @@ async function toggleMic(slotId){
     }
 
     currentStream = null;
-
     mySlot = null;
 
     alert(
@@ -2266,17 +2220,27 @@ async function leaveMic(){
     }
 
     return;
-
   }
 
-  const slot =
-    mySlot;
+  const slot = mySlot;
 
   try{
 
-    await deleteDoc(
-      doc(db,"voiceSlots",slot)
-    );
+    const slotSnap =
+      await getDoc(
+        doc(db,"voiceSlots",slot)
+      );
+
+    if(
+      slotSnap.exists() &&
+      slotSnap.data().uid === currentUser?.uid
+    ){
+
+      await deleteDoc(
+        doc(db,"voiceSlots",slot)
+      );
+
+    }
 
   }catch(error){
 
@@ -2293,13 +2257,14 @@ async function leaveMic(){
   }
 
   currentStream = null;
-
   mySlot = null;
 
 }
 
 
-/* CLOSE */
+/* =========================
+   CLOSE MODALS
+   ========================= */
 
 document
   .querySelectorAll("[data-close]")
@@ -2326,9 +2291,7 @@ document
     modal.onclick = event=>{
 
       if(event.target === modal){
-
         modal.classList.remove("show");
-
       }
 
     };
@@ -2336,28 +2299,38 @@ document
   });
 
 
-/* LOGOUT */
+/* =========================
+   LOGOUT
+   ========================= */
 
-$("logoutButton").onclick =
-  async()=>{
+$("logoutButton").onclick = async()=>{
 
+  try{
     await leaveMic();
+  }catch(_){}
 
-    if(unsubscribePosts){
-      unsubscribePosts();
-    }
+  if(unsubscribePosts){
+    unsubscribePosts();
+    unsubscribePosts = null;
+  }
 
-    if(unsubscribeMembers){
-      unsubscribeMembers();
-    }
+  if(unsubscribeMembers){
+    unsubscribeMembers();
+    unsubscribeMembers = null;
+  }
 
-    if(unsubscribeVoice){
-      unsubscribeVoice();
-    }
+  if(unsubscribeVoice){
+    unsubscribeVoice();
+    unsubscribeVoice = null;
+  }
 
+  try{
     await signOut(auth);
+  }catch(error){
+    console.error(error);
+  }
 
-  };
+};
 
 
 window.addEventListener(
@@ -2379,3 +2352,8 @@ window.addEventListener(
 
 </body>
 </html>
+'''
+
+path = Path("/mnt/data/index.html")
+path.write_text(html, encoding="utf-8")
+print(f"تم إنشاء الملف: {path}")
