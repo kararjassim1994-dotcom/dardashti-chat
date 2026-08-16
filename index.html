@@ -1,2283 +1,1212 @@
-from pathlib import Path
-
-html = r'''<!DOCTYPE html>
+```html
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>كرار جاسم</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#080b14">
+<meta name="description" content="موسوعة الشعلة - صور وفيديوهات وألعاب وملفات وصوتيات">
+<title>موسوعة الشعلة</title>
 
 <style>
 *{box-sizing:border-box}
 
-html,body{
-  margin:0;
-  width:100%;
-  min-height:100%;
-  font-family:Arial,Tahoma,sans-serif;
-  background:#070b12;
-  color:#fff;
+html{
+  scroll-behavior:smooth;
 }
 
 body{
-  background:
-    linear-gradient(135deg,#06101dcc,#101827dd),
-    url("https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1800&q=80")
-    center/cover fixed no-repeat;
+  margin:0;
+  background:#070a12;
+  color:#fff;
+  font-family:Arial,Tahoma,sans-serif;
 }
 
-button,input{font-family:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
-
-:root{
-  --panel:#101925ed;
-  --panel2:#182333ee;
-  --line:#314156;
-  --blue:#1687ff;
-  --green:#27c47b;
-  --red:#c83b4a;
-  --muted:#9aa9bb;
+button,
+input,
+select{
+  font-family:inherit;
 }
 
-/* LOGIN */
+button{
+  cursor:pointer;
+}
 
-#loginPage{
-  min-height:100vh;
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  height:68px;
   display:flex;
   align-items:center;
-  justify-content:center;
-  padding:18px;
-}
-
-.loginBox{
-  width:100%;
-  max-width:440px;
-  background:var(--panel);
-  padding:24px;
-  border-radius:22px;
-  border:1px solid #ffffff20;
-  box-shadow:0 20px 70px #000b;
-  backdrop-filter:blur(12px);
+  justify-content:space-between;
+  padding:0 5%;
+  background:#090d18ee;
+  border-bottom:1px solid #ffffff18;
+  backdrop-filter:blur(15px);
 }
 
 .logo{
-  text-align:center;
-  font-size:32px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:21px;
   font-weight:900;
-  margin-bottom:6px;
 }
 
-.description{
-  text-align:center;
-  color:#c5d0dc;
-  line-height:1.7;
-  margin-bottom:18px;
+.logoIcon{
+  font-size:30px;
 }
 
-.tabs{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:6px;
-  margin-bottom:12px;
+.nav{
+  display:flex;
+  align-items:center;
+  gap:7px;
 }
 
-.tab,.btn{
+.nav button,
+.nav a{
   border:0;
-  border-radius:10px;
-  padding:12px;
+  background:#151d2d;
+  color:#fff;
+  border-radius:9px;
+  padding:10px 13px;
+}
+
+.nav .active{
+  background:#ff7117;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  min-height:510px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:70px 20px;
+
+  background:
+    radial-gradient(circle at 50% 35%,#ff7a1835,transparent 35%),
+    linear-gradient(#080d19aa,#080d19),
+    linear-gradient(135deg,#271108,#101a31 55%,#070a12);
+
+  position:relative;
+  overflow:hidden;
+}
+
+.hero:before{
+  content:"";
+  position:absolute;
+  width:420px;
+  height:420px;
+  border-radius:50%;
+  background:#ff751720;
+  filter:blur(80px);
+}
+
+.heroContent{
+  position:relative;
+  max-width:850px;
+}
+
+.smallTitle{
+  color:#ffad66;
+  font-size:13px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+
+.hero h1{
+  margin:15px 0 8px;
+  font-size:clamp(48px,10vw,95px);
+  line-height:1;
+  background:linear-gradient(90deg,#fff,#ffb45f);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  color:#b8c3d3;
+  font-size:18px;
+  line-height:1.8;
+}
+
+.heroButtons{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:25px;
+  flex-wrap:wrap;
+}
+
+.primary{
+  border:0;
+  border-radius:11px;
+  background:linear-gradient(135deg,#ff7b18,#df4600);
+  color:#fff;
+  padding:13px 20px;
   font-weight:bold;
 }
 
-.tab{
-  background:#1a2635;
-  color:#ccd7e4;
-  border:1px solid var(--line);
-}
-
-.tab.active,.primary{
-  background:var(--blue);
+.secondary{
+  border:1px solid #ffffff22;
+  border-radius:11px;
+  background:#ffffff0d;
   color:#fff;
+  padding:13px 20px;
 }
 
-.form{display:none}
-.form.active{display:block}
+/* =========================
+   SECTIONS
+========================= */
 
-input{
+.section{
+  max-width:1500px;
+  margin:auto;
+  padding:55px 5%;
+}
+
+.sectionHead{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:22px;
+}
+
+.sectionHead h2{
+  margin:6px 0 0;
+  font-size:31px;
+}
+
+.searchBox{
+  width:330px;
+  max-width:100%;
+}
+
+.searchBox input{
   width:100%;
   padding:13px;
-  margin:5px 0;
-  border:1px solid var(--line);
-  border-radius:10px;
-  background:#0b121c;
+  border-radius:11px;
+  border:1px solid #ffffff1c;
+  background:#101725;
   color:#fff;
   outline:none;
 }
 
-.btn{
-  width:100%;
-  margin-top:7px;
-  color:#fff;
-}
+/* =========================
+   CATEGORIES
+========================= */
 
-.secondary{background:#293648}
-
-#authMessage{
-  text-align:center;
-  min-height:24px;
-  color:#ffb4b4;
-  margin-top:10px;
-}
-
-.status{
-  text-align:center;
-  color:#79e2aa;
-  font-size:12px;
-  margin-top:10px;
-}
-
-/* APP */
-
-#chatApp{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-}
-
-.header{
-  min-height:64px;
-  background:#0e1723ed;
-  border-bottom:1px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 10px;
-  gap:8px;
-}
-
-.headerUser{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  min-width:0;
-}
-
-.headerAvatar{
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  object-fit:cover;
-  background:#26364a;
-}
-
-.title{
-  font-size:20px;
-  font-weight:900;
-}
-
-.username{
-  font-size:12px;
-  color:#72e3a4;
-  margin-top:2px;
-}
-
-.headerActions{
-  display:flex;
-  gap:6px;
-  align-items:center;
-  flex-wrap:wrap;
-}
-
-.iconBtn{
-  border:0;
-  background:#223044;
-  color:#fff;
-  padding:9px 10px;
-  border-radius:9px;
-}
-
-.logout{background:#a82f3c}
-.adminBtn{background:#8a5cf6}
-
-/* VOICE */
-
-.voicePanel{
-  background:#0d1622e8;
-  border-bottom:1px solid var(--line);
-  padding:9px;
-}
-
-.voiceTitle{
-  text-align:center;
-  font-weight:bold;
-  color:#dbe6f2;
-  margin-bottom:7px;
-}
-
-.voiceSlots{
+.categories{
   display:grid;
   grid-template-columns:repeat(5,1fr);
-  gap:7px;
+  gap:14px;
 }
 
-.voiceSlot{
-  min-height:82px;
-  background:#172233;
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:7px;
+.category{
+  position:relative;
+  min-height:190px;
+  padding:20px;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid #ffffff18;
   display:flex;
   flex-direction:column;
+  justify-content:end;
+  cursor:pointer;
+  box-shadow:0 15px 45px #0008;
+}
+
+.category:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(transparent 20%,#000d);
+}
+
+.category>*{
+  position:relative;
+  z-index:2;
+}
+
+.categoryIcon{
+  font-size:43px;
+}
+
+.category h3{
+  margin:8px 0 4px;
+  font-size:21px;
+}
+
+.category p{
+  margin:0;
+  color:#d0d7e1;
+  font-size:12px;
+}
+
+.images{
+  background:
+    linear-gradient(#0002,#0008),
+    linear-gradient(135deg,#5830a4,#172c68);
+}
+
+.videos{
+  background:
+    linear-gradient(#0002,#0008),
+    linear-gradient(135deg,#a92c48,#24132e);
+}
+
+.games{
+  background:
+    linear-gradient(#0002,#0008),
+    linear-gradient(135deg,#006c76,#112c46);
+}
+
+.audio{
+  background:
+    linear-gradient(#0002,#0008),
+    linear-gradient(135deg,#a95012,#28200f);
+}
+
+.files{
+  background:
+    linear-gradient(#0002,#0008),
+    linear-gradient(135deg,#315d92,#17253c);
+}
+
+/* =========================
+   FILTER
+========================= */
+
+.filter{
+  padding:11px 13px;
+  border:1px solid #ffffff18;
+  border-radius:10px;
+  background:#101725;
+  color:#fff;
+}
+
+/* =========================
+   CONTENT GRID
+========================= */
+
+.contentGrid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+.card{
+  background:#101725;
+  border:1px solid #ffffff12;
+  border-radius:15px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+  border-color:#ff7b1855;
+}
+
+.thumbnail{
+  height:170px;
+  display:flex;
   align-items:center;
   justify-content:center;
-  gap:4px;
+  font-size:55px;
 }
 
-.voiceSlot.active{border-color:var(--green)}
-
-.micIcon{font-size:25px}
-
-.voiceName{
-  font-size:11px;
-  color:#c0cad6;
-  max-width:100%;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-.voiceStatus{
-  font-size:10px;
-  color:#8797aa;
-  text-align:center;
-}
-
-.voiceSlot button{
-  border:0;
-  border-radius:8px;
-  padding:6px 8px;
-  background:var(--blue);
-  color:#fff;
-  font-size:11px;
-  font-weight:bold;
-}
-
-/* ROOMS */
-
-.roomsBar{
-  display:flex;
-  gap:7px;
-  overflow-x:auto;
-  padding:8px;
-  background:#0c1420e8;
-  border-bottom:1px solid var(--line);
-}
-
-.roomBtn{
-  white-space:nowrap;
-  border:1px solid var(--line);
-  background:#182333;
-  color:#dce7f4;
-  border-radius:9px;
-  padding:8px 11px;
-}
-
-.roomBtn.active{
-  background:#1687ff;
-  border-color:#1687ff;
-}
-
-/* CONTENT */
-
-.content{
-  flex:1;
-  display:flex;
-  min-height:0;
-  overflow:hidden;
-}
-
-.feed{
-  flex:1;
-  overflow-y:auto;
+.cardBody{
   padding:12px;
-  background:#0005;
 }
 
-.side{
-  width:250px;
-  background:#0e1724e8;
-  border-right:1px solid var(--line);
-  overflow-y:auto;
-  padding:10px;
-}
-
-.sideTitle{
+.cardTitle{
   font-weight:bold;
-  margin:5px 0 10px;
-}
-
-.onlineCount{
-  color:#74e2a5;
-  font-size:12px;
-  margin-bottom:8px;
-}
-
-.member{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:7px;
-  border-radius:9px;
-  background:#162131;
-  margin-bottom:6px;
-}
-
-.member img{
-  width:34px;
-  height:34px;
-  border-radius:50%;
-  object-fit:cover;
-}
-
-.memberName{
-  font-size:12px;
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
 }
 
-.dot{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#35d47f;
-  margin-right:auto;
-}
-
-.composer{
+.cardMeta{
+  margin-top:8px;
   display:flex;
-  gap:7px;
-  padding:8px;
-  background:#111a26ee;
-  border-top:1px solid var(--line);
-  align-items:center;
+  justify-content:space-between;
+  color:#8996aa;
+  font-size:11px;
 }
 
-.composer input{
-  margin:0;
-  flex:1;
-}
-
-.send{
-  width:48px;
-  height:46px;
-  border:0;
-  border-radius:10px;
-  background:var(--blue);
-  color:#fff;
-  font-size:18px;
-}
-
-.empty{
-  text-align:center;
-  color:#7f8da0;
-  padding:35px 10px;
-}
-
-.post{
-  background:#101a27ed;
-  border:1px solid #ffffff12;
-  border-radius:14px;
-  padding:10px;
-  margin-bottom:10px;
-}
-
-.postHead{
-  display:flex;
-  gap:8px;
-  align-items:center;
-}
-
-.postHead img{
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  object-fit:cover;
-}
-
-.postName{
-  font-weight:bold;
-  color:#75b7ff;
-}
-
-.postRoom{
-  font-size:10px;
-  color:#7f90a5;
-}
-
-.postText{
-  white-space:pre-wrap;
-  word-break:break-word;
-  line-height:1.55;
-  margin:9px 0;
-}
-
-.postActions{
-  display:flex;
-  gap:6px;
-  border-top:1px solid #ffffff10;
-  padding-top:7px;
-}
-
-.postActions button{
-  border:0;
-  border-radius:8px;
-  background:#1d2a3b;
-  color:#dce7f4;
-  padding:7px 10px;
-}
-
-/* MODAL */
+/* =========================
+   MODAL
+========================= */
 
 .modal{
   position:fixed;
   inset:0;
-  z-index:10000;
+  z-index:5000;
   background:#000c;
   display:none;
   align-items:center;
   justify-content:center;
-  padding:12px;
+  padding:15px;
 }
 
-.modal.show{display:flex}
-
-.box{
-  width:100%;
-  max-width:620px;
-  max-height:94vh;
-  overflow:auto;
-  background:#0f1825;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:14px;
-}
-
-.boxHead{
+.modal.show{
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
 }
 
-.boxTitle{
-  font-size:20px;
-  font-weight:bold;
+.modalBox{
+  position:relative;
+  width:100%;
+  max-width:850px;
+  max-height:92vh;
+  overflow:auto;
+  background:#101725;
+  border:1px solid #ffffff1b;
+  border-radius:18px;
+  padding:20px;
 }
 
 .close{
-  border:0;
-  background:var(--red);
-  color:#fff;
-  border-radius:9px;
+  position:absolute;
+  left:12px;
+  top:12px;
   width:38px;
   height:38px;
-  font-size:22px;
-}
-
-.profilePreview{
-  width:90px;
-  height:90px;
-  border-radius:50%;
-  object-fit:cover;
-  border:3px solid #315273;
-  margin:5px auto 10px;
-  display:block;
-}
-
-.profileBox{text-align:center}
-
-.profileBox label{
-  display:block;
-  text-align:right;
-  font-size:12px;
-  color:#aebbc9;
-  margin-top:8px;
-}
-
-.danger{background:var(--red)!important}
-
-.adminRow{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  background:#172333;
-  padding:8px;
-  border-radius:10px;
-  margin-bottom:7px;
-}
-
-.adminRow .grow{
-  flex:1;
-  min-width:0;
-}
-
-.adminRow button{
   border:0;
-  border-radius:8px;
-  padding:7px;
+  border-radius:9px;
+  background:#b82f3e;
   color:#fff;
+  font-size:24px;
 }
 
-.adminActions{
+.preview{
+  width:100%;
+  max-height:70vh;
+  object-fit:contain;
+  border-radius:12px;
+  background:#000;
+}
+
+.previewTitle{
+  font-size:21px;
+  font-weight:bold;
+  margin:15px 0;
+}
+
+/* =========================
+   UPLOAD
+========================= */
+
+.uploadForm{
+  display:grid;
+  gap:12px;
+}
+
+.uploadForm label{
+  display:grid;
+  gap:6px;
+  color:#c9d3df;
+}
+
+.uploadForm input,
+.uploadForm select{
+  width:100%;
+  padding:12px;
+  border:1px solid #ffffff1a;
+  border-radius:10px;
+  background:#090f1b;
+  color:#fff;
+  outline:none;
+}
+
+.status{
+  min-height:25px;
+  color:#7ce2a7;
+  text-align:center;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+  border-top:1px solid #ffffff12;
+  padding:30px 5%;
   display:flex;
-  gap:5px;
-  flex-wrap:wrap;
-  justify-content:flex-end;
+  justify-content:space-between;
+  gap:15px;
+  color:#8e9aac;
 }
 
-.adminActions button{
-  min-width:58px;
-}
+/* =========================
+   MOBILE
+========================= */
 
-.good{background:#218b5b!important}
+@media(max-width:1000px){
 
-.warn{background:#8b6a20!important}
-
-@media(max-width:760px){
-  .side{display:none}
-
-  .voiceSlots{
-    grid-template-columns:repeat(5,90px);
-    overflow-x:auto;
+  .categories{
+    grid-template-columns:repeat(3,1fr);
   }
 
-  .header .title{font-size:17px}
+  .contentGrid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+}
+
+@media(max-width:700px){
+
+  .header{
+    padding:0 12px;
+  }
+
+  .nav a{
+    display:none;
+  }
+
+  .hero{
+    min-height:450px;
+  }
+
+  .section{
+    padding:40px 12px;
+  }
+
+  .sectionHead{
+    align-items:stretch;
+    flex-direction:column;
+  }
+
+  .categories{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .contentGrid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .thumbnail{
+    height:135px;
+  }
+
+  .footer{
+    flex-direction:column;
+  }
+
+}
+
+@media(max-width:420px){
+
+  .category{
+    min-height:155px;
+    padding:14px;
+  }
+
+  .categoryIcon{
+    font-size:34px;
+  }
+
+  .category h3{
+    font-size:17px;
+  }
+
+  .hero h1{
+    font-size:49px;
+  }
+
 }
 </style>
 </head>
 
 <body>
 
-<div id="loginPage">
-  <div class="loginBox">
-    <div class="logo">كرار جاسم</div>
+<!-- HEADER -->
 
-    <div class="description">
-      دردشة عراقية متعددة الغرف والمجتمع<br>
-      تواصل، نشر، صور، ورسائل خاصة
+<header class="header">
+
+  <a href="#" class="logo">
+    <span class="logoIcon">🔥</span>
+    <span>موسوعة الشعلة</span>
+  </a>
+
+  <nav class="nav">
+    <a href="#sections">الأقسام</a>
+    <a href="#latest">المحتوى</a>
+    <button id="uploadOpen">رفع محتوى</button>
+  </nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="heroContent">
+
+    <div class="smallTitle">
+      منصة المحتوى الرقمية
     </div>
 
-    <div class="tabs">
-      <button class="tab active" data-tab="visitor">زائر</button>
-      <button class="tab" data-tab="login">دخول</button>
-      <button class="tab" data-tab="signup">عضوية</button>
-    </div>
+    <h1>موسوعة الشعلة</h1>
 
-    <div id="visitorForm" class="form active">
-      <input id="visitorName" placeholder="اسم الزائر" maxlength="30">
-      <button id="visitorButton" class="btn primary">دخول كزائر</button>
-    </div>
+    <p>
+      اكتشف الصور والفيديوهات والألعاب والصوتيات والملفات
+      في مكان واحد.
+    </p>
 
-    <div id="loginForm" class="form">
-      <input id="emailInput" type="email" placeholder="البريد الإلكتروني" autocomplete="username">
-      <input id="passwordInput" type="password" placeholder="كلمة المرور" autocomplete="current-password">
-      <button id="loginButton" class="btn primary">تسجيل الدخول</button>
-    </div>
+    <div class="heroButtons">
 
-    <div id="signupForm" class="form">
-      <input id="nameInput" placeholder="اسم العضو" maxlength="30">
-      <input id="signupEmail" type="email" placeholder="البريد الإلكتروني" autocomplete="email">
-      <input id="signupPassword" type="password" placeholder="كلمة المرور - 6 أحرف على الأقل" autocomplete="new-password">
-      <button id="signupButton" class="btn primary">إنشاء العضوية</button>
-    </div>
+      <a href="#sections" class="primary">
+        تصفح الأقسام
+      </a>
 
-    <div id="authMessage"></div>
-    <div class="status">● Firebase متصل</div>
-  </div>
-</div>
-
-<div id="chatApp" class="hidden">
-
-  <header class="header">
-    <div class="headerUser">
-      <img id="headerAvatar" class="headerAvatar" alt="الصورة الشخصية">
-      <div>
-        <div class="title">كرار جاسم</div>
-        <div id="currentUsername" class="username">عضو</div>
-      </div>
-    </div>
-
-    <div class="headerActions">
-      <button id="profileBtn" class="iconBtn">👤 حسابي</button>
-
-      <button id="adminBtn" class="iconBtn adminBtn hidden">
-        🛡️ إشراف
+      <button id="uploadHero" class="secondary">
+        ⬆️ رفع محتوى
       </button>
 
-      <button id="logoutButton" class="iconBtn logout">
-        خروج
-      </button>
     </div>
-  </header>
 
-  <section class="voicePanel">
-    <div class="voiceTitle">🎙️ البث الصوتي — 5 مايكات</div>
-    <div id="voiceSlots" class="voiceSlots"></div>
-  </section>
-
-  <nav id="roomsBar" class="roomsBar"></nav>
-
-  <main class="content">
-    <section id="feed" class="feed">
-      <div class="empty">جاري تحميل المحادثة...</div>
-    </section>
-
-    <aside class="side">
-      <div class="sideTitle">👥 الأعضاء</div>
-      <div id="onlineCount" class="onlineCount">0 عضو</div>
-      <div id="membersList"></div>
-    </aside>
-  </main>
-
-  <div class="composer">
-    <input id="messageInput" placeholder="اكتب رسالة في الغرفة..." maxlength="2000">
-    <button id="sendButton" class="send">➤</button>
   </div>
-</div>
 
-<!-- PROFILE -->
+</section>
 
-<div id="profileModal" class="modal">
-  <div class="box profileBox">
-    <div class="boxHead">
-      <div class="boxTitle">👤 حسابي</div>
-      <button class="close" data-close="profileModal">×</button>
+
+<!-- CATEGORIES -->
+
+<section id="sections" class="section">
+
+  <div class="sectionHead">
+
+    <div>
+      <div class="smallTitle">استكشف</div>
+      <h2>أقسام الموسوعة</h2>
     </div>
 
-    <img id="profilePreview" class="profilePreview" alt="الصورة">
+    <div class="searchBox">
+      <input
+        id="search"
+        placeholder="🔎 ابحث عن محتوى..."
+      >
+    </div>
 
-    <label>الاسم</label>
-    <input id="profileName" maxlength="30">
-
-    <label>الصورة الشخصية</label>
-    <input id="profilePhoto" type="file" accept="image/*">
-
-    <button id="saveProfile" class="btn primary">حفظ التغييرات</button>
-    <div id="profileStatus"></div>
   </div>
-</div>
 
-<!-- ADMIN -->
+  <div id="categories" class="categories"></div>
 
-<div id="adminModal" class="modal">
-  <div class="box">
-    <div class="boxHead">
-      <div class="boxTitle">🛡️ لوحة الإشراف</div>
-      <button class="close" data-close="adminModal">×</button>
+</section>
+
+
+<!-- CONTENT -->
+
+<section id="latest" class="section">
+
+  <div class="sectionHead">
+
+    <div>
+      <div class="smallTitle">المحتوى</div>
+      <h2>أحدث المحتويات</h2>
     </div>
 
-    <button id="deleteAllBtn" class="btn danger">
-      🗑️ حذف جميع الرسائل
+    <select id="filter" class="filter"></select>
+
+  </div>
+
+  <div id="contentGrid" class="contentGrid"></div>
+
+</section>
+
+
+<!-- VIEWER -->
+
+<div id="viewer" class="modal">
+
+  <div class="modalBox">
+
+    <button
+      class="close"
+      data-close="viewer">
+      ×
     </button>
 
-    <div id="adminStatus" style="text-align:center;color:#9fb0c2;margin:8px"></div>
-    <div id="adminList"></div>
+    <div id="viewerContent"></div>
+
   </div>
+
 </div>
 
-<script type="module">
 
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+<!-- UPLOAD -->
 
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signInAnonymously,
-  updateProfile,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+<div id="uploadModal" class="modal">
 
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  query,
-  where,
-  limit,
-  onSnapshot,
-  serverTimestamp,
-  doc,
-  setDoc,
-  getDoc,
-  deleteDoc,
-  getDocs,
-  writeBatch
-} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+  <div class="modalBox">
 
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL
-} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js";
+    <button
+      class="close"
+      data-close="uploadModal">
+      ×
+    </button>
 
+    <h2>⬆️ إضافة محتوى</h2>
 
-/* =========================
-   FIREBASE
-   ========================= */
+    <p style="color:#9ba8ba;line-height:1.7">
+      يمكنك اختيار صورة أو فيديو أو صوت أو ملف أو لعبة من جهازك.
+      هذه النسخة تعرض الملف أثناء الجلسة فقط.
+    </p>
 
-const firebaseConfig = {
-  apiKey:"AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
-  authDomain:"dardashti-chat.firebaseapp.com",
-  projectId:"dardashti-chat",
-  storageBucket:"dardashti-chat.firebasestorage.app",
-  messagingSenderId:"779042757468",
-  appId:"1:779042757468:web:7646d3cdadf46f315a3f99"
-};
+    <form id="uploadForm" class="uploadForm">
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const storage = getStorage(app);
+      <label>
+        اسم المحتوى
+        <input
+          id="contentName"
+          maxlength="100"
+          required
+          placeholder="مثال: صور بغداد"
+        >
+      </label>
 
+      <label>
+        القسم
+        <select id="contentCategory"></select>
+      </label>
 
-/* =========================
-   ADMIN
-   ========================= */
+      <label>
+        الملف
+        <input
+          id="contentFile"
+          type="file"
+          required
+        >
+      </label>
 
-const ADMIN_UID = "N6KoWvu1IxbgWtVE46fmCsydZbF3";
+      <button
+        type="submit"
+        class="primary">
+        إضافة المحتوى
+      </button>
+
+      <div id="uploadStatus" class="status"></div>
+
+    </form>
+
+  </div>
+
+</div>
 
 
-const rooms = [
-  "بغداد","البصرة","نينوى","الأنبار","ديالى",
-  "كركوك","صلاح الدين","واسط","بابل","كربلاء",
-  "النجف","القادسية","المثنى","ذي قار","ميسان",
-  "أربيل","السليمانية","دهوك"
+<footer class="footer">
+
+  <strong>🔥 موسوعة الشعلة</strong>
+
+  <span>
+    © 2026 موسوعة الشعلة
+  </span>
+
+</footer>
+
+
+<script>
+
+const categories = [
+
+  {
+    id:"images",
+    name:"الصور",
+    icon:"🖼️",
+    className:"images",
+    description:"صور وخلفيات وتصاميم"
+  },
+
+  {
+    id:"videos",
+    name:"الفيديوهات",
+    icon:"🎬",
+    className:"videos",
+    description:"مقاطع وفيديوهات"
+  },
+
+  {
+    id:"games",
+    name:"الألعاب",
+    icon:"🎮",
+    className:"games",
+    description:"ألعاب وملفات ألعاب"
+  },
+
+  {
+    id:"audio",
+    name:"الصوتيات",
+    icon:"🎵",
+    className:"audio",
+    description:"ملفات ومقاطع صوتية"
+  },
+
+  {
+    id:"files",
+    name:"الملفات",
+    icon:"📁",
+    className:"files",
+    description:"مستندات وملفات متنوعة"
+  }
+
 ];
 
 
-let currentUser = null;
+let contents = [];
 
-let currentProfile = {
-  name:"عضو",
-  photo:"",
-  role:"user"
-};
+let uploadedContents = [];
 
-let currentRoom = rooms[0];
 
-let unsubscribePosts = null;
-let unsubscribeMembers = null;
-let unsubscribeVoice = null;
+/* إنشاء 120 عنصر تجريبي لكل قسم */
 
-let currentStream = null;
-let mySlot = null;
+categories.forEach(category => {
 
-const voiceIds = [
-  "voice1",
-  "voice2",
-  "voice3",
-  "voice4",
-  "voice5"
-];
+  for(let i = 1; i <= 120; i++){
+
+    contents.push({
+
+      id:
+        category.id +
+        "-" +
+        i,
+
+      category:
+        category.id,
+
+      title:
+        category.name +
+        " " +
+        String(i).padStart(3,"0"),
+
+      size:
+        (i % 9 + 1) +
+        " MB",
+
+      demo:true
+
+    });
+
+  }
+
+});
 
 
 function $(id){
+
   return document.getElementById(id);
+
 }
 
 
-/* =========================
-   SECURITY HELPERS
-   ========================= */
+function escapeHTML(value){
 
-function escapeHtml(value){
-  return String(value ?? "")
-    .replace(/[&<>"']/g,char => ({
-      "&":"&amp;",
-      "<":"&lt;",
-      ">":"&gt;",
-      '"':"&quot;",
-      "'":"&#039;"
-    }[char]));
-}
+  return String(value || "")
+    .replace(/[&<>"']/g, function(char){
 
+      return {
 
-function avatarFor(name,photo){
-  if(photo){
-    return photo;
-  }
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
 
-  return "https://ui-avatars.com/api/?name=" +
-    encodeURIComponent(name || "عضو") +
-    "&background=1687ff&color=fff";
-}
+      }[char];
 
-
-function isAdmin(){
-  return !!currentUser &&
-    currentUser.uid === ADMIN_UID;
-}
-
-
-function message(text){
-  $("authMessage").textContent = text || "";
-}
-
-
-function friendlyError(error){
-
-  const code = error?.code || "";
-
-  const errors = {
-
-    "auth/invalid-credential":
-      "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
-
-    "auth/invalid-login-credentials":
-      "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
-
-    "auth/email-already-in-use":
-      "البريد الإلكتروني مستخدم مسبقًا.",
-
-    "auth/invalid-email":
-      "البريد الإلكتروني غير صحيح.",
-
-    "auth/weak-password":
-      "كلمة المرور ضعيفة.",
-
-    "auth/operation-not-allowed":
-      "هذه الطريقة غير مفعلة في Firebase.",
-
-    "auth/network-request-failed":
-      "تعذر الاتصال بالشبكة.",
-
-    "permission-denied":
-      "ليس لديك صلاحية لتنفيذ هذه العملية.",
-
-    "storage/unauthorized":
-      "ليس لديك صلاحية لرفع الصورة.",
-
-    "storage/canceled":
-      "تم إلغاء رفع الصورة.",
-
-    "storage/unknown":
-      "حدث خطأ في Storage."
-
-  };
-
-  return errors[code] ||
-    error?.message ||
-    "حدث خطأ غير معروف.";
-}
-
-
-async function getMyModeration(){
-
-  if(!currentUser){
-    return null;
-  }
-
-  try{
-
-    const snap = await getDoc(
-      doc(db,"moderation",currentUser.uid)
-    );
-
-    return snap.exists()
-      ? snap.data()
-      : null;
-
-  }catch(error){
-
-    console.error("Moderation read:",error);
-    return null;
-
-  }
-}
-
-
-async function isCurrentUserBlocked(){
-
-  if(!currentUser){
-    return true;
-  }
-
-  if(isAdmin()){
-    return false;
-  }
-
-  const moderation = await getMyModeration();
-
-  return moderation?.banned === true;
-}
-
-
-async function enforceCurrentUser(){
-
-  if(!currentUser){
-    return false;
-  }
-
-  if(isAdmin()){
-    return true;
-  }
-
-  const moderation = await getMyModeration();
-
-  if(moderation?.banned === true){
-
-    try{
-      await signOut(auth);
-    }catch(_){}
-
-    message("🚫 هذا الحساب محظور.");
-    return false;
-  }
-
-  return true;
-}
-
-
-/* =========================
-   TABS
-   ========================= */
-
-document.querySelectorAll(".tab").forEach(tab => {
-
-  tab.addEventListener("click",()=>{
-
-    document
-      .querySelectorAll(".tab")
-      .forEach(x=>x.classList.remove("active"));
-
-    document
-      .querySelectorAll(".form")
-      .forEach(x=>x.classList.remove("active"));
-
-    tab.classList.add("active");
-
-    const form = $(tab.dataset.tab + "Form");
-
-    if(form){
-      form.classList.add("active");
-    }
-
-    message("");
-  });
-
-});
-
-
-/* =========================
-   VISITOR
-   ========================= */
-
-$("visitorButton").addEventListener("click",async()=>{
-
-  const name = $("visitorName").value.trim();
-
-  if(name.length < 2){
-    message("اكتب اسمًا من حرفين على الأقل.");
-    return;
-  }
-
-  localStorage.setItem("visitorName",name);
-
-  try{
-    await signInAnonymously(auth);
-  }catch(error){
-    console.error(error);
-    message("❌ " + friendlyError(error));
-  }
-
-});
-
-
-/* =========================
-   LOGIN
-   ========================= */
-
-$("loginButton").addEventListener("click",async()=>{
-
-  const email = $("emailInput").value.trim();
-  const password = $("passwordInput").value;
-
-  if(!email || !password){
-    message("أدخل البريد الإلكتروني وكلمة المرور.");
-    return;
-  }
-
-  try{
-    await signInWithEmailAndPassword(auth,email,password);
-  }catch(error){
-    console.error(error);
-    message("❌ " + friendlyError(error));
-  }
-
-});
-
-
-/* =========================
-   SIGNUP
-   ========================= */
-
-$("signupButton").addEventListener("click",async()=>{
-
-  const name = $("nameInput").value.trim();
-  const email = $("signupEmail").value.trim();
-  const password = $("signupPassword").value;
-
-  if(name.length < 2){
-    message("الاسم يجب أن يكون حرفين على الأقل.");
-    return;
-  }
-
-  if(!email){
-    message("أدخل البريد الإلكتروني.");
-    return;
-  }
-
-  if(password.length < 6){
-    message("كلمة المرور يجب أن تكون 6 أحرف على الأقل.");
-    return;
-  }
-
-  try{
-
-    const result =
-      await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-    await updateProfile(result.user,{
-      displayName:name
     });
 
-    await setDoc(
-      doc(db,"users",result.user.uid),
-      {
-        uid:result.user.uid,
-        name:name,
-        email:email,
-        photo:"",
-        role:"user",
-        banned:false,
-        createdAt:serverTimestamp()
-      },
-      {merge:true}
-    );
-
-    await setDoc(
-      doc(db,"moderation",result.user.uid),
-      {
-        banned:false,
-        micMuted:false,
-        updatedAt:serverTimestamp()
-      },
-      {merge:true}
-    );
-
-  }catch(error){
-
-    console.error(error);
-    message("❌ " + friendlyError(error));
-
-  }
-
-});
-
-
-/* =========================
-   PROFILE
-   ========================= */
-
-async function loadProfile(user){
-
-  const userRef = doc(db,"users",user.uid);
-  const snap = await getDoc(userRef);
-
-  if(!snap.exists()){
-
-    const name =
-      user.isAnonymous
-        ? localStorage.getItem("visitorName") || "زائر"
-        : user.displayName || "عضو";
-
-    await setDoc(
-      userRef,
-      {
-        uid:user.uid,
-        name:name,
-        email:user.email || "",
-        photo:"",
-        role:"user",
-        banned:false,
-        createdAt:serverTimestamp()
-      },
-      {merge:true}
-    );
-
-  }
-
-  const finalSnap = await getDoc(userRef);
-
-  currentProfile =
-    finalSnap.exists()
-      ? finalSnap.data()
-      : {
-          name:"عضو",
-          photo:"",
-          role:"user"
-        };
 }
 
 
 /* =========================
-   AUTH
-   ========================= */
+   الأقسام
+========================= */
 
-onAuthStateChanged(auth,async user=>{
+function renderCategories(){
 
-  if(!user){
+  $("categories").innerHTML =
+    categories.map(category => `
 
-    currentUser = null;
+      <article
+        class="category ${category.className}"
+        data-category="${category.id}">
 
-    $("loginPage").classList.remove("hidden");
-    $("chatApp").classList.add("hidden");
-    $("adminBtn").classList.add("hidden");
+        <div class="categoryIcon">
+          ${category.icon}
+        </div>
 
-    return;
-  }
+        <h3>
+          ${category.name}
+        </h3>
 
-  currentUser = user;
+        <p>
+          ${category.description}
+          • 120 محتوى
+        </p>
 
-  try{
+      </article>
 
-    await loadProfile(user);
-
-    const allowed = await enforceCurrentUser();
-
-    if(!allowed){
-      return;
-    }
-
-    $("loginPage").classList.add("hidden");
-    $("chatApp").classList.remove("hidden");
-
-    $("currentUsername").textContent =
-      currentProfile.name +
-      (user.isAnonymous ? " (زائر)" : "");
-
-    $("headerAvatar").src =
-      avatarFor(
-        currentProfile.name,
-        currentProfile.photo
-      );
-
-    $("adminBtn").classList.toggle(
-      "hidden",
-      !isAdmin()
-    );
-
-    renderRooms();
-    renderVoice();
-    loadPosts();
-    loadMembers();
-
-  }catch(error){
-
-    console.error(error);
-    message("❌ " + friendlyError(error));
-
-  }
-
-});
+    `).join("");
 
 
-/* =========================
-   ROOMS
-   ========================= */
+  document
+    .querySelectorAll(".category")
+    .forEach(category => {
 
-function renderRooms(){
+      category.onclick = function(){
 
-  const bar = $("roomsBar");
-  bar.innerHTML = "";
+        $("filter").value =
+          category.dataset.category;
 
-  rooms.forEach(room=>{
+        renderContent();
 
-    const button = document.createElement("button");
+        location.hash = "latest";
 
-    button.className =
-      "roomBtn" +
-      (room === currentRoom ? " active" : "");
+      };
 
-    button.textContent = "📍 " + room;
-
-    button.onclick = async()=>{
-
-      if(await isCurrentUserBlocked()){
-        return;
-      }
-
-      currentRoom = room;
-      renderRooms();
-      loadPosts();
-
-    };
-
-    bar.appendChild(button);
-
-  });
+    });
 
 }
 
 
 /* =========================
-   POSTS
-   ========================= */
+   الفلتر
+========================= */
 
-function loadPosts(){
+function renderFilter(){
 
-  if(unsubscribePosts){
-    unsubscribePosts();
-  }
+  $("filter").innerHTML =
 
-  const q = query(
-    collection(db,"messages"),
-    where("room","==",currentRoom),
-    limit(200)
-  );
+    `<option value="all">
+      كل الأقسام
+    </option>`
 
-  unsubscribePosts = onSnapshot(
-    q,
-    snapshot=>{
+    +
 
-      const posts = [];
+    categories.map(category => `
 
-      snapshot.forEach(item=>{
+      <option value="${category.id}">
+        ${category.icon}
+        ${category.name}
+      </option>
 
-        posts.push({
-          id:item.id,
-          data:item.data()
-        });
+    `).join("");
 
-      });
+}
 
-      posts.sort((a,b)=>{
 
-        const ta =
-          a.data.createdAt?.toMillis?.() || 0;
+/* =========================
+   المحتوى
+========================= */
 
-        const tb =
-          b.data.createdAt?.toMillis?.() || 0;
+function renderContent(){
 
-        return ta - tb;
+  const search =
+    $("search").value
+      .trim()
+      .toLowerCase();
 
-      });
+  const filter =
+    $("filter").value;
 
-      const feed = $("feed");
-      feed.innerHTML = "";
 
-      if(!posts.length){
+  const all =
+    [
+      ...uploadedContents,
+      ...contents
+    ];
 
-        feed.innerHTML =
-          '<div class="empty">لا توجد رسائل بعد.</div>';
 
-        return;
-      }
+  const result =
+    all.filter(item => {
 
-      posts.forEach(item=>{
+      const categoryOK =
+        filter === "all" ||
+        item.category === filter;
 
-        const post = document.createElement("article");
-        post.className = "post";
+      const searchOK =
+        !search ||
+        item.title
+          .toLowerCase()
+          .includes(search);
 
-        const data = item.data;
+      return categoryOK && searchOK;
 
-        post.innerHTML = `
+    });
 
-          <div class="postHead">
 
-            <img
-              src="${escapeHtml(avatarFor(data.name,data.photo))}"
-              alt=""
-            >
+  $("contentGrid").innerHTML =
 
-            <div>
+    result
+      .slice(0,300)
+      .map(item => {
 
-              <div class="postName">
-                ${escapeHtml(data.name || "عضو")}
+        const category =
+          categories.find(
+            x => x.id === item.category
+          );
+
+
+        return `
+
+          <article
+            class="card"
+            data-id="${item.id}">
+
+            <div
+              class="thumbnail ${category.className}">
+
+              ${category.icon}
+
+            </div>
+
+            <div class="cardBody">
+
+              <div class="cardTitle">
+                ${escapeHTML(item.title)}
               </div>
 
-              <div class="postRoom">
-                📍 ${escapeHtml(data.room || "")}
+              <div class="cardMeta">
+
+                <span>
+                  ${category.name}
+                </span>
+
+                <span>
+                  ${item.size || "ملف"}
+                </span>
+
               </div>
 
             </div>
 
-          </div>
+          </article>
 
-          <div class="postText">
-            ${escapeHtml(data.text || "")}
-          </div>
-
-          <div class="postActions">
-
-            ${
-              isAdmin()
-              ?
-              '<button class="danger" data-delete>🗑️ حذف</button>'
-              :
-              ''
-            }
-
-          </div>
         `;
 
-        const del =
-          post.querySelector("[data-delete]");
+      }).join("");
 
-        if(del){
 
-          del.onclick = async()=>{
+  document
+    .querySelectorAll(".card")
+    .forEach(card => {
 
-            if(!isAdmin()){
-              return;
-            }
+      card.onclick = function(){
 
-            if(!confirm("حذف الرسالة؟")){
-              return;
-            }
-
-            try{
-
-              await deleteDoc(
-                doc(db,"messages",item.id)
-              );
-
-            }catch(error){
-
-              alert(friendlyError(error));
-
-            }
-
-          };
-
-        }
-
-        feed.appendChild(post);
-
-      });
-
-      feed.scrollTop = feed.scrollHeight;
-
-    },
-    error=>{
-
-      console.error(error);
-
-      $("feed").innerHTML =
-        '<div class="empty">❌ ' +
-        escapeHtml(friendlyError(error)) +
-        '</div>';
-
-    }
-  );
-}
-
-
-/* =========================
-   SEND
-   ========================= */
-
-async function sendMessage(){
-
-  const input = $("messageInput");
-  const text = input.value.trim();
-
-  if(!text || !currentUser){
-    return;
-  }
-
-  try{
-
-    if(await isCurrentUserBlocked()){
-
-      alert("🚫 الحساب محظور.");
-      return;
-
-    }
-
-    const profileSnap =
-      await getDoc(
-        doc(db,"users",currentUser.uid)
-      );
-
-    if(!profileSnap.exists()){
-
-      alert("تعذر تحميل ملف الحساب.");
-      return;
-
-    }
-
-    const profile = profileSnap.data();
-
-    await addDoc(
-      collection(db,"messages"),
-      {
-        uid:currentUser.uid,
-        name:profile.name || "عضو",
-        photo:profile.photo || "",
-        room:currentRoom,
-        text:text,
-        createdAt:serverTimestamp()
-      }
-    );
-
-    input.value = "";
-
-  }catch(error){
-
-    console.error(error);
-
-    alert(
-      "❌ تعذر إرسال الرسالة:\n" +
-      friendlyError(error)
-    );
-
-  }
-
-}
-
-
-$("sendButton").onclick = sendMessage;
-
-$("messageInput").addEventListener(
-  "keydown",
-  event=>{
-
-    if(event.key === "Enter"){
-
-      event.preventDefault();
-      sendMessage();
-
-    }
-
-  }
-);
-
-
-/* =========================
-   MEMBERS
-   ========================= */
-
-function loadMembers(){
-
-  if(unsubscribeMembers){
-    unsubscribeMembers();
-  }
-
-  unsubscribeMembers =
-    onSnapshot(
-      query(
-        collection(db,"users"),
-        limit(100)
-      ),
-      snapshot=>{
-
-        $("membersList").innerHTML = "";
-
-        let count = 0;
-
-        snapshot.forEach(item=>{
-
-          const data = item.data();
-
-          if(data.banned === true){
-            return;
-          }
-
-          count++;
-
-          const div =
-            document.createElement("div");
-
-          div.className = "member";
-
-          div.innerHTML = `
-
-            <img
-              src="${escapeHtml(avatarFor(data.name,data.photo))}"
-              alt=""
-            >
-
-            <span class="memberName">
-              ${escapeHtml(data.name || "عضو")}
-            </span>
-
-            <span class="dot"></span>
-
-          `;
-
-          $("membersList").appendChild(div);
-
-        });
-
-        $("onlineCount").textContent =
-          count + " عضو";
-
-      },
-      error=>{
-        console.error(error);
-      }
-    );
-
-}
-
-
-/* =========================
-   PROFILE MODAL
-   ========================= */
-
-$("profileBtn").onclick = ()=>{
-
-  $("profileName").value =
-    currentProfile.name || "";
-
-  $("profilePreview").src =
-    avatarFor(
-      currentProfile.name,
-      currentProfile.photo
-    );
-
-  $("profilePhoto").value = "";
-  $("profileStatus").textContent = "";
-  $("profileModal").classList.add("show");
-
-};
-
-
-/* =========================
-   IMAGE PREVIEW
-   ========================= */
-
-$("profilePhoto").addEventListener(
-  "change",
-  ()=>{
-
-    const file = $("profilePhoto").files[0];
-
-    if(!file){
-      return;
-    }
-
-    if(!file.type.startsWith("image/")){
-
-      $("profileStatus").textContent =
-        "❌ اختر صورة فقط.";
-
-      $("profilePhoto").value = "";
-      return;
-
-    }
-
-    if(file.size > 5 * 1024 * 1024){
-
-      $("profileStatus").textContent =
-        "❌ الحد الأقصى للصورة 5MB.";
-
-      $("profilePhoto").value = "";
-      return;
-
-    }
-
-    $("profilePreview").src =
-      URL.createObjectURL(file);
-
-  }
-);
-
-
-/* =========================
-   SAVE PROFILE
-   ========================= */
-
-$("saveProfile").onclick = async()=>{
-
-  if(!currentUser){
-    return;
-  }
-
-  const status = $("profileStatus");
-
-  try{
-
-    status.textContent = "جاري الحفظ...";
-
-    const name =
-      $("profileName").value.trim();
-
-    if(name.length < 2){
-      throw new Error(
-        "الاسم يجب أن يكون حرفين على الأقل."
-      );
-    }
-
-    let photo =
-      currentProfile.photo || "";
-
-    const file =
-      $("profilePhoto").files[0];
-
-    if(file){
-
-      if(!file.type.startsWith("image/")){
-        throw new Error("الملف المختار ليس صورة.");
-      }
-
-      if(file.size > 5 * 1024 * 1024){
-        throw new Error("حجم الصورة أكبر من 5MB.");
-      }
-
-      const safeType =
-        file.type === "image/png"
-          ? "png"
-          : file.type === "image/webp"
-            ? "webp"
-            : "jpg";
-
-      const path =
-        "profiles/" +
-        currentUser.uid +
-        "/avatar_" +
-        Date.now() +
-        "." +
-        safeType;
-
-      const storageRef = ref(storage,path);
-
-      await uploadBytes(
-        storageRef,
-        file,
-        {
-          contentType:file.type
-        }
-      );
-
-      photo =
-        await getDownloadURL(storageRef);
-
-    }
-
-    /*
-     * قواعد Firestore تمنع المستخدم من تعديل
-     * أي حقول حساسة مثل role و banned.
-     */
-    await setDoc(
-      doc(db,"users",currentUser.uid),
-      {
-        uid:currentUser.uid,
-        name:name,
-        photo:photo
-      },
-      {merge:true}
-    );
-
-    try{
-
-      await updateProfile(
-        currentUser,
-        {
-          displayName:name,
-          photoURL:photo || null
-        }
-      );
-
-    }catch(error){
-
-      console.warn("Auth update:",error);
-
-    }
-
-    currentProfile = {
-      ...currentProfile,
-      name:name,
-      photo:photo
-    };
-
-    $("profilePreview").src =
-      avatarFor(name,photo);
-
-    $("headerAvatar").src =
-      avatarFor(name,photo);
-
-    $("currentUsername").textContent =
-      name +
-      (currentUser.isAnonymous ? " (زائر)" : "");
-
-    status.textContent =
-      "✅ تم حفظ الحساب والصورة.";
-
-  }catch(error){
-
-    console.error("PROFILE ERROR:",error);
-
-    status.textContent =
-      "❌ " + friendlyError(error);
-
-  }
-
-};
-
-
-/* =========================
-   ADMIN PANEL
-   ========================= */
-
-$("adminBtn").onclick = async()=>{
-
-  if(!isAdmin()){
-    return;
-  }
-
-  $("adminModal").classList.add("show");
-  $("adminStatus").textContent = "";
-
-  await loadAdmin();
-
-};
-
-
-async function loadAdmin(){
-
-  if(!isAdmin()){
-    return;
-  }
-
-  $("adminList").innerHTML =
-    '<div class="empty">جاري التحميل...</div>';
-
-  try{
-
-    const snapshot =
-      await getDocs(
-        query(
-          collection(db,"users"),
-          limit(100)
-        )
-      );
-
-    $("adminList").innerHTML = "";
-
-    snapshot.forEach(item=>{
-
-      const data = item.data();
-
-      const row =
-        document.createElement("div");
-
-      row.className = "adminRow";
-
-      const isProtected =
-        data.uid === ADMIN_UID;
-
-      const moderationPromise =
-        getDoc(
-          doc(db,"moderation",data.uid)
+        showContent(
+          card.dataset.id
         );
 
-      moderationPromise.then(modSnap=>{
-
-        const moderation =
-          modSnap.exists()
-            ? modSnap.data()
-            : {};
-
-        const banned =
-          moderation.banned === true;
-
-        const micMuted =
-          moderation.micMuted === true;
-
-        row.innerHTML = `
-
-          <div class="grow">
-
-            <b>
-              ${escapeHtml(data.name || "عضو")}
-            </b>
-
-            <div style="font-size:10px;color:#8494a8;word-break:break-all">
-              ${escapeHtml(data.uid || "")}
-            </div>
-
-            <div style="font-size:11px;margin-top:4px">
-              ${banned ? "🚫 محظور" : "🟢 غير محظور"}
-              -
-              ${micMuted ? "🔇 المايك ممنوع" : "🎙️ المايك مسموح"}
-            </div>
-
-          </div>
-
-          <div class="adminActions">
-
-            ${
-              isProtected
-              ? '<button class="warn">المدير</button>'
-              :
-              `
-              <button data-ban class="${banned ? "good" : "danger"}">
-                ${banned ? "فك الحظر" : "حظر"}
-              </button>
-
-              <button data-mic class="${micMuted ? "good" : "warn"}">
-                ${micMuted ? "سماح المايك" : "منع المايك"}
-              </button>
-              `
-            }
-
-          </div>
-        `;
-
-        if(!isProtected){
-
-          const banBtn =
-            row.querySelector("[data-ban]");
-
-          const micBtn =
-            row.querySelector("[data-mic]");
-
-          banBtn.onclick = async()=>{
-
-            try{
-
-              await setDoc(
-                doc(db,"moderation",data.uid),
-                {
-                  banned:!banned,
-                  micMuted:micMuted,
-                  updatedAt:serverTimestamp()
-                },
-                {merge:true}
-              );
-
-              await loadAdmin();
-
-            }catch(error){
-
-              alert(friendlyError(error));
-
-            }
-
-          };
-
-
-          micBtn.onclick = async()=>{
-
-            try{
-
-              await setDoc(
-                doc(db,"moderation",data.uid),
-                {
-                  banned:banned,
-                  micMuted:!micMuted,
-                  updatedAt:serverTimestamp()
-                },
-                {merge:true}
-              );
-
-              await loadAdmin();
-
-            }catch(error){
-
-              alert(friendlyError(error));
-
-            }
-
-          };
-
-        }
-
-        $("adminList").appendChild(row);
-
-      });
+      };
 
     });
 
-  }catch(error){
-
-    console.error(error);
-
-    $("adminList").innerHTML =
-      '<div class="empty">❌ ' +
-      escapeHtml(friendlyError(error)) +
-      '</div>';
-
-  }
-
 }
 
 
 /* =========================
-   DELETE ALL
-   ========================= */
+   عرض المحتوى
+========================= */
 
-$("deleteAllBtn").onclick = async()=>{
+function showContent(id){
 
-  if(!isAdmin()){
+  const item =
+    [
+      ...uploadedContents,
+      ...contents
+    ].find(
+      x => x.id === id
+    );
+
+
+  if(!item){
     return;
   }
 
-  if(!confirm("حذف جميع الرسائل؟")){
-    return;
-  }
 
-  try{
+  const category =
+    categories.find(
+      x => x.id === item.category
+    );
 
-    while(true){
 
-      const snapshot =
-        await getDocs(
-          query(
-            collection(db,"messages"),
-            limit(400)
-          )
-        );
+  if(item.url){
 
-      if(snapshot.empty){
-        break;
-      }
+    let media = "";
 
-      const batch = writeBatch(db);
 
-      snapshot.forEach(item=>{
-        batch.delete(item.ref);
-      });
+    if(
+      item.mime &&
+      item.mime.startsWith("image/")
+    ){
 
-      await batch.commit();
+      media = `
 
-      if(snapshot.size < 400){
-        break;
-      }
+        <img
+          class="preview"
+          src="${item.url}"
+          alt="">
+
+      `;
 
     }
 
-    $("adminStatus").textContent =
-      "✅ تم حذف الرسائل.";
+    else if(
+      item.mime &&
+      item.mime.startsWith("video/")
+    ){
 
-  }catch(error){
+      media = `
 
-    $("adminStatus").textContent =
-      "❌ " + friendlyError(error);
+        <video
+          class="preview"
+          src="${item.url}"
+          controls
+          playsinline>
+        </video>
 
-  }
+      `;
 
-};
+    }
+
+    else if(
+      item.mime &&
+      item.mime.startsWith("audio/")
+    ){
+
+      media = `
+
+        <audio
+          class="preview"
+          style="width:100%"
+          src="${item.url}"
+          controls>
+        </audio>
+
+      `;
+
+    }
+
+    else{
+
+      media = `
+
+        <div
+          class="thumbnail ${category.className}"
+          style="height:300px">
+
+          ${category.icon}
+
+        </div>
+
+      `;
+
+    }
 
 
-/* =========================
-   VOICE UI
-   ========================= */
+    $("viewerContent").innerHTML = `
 
-function renderVoice(){
+      ${media}
 
-  const container = $("voiceSlots");
-  container.innerHTML = "";
-
-  voiceIds.forEach(id=>{
-
-    const div = document.createElement("div");
-
-    div.className = "voiceSlot";
-    div.id = id;
-
-    div.innerHTML = `
-
-      <div class="micIcon">🎙️</div>
-
-      <div class="voiceName" id="${id}Name">
-        شاغر
+      <div class="previewTitle">
+        ${escapeHTML(item.title)}
       </div>
 
-      <div class="voiceStatus" id="${id}Status">
-        اضغط للتحدث
-      </div>
+      <a
+        class="primary"
+        href="${item.url}"
+        download="${escapeHTML(item.title)}">
 
-      <button id="${id}Btn">
-        تشغيل
-      </button>
+        ⬇️ تحميل الملف
+
+      </a>
 
     `;
 
-    $(id+"Btn").onclick =
-      ()=>toggleMic(id);
+  }
 
-    container.appendChild(div);
+  else{
 
-  });
+    $("viewerContent").innerHTML = `
 
-  watchVoice();
+      <div
+        class="thumbnail ${category.className}"
+        style="height:300px">
+
+        ${category.icon}
+
+      </div>
+
+      <div class="previewTitle">
+
+        ${escapeHTML(item.title)}
+
+      </div>
+
+      <p style="color:#9ca9ba;line-height:1.8">
+
+        هذا محتوى تجريبي.
+        سيتم استبداله بالملفات الحقيقية
+        عند ربط الموقع بالتخزين السحابي.
+
+      </p>
+
+    `;
+
+  }
+
+
+  openModal("viewer");
 
 }
 
 
 /* =========================
-   VOICE WATCH
-   ========================= */
+   فتح وإغلاق النوافذ
+========================= */
 
-function watchVoice(){
+function openModal(id){
 
-  if(unsubscribeVoice){
-    unsubscribeVoice();
-  }
-
-  unsubscribeVoice =
-    onSnapshot(
-      collection(db,"voiceSlots"),
-      snapshot=>{
-
-        const slots = {};
-
-        snapshot.forEach(item=>{
-          slots[item.id] = item.data();
-        });
-
-        voiceIds.forEach(id=>{
-
-          const slot = $(id);
-          const name = $(id+"Name");
-          const status = $(id+"Status");
-          const button = $(id+"Btn");
-
-          const data = slots[id];
-
-          if(!data){
-
-            slot.classList.remove("active");
-
-            name.textContent = "شاغر";
-            status.textContent = "اضغط للتحدث";
-            button.textContent = "تشغيل";
-
-            return;
-          }
-
-          slot.classList.add("active");
-
-          name.textContent =
-            data.name || "عضو";
-
-          if(data.uid === currentUser?.uid){
-
-            status.textContent =
-              "🎙️ أنت تتحدث";
-
-            button.textContent = "إيقاف";
-
-          }else{
-
-            status.textContent =
-              "🔊 مباشر";
-
-            button.textContent = "استماع";
-
-          }
-
-        });
-
-      },
-      error=>{
-        console.error("VOICE:",error);
-      }
-    );
+  $(id).classList.add("show");
 
 }
 
 
-/* =========================
-   VOICE
-   ========================= */
+function closeModal(id){
 
-async function toggleMic(slotId){
-
-  if(!currentUser){
-    alert("سجل الدخول أولًا.");
-    return;
-  }
-
-  if(currentUser.isAnonymous){
-    alert("استخدام المايك يحتاج عضوية.");
-    return;
-  }
-
-  if(mySlot === slotId){
-    await leaveMic();
-    return;
-  }
-
-  if(mySlot){
-    alert("لديك مايك يعمل بالفعل.");
-    return;
-  }
-
-  try{
-
-    if(await isCurrentUserBlocked()){
-      alert("🚫 الحساب محظور.");
-      return;
-    }
-
-    const moderation =
-      await getMyModeration();
-
-    if(moderation?.micMuted === true){
-
-      alert("🎤 تم منعك من استخدام المايك.");
-      return;
-
-    }
-
-    if(
-      !navigator.mediaDevices ||
-      !navigator.mediaDevices.getUserMedia
-    ){
-
-      throw new Error(
-        "الميكروفون يحتاج HTTPS ودعم المتصفح."
-      );
-
-    }
-
-    const slot =
-      await getDoc(
-        doc(db,"voiceSlots",slotId)
-      );
-
-    if(slot.exists()){
-      alert("هذا المايك مشغول.");
-      return;
-    }
-
-    currentStream =
-      await navigator.mediaDevices.getUserMedia({
-        audio:true,
-        video:false
-      });
-
-    mySlot = slotId;
-
-    await setDoc(
-      doc(db,"voiceSlots",slotId),
-      {
-        uid:currentUser.uid,
-        name:currentProfile.name || "عضو",
-        createdAt:serverTimestamp()
-      }
-    );
-
-  }catch(error){
-
-    if(currentStream){
-
-      currentStream
-        .getTracks()
-        .forEach(track=>track.stop());
-
-    }
-
-    currentStream = null;
-    mySlot = null;
-
-    alert(
-      "❌ تعذر تشغيل المايك:\n" +
-      friendlyError(error)
-    );
-
-  }
+  $(id).classList.remove("show");
 
 }
 
-
-async function leaveMic(){
-
-  if(!mySlot){
-
-    if(currentStream){
-
-      currentStream
-        .getTracks()
-        .forEach(track=>track.stop());
-
-      currentStream = null;
-
-    }
-
-    return;
-  }
-
-  const slot = mySlot;
-
-  try{
-
-    const slotSnap =
-      await getDoc(
-        doc(db,"voiceSlots",slot)
-      );
-
-    if(
-      slotSnap.exists() &&
-      slotSnap.data().uid === currentUser?.uid
-    ){
-
-      await deleteDoc(
-        doc(db,"voiceSlots",slot)
-      );
-
-    }
-
-  }catch(error){
-
-    console.warn(error);
-
-  }
-
-  if(currentStream){
-
-    currentStream
-      .getTracks()
-      .forEach(track=>track.stop());
-
-  }
-
-  currentStream = null;
-  mySlot = null;
-
-}
-
-
-/* =========================
-   CLOSE MODALS
-   ========================= */
 
 document
   .querySelectorAll("[data-close]")
-  .forEach(button=>{
+  .forEach(button => {
 
-    button.onclick = ()=>{
+    button.onclick = function(){
 
-      const modal =
-        $(button.dataset.close);
-
-      if(modal){
-        modal.classList.remove("show");
-      }
+      closeModal(
+        button.dataset.close
+      );
 
     };
 
@@ -2286,74 +1215,183 @@ document
 
 document
   .querySelectorAll(".modal")
-  .forEach(modal=>{
+  .forEach(modal => {
 
-    modal.onclick = event=>{
+    modal.addEventListener(
+      "click",
+      function(event){
 
-      if(event.target === modal){
-        modal.classList.remove("show");
+        if(
+          event.target === modal
+        ){
+
+          closeModal(modal.id);
+
+        }
+
       }
-
-    };
+    );
 
   });
 
 
 /* =========================
-   LOGOUT
-   ========================= */
+   رفع المحتوى
+========================= */
 
-$("logoutButton").onclick = async()=>{
+function setupUpload(){
 
-  try{
-    await leaveMic();
-  }catch(_){}
+  $("contentCategory").innerHTML =
+    categories.map(category => `
 
-  if(unsubscribePosts){
-    unsubscribePosts();
-    unsubscribePosts = null;
-  }
+      <option value="${category.id}">
+        ${category.icon}
+        ${category.name}
+      </option>
 
-  if(unsubscribeMembers){
-    unsubscribeMembers();
-    unsubscribeMembers = null;
-  }
+    `).join("");
 
-  if(unsubscribeVoice){
-    unsubscribeVoice();
-    unsubscribeVoice = null;
-  }
+}
 
-  try{
-    await signOut(auth);
-  }catch(error){
-    console.error(error);
-  }
+
+$("uploadOpen").onclick = function(){
+
+  openModal("uploadModal");
 
 };
 
 
-window.addEventListener(
-  "beforeunload",
-  ()=>{
+$("uploadHero").onclick = function(){
 
-    if(currentStream){
+  openModal("uploadModal");
 
-      currentStream
-        .getTracks()
-        .forEach(track=>track.stop());
+};
+
+
+$("uploadForm").addEventListener(
+  "submit",
+  function(event){
+
+    event.preventDefault();
+
+
+    const name =
+      $("contentName")
+        .value
+        .trim();
+
+
+    const category =
+      $("contentCategory")
+        .value;
+
+
+    const file =
+      $("contentFile")
+        .files[0];
+
+
+    if(!name || !file){
+
+      return;
 
     }
 
+
+    const url =
+      URL.createObjectURL(file);
+
+
+    const item = {
+
+      id:
+        "upload-" +
+        Date.now(),
+
+      category:
+        category,
+
+      title:
+        name,
+
+      size:
+        (
+          file.size /
+          1024 /
+          1024
+        ).toFixed(2) +
+        " MB",
+
+      mime:
+        file.type,
+
+      url:
+        url,
+
+      demo:false
+
+    };
+
+
+    uploadedContents.unshift(
+      item
+    );
+
+
+    renderContent();
+
+
+    $("uploadStatus").textContent =
+      "✅ تمت إضافة الملف بنجاح لهذا الجهاز.";
+
+
+    $("uploadForm").reset();
+
+
+    setTimeout(
+      function(){
+
+        $("uploadStatus").textContent =
+          "";
+
+      },
+      2500
+    );
+
   }
 );
+
+
+/* =========================
+   البحث
+========================= */
+
+$("search").addEventListener(
+  "input",
+  renderContent
+);
+
+
+$("filter").addEventListener(
+  "change",
+  renderContent
+);
+
+
+/* =========================
+   بدء الموقع
+========================= */
+
+renderCategories();
+
+renderFilter();
+
+setupUpload();
+
+renderContent();
 
 </script>
 
 </body>
 </html>
-'''
-
-path = Path("/mnt/data/index.html")
-path.write_text(html, encoding="utf-8")
-print(f"تم إنشاء الملف: {path}")
+```
