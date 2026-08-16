@@ -490,8 +490,14 @@ a{text-decoration:none;color:inherit}
   <nav class="nav">
     <a href="#sections">الأقسام</a>
     <a href="#latest">المحتوى</a>
-    <button id="loginOpen">دخول المشرف</button>
-    <button id="uploadOpen" style="display:none">رفع محتوى</button>
+
+    <button id="loginOpen">
+      دخول المشرف
+    </button>
+
+    <button id="uploadOpen" style="display:none">
+      رفع محتوى
+    </button>
   </nav>
 
 </header>
@@ -517,7 +523,10 @@ a{text-decoration:none;color:inherit}
         تصفح الأقسام
       </a>
 
-      <button id="uploadHero" class="secondary" style="display:none">
+      <button
+        id="uploadHero"
+        class="secondary"
+        style="display:none">
         ⬆️ رفع محتوى
       </button>
 
@@ -537,9 +546,11 @@ a{text-decoration:none;color:inherit}
     </div>
 
     <div class="searchBox">
+
       <input
         id="search"
         placeholder="🔎 ابحث عن محتوى...">
+
     </div>
 
   </div>
@@ -550,18 +561,26 @@ a{text-decoration:none;color:inherit}
 
 <section id="latest" class="section">
 
-  <div id="adminPanel" class="adminPanel" style="display:none">
+  <div
+    id="adminPanel"
+    class="adminPanel"
+    style="display:none">
 
     <div class="adminRow">
 
       <div>
+
         <div>لوحة المشرف</div>
+
         <div class="adminName">
           🛡️ كرار — مشرف موسوعة الشعلة
         </div>
+
       </div>
 
-      <button id="logoutButton" class="danger">
+      <button
+        id="logoutButton"
+        class="danger">
         تسجيل الخروج
       </button>
 
@@ -572,23 +591,40 @@ a{text-decoration:none;color:inherit}
   <div class="sectionHead">
 
     <div>
-      <div class="smallTitle">المحتوى</div>
-      <h2>أحدث المحتويات</h2>
+
+      <div class="smallTitle">
+        المحتوى
+      </div>
+
+      <h2>
+        أحدث المحتويات
+      </h2>
+
     </div>
 
-    <select id="filter" class="filter"></select>
+    <select
+      id="filter"
+      class="filter">
+    </select>
 
   </div>
 
-  <div id="contentGrid" class="contentGrid"></div>
+  <div
+    id="contentGrid"
+    class="contentGrid">
+  </div>
 
 </section>
 
-<div id="viewer" class="modal">
+<div
+  id="viewer"
+  class="modal">
 
   <div class="modalBox">
 
-    <button class="close" data-close="viewer">
+    <button
+      class="close"
+      data-close="viewer">
       ×
     </button>
 
@@ -598,54 +634,88 @@ a{text-decoration:none;color:inherit}
 
 </div>
 
-<div id="uploadModal" class="modal">
+<div
+  id="uploadModal"
+  class="modal">
 
   <div class="modalBox">
 
-    <button class="close" data-close="uploadModal">
+    <button
+      class="close"
+      data-close="uploadModal">
       ×
     </button>
 
-    <h2>⬆️ إضافة محتوى</h2>
+    <h2>
+      ⬆️ إضافة محتوى
+    </h2>
 
     <p style="color:#9ba8ba;line-height:1.7">
-      الملفات التي ترفعها هنا يتم حفظها في Firebase Storage
-      وتبقى موجودة بعد إغلاق الموقع.
+
+      الملفات التي ترفعها هنا يتم حفظها في
+      Firebase Storage وتبقى موجودة بعد إغلاق الموقع.
+
     </p>
 
-    <form id="uploadForm" class="uploadForm">
+    <form
+      id="uploadForm"
+      class="uploadForm">
 
       <label>
+
         اسم المحتوى
+
         <input
           id="contentName"
           maxlength="100"
           required
           placeholder="مثال: صور بغداد">
+
       </label>
 
       <label>
+
         القسم
-        <select id="contentCategory"></select>
+
+        <select id="contentCategory">
+        </select>
+
       </label>
 
       <label>
+
         الملف
+
         <input
           id="contentFile"
           type="file"
           required>
+
       </label>
 
-      <button type="submit" class="primary">
+      <button
+        type="submit"
+        class="primary">
+
         ⬆️ رفع وحفظ المحتوى
+
       </button>
 
-      <div class="progress" id="uploadProgress">
-        <div class="progressBar" id="progressBar"></div>
+      <div
+        class="progress"
+        id="uploadProgress">
+
+        <div
+          class="progressBar"
+          id="progressBar">
+        </div>
+
       </div>
 
-      <div id="uploadStatus" class="status"></div>
+      <div
+        id="uploadStatus"
+        class="status">
+      </div>
 
     </form>
 
@@ -653,45 +723,67 @@ a{text-decoration:none;color:inherit}
 
 </div>
 
-<div id="loginModal" class="modal">
+<div
+  id="loginModal"
+  class="modal">
 
   <div class="modalBox">
 
-    <button class="close" data-close="loginModal">
+    <button
+      class="close"
+      data-close="loginModal">
       ×
     </button>
 
-    <h2>🛡️ دخول المشرف</h2>
+    <h2>
+      🛡️ دخول المشرف
+    </h2>
 
     <p class="loginHint">
-      أدخل رمز حساب المشرف. البريد الإلكتروني المستخدم في Firebase
-      لا يظهر للزوار.
+
+      أدخل رمز حساب المشرف.
+
     </p>
 
-    <form id="loginForm" class="uploadForm">
+    <form
+      id="loginForm"
+      class="uploadForm">
 
       <label>
+
         اسم المشرف
+
         <input
           value="كرار"
           readonly>
+
       </label>
 
       <label>
+
         رمز الدخول
+
         <input
           id="adminPassword"
           type="password"
           autocomplete="current-password"
           required
           placeholder="أدخل رمز الدخول">
+
       </label>
 
-      <button type="submit" class="primary">
+      <button
+        type="submit"
+        class="primary">
+
         🔐 تسجيل الدخول
+
       </button>
 
-      <div id="loginStatus" class="status"></div>
+      <div
+        id="loginStatus"
+        class="status">
+      </div>
 
     </form>
 
@@ -701,7 +793,9 @@ a{text-decoration:none;color:inherit}
 
 <footer class="footer">
 
-  <strong>🔥 موسوعة الشعلة</strong>
+  <strong>
+    🔥 موسوعة الشعلة
+  </strong>
 
   <span>
     © 2026 موسوعة الشعلة
@@ -714,13 +808,17 @@ a{text-decoration:none;color:inherit}
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 
+
 import {
   getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  signOut
+  signOut,
+  setPersistence,
+  browserLocalPersistence
 }
 from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
 
 import {
   getFirestore,
@@ -735,6 +833,7 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
+
 import {
   getStorage,
   ref,
@@ -746,39 +845,67 @@ from "https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js";
 
 
 /* =====================================================
-   إعدادات Firebase
+   Firebase
 ===================================================== */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
-  authDomain: "dardashti-chat.firebaseapp.com",
-  projectId: "dardashti-chat",
-  storageBucket: "dardashti-chat.firebasestorage.app",
-  messagingSenderId: "779042757468",
-  appId: "1:779042757468:web:7646d3cdadf46f315a3f99",
-  measurementId: "G-PFW6X6P2TR"
+
+  apiKey:
+    "AIzaSyAuFZxL_pmEm7weqkMQVGRME8VHeVs4fDU",
+
+  authDomain:
+    "dardashti-chat.firebaseapp.com",
+
+  projectId:
+    "dardashti-chat",
+
+  storageBucket:
+    "dardashti-chat.firebasestorage.app",
+
+  messagingSenderId:
+    "779042757468",
+
+  appId:
+    "1:779042757468:web:7646d3cdadf46f315a3f99",
+
+  measurementId:
+    "G-PFW6X6P2TR"
+
 };
 
 
-/* =====================================================
-   مهم:
-   ضع هنا بريد حساب المشرف الموجود في Firebase Authentication.
-   لا تضع كلمة المرور هنا.
-===================================================== */
+const ADMIN_EMAIL =
+  "Kararjassim1994@gmail.com";
 
-const ADMIN_EMAIL = "ضع_بريد_حساب_المشرف_هنا";
 
 const ADMIN_UID =
   "N6KoWvu1IxbgWtVE46fmCsydZbF3";
 
 
-const app = initializeApp(firebaseConfig);
+const app =
+  initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
 
-const db = getFirestore(app);
+const auth =
+  getAuth(app);
 
-const storage = getStorage(app);
+
+const db =
+  getFirestore(app);
+
+
+const storage =
+  getStorage(app);
+
+
+/* =====================================================
+   حفظ جلسة تسجيل الدخول
+===================================================== */
+
+await setPersistence(
+  auth,
+  browserLocalPersistence
+);
 
 
 /* =====================================================
@@ -840,24 +967,31 @@ let currentUser = null;
 ===================================================== */
 
 function $(id){
+
   return document.getElementById(id);
+
 }
 
 
 function escapeHTML(value){
 
   return String(value || "")
-    .replace(/[&<>"']/g,function(char){
+    .replace(
+      /[&<>"']/g,
+      function(char){
 
-      return {
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#039;"
-      }[char];
+        return {
 
-    });
+          "&":"&amp;",
+          "<":"&lt;",
+          ">":"&gt;",
+          '"':"&quot;",
+          "'":"&#039;"
+
+        }[char];
+
+      }
+    );
 
 }
 
@@ -865,11 +999,15 @@ function escapeHTML(value){
 function formatSize(bytes){
 
   if(!bytes){
+
     return "ملف";
+
   }
+
 
   const mb =
     bytes / 1024 / 1024;
+
 
   if(mb < 1){
 
@@ -879,7 +1017,9 @@ function formatSize(bytes){
 
   }
 
+
   return mb.toFixed(2) + " MB";
+
 }
 
 
@@ -890,43 +1030,48 @@ function formatSize(bytes){
 function renderCategories(){
 
   $("categories").innerHTML =
-    categories.map(category => `
 
-      <article
-        class="category ${category.className}"
-        data-category="${category.id}">
+    categories.map(
+      category => `
 
-        <div class="categoryIcon">
-          ${category.icon}
-        </div>
+        <article
+          class="category ${category.className}"
+          data-category="${category.id}">
 
-        <h3>
-          ${category.name}
-        </h3>
+          <div class="categoryIcon">
+            ${category.icon}
+          </div>
 
-        <p>
-          ${category.description}
-        </p>
+          <h3>
+            ${category.name}
+          </h3>
 
-      </article>
+          <p>
+            ${category.description}
+          </p>
 
-    `).join("");
+        </article>
+
+      `
+    ).join("");
 
 
   document
     .querySelectorAll(".category")
     .forEach(category => {
 
-      category.onclick = function(){
+      category.onclick =
+        function(){
 
-        $("filter").value =
-          category.dataset.category;
+          $("filter").value =
+            category.dataset.category;
 
-        renderContent();
+          renderContent();
 
-        location.hash = "latest";
+          location.hash =
+            "latest";
 
-      };
+        };
 
     });
 
@@ -940,21 +1085,27 @@ function renderCategories(){
 function renderFilter(){
 
   $("filter").innerHTML =
-    `<option value="all">كل الأقسام</option>` +
 
-    categories.map(category => `
+    `<option value="all">
+      كل الأقسام
+    </option>` +
 
-      <option value="${category.id}">
-        ${category.icon} ${category.name}
-      </option>
+    categories.map(
+      category => `
 
-    `).join("");
+        <option value="${category.id}">
+          ${category.icon}
+          ${category.name}
+        </option>
+
+      `
+    ).join("");
 
 }
 
 
 /* =====================================================
-   تحميل المحتوى من Firestore
+   تحميل المحتوى
 ===================================================== */
 
 async function loadContents(){
@@ -963,54 +1114,78 @@ async function loadContents(){
 
     const q =
       query(
-        collection(db,"content"),
-        orderBy("createdAt","desc")
+        collection(
+          db,
+          "content"
+        ),
+        orderBy(
+          "createdAt",
+          "desc"
+        )
       );
+
 
     const snapshot =
       await getDocs(q);
 
+
     uploadedContents =
-      snapshot.docs.map(item => {
+      snapshot.docs.map(
+        item => {
 
-        const data = item.data();
+          const data =
+            item.data();
 
-        return {
 
-          id:item.id,
+          return {
 
-          category:
-            data.category || "files",
+            id:
+              item.id,
 
-          title:
-            data.title || "بدون اسم",
+            category:
+              data.category ||
+              "files",
 
-          size:
-            data.size || "ملف",
+            title:
+              data.title ||
+              "بدون اسم",
 
-          mime:
-            data.mime || "",
+            size:
+              data.size ||
+              "ملف",
 
-          url:
-            data.url || "",
+            mime:
+              data.mime ||
+              "",
 
-          storagePath:
-            data.storagePath || "",
+            url:
+              data.url ||
+              "",
 
-          createdAt:
-            data.createdAt || null
+            storagePath:
+              data.storagePath ||
+              "",
 
-        };
+            createdAt:
+              data.createdAt ||
+              null
 
-      });
+          };
+
+        }
+      );
+
 
     renderContent();
+
 
   }catch(error){
 
     console.error(error);
 
+
     $("contentGrid").innerHTML = `
+
       <div style="
         grid-column:1/-1;
         padding:20px;
@@ -1019,10 +1194,17 @@ async function loadContents(){
         border-radius:12px;
         color:#ffb3bd;
         line-height:1.8">
+
         تعذر تحميل المحتوى من Firebase.
+
         <br>
-        ${escapeHTML(error.message)}
+
+        ${escapeHTML(
+          error.message
+        )}
+
       </div>
+
     `;
 
   }
@@ -1041,38 +1223,50 @@ function renderContent(){
       .trim()
       .toLowerCase();
 
+
   const filter =
     $("filter").value;
 
 
   const result =
-    uploadedContents.filter(item => {
+    uploadedContents.filter(
+      item => {
 
-      const categoryOK =
-        filter === "all" ||
-        item.category === filter;
+        const categoryOK =
+          filter === "all" ||
+          item.category === filter;
 
-      const searchOK =
-        !search ||
-        item.title
-          .toLowerCase()
-          .includes(search);
 
-      return categoryOK && searchOK;
+        const searchOK =
+          !search ||
+          String(item.title)
+            .toLowerCase()
+            .includes(search);
 
-    });
+
+        return (
+          categoryOK &&
+          searchOK
+        );
+
+      }
+    );
 
 
   if(!result.length){
 
     $("contentGrid").innerHTML = `
+
       <div style="
         grid-column:1/-1;
         text-align:center;
         padding:40px;
         color:#8996aa">
+
         لا يوجد محتوى محفوظ حاليًا.
+
       </div>
+
     `;
 
     return;
@@ -1084,85 +1278,96 @@ function renderContent(){
 
     result
       .slice(0,300)
-      .map(item => {
+      .map(
+        item => {
 
-        const category =
-          categories.find(
-            x => x.id === item.category
-          ) || categories[4];
+          const category =
+            categories.find(
+              x =>
+                x.id ===
+                item.category
+            ) ||
+            categories[4];
 
 
-        let thumbnail =
-          category.icon;
+          let thumbnail =
+            category.icon;
 
 
-        if(
-          item.mime &&
-          item.mime.startsWith("image/") &&
-          item.url
-        ){
+          if(
+            item.mime &&
+            item.mime.startsWith(
+              "image/"
+            ) &&
+            item.url
+          ){
 
-          thumbnail = `
-            <img
-              src="${escapeHTML(item.url)}"
-              alt=""
-              loading="lazy">
+            thumbnail = `
+
+              <img
+                src="${escapeHTML(item.url)}"
+                alt=""
+                loading="lazy">
+
+            `;
+
+          }
+
+
+          return `
+
+            <article
+              class="card"
+              data-id="${escapeHTML(item.id)}">
+
+              <div
+                class="thumbnail ${category.className}">
+
+                ${thumbnail}
+
+              </div>
+
+              <div class="cardBody">
+
+                <div class="cardTitle">
+                  ${escapeHTML(item.title)}
+                </div>
+
+                <div class="cardMeta">
+
+                  <span>
+                    ${category.name}
+                  </span>
+
+                  <span>
+                    ${escapeHTML(item.size)}
+                  </span>
+
+                </div>
+
+              </div>
+
+            </article>
+
           `;
 
         }
-
-
-        return `
-
-          <article
-            class="card"
-            data-id="${escapeHTML(item.id)}">
-
-            <div
-              class="thumbnail ${category.className}">
-
-              ${thumbnail}
-
-            </div>
-
-            <div class="cardBody">
-
-              <div class="cardTitle">
-                ${escapeHTML(item.title)}
-              </div>
-
-              <div class="cardMeta">
-
-                <span>
-                  ${category.name}
-                </span>
-
-                <span>
-                  ${escapeHTML(item.size)}
-                </span>
-
-              </div>
-
-            </div>
-
-          </article>
-
-        `;
-
-      }).join("");
+      )
+      .join("");
 
 
   document
     .querySelectorAll(".card")
     .forEach(card => {
 
-      card.onclick = function(){
+      card.onclick =
+        function(){
 
-        showContent(
-          card.dataset.id
-        );
+          showContent(
+            card.dataset.id
+          );
 
-      };
+        };
 
     });
 
@@ -1170,26 +1375,31 @@ function renderContent(){
 
 
 /* =====================================================
-   عرض ملف
+   عرض الملف
 ===================================================== */
 
 function showContent(id){
 
   const item =
     uploadedContents.find(
-      x => x.id === id
+      x =>
+        x.id === id
     );
 
 
   if(!item){
+
     return;
+
   }
 
 
   const category =
     categories.find(
-      x => x.id === item.category
-    ) || categories[4];
+      x =>
+        x.id === item.category
+    ) ||
+    categories[4];
 
 
   let media = "";
@@ -1197,7 +1407,9 @@ function showContent(id){
 
   if(
     item.mime &&
-    item.mime.startsWith("image/")
+    item.mime.startsWith(
+      "image/"
+    )
   ){
 
     media = `
@@ -1213,7 +1425,9 @@ function showContent(id){
 
   else if(
     item.mime &&
-    item.mime.startsWith("video/")
+    item.mime.startsWith(
+      "video/"
+    )
   ){
 
     media = `
@@ -1231,7 +1445,9 @@ function showContent(id){
 
   else if(
     item.mime &&
-    item.mime.startsWith("audio/")
+    item.mime.startsWith(
+      "audio/"
+    )
   ){
 
     media = `
@@ -1289,14 +1505,21 @@ function showContent(id){
       ${
         currentUser &&
         currentUser.uid === ADMIN_UID
+
         ?
+
         `<button
           id="deleteCurrent"
           class="danger">
+
           🗑️ حذف المحتوى
+
         </button>`
+
         :
+
         ""
+
       }
 
     </div>
@@ -1309,8 +1532,17 @@ function showContent(id){
     currentUser.uid === ADMIN_UID
   ){
 
-    $("deleteCurrent").onclick =
-      () => deleteContent(item);
+    const deleteButton =
+      $("deleteCurrent");
+
+
+    if(deleteButton){
+
+      deleteButton.onclick =
+        () =>
+          deleteContent(item);
+
+    }
 
   }
 
@@ -1321,7 +1553,7 @@ function showContent(id){
 
 
 /* =====================================================
-   حذف المحتوى للمشرف
+   حذف المحتوى
 ===================================================== */
 
 async function deleteContent(item){
@@ -1357,7 +1589,10 @@ async function deleteContent(item){
           item.storagePath
         );
 
-      await deleteObject(fileRef);
+
+      await deleteObject(
+        fileRef
+      );
 
     }
 
@@ -1373,7 +1608,8 @@ async function deleteContent(item){
 
     uploadedContents =
       uploadedContents.filter(
-        x => x.id !== item.id
+        x =>
+          x.id !== item.id
       );
 
 
@@ -1381,11 +1617,16 @@ async function deleteContent(item){
 
     renderContent();
 
-    alert("تم حذف المحتوى بنجاح.");
+
+    alert(
+      "تم حذف المحتوى بنجاح."
+    );
+
 
   }catch(error){
 
     console.error(error);
+
 
     alert(
       "تعذر حذف المحتوى: " +
@@ -1402,26 +1643,37 @@ async function deleteContent(item){
 ===================================================== */
 
 function openModal(id){
-  $(id).classList.add("show");
+
+  $(id)
+    .classList
+    .add("show");
+
 }
 
 
 function closeModal(id){
-  $(id).classList.remove("show");
+
+  $(id)
+    .classList
+    .remove("show");
+
 }
 
 
 document
-  .querySelectorAll("[data-close]")
+  .querySelectorAll(
+    "[data-close]"
+  )
   .forEach(button => {
 
-    button.onclick = function(){
+    button.onclick =
+      function(){
 
-      closeModal(
-        button.dataset.close
-      );
+        closeModal(
+          button.dataset.close
+        );
 
-    };
+      };
 
   });
 
@@ -1434,9 +1686,13 @@ document
       "click",
       function(event){
 
-        if(event.target === modal){
+        if(
+          event.target === modal
+        ){
 
-          closeModal(modal.id);
+          closeModal(
+            modal.id
+          );
 
         }
 
@@ -1447,55 +1703,73 @@ document
 
 
 /* =====================================================
-   إعداد رفع الملفات
+   إعداد الرفع
 ===================================================== */
 
 function setupUpload(){
 
   $("contentCategory").innerHTML =
-    categories.map(category => `
 
-      <option value="${category.id}">
-        ${category.icon} ${category.name}
-      </option>
+    categories.map(
+      category => `
 
-    `).join("");
+        <option value="${category.id}">
+          ${category.icon}
+          ${category.name}
+        </option>
+
+      `
+    ).join("");
 
 }
 
 
-$("uploadOpen").onclick = function(){
+$("uploadOpen").onclick =
+  function(){
 
-  if(!currentUser){
+    if(
+      !currentUser ||
+      currentUser.uid !== ADMIN_UID
+    ){
 
-    openModal("loginModal");
+      openModal("loginModal");
 
-    return;
+      return;
 
-  }
-
-  openModal("uploadModal");
-
-};
+    }
 
 
-$("uploadHero").onclick = function(){
+    openModal(
+      "uploadModal"
+    );
 
-  if(!currentUser){
+  };
 
-    openModal("loginModal");
 
-    return;
+$("uploadHero").onclick =
+  function(){
 
-  }
+    if(
+      !currentUser ||
+      currentUser.uid !== ADMIN_UID
+    ){
 
-  openModal("uploadModal");
+      openModal("loginModal");
 
-};
+      return;
+
+    }
+
+
+    openModal(
+      "uploadModal"
+    );
+
+  };
 
 
 /* =====================================================
-   رفع الملف إلى Firebase Storage
+   رفع الملف
 ===================================================== */
 
 $("uploadForm").addEventListener(
@@ -1534,7 +1808,10 @@ $("uploadForm").addEventListener(
         .files[0];
 
 
-    if(!name || !file){
+    if(
+      !name ||
+      !file
+    ){
 
       $("uploadStatus").textContent =
         "❌ أدخل اسم المحتوى واختر ملفًا.";
@@ -1551,6 +1828,7 @@ $("uploadForm").addEventListener(
     $("uploadProgress").style.display =
       "block";
 
+
     $("progressBar").style.width =
       "0%";
 
@@ -1559,7 +1837,10 @@ $("uploadForm").addEventListener(
 
       const safeName =
         file.name
-          .replace(/[^\w\u0600-\u06FF.\- ]/g,"_");
+          .replace(
+            /[^\w\u0600-\u06FF.\- ]/g,
+            "_"
+          );
 
 
       const uniqueName =
@@ -1595,6 +1876,7 @@ $("uploadForm").addEventListener(
 
 
       uploadTask.on(
+
         "state_changed",
 
         function(snapshot){
@@ -1607,7 +1889,9 @@ $("uploadForm").addEventListener(
 
 
           $("progressBar").style.width =
-            percent.toFixed(0) + "%";
+            percent.toFixed(0) +
+            "%";
+
 
           $("uploadStatus").textContent =
             "⏳ جارٍ الرفع " +
@@ -1620,9 +1904,11 @@ $("uploadForm").addEventListener(
 
           console.error(error);
 
+
           $("uploadStatus").textContent =
             "❌ فشل الرفع: " +
             error.message;
+
 
           $("uploadProgress").style.display =
             "none";
@@ -1641,16 +1927,20 @@ $("uploadForm").addEventListener(
 
             const documentData = {
 
-              title:name,
+              title:
+                name,
 
-              category:category,
+              category:
+                category,
 
               mime:
                 file.type ||
                 "application/octet-stream",
 
               size:
-                formatSize(file.size),
+                formatSize(
+                  file.size
+                ),
 
               fileName:
                 file.name,
@@ -1714,11 +2004,14 @@ $("uploadForm").addEventListener(
                   "uploadModal"
                 );
 
+
                 $("uploadStatus").textContent =
                   "";
 
+
                 $("uploadProgress").style.display =
                   "none";
+
 
                 $("progressBar").style.width =
                   "0%";
@@ -1732,6 +2025,7 @@ $("uploadForm").addEventListener(
 
             console.error(error);
 
+
             $("uploadStatus").textContent =
               "❌ تم رفع الملف لكن تعذر حفظ بياناته: " +
               error.message;
@@ -1739,15 +2033,18 @@ $("uploadForm").addEventListener(
           }
 
         }
+
       );
 
     }catch(error){
 
       console.error(error);
 
+
       $("uploadStatus").textContent =
         "❌ تعذر رفع الملف: " +
         error.message;
+
 
       $("uploadProgress").style.display =
         "none";
@@ -1765,13 +2062,19 @@ $("uploadForm").addEventListener(
 $("loginOpen").onclick =
   function(){
 
-    if(currentUser){
+    if(
+      currentUser &&
+      currentUser.uid === ADMIN_UID
+    ){
 
       return;
 
     }
 
-    openModal("loginModal");
+
+    openModal(
+      "loginModal"
+    );
 
   };
 
@@ -1784,21 +2087,8 @@ $("loginForm").addEventListener(
 
 
     const password =
-      $("adminPassword").value;
-
-
-    if(
-      !ADMIN_EMAIL ||
-      ADMIN_EMAIL ===
-      "ضع_بريد_حساب_المشرف_هنا"
-    ){
-
-      $("loginStatus").textContent =
-        "❌ ضع بريد حساب المشرف في ADMIN_EMAIL داخل الملف.";
-
-      return;
-
-    }
+      $("adminPassword")
+        .value;
 
 
     if(!password){
@@ -1832,6 +2122,7 @@ $("loginForm").addEventListener(
 
         await signOut(auth);
 
+
         $("loginStatus").textContent =
           "❌ هذا الحساب ليس حساب المشرف المعتمد.";
 
@@ -1841,10 +2132,11 @@ $("loginForm").addEventListener(
 
 
       $("loginStatus").textContent =
-        "✅ تم تسجيل الدخول.";
+        "✅ تم تسجيل الدخول بنجاح.";
 
 
-      $("adminPassword").value = "";
+      $("adminPassword").value =
+        "";
 
 
       setTimeout(
@@ -1863,8 +2155,54 @@ $("loginForm").addEventListener(
 
       console.error(error);
 
+
+      let message =
+        "❌ تعذر تسجيل الدخول.";
+
+
+      if(
+        error.code ===
+        "auth/invalid-credential"
+      ){
+
+        message =
+          "❌ البريد أو رمز الدخول غير صحيح.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/user-not-found"
+      ){
+
+        message =
+          "❌ حساب المشرف غير موجود في Firebase Authentication.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/wrong-password"
+      ){
+
+        message =
+          "❌ رمز الدخول غير صحيح.";
+
+      }
+
+      else if(
+        error.code ===
+        "auth/too-many-requests"
+      ){
+
+        message =
+          "❌ تم إيقاف محاولات الدخول مؤقتًا. حاول لاحقًا.";
+
+      }
+
+
       $("loginStatus").textContent =
-        "❌ تعذر تسجيل الدخول. تأكد من رمز الدخول.";
+        message;
 
     }
 
@@ -1892,58 +2230,83 @@ $("logoutButton").onclick =
 
 
 /* =====================================================
-   مراقبة حالة تسجيل الدخول
+   مراقبة تسجيل الدخول
 ===================================================== */
 
 onAuthStateChanged(
   auth,
   async function(user){
 
-    currentUser = user;
-
-
     if(
       user &&
       user.uid === ADMIN_UID
     ){
 
+      currentUser =
+        user;
+
+
       $("loginOpen").style.display =
         "none";
 
+
       $("uploadOpen").style.display =
         "block";
+
 
       $("uploadHero").style.display =
         "inline-block";
 
+
       $("adminPanel").style.display =
         "block";
 
+
+      $("adminPassword").value =
+        "";
+
+
+      renderContent();
+
+
+      return;
+
     }
 
-    else{
 
-      if(user){
+    if(user){
 
-        try{
-          await signOut(auth);
-        }catch(e){}
+      try{
+
+        await signOut(auth);
+
+      }catch(error){
+
+        console.error(error);
+
       }
 
-
-      $("loginOpen").style.display =
-        "block";
-
-      $("uploadOpen").style.display =
-        "none";
-
-      $("uploadHero").style.display =
-        "none";
-
-      $("adminPanel").style.display =
-        "none";
-
     }
+
+
+    currentUser =
+      null;
+
+
+    $("loginOpen").style.display =
+      "block";
+
+
+    $("uploadOpen").style.display =
+      "none";
+
+
+    $("uploadHero").style.display =
+      "none";
+
+
+    $("adminPanel").style.display =
+      "none";
 
 
     renderContent();
@@ -1953,7 +2316,7 @@ onAuthStateChanged(
 
 
 /* =====================================================
-   البحث والفلتر
+   البحث
 ===================================================== */
 
 $("search").addEventListener(
